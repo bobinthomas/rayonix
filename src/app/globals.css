@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Figma Rayonix Design Tokens */
+  --rayonix-background-canvas: #080f12;
+  --rayonix-background-panel: #10181c;
+  --rayonix-footer-background: #000000;
+  --rayonix-border-subtle: #253035;
+  --rayonix-accent-brand: #e22328;
+  --rayonix-text-primary: #f5f6f6;
+  --rayonix-text-secondary: #bdc4c8;
+  --rayonix-text-muted: #7f8a91;
+  --rayonix-text-inverse: #080f12;
+  --rayonix-inset-page: 84px;
+
+  /* Font fallbacks */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", Menlo, monospace;
+}
+
+/* Core Web Vitals & Zero Layout Shift Baseline */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--rayonix-background-canvas);
+  color: var(--rayonix-text-primary);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: var(--rayonix-background-canvas);
+  color: var(--rayonix-text-primary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+/* Apple-style Hairlines and Glassmorphism */
+.glass-nav {
+  background: rgba(8, 15, 18, 0.72);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hairline-border {
+  border: 1px solid var(--rayonix-border-subtle);
+}
+
+.hairline-t {
+  border-top: 1px solid var(--rayonix-border-subtle);
+}
+
+.hairline-b {
+  border-bottom: 1px solid var(--rayonix-border-subtle);
+}
+
+.hairline-r {
+  border-right: 1px solid var(--rayonix-border-subtle);
+}
+
+/* Display Typography Tracking */
+.tracking-hero {
+  letter-spacing: -0.035em;
+}
+
+.tracking-section {
+  letter-spacing: -0.025em;
+}
+
+.tracking-label {
+  letter-spacing: 0.08em;
+}
+
+/* Accessibility: Honor prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

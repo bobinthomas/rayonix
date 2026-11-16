@@ -1,0 +1,39 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="46" height="30" viewBox="0 0 46 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Flag / India" clip-path="url(#clip0_0_9)">
+<path id="Vector" d="M0 0H46V10H0V0Z" fill="#FF9933"/>
+<path id="Vector_2" d="M0 10H46V20H0V10Z" fill="white"/>
+<path id="Vector_3" d="M0 20H46V30H0V20Z" fill="#138808"/>
+<g id="Group">
+<path id="Vector_4" d="M27 15C27 17.2091 25.2091 19 23 19C20.7909 19 19 17.2091 19 15C19 12.7909 20.7909 11 23 11C25.2091 11 27 12.7909 27 15Z" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_5" d="M23 15H27" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_6" d="M23 15L26.8637 16.0353" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_7" d="M23 15L26.4641 17" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_8" d="M23 15L25.8284 17.8284" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_9" d="M23 15L25 18.4641" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_10" d="M23 15L24.0353 18.8637" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_11" d="M23 15V19" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_12" d="M23 15L21.9647 18.8637" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_13" d="M23 15L21 18.4641" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_14" d="M23 15L20.1716 17.8284" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_15" d="M23 15L19.5359 17" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_16" d="M23 15L19.1363 16.0353" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_17" d="M23 15H19" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_18" d="M23 15L19.1363 13.9647" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_19" d="M23 15L19.5359 13" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_20" d="M23 15L20.1716 12.1716" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_21" d="M23 15L21 11.5359" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_22" d="M23 15L21.9647 11.1363" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_23" d="M23 15V11" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_24" d="M23 15L24.0353 11.1363" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_25" d="M23 15L25 11.5359" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_26" d="M23 15L25.8284 12.1716" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_27" d="M23 15L26.4641 13" stroke-width="0.35" stroke="#000080"/>
+<path id="Vector_28" d="M23 15L26.8637 13.9647" stroke-width="0.35" stroke="#000080"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_9">
+<rect width="46" height="30" fill="white"/>
+</clipPath>
+</defs>
+</svg>

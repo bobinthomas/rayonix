@@ -1,0 +1,17 @@
+name = "rayonix-site"
+compatibility_date = "2024-11-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+# Cloudflare D1 Database binding for CMS
+[[d1_databases]]
+binding = "DB"
+database_name = "rayonix-db"
+database_id = "local-d1-db"
+preview_database_id = "local-d1-db"
+
+# Cloudflare R2 Bucket binding for Media Storage (Local emulation -> Production)
+# [[r2_buckets]]
+# binding = "MEDIA_BUCKET"
+# bucket_name = "rayonix-media"
+# preview_bucket_name = "rayonix-media-preview"

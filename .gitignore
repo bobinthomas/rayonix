@@ -1,0 +1,24 @@
+# Dependencies
+/node_modules
+/.pnpm-store
+
+# Next.js build
+/.next/
+/out/
+
+# Cloudflare Pages / Wrangler
+/.vercel/
+/.wrangler/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# OS / Editor
+.DS_Store
+*.pem
+*.local
+*.tsbuildinfo
+.vscode/
+.idea/
