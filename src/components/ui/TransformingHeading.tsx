@@ -90,7 +90,7 @@ export default function TransformingHeading({
       for (let i = 0; i < length; i++) {
         const char = fullText[i];
 
-        if (char === " " || char === "\n") {
+        if (char === " " || char === "\n" || char === ".") {
           newChars.push(char);
           newStates.push(true);
           continue;
