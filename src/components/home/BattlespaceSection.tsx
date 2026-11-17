@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import TransformingHeading from "@/components/ui/TransformingHeading";
+import ScrollGradientText from "@/components/ui/ScrollGradientText";
 
 export default function BattlespaceSection() {
   return (
@@ -9,42 +11,45 @@ export default function BattlespaceSection() {
       aria-label="The New Battlespace"
       data-node-id="640:3823"
     >
-      {/* Background Image: Two Soldiers Walking in Fog matching Figma node 640:3823 */}
+      {/* Background Image: battlespace-bg.png */}
       <div className="absolute inset-0 pointer-events-none">
         <Image
-          src="/assets/two-soldiers-fog.png"
+          src="/assets/battlespace-bg.png"
           alt="The New Battlespace"
           fill
           priority={false}
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Subtle dark tint matching Figma rgba(8,13,15,0.3) */}
-        <div className="absolute inset-0 bg-[#080d0f]/30" />
-        {/* Figma linear gradient 87% transparent to 60% black */}
+        {/* Subtle dark tint for text contrast */}
+        <div className="absolute inset-0 bg-[#080d0f]/35" />
+        {/* Figma linear gradient blending */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
       </div>
 
       <div className="relative z-10 max-w-[1408px] mx-auto w-full flex flex-col gap-16 lg:gap-[150px] justify-between py-12 lg:py-16">
-        {/* Heading matching Figma node 640:3832 */}
+        {/* Axion-style Transforming Heading: starts transformed in monospace/glyphs and settles back to bold display font */}
         <div>
-          <h2 className="text-3xl sm:text-5xl lg:text-[64px] font-bold text-[#f5f6f6] tracking-[2px] sm:tracking-[4.48px] leading-tight lg:leading-[72px]">
-            The Future of Defence Is Integrated
-            <span className="text-[#e22328]">.</span>
-          </h2>
+          <TransformingHeading
+            text="The Future of Defence Is Integrated"
+            accentDot={true}
+            accentColor="#e22328"
+            as="h2"
+            className="text-3xl sm:text-5xl lg:text-[64px] font-bold text-[#f5f6f6] tracking-[2px] sm:tracking-[4.48px] leading-tight lg:leading-[72px]"
+          />
         </div>
 
-        {/* Editorial Text matching Figma node 640:3833 */}
-        <div className="max-w-[1269px] space-y-6 sm:space-y-8 text-xl sm:text-2xl lg:text-[32px] font-normal text-[#f5f6f6] leading-relaxed lg:leading-[40px]">
-          <p>
+        {/* Editorial Text with scroll-driven gradient fill animation */}
+        <ScrollGradientText className="max-w-[1269px] space-y-6 sm:space-y-8 text-xl sm:text-2xl lg:text-[32px] font-normal leading-relaxed lg:leading-[40px]">
+          <p data-gradient-text>
             Today&apos;s asymmetric threats transcend conventional boundaries,
             demanding intelligent, interconnected defence capabilities.
           </p>
-          <p>
+          <p data-gradient-text>
             We combine AI, autonomy and advanced technologies to engineer
             integrated defence systems tailored to mission-specific requirements.
           </p>
-        </div>
+        </ScrollGradientText>
       </div>
     </section>
   );

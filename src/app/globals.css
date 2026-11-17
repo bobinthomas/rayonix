@@ -84,8 +84,33 @@ body {
   letter-spacing: 0.08em;
 }
 
+/* Scroll-scrubbed text gradient animation matching Axion */
+[data-gradient-text] {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #ffffff 45%,
+    rgba(255, 255, 255, 0.24) 65%,
+    rgba(255, 255, 255, 0.24) 100%
+  );
+  background-size: 250% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: block;
+  will-change: background-position;
+}
+
 /* Accessibility: Honor prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
+  [data-gradient-text] {
+    background: none !important;
+    color: #f5f6f6 !important;
+    -webkit-text-fill-color: #f5f6f6 !important;
+  }
+
   *,
   *::before,
   *::after {
