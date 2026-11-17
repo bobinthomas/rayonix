@@ -43,7 +43,7 @@ const pillars: MissionPillar[] = [
 export default function MissionArchitectureSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   // GSAP ScrollTrigger combined with native scroll calculation
   useEffect(() => {
@@ -52,8 +52,8 @@ export default function MissionArchitectureSection() {
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: "top top",
-        end: "bottom bottom",
+        start: "top top+=16",
+        end: "bottom bottom-=16",
         scrub: true,
         onUpdate: (self) => {
           const p = self.progress;
@@ -74,10 +74,12 @@ export default function MissionArchitectureSection() {
       if (!el) return;
 
       const rect = el.getBoundingClientRect();
-      const totalScrollable = el.offsetHeight - window.innerHeight;
+      const cardHeight = cardRef.current?.offsetHeight || 792;
+      const stickyTop = Math.max(16, (window.innerHeight - cardHeight) / 2);
+      const totalScrollable = el.offsetHeight - cardHeight;
       if (totalScrollable <= 0) return;
 
-      const scrolled = -rect.top;
+      const scrolled = stickyTop - rect.top;
       const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
 
       if (progress < 0.33) {
@@ -98,15 +100,17 @@ export default function MissionArchitectureSection() {
     };
   }, []);
 
-  // Click on any word on the left to smoothly navigate directly to that stage
+  // Click on any stage to smoothly navigate to that stage
   const scrollToStage = useCallback((index: number) => {
     const el = sectionRef.current;
     if (!el) return;
 
-    const totalScrollable = el.offsetHeight - window.innerHeight;
+    const cardHeight = cardRef.current?.offsetHeight || 792;
+    const stickyTop = Math.max(16, (window.innerHeight - cardHeight) / 2);
+    const totalScrollable = el.offsetHeight - cardHeight;
     const targetProgress = index === 0 ? 0.1 : index === 1 ? 0.5 : 0.85;
     const sectionTop = el.getBoundingClientRect().top + window.scrollY;
-    const targetScrollY = sectionTop + targetProgress * totalScrollable;
+    const targetScrollY = sectionTop - stickyTop + targetProgress * totalScrollable;
 
     window.scrollTo({
       top: targetScrollY,
@@ -117,14 +121,14 @@ export default function MissionArchitectureSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-[300vh] bg-[#080f12]"
+      className="relative w-full h-[220vh] sm:h-[250vh]"
       aria-label="Detect Decide Respond Mission Architecture"
       data-node-id="640:3899"
     >
-      {/* Sticky Viewport Container - Pins for 300vh */}
+      {/* Sticky Card Container - Natural Figma height (792px), vertically centered in viewport */}
       <div
-        ref={stickyRef}
-        className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden px-6 sm:px-12 lg:px-[84px]"
+        ref={cardRef}
+        className="sticky top-4 lg:top-[calc((100vh-792px)/2)] w-full min-h-[750px] lg:h-[792px] bg-[#080f12] overflow-hidden rounded-[14px] flex items-center justify-center px-6 sm:px-12 lg:px-[84px] py-16 lg:py-0 shadow-2xl"
       >
         {/* Background Command Centre imagery at 20% opacity */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
