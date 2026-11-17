@@ -205,7 +205,11 @@ export default function EcosystemSection() {
 
   return (
     <section
-      className="relative w-full bg-[#f5f6f6] px-6 sm:px-10 lg:px-[45px] py-16 lg:py-[50px] overflow-hidden"
+      className="relative w-full bg-[#f5f6f6] py-16 lg:py-[50px] overflow-hidden"
+      style={{
+        paddingLeft: "max(24px, calc((100% - 1320px) / 2))",
+        paddingRight: 0,
+      }}
       aria-label="One Connected Defense Ecosystem"
       data-node-id="210:1961"
       onMouseEnter={() => setIsPaused(true)}
@@ -214,9 +218,9 @@ export default function EcosystemSection() {
         setHoveredCardIndex(null);
       }}
     >
-      <div className="max-w-[1320px] mx-auto flex flex-col gap-[30px]">
+      <div className="w-full flex flex-col gap-[30px]">
         {/* Section Heading with Axion text-transform decrypt animation */}
-        <div className="pt-2">
+        <div className="pt-2 max-w-[1320px] pr-6 sm:pr-10">
           <TransformingHeading
             as="h2"
             segments={[
@@ -229,9 +233,9 @@ export default function EcosystemSection() {
           />
         </div>
 
-        {/* 7 Filter Tabs - solid high-contrast styling with no scrollbar */}
-        <div className="w-full overflow-x-auto no-scrollbar -mx-6 px-6 sm:mx-0 sm:px-0">
-          <div className="flex items-center gap-[10px] min-w-max pb-1">
+        {/* 7 Filter Tabs - Solid high-contrast styling extending to right edge */}
+        <div className="w-full overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-[10px] min-w-max pb-1 pr-6 sm:pr-10">
             {ecosystemData.map((item, idx) => {
               const isActive = activeTab === idx;
               return (
@@ -274,10 +278,10 @@ export default function EcosystemSection() {
           </div>
         </div>
 
-        {/* Horizontal Carousel Track - Clamped to eliminate right-side gaps */}
+        {/* Horizontal Carousel Track - Bleeds smoothly all the way to the right edge */}
         <div
           ref={containerRef}
-          className="relative w-full overflow-hidden -mx-6 px-6 sm:mx-0 sm:px-0"
+          className="relative w-full overflow-hidden"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
