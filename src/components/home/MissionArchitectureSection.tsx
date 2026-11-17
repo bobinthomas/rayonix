@@ -1,79 +1,189 @@
 "use client";
 
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 
+interface MissionPillar {
+  id: string;
+  number: string;
+  title: string;
+  description: string;
+}
+
+const pillars: MissionPillar[] = [
+  {
+    id: "detect",
+    number: "01",
+    title: "Detect.",
+    description:
+      "Build a unified operational picture by collecting intelligence from sensors across land, air, maritime and subsurface domains.",
+  },
+  {
+    id: "decide",
+    number: "02",
+    title: "Decide.",
+    description:
+      "Fuse mission data, AI and operator intent into a common decision layer for faster, coordinated decision-making.",
+  },
+  {
+    id: "respond",
+    number: "03",
+    title: "Respond.",
+    description:
+      "Enable coordinated, mission-specific responses by integrating autonomous systems, command centres and operational assets into a unified response framework.",
+  },
+];
+
 export default function MissionArchitectureSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Scroll listener to smoothly reveal and focus Detect -> Decide -> Respond as user scrolls
+  const handleScroll = useCallback(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const totalScrollable = el.offsetHeight - window.innerHeight;
+    if (totalScrollable <= 0) return;
+
+    // Current scrolled distance inside this section
+    const scrolled = -rect.top;
+    const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
+
+    if (progress < 0.33) {
+      setActiveIndex(0);
+    } else if (progress < 0.66) {
+      setActiveIndex(1);
+    } else {
+      setActiveIndex(2);
+    }
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
+  // Click on any word on the left to smoothly navigate directly to that stage
+  const scrollToStage = (index: number) => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const totalScrollable = el.offsetHeight - window.innerHeight;
+    const targetProgress = index === 0 ? 0.1 : index === 1 ? 0.5 : 0.9;
+    const targetScrollY =
+      window.scrollY + el.getBoundingClientRect().top + targetProgress * totalScrollable;
+
+    window.scrollTo({
+      top: targetScrollY,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section
-      className="relative w-full min-h-[750px] lg:h-[792px] flex items-center bg-[#080f12] px-6 sm:px-12 lg:px-[84px] py-16 lg:py-0 overflow-hidden"
+      ref={sectionRef}
+      className="relative w-full h-[260vh] sm:h-[300vh] bg-[#080f12]"
       aria-label="Detect Decide Respond Mission Architecture"
       data-node-id="640:3899"
     >
-      {/* Background Command Centre photo with 20% opacity matching Figma node I640:3899;127:954 */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="relative w-full h-full opacity-20">
-          <Image
-            src="/assets/command-centre.png"
-            alt="Tactical Command Centre"
-            fill
-            sizes="100vw"
-            className="object-cover object-center"
-          />
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080f12] via-transparent to-[#080f12]" />
-      </div>
-
-      <div className="relative z-10 max-w-[1408px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-        {/* Left Column: Big Editorial Words matching Figma node I640:3899;127:957 */}
-        <div className="lg:col-span-5 flex flex-col justify-center">
-          <h2 className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-hero leading-tight lg:leading-[72px]">
-            <span className="text-[#f5f6f6]">
-              Detect<span className="text-[#e22328]">.</span>
-            </span>
-            <br />
-            <span className="text-[#f5f6f6] opacity-30">
-              Decide.
-            </span>
-            <br />
-            <span className="text-[#f5f6f6] opacity-30">
-              Respond<span className="text-[#7f8a91]">.</span>
-            </span>
-          </h2>
+      {/* Sticky Viewport Container */}
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden px-6 sm:px-12 lg:px-[84px]">
+        {/* Background Command Centre imagery at 20% opacity matching Figma node I640:3899;127:954 */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="relative w-full h-full opacity-20">
+            <Image
+              src="/assets/command-centre.webp"
+              alt="Tactical Command Centre"
+              fill
+              priority={false}
+              sizes="100vw"
+              className="object-cover object-center scale-105"
+            />
+          </div>
+          {/* Edge Vignette Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080f12] via-transparent to-[#080f12]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#080f12] via-transparent to-[#080f12]" />
         </div>
 
-        {/* Right Column: 3 Pillar Explanations matching Figma node I640:3899;127:962 */}
-        <div className="lg:col-span-7 flex flex-col gap-8 max-w-[480px] lg:ml-auto">
-          {/* 01 · Detect */}
-          <div className="flex flex-col gap-[12px]">
-            <span className="text-[14px] font-medium text-[#e8141a]">01</span>
-            <h3 className="text-2xl sm:text-[32px] font-normal text-[#f5f6f6] leading-[40px]">
-              Detect.
-            </h3>
-            <p className="text-[16px] sm:text-[18px] font-normal text-[#a3adb2] leading-[28px]">
-              Build a unified operational picture by collecting intelligence from sensors across land, air, maritime and subsurface domains.
-            </p>
+        {/* Inner Content Grid */}
+        <div className="relative z-10 max-w-[1408px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+          {/* Left Column: Big Editorial Words (Detect. Decide. Respond.) */}
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            <h2 className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[76px] select-none">
+              {pillars.map((pillar, idx) => {
+                const isActive = activeIndex === idx;
+                return (
+                  <button
+                    key={pillar.id}
+                    type="button"
+                    onClick={() => scrollToStage(idx)}
+                    className={`block text-left transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer py-1 ${
+                      isActive
+                        ? "opacity-100 scale-100 text-[#f5f6f6]"
+                        : "opacity-25 scale-95 text-[#7f8a91] hover:opacity-50"
+                    }`}
+                  >
+                    <span>{pillar.title.replace(".", "")}</span>
+                    <span
+                      className={`transition-colors duration-500 ${
+                        isActive ? "text-[#e22328]" : "text-[#7f8a91]"
+                      }`}
+                    >
+                      .
+                    </span>
+                  </button>
+                );
+              })}
+            </h2>
           </div>
 
-          {/* 02 · Decide (opacity 30% matching Figma) */}
-          <div className="flex flex-col gap-[12px] opacity-30 hover:opacity-100 transition-opacity">
-            <span className="text-[14px] font-medium text-[#e8141a]">02</span>
-            <h3 className="text-2xl sm:text-[32px] font-normal text-[#f5f6f6] leading-[40px]">
-              Decide.
-            </h3>
-            <p className="text-[16px] sm:text-[18px] font-normal text-[#a3adb2] leading-[28px]">
-              Fuse mission data, AI and operator intent into a common decision layer for faster, coordinated decision-making.
-            </p>
-          </div>
+          {/* Right Column: 3 Pillar Explanations */}
+          <div className="lg:col-span-7 flex flex-col gap-8 sm:gap-10 max-w-[520px] lg:ml-auto">
+            {pillars.map((pillar, idx) => {
+              const isActive = activeIndex === idx;
 
-          {/* 03 · Respond (opacity 30% matching Figma) */}
-          <div className="flex flex-col gap-[12px] opacity-30 hover:opacity-100 transition-opacity">
-            <span className="text-[14px] font-medium text-[#e8141a]">03</span>
-            <h3 className="text-2xl sm:text-[32px] font-normal text-[#f5f6f6] leading-[40px]">
-              Respond.
-            </h3>
-            <p className="text-[16px] sm:text-[18px] font-normal text-[#a3adb2] leading-[28px]">
-              Enable coordinated, mission-specific responses by integrating autonomous systems, command centres and operational assets into a unified response framework.
-            </p>
+              return (
+                <div
+                  key={pillar.id}
+                  onClick={() => scrollToStage(idx)}
+                  className={`group relative flex flex-col gap-3 p-5 sm:p-6 rounded-[10px] cursor-pointer transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                    isActive
+                      ? "opacity-100 translate-x-0 bg-[#10181c]/60 backdrop-blur-sm border-l-2 border-[#e22328] shadow-lg shadow-black/40"
+                      : "opacity-25 hover:opacity-50 translate-x-2 border-l-2 border-transparent"
+                  }`}
+                >
+                  {/* Step Number */}
+                  <span
+                    className={`text-[14px] font-medium transition-colors duration-500 ${
+                      isActive ? "text-[#e8141a]" : "text-[#7f8a91]"
+                    }`}
+                  >
+                    {pillar.number}
+                  </span>
+
+                  {/* Heading */}
+                  <h3
+                    className={`text-2xl sm:text-[32px] font-normal leading-[40px] transition-colors duration-500 ${
+                      isActive ? "text-[#f5f6f6]" : "text-[#f5f6f6]/40"
+                    }`}
+                  >
+                    {pillar.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p
+                    className={`text-[16px] sm:text-[18px] font-normal leading-[28px] transition-colors duration-500 ${
+                      isActive ? "text-[#a3adb2]" : "text-[#a3adb2]/40"
+                    }`}
+                  >
+                    {pillar.description}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
