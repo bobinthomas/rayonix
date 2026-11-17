@@ -1,12 +1,18 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface AnimatedCounterProps {
   target: number;
   suffix?: string;
   prefix?: string;
-  duration?: number; // Duration in ms (default: 2000)
+  duration?: number; // Duration in seconds (default: 1.8)
   className?: string;
 }
 
@@ -14,73 +20,45 @@ export default function AnimatedCounter({
   target,
   suffix = "",
   prefix = "",
-  duration = 2000,
+  duration = 1.8,
   className = "",
 }: AnimatedCounterProps) {
   const [currentValue, setCurrentValue] = useState<number>(0);
-  const [hasStarted, setHasStarted] = useState<boolean>(false);
   const containerRef = useRef<HTMLSpanElement>(null);
-  const animRef = useRef<number | null>(null);
 
   useEffect(() => {
-    // Respect user's motion preferences
-    if (
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    ) {
+    if (typeof window === "undefined" || !containerRef.current) return;
+
+    // Respect reduced motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setCurrentValue(target);
       return;
     }
 
-    const element = containerRef.current;
-    if (!element) return;
+    const obj = { val: 0 };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasStarted) {
-            setHasStarted(true);
-            const startTime = performance.now();
-
-            const updateCount = (now: number) => {
-              const elapsed = now - startTime;
-              const progress = Math.min(1, elapsed / duration);
-
-              // Apple-grade smooth ease-out (cubic)
-              const easeOut = 1 - Math.pow(1 - progress, 3);
-              const nextVal = Math.round(easeOut * target);
-
-              setCurrentValue(nextVal);
-
-              if (progress < 1) {
-                animRef.current = requestAnimationFrame(updateCount);
-              } else {
-                setCurrentValue(target);
-                animRef.current = null;
-              }
-            };
-
-            animRef.current = requestAnimationFrame(updateCount);
-          }
-        });
+    const tween = gsap.to(obj, {
+      val: target,
+      duration: duration,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 85%",
+        once: true,
       },
-      {
-        threshold: 0.25,
-        rootMargin: "0px 0px -50px 0px",
-      }
-    );
-
-    observer.observe(element);
+      onUpdate: () => {
+        setCurrentValue(Math.max(0, Math.round(obj.val)));
+      },
+      onComplete: () => {
+        setCurrentValue(target);
+      },
+    });
 
     return () => {
-      observer.disconnect();
-      if (animRef.current !== null) {
-        cancelAnimationFrame(animRef.current);
-      }
+      tween.kill();
     };
-  }, [target, duration, hasStarted]);
+  }, [target, duration]);
 
-  // Format with locale thousands separator (e.g. 18,000)
   const formattedNumber = currentValue.toLocaleString("en-US");
 
   return (

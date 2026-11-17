@@ -130,7 +130,7 @@ export default function CapabilitiesSection() {
                 <AnimatedCounter
                   target={point.target}
                   suffix={point.suffix}
-                  duration={1800}
+                  duration={1.8}
                 />
               </div>
 
