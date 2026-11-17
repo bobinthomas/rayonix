@@ -146,6 +146,7 @@ export default function EcosystemSection() {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const tabsContainerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const touchStartX = useRef<number | null>(null);
@@ -171,14 +172,18 @@ export default function EcosystemSection() {
     return () => window.removeEventListener("resize", updateOffset);
   }, [updateOffset]);
 
-  // Keep active tab smoothly scrolled into view inside the tabs navigation on mobile
+  // Keep active tab smoothly scrolled horizontally within its own container only (never touch window/page scroll)
   useEffect(() => {
+    const container = tabsContainerRef.current;
     const currentTabEl = tabRefs.current[activeTab];
-    if (currentTabEl) {
-      currentTabEl.scrollIntoView({
+    if (container && currentTabEl) {
+      const targetLeft =
+        currentTabEl.offsetLeft -
+        container.clientWidth / 2 +
+        currentTabEl.clientWidth / 2;
+      container.scrollTo({
+        left: Math.max(0, targetLeft),
         behavior: "smooth",
-        block: "nearest",
-        inline: "center",
       });
     }
   }, [activeTab]);
@@ -234,7 +239,7 @@ export default function EcosystemSection() {
         </div>
 
         {/* 7 Filter Tabs - Solid high-contrast styling extending to right edge */}
-        <div className="w-full overflow-x-auto no-scrollbar">
+        <div ref={tabsContainerRef} className="w-full overflow-x-auto no-scrollbar">
           <div className="flex items-center gap-[10px] min-w-max pb-1 pr-6 sm:pr-10">
             {ecosystemData.map((item, idx) => {
               const isActive = activeTab === idx;
