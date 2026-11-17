@@ -2,6 +2,12 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface MissionPillar {
   id: string;
@@ -37,61 +43,90 @@ const pillars: MissionPillar[] = [
 export default function MissionArchitectureSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const stickyRef = useRef<HTMLDivElement>(null);
 
-  // Scroll listener to smoothly reveal and focus Detect -> Decide -> Respond as user scrolls
-  const handleScroll = useCallback(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const rect = el.getBoundingClientRect();
-    const totalScrollable = el.offsetHeight - window.innerHeight;
-    if (totalScrollable <= 0) return;
-
-    // Current scrolled distance inside this section
-    const scrolled = -rect.top;
-    const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
-
-    if (progress < 0.33) {
-      setActiveIndex(0);
-    } else if (progress < 0.66) {
-      setActiveIndex(1);
-    } else {
-      setActiveIndex(2);
-    }
-  }, []);
-
+  // GSAP ScrollTrigger combined with native scroll calculation
   useEffect(() => {
+    if (typeof window === "undefined" || !sectionRef.current) return;
+
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true,
+        onUpdate: (self) => {
+          const p = self.progress;
+          if (p < 0.33) {
+            setActiveIndex(0);
+          } else if (p < 0.66) {
+            setActiveIndex(1);
+          } else {
+            setActiveIndex(2);
+          }
+        },
+      });
+    }, sectionRef);
+
+    // Fallback native scroll listener for instant reactivity
+    const handleScroll = () => {
+      const el = sectionRef.current;
+      if (!el) return;
+
+      const rect = el.getBoundingClientRect();
+      const totalScrollable = el.offsetHeight - window.innerHeight;
+      if (totalScrollable <= 0) return;
+
+      const scrolled = -rect.top;
+      const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
+
+      if (progress < 0.33) {
+        setActiveIndex(0);
+      } else if (progress < 0.66) {
+        setActiveIndex(1);
+      } else {
+        setActiveIndex(2);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // Click on any word on the left to smoothly navigate directly to that stage
-  const scrollToStage = (index: number) => {
+  const scrollToStage = useCallback((index: number) => {
     const el = sectionRef.current;
     if (!el) return;
 
     const totalScrollable = el.offsetHeight - window.innerHeight;
-    const targetProgress = index === 0 ? 0.1 : index === 1 ? 0.5 : 0.9;
-    const targetScrollY =
-      window.scrollY + el.getBoundingClientRect().top + targetProgress * totalScrollable;
+    const targetProgress = index === 0 ? 0.1 : index === 1 ? 0.5 : 0.85;
+    const sectionTop = el.getBoundingClientRect().top + window.scrollY;
+    const targetScrollY = sectionTop + targetProgress * totalScrollable;
 
     window.scrollTo({
       top: targetScrollY,
       behavior: "smooth",
     });
-  };
+  }, []);
 
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-[260vh] sm:h-[300vh] bg-[#080f12]"
+      className="relative w-full h-[300vh] bg-[#080f12]"
       aria-label="Detect Decide Respond Mission Architecture"
       data-node-id="640:3899"
     >
-      {/* Sticky Viewport Container */}
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden px-6 sm:px-12 lg:px-[84px]">
-        {/* Background Command Centre imagery at 20% opacity matching Figma node I640:3899;127:954 */}
+      {/* Sticky Viewport Container - Pins for 300vh */}
+      <div
+        ref={stickyRef}
+        className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden px-6 sm:px-12 lg:px-[84px]"
+      >
+        {/* Background Command Centre imagery at 20% opacity */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="relative w-full h-full opacity-20">
             <Image
@@ -141,7 +176,7 @@ export default function MissionArchitectureSection() {
           </div>
 
           {/* Right Column: 3 Pillar Explanations */}
-          <div className="lg:col-span-7 flex flex-col gap-8 sm:gap-10 max-w-[520px] lg:ml-auto">
+          <div className="lg:col-span-7 flex flex-col gap-6 sm:gap-8 max-w-[540px] lg:ml-auto">
             {pillars.map((pillar, idx) => {
               const isActive = activeIndex === idx;
 
@@ -151,18 +186,23 @@ export default function MissionArchitectureSection() {
                   onClick={() => scrollToStage(idx)}
                   className={`group relative flex flex-col gap-3 p-5 sm:p-6 rounded-[10px] cursor-pointer transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                     isActive
-                      ? "opacity-100 translate-x-0 bg-[#10181c]/60 backdrop-blur-sm border-l-2 border-[#e22328] shadow-lg shadow-black/40"
-                      : "opacity-25 hover:opacity-50 translate-x-2 border-l-2 border-transparent"
+                      ? "opacity-100 translate-x-0 scale-100 bg-[#10181c]/75 backdrop-blur-md border-l-2 border-[#e22328] shadow-2xl shadow-black/60"
+                      : "opacity-20 translate-x-2 scale-[0.97] border-l-2 border-transparent hover:opacity-40"
                   }`}
                 >
                   {/* Step Number */}
-                  <span
-                    className={`text-[14px] font-medium transition-colors duration-500 ${
-                      isActive ? "text-[#e8141a]" : "text-[#7f8a91]"
-                    }`}
-                  >
-                    {pillar.number}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span
+                      className={`text-[14px] font-medium transition-colors duration-500 ${
+                        isActive ? "text-[#e8141a]" : "text-[#7f8a91]"
+                      }`}
+                    >
+                      {pillar.number}
+                    </span>
+                    {isActive && (
+                      <span className="size-[6px] rounded-full bg-[#e22328] animate-pulse" />
+                    )}
+                  </div>
 
                   {/* Heading */}
                   <h3
