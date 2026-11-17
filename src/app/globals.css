@@ -39,7 +39,7 @@ html {
 
 body {
   margin: 0;
-  padding: 0 16px 16px 16px;
+  padding: 16px;
   overflow-x: hidden;
   background-color: var(--rayonix-background-canvas);
   color: var(--rayonix-text-primary);

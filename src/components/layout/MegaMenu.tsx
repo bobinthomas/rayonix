@@ -614,7 +614,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
 
   return (
     <div
-      className="w-full bg-[#10181c] text-[#f5f6f6] rounded-none border-b border-[#253035] shadow-[0_24px_60px_-15px_rgba(0,0,0,0.85)] overflow-hidden"
+      className="w-full bg-[#10181c] text-[#f5f6f6] rounded-none border-b border-x border-[#253035] shadow-[0_24px_60px_-15px_rgba(0,0,0,0.85)] overflow-hidden"
       data-testid="rayonix-mega-menu"
       onMouseLeave={onClose}
     >

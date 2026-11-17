@@ -17,7 +17,7 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 12);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -55,16 +55,18 @@ export default function Header() {
         ref={headerRef}
         onMouseEnter={handleCancelClose}
         onMouseLeave={handleCloseMegaMenu}
-        className="fixed top-0 left-0 right-0 z-50"
+        className={`fixed top-4 left-4 right-4 z-50 transform transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
+          isScrolled ? "-translate-y-4" : "translate-y-0"
+        }`}
       >
         {/* Persistent invariant-height Header (80px at all times: zero layout jump) */}
         <header
           className={`h-[80px] w-full flex items-center transition-colors duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
             isMenuOpen
-              ? "bg-[#10181c] border-b border-[#253035]"
+              ? "bg-[#10181c] border-b border-x border-[#253035]"
               : isScrolled
-              ? "bg-[#080f12]/90 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-[#253035]/60"
-              : "bg-transparent border-b border-transparent"
+              ? "bg-[#080f12]/90 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-x border-[#253035]/60"
+              : "bg-transparent border-b border-x border-transparent"
           }`}
         >
           <div className="max-w-[1440px] mx-auto w-full px-6 sm:px-12 lg:px-[60px] flex items-center justify-between">
