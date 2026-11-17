@@ -24,6 +24,7 @@ Every page must maintain Lighthouse scores >= 98 (`LCP < 1.2s`, `INP < 50ms`, `C
 - **Easing & Cleanup:** Use `cubic-bezier(0.16, 1, 0.3, 1)` easing and wrap all GSAP animations inside `gsap.context()` within `useEffect` for strict cleanup.
 - **Accessibility:** Respect `prefers-reduced-motion` across all GSAP timelines and Three.js loops.
 - **Aesthetics:** Generous whitespace, tight display heading tracking (`-0.02em` to `-0.04em`), subtle `1px` hairline borders, and sticky glassmorphic headers (`backdrop-filter: blur(16px)`).
+- **Strict Square Section Edges:** NEVER add rounded corners (`rounded-[...]` or `border-radius`) to any section wrapper or full-width section container. All sections must maintain sharp, crisp 90-degree square corners.
 
 ## Technical SEO & GEO (AI Search Optimization)
 - **SEO:** Semantic HTML5 (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`), single `<h1>` per page, full Next.js Metadata API, dynamic `sitemap.ts`, and `robots.ts`.
