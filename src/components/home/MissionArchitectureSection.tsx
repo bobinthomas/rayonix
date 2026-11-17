@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -41,74 +41,98 @@ const pillars: MissionPillar[] = [
 ];
 
 export default function MissionArchitectureSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // GSAP ScrollTrigger combined with native scroll calculation
+  // Element refs for continuous GSAP scrubbing
+  const leftWordRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const pillarRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const numberRefs = useRef<(HTMLSpanElement | null)[]>([]);
+
   useEffect(() => {
     if (typeof window === "undefined" || !sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: "top top+=16",
-        end: "bottom bottom-=16",
-        scrub: true,
-        onUpdate: (self) => {
-          const p = self.progress;
-          if (p < 0.33) {
-            setActiveIndex(0);
-          } else if (p < 0.66) {
-            setActiveIndex(1);
-          } else {
-            setActiveIndex(2);
-          }
+      // Set initial visual states: Step 0 is fully active, Steps 1 and 2 are dimmed
+      gsap.set([leftWordRefs.current[0], pillarRefs.current[0]], { opacity: 1 });
+      gsap.set([leftWordRefs.current[1], pillarRefs.current[1]], { opacity: 0.25 });
+      gsap.set([leftWordRefs.current[2], pillarRefs.current[2]], { opacity: 0.25 });
+
+      gsap.set(dotRefs.current[0], { color: "#e22328" });
+      gsap.set(dotRefs.current[1], { color: "#7f8a91" });
+      gsap.set(dotRefs.current[2], { color: "#7f8a91" });
+
+      gsap.set(numberRefs.current[0], { color: "#e8141a" });
+      gsap.set(numberRefs.current[1], { color: "rgba(232, 20, 26, 0.3)" });
+      gsap.set(numberRefs.current[2], { color: "rgba(232, 20, 26, 0.3)" });
+
+      // Create a smooth scrubbed timeline: plays forward on scroll down, reverses symmetrically on scroll back (3 -> 2 -> 1)
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top+=16",
+          end: "bottom bottom-=16",
+          scrub: 0.5,
         },
       });
+
+      // --- STAGE 0 to STAGE 1 (Detect -> Decide) ---
+      // Hold Stage 0 initially
+      tl.to({}, { duration: 0.5 });
+
+      // Cross-fade Step 0 down, Step 1 up
+      tl.to(
+        [leftWordRefs.current[0], pillarRefs.current[0]],
+        { opacity: 0.25, duration: 1, ease: "power1.inOut" },
+        "step0to1"
+      )
+        .to(dotRefs.current[0], { color: "#7f8a91", duration: 1, ease: "power1.inOut" }, "step0to1")
+        .to(numberRefs.current[0], { color: "rgba(232, 20, 26, 0.3)", duration: 1, ease: "power1.inOut" }, "step0to1")
+        .to(
+          [leftWordRefs.current[1], pillarRefs.current[1]],
+          { opacity: 1, duration: 1, ease: "power1.inOut" },
+          "step0to1"
+        )
+        .to(dotRefs.current[1], { color: "#e22328", duration: 1, ease: "power1.inOut" }, "step0to1")
+        .to(numberRefs.current[1], { color: "#e8141a", duration: 1, ease: "power1.inOut" }, "step0to1");
+
+      // Hold Stage 1 in center focus
+      tl.to({}, { duration: 0.6 });
+
+      // --- STAGE 1 to STAGE 2 (Decide -> Respond) ---
+      // Cross-fade Step 1 down, Step 2 up
+      tl.to(
+        [leftWordRefs.current[1], pillarRefs.current[1]],
+        { opacity: 0.25, duration: 1, ease: "power1.inOut" },
+        "step1to2"
+      )
+        .to(dotRefs.current[1], { color: "#7f8a91", duration: 1, ease: "power1.inOut" }, "step1to2")
+        .to(numberRefs.current[1], { color: "rgba(232, 20, 26, 0.3)", duration: 1, ease: "power1.inOut" }, "step1to2")
+        .to(
+          [leftWordRefs.current[2], pillarRefs.current[2]],
+          { opacity: 1, duration: 1, ease: "power1.inOut" },
+          "step1to2"
+        )
+        .to(dotRefs.current[2], { color: "#e22328", duration: 1, ease: "power1.inOut" }, "step1to2")
+        .to(numberRefs.current[2], { color: "#e8141a", duration: 1, ease: "power1.inOut" }, "step1to2");
+
+      // Hold Stage 2 before unpinning
+      tl.to({}, { duration: 0.5 });
     }, sectionRef);
 
-    // Fallback native scroll listener for instant reactivity
-    const handleScroll = () => {
-      const el = sectionRef.current;
-      if (!el) return;
-
-      const rect = el.getBoundingClientRect();
-      const cardHeight = cardRef.current?.offsetHeight || 792;
-      const stickyTop = Math.max(16, (window.innerHeight - cardHeight) / 2);
-      const totalScrollable = el.offsetHeight - cardHeight;
-      if (totalScrollable <= 0) return;
-
-      const scrolled = stickyTop - rect.top;
-      const progress = Math.max(0, Math.min(1, scrolled / totalScrollable));
-
-      if (progress < 0.33) {
-        setActiveIndex(0);
-      } else if (progress < 0.66) {
-        setActiveIndex(1);
-      } else {
-        setActiveIndex(2);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      ctx.revert();
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => ctx.revert();
   }, []);
 
-  // Click on any stage to smoothly navigate to that stage
-  const scrollToStage = useCallback((index: number) => {
+  // Smooth scroll click navigation to stage
+  const scrollToStage = (index: number) => {
     const el = sectionRef.current;
     if (!el) return;
 
     const cardHeight = cardRef.current?.offsetHeight || 792;
     const stickyTop = Math.max(16, (window.innerHeight - cardHeight) / 2);
     const totalScrollable = el.offsetHeight - cardHeight;
-    const targetProgress = index === 0 ? 0.1 : index === 1 ? 0.5 : 0.85;
+    const targetProgress = index === 0 ? 0.05 : index === 1 ? 0.5 : 0.95;
     const sectionTop = el.getBoundingClientRect().top + window.scrollY;
     const targetScrollY = sectionTop - stickyTop + targetProgress * totalScrollable;
 
@@ -116,7 +140,7 @@ export default function MissionArchitectureSection() {
       top: targetScrollY,
       behavior: "smooth",
     });
-  }, []);
+  };
 
   return (
     <section
@@ -130,12 +154,12 @@ export default function MissionArchitectureSection() {
         ref={cardRef}
         className="sticky top-4 lg:top-[calc((100vh-792px)/2)] w-full min-h-[750px] lg:h-[792px] bg-[#080f12] overflow-hidden rounded-[14px] flex items-center justify-center px-6 sm:px-12 lg:px-[84px] py-16 lg:py-0 shadow-2xl"
       >
-        {/* Background Command Centre imagery at 20% opacity */}
+        {/* Background Image: detect-decide-respond-bg.webp matching Figma */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="relative w-full h-full opacity-20">
+          <div className="relative w-full h-full opacity-25">
             <Image
-              src="/assets/command-centre.webp"
-              alt="Tactical Command Centre"
+              src="/assets/detect-decide-respond-bg.webp"
+              alt="Tactical Mission Equipment"
               fill
               priority={false}
               sizes="100vw"
@@ -151,83 +175,63 @@ export default function MissionArchitectureSection() {
         <div className="relative z-10 max-w-[1408px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Left Column: Big Editorial Words (Detect. Decide. Respond.) */}
           <div className="lg:col-span-5 flex flex-col justify-center">
-            <h2 className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[76px] select-none">
-              {pillars.map((pillar, idx) => {
-                const isActive = activeIndex === idx;
-                return (
-                  <button
-                    key={pillar.id}
-                    type="button"
-                    onClick={() => scrollToStage(idx)}
-                    className={`block text-left transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer py-1 ${
-                      isActive
-                        ? "opacity-100 scale-100 text-[#f5f6f6]"
-                        : "opacity-25 scale-95 text-[#7f8a91] hover:opacity-50"
-                    }`}
+            <h2 className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[76px] select-none text-[#f5f6f6]">
+              {pillars.map((pillar, idx) => (
+                <button
+                  key={pillar.id}
+                  ref={(el) => {
+                    leftWordRefs.current[idx] = el;
+                  }}
+                  type="button"
+                  onClick={() => scrollToStage(idx)}
+                  className="block text-left py-1 cursor-pointer transition-transform duration-300 hover:scale-[1.02] will-change-[opacity]"
+                >
+                  <span>{pillar.title.replace(".", "")}</span>
+                  <span
+                    ref={(el) => {
+                      dotRefs.current[idx] = el;
+                    }}
+                    className="transition-colors duration-300"
                   >
-                    <span>{pillar.title.replace(".", "")}</span>
-                    <span
-                      className={`transition-colors duration-500 ${
-                        isActive ? "text-[#e22328]" : "text-[#7f8a91]"
-                      }`}
-                    >
-                      .
-                    </span>
-                  </button>
-                );
-              })}
+                    .
+                  </span>
+                </button>
+              ))}
             </h2>
           </div>
 
-          {/* Right Column: 3 Pillar Explanations */}
-          <div className="lg:col-span-7 flex flex-col gap-6 sm:gap-8 max-w-[540px] lg:ml-auto">
-            {pillars.map((pillar, idx) => {
-              const isActive = activeIndex === idx;
-
-              return (
-                <div
-                  key={pillar.id}
-                  onClick={() => scrollToStage(idx)}
-                  className={`group relative flex flex-col gap-3 p-5 sm:p-6 rounded-[10px] cursor-pointer transition-all duration-600 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    isActive
-                      ? "opacity-100 translate-x-0 scale-100 bg-[#10181c]/75 backdrop-blur-md border-l-2 border-[#e22328] shadow-2xl shadow-black/60"
-                      : "opacity-20 translate-x-2 scale-[0.97] border-l-2 border-transparent hover:opacity-40"
-                  }`}
+          {/* Right Column: Clean Typography Without Card Backgrounds */}
+          <div className="lg:col-span-7 flex flex-col gap-8 sm:gap-10 max-w-[480px] lg:ml-auto">
+            {pillars.map((pillar, idx) => (
+              <div
+                key={pillar.id}
+                ref={(el) => {
+                  pillarRefs.current[idx] = el;
+                }}
+                onClick={() => scrollToStage(idx)}
+                className="flex flex-col gap-[12px] cursor-pointer transition-transform duration-300 hover:translate-x-1 will-change-[opacity]"
+              >
+                {/* Step Number */}
+                <span
+                  ref={(el) => {
+                    numberRefs.current[idx] = el;
+                  }}
+                  className="text-[14px] font-medium transition-colors duration-300"
                 >
-                  {/* Step Number */}
-                  <div className="flex items-center gap-2">
-                    <span
-                      className={`text-[14px] font-medium transition-colors duration-500 ${
-                        isActive ? "text-[#e8141a]" : "text-[#7f8a91]"
-                      }`}
-                    >
-                      {pillar.number}
-                    </span>
-                    {isActive && (
-                      <span className="size-[6px] rounded-full bg-[#e22328] animate-pulse" />
-                    )}
-                  </div>
+                  {pillar.number}
+                </span>
 
-                  {/* Heading */}
-                  <h3
-                    className={`text-2xl sm:text-[32px] font-normal leading-[40px] transition-colors duration-500 ${
-                      isActive ? "text-[#f5f6f6]" : "text-[#f5f6f6]/40"
-                    }`}
-                  >
-                    {pillar.title}
-                  </h3>
+                {/* Heading */}
+                <h3 className="text-2xl sm:text-[32px] font-normal leading-[40px] text-[#f5f6f6]">
+                  {pillar.title}
+                </h3>
 
-                  {/* Description */}
-                  <p
-                    className={`text-[16px] sm:text-[18px] font-normal leading-[28px] transition-colors duration-500 ${
-                      isActive ? "text-[#a3adb2]" : "text-[#a3adb2]/40"
-                    }`}
-                  >
-                    {pillar.description}
-                  </p>
-                </div>
-              );
-            })}
+                {/* Description */}
+                <p className="text-[16px] sm:text-[18px] font-normal leading-[28px] text-[#a3adb2]">
+                  {pillar.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
