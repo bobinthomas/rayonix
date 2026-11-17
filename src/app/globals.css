@@ -117,6 +117,17 @@ body {
   animation: tabProgress 5000ms linear forwards;
 }
 
+/* Universal Cross-Browser No Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important; /* IE and Edge */
+  scrollbar-width: none !important; /* Firefox */
+}
+
 /* Accessibility: Honor prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   [data-gradient-text] {

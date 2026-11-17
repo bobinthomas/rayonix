@@ -56,19 +56,111 @@ const ecosystemData: EcosystemItem[] = [
   },
 ];
 
+const GLYPHS = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'.";
+
+function CardTitleScramble({
+  title,
+  isActive,
+  isHovered,
+}: {
+  title: string;
+  isActive: boolean;
+  isHovered: boolean;
+}) {
+  const [displayText, setDisplayText] = useState(title);
+  const animRef = useRef<NodeJS.Timeout | null>(null);
+
+  const runScramble = useCallback(() => {
+    if (animRef.current) clearInterval(animRef.current);
+
+    const length = title.length;
+    const ticks = new Array(length).fill(0);
+    const startDelays = title.split("").map((_, i) => Math.floor(i * 0.7));
+    let currentGlobalTick = 0;
+    const scrambleTicks = 5;
+
+    animRef.current = setInterval(() => {
+      currentGlobalTick++;
+      let allDone = true;
+      const newChars: string[] = [];
+
+      for (let i = 0; i < length; i++) {
+        const char = title[i];
+        if (char === " " || char === "•" || char === ".") {
+          newChars.push(char);
+          continue;
+        }
+
+        if (currentGlobalTick < startDelays[i]) {
+          allDone = false;
+          newChars.push(GLYPHS[Math.floor(Math.random() * GLYPHS.length)]);
+        } else {
+          ticks[i]++;
+          if (ticks[i] < scrambleTicks) {
+            allDone = false;
+            newChars.push(GLYPHS[Math.floor(Math.random() * GLYPHS.length)]);
+          } else {
+            newChars.push(char);
+          }
+        }
+      }
+
+      setDisplayText(newChars.join(""));
+
+      if (allDone) {
+        if (animRef.current) clearInterval(animRef.current);
+        animRef.current = null;
+        setDisplayText(title);
+      }
+    }, 24);
+  }, [title]);
+
+  // Trigger whenever this card becomes active
+  useEffect(() => {
+    if (isActive) {
+      runScramble();
+    }
+  }, [isActive, runScramble]);
+
+  // Trigger on card hover
+  useEffect(() => {
+    if (isHovered) {
+      runScramble();
+    }
+  }, [isHovered, runScramble]);
+
+  useEffect(() => {
+    return () => {
+      if (animRef.current) clearInterval(animRef.current);
+    };
+  }, []);
+
+  return <span>{displayText}</span>;
+}
+
 export default function EcosystemSection() {
   const [activeTab, setActiveTab] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
   const [carouselOffset, setCarouselOffset] = useState(0);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const touchStartX = useRef<number | null>(null);
 
-  // Measure and update carousel translation whenever activeTab changes or window resizes
+  // Measure and update carousel translation, clamping to eliminate right-side gaps
   const updateOffset = useCallback(() => {
     const activeCard = cardRefs.current[activeTab];
-    if (activeCard) {
+    if (activeCard && trackRef.current && containerRef.current) {
+      const naturalOffset = activeCard.offsetLeft;
+      const maxOffset = Math.max(
+        0,
+        trackRef.current.scrollWidth - containerRef.current.clientWidth
+      );
+      setCarouselOffset(Math.min(naturalOffset, maxOffset));
+    } else if (activeCard) {
       setCarouselOffset(activeCard.offsetLeft);
     }
   }, [activeTab]);
@@ -103,10 +195,8 @@ export default function EcosystemSection() {
 
     if (Math.abs(diff) > 50) {
       if (diff > 0) {
-        // Swipe left -> next
         setActiveTab((prev) => (prev + 1) % ecosystemData.length);
       } else {
-        // Swipe right -> prev
         setActiveTab((prev) => (prev - 1 + ecosystemData.length) % ecosystemData.length);
       }
     }
@@ -115,11 +205,14 @@ export default function EcosystemSection() {
 
   return (
     <section
-      className="relative w-full bg-[#f5f6f6] px-6 sm:px-10 lg:px-[45px] py-16 lg:py-[50px] overflow-hidden rounded-[14px]"
+      className="relative w-full bg-[#f5f6f6] px-6 sm:px-10 lg:px-[45px] py-16 lg:py-[50px] overflow-hidden"
       aria-label="One Connected Defense Ecosystem"
       data-node-id="210:1961"
       onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
+      onMouseLeave={() => {
+        setIsPaused(false);
+        setHoveredCardIndex(null);
+      }}
     >
       <div className="max-w-[1320px] mx-auto flex flex-col gap-[30px]">
         {/* Section Heading with Axion text-transform decrypt animation */}
@@ -136,8 +229,8 @@ export default function EcosystemSection() {
           />
         </div>
 
-        {/* 7 Filter Tabs with animating red indicator border */}
-        <div className="overflow-x-auto no-scrollbar -mx-6 px-6 sm:mx-0 sm:px-0">
+        {/* 7 Filter Tabs - solid high-contrast styling with no scrollbar */}
+        <div className="w-full overflow-x-auto no-scrollbar -mx-6 px-6 sm:mx-0 sm:px-0">
           <div className="flex items-center gap-[10px] min-w-max pb-1">
             {ecosystemData.map((item, idx) => {
               const isActive = activeTab === idx;
@@ -149,10 +242,11 @@ export default function EcosystemSection() {
                   }}
                   type="button"
                   onClick={() => setActiveTab(idx)}
-                  className={`group relative px-[12px] py-[13.5px] rounded-[4px] text-[14px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none ${
+                  onMouseEnter={() => setHoveredCardIndex(idx)}
+                  className={`group relative px-[12px] py-[13.5px] rounded-[4px] text-[14px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
                     isActive
                       ? "bg-[#10181c] text-[#f1f2f2]"
-                      : "bg-[#10181c]/38 text-[#f1f2f2] hover:bg-[#10181c]/60"
+                      : "bg-[#9da1a4] text-white hover:bg-[#868c90]"
                   }`}
                   aria-selected={isActive}
                   role="tab"
@@ -180,13 +274,15 @@ export default function EcosystemSection() {
           </div>
         </div>
 
-        {/* Horizontal Carousel Track */}
+        {/* Horizontal Carousel Track - Clamped to eliminate right-side gaps */}
         <div
+          ref={containerRef}
           className="relative w-full overflow-hidden -mx-6 px-6 sm:mx-0 sm:px-0"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
           <div
+            ref={trackRef}
             className="flex gap-[10px] items-start transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{
               transform: `translate3d(-${carouselOffset}px, 0, 0)`,
@@ -194,6 +290,8 @@ export default function EcosystemSection() {
           >
             {ecosystemData.map((item, idx) => {
               const isActive = activeTab === idx;
+              const isCardHovered = hoveredCardIndex === idx;
+
               return (
                 <div
                   key={item.id}
@@ -203,10 +301,12 @@ export default function EcosystemSection() {
                   onClick={() => {
                     if (!isActive) setActiveTab(idx);
                   }}
-                  className={`group relative h-[468px] rounded-[14px] overflow-hidden shrink-0 shadow-lg bg-black cursor-pointer transition-opacity duration-500 ${
+                  onMouseEnter={() => setHoveredCardIndex(idx)}
+                  onMouseLeave={() => setHoveredCardIndex(null)}
+                  className={`group relative w-[88vw] sm:w-[680px] lg:w-[976px] h-[468px] rounded-[14px] overflow-hidden shrink-0 shadow-lg bg-black cursor-pointer transition-opacity duration-500 ${
                     isActive
-                      ? "w-[88vw] sm:w-[680px] lg:w-[976px] opacity-100"
-                      : "w-[88vw] sm:w-[680px] lg:w-[814px] opacity-90 hover:opacity-100"
+                      ? "opacity-100"
+                      : "opacity-90 hover:opacity-100"
                   }`}
                   role="group"
                   aria-label={item.cardTitle}
@@ -243,14 +343,18 @@ export default function EcosystemSection() {
                   <div className="absolute top-0 left-0 size-[10px] bg-[#e22328] z-20" />
                   <div className="absolute bottom-0 right-0 size-[10px] bg-[#e22328] z-20" />
 
-                  {/* Card Title Container with Tactical Framing Brackets */}
+                  {/* Card Title Container with Tactical Framing Brackets & Scramble Animation */}
                   <div className="absolute bottom-10 left-8 sm:left-10 z-10 max-w-[85%] sm:max-w-[80%]">
                     <div className="relative inline-block pr-6 pb-2">
                       {/* Top-left mini bracket */}
                       <span className="absolute -top-3 -left-3 size-[10px] border-t border-l border-[#e22328]" />
 
                       <h3 className="text-lg sm:text-2xl font-medium text-[#f5f6f6] leading-snug sm:leading-[32px]">
-                        {item.cardTitle}
+                        <CardTitleScramble
+                          title={item.cardTitle}
+                          isActive={isActive}
+                          isHovered={isCardHovered}
+                        />
                       </h3>
 
                       {/* Bottom-right mini bracket */}
