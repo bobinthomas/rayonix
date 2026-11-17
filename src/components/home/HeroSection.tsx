@@ -1,28 +1,46 @@
 "use client";
 
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 
 export default function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Safely trigger autoplay on mount
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // Autoplay policy prevented playback; poster remains visible
+      });
+    }
+  }, []);
+
   return (
     <section
-      className="relative w-full h-[750px] sm:h-[810px] bg-black overflow-hidden"
+      className="relative w-full h-[calc(100vh-32px)] sm:h-[calc(100dvh-32px)] min-h-[580px] bg-black overflow-hidden"
       aria-label="Rayonix Tactical Video Banner"
       data-node-id="640:3763"
     >
-      {/* Background Weapon / Turret Optical Hero Image matching Figma node 640:3763 */}
-      <div className="absolute inset-0 pointer-events-none">
-        <Image
-          src="/assets/hero-banner.png"
-          alt="Rayonix Tactical Autonomous Weapon System"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        {/* Top vignette for navigation contrast */}
-        <div className="absolute top-0 left-0 right-0 h-[200px] bg-gradient-to-b from-black/80 via-black/40 to-transparent" />
+      {/* Background Hero Video with Poster Fallback */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/assets/hero-banner.png"
+          className="w-full h-full object-cover object-center"
+        >
+          <source src="/assets/videos/hero.mp4" type="video/mp4" />
+        </video>
+
+        {/* Top vignette for navigation contrast and readability */}
+        <div className="absolute top-0 left-0 right-0 h-[220px] bg-gradient-to-b from-black/85 via-black/40 to-transparent" />
+
         {/* Bottom edge blending */}
-        <div className="absolute bottom-0 left-0 right-0 h-[140px] bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-[160px] bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
       </div>
 
       {/* Bottom-Left Tactical Badge: RAYONIX | ASYMMETRIC WARFARE matching uploaded reference */}
