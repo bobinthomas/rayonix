@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import CTAButton from "@/components/ui/CTAButton";
 
 const subsidiaries = [
   {
@@ -41,13 +41,9 @@ export default function BeyondIntegrationSection() {
           </div>
 
           <div>
-            <Link
-              href="/ecosystem"
-              className="inline-flex items-center gap-3 px-[20px] py-[13px] bg-[#e22328] hover:bg-[#c8171c] text-white text-[16px] font-normal transition-colors rounded-[4px] shadow-sm group"
-            >
-              <span>Discover our Xfactor</span>
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Link>
+            <CTAButton href="/ecosystem" variant="primary">
+              Discover our Xfactor
+            </CTAButton>
           </div>
         </div>
 

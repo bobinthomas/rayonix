@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
+import CTAButton from "@/components/ui/CTAButton";
 
 export default function ExploreSection() {
   return (
@@ -45,13 +46,9 @@ export default function ExploreSection() {
               Discover our mission, vision and approach to advancing defence technology.
             </p>
             <div className="pt-2">
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-3 px-[20px] py-[13px] bg-[#c8171c] hover:bg-[#b01217] text-white text-[16px] font-normal transition-colors rounded-[4px] shadow-sm group"
-              >
-                <span>Learn More</span>
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
+              <CTAButton href="/about" variant="primary">
+                Learn More
+              </CTAButton>
             </div>
           </div>
         </div>
@@ -82,13 +79,9 @@ export default function ExploreSection() {
                 Explore the specialised engineering, innovation and manufacturing entities behind our capabilities.
               </p>
               <div className="pt-2">
-                <Link
-                  href="/ecosystem"
-                  className="inline-flex items-center gap-3 px-[20px] py-[13px] bg-[#e22328] hover:bg-[#c8171c] text-white text-[16px] font-normal transition-colors rounded-[4px] shadow-sm group"
-                >
-                  <span>Learn More</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
+                <CTAButton href="/ecosystem" variant="primary">
+                  Learn More
+                </CTAButton>
               </div>
             </div>
           </div>
@@ -117,13 +110,9 @@ export default function ExploreSection() {
                 Explore opportunities to work across engineering, technology and defence innovation.
               </p>
               <div className="pt-2">
-                <Link
-                  href="/careers"
-                  className="inline-flex items-center gap-3 px-[20px] py-[13px] bg-[#e22328] hover:bg-[#c8171c] text-white text-[16px] font-normal transition-colors rounded-[4px] shadow-sm group"
-                >
-                  <span>Learn More</span>
-                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </Link>
+                <CTAButton href="/careers" variant="primary">
+                  Learn More
+                </CTAButton>
               </div>
             </div>
           </div>
@@ -143,13 +132,9 @@ export default function ExploreSection() {
             </div>
 
             <div>
-              <Link
-                href="/news"
-                className="inline-flex items-center gap-3 px-[20px] py-[13px] border border-[#e22328] text-[#e22328] hover:bg-[#e22328] hover:text-white transition-colors text-[16px] font-normal rounded-[4px] group"
-              >
-                <span>Learn More</span>
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </Link>
+              <CTAButton href="/news" variant="secondary">
+                Learn More
+              </CTAButton>
             </div>
           </div>
 

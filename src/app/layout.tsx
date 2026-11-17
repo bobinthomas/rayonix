@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import SniperCursor from "@/components/ui/SniperCursor";
 import "./globals.css";
 
 const gordita = localFont({
@@ -138,6 +139,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${gordita.variable} ${gordita.className}`}>
       <body className={`${gordita.className} font-sans min-h-screen flex flex-col gap-4 bg-rayonix-canvas text-rayonix-text-primary antialiased selection:bg-rayonix-accent selection:text-white p-4`}>
+        <SniperCursor />
         <Header />
         <div className="flex-1 w-full">
           {children}

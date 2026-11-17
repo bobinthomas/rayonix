@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import CTAButton from "@/components/ui/CTAButton";
 
 export default function LetsTalkSection() {
   return (
@@ -40,13 +40,12 @@ export default function LetsTalkSection() {
             </div>
 
             <div className="pt-6">
-              <a
+              <CTAButton
                 href="mailto:info@rayonix.in?subject=Operational%20requirement"
-                className="inline-flex items-center gap-3 px-[20px] py-[13px] border border-[#e22328] text-[#e22328] hover:bg-[#e22328] hover:text-white transition-colors text-[16px] font-normal rounded-[4px] group"
+                variant="secondary"
               >
-                <span>Discuss Your Requirement</span>
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+                Discuss Your Requirement
+              </CTAButton>
             </div>
           </div>
 
@@ -70,13 +69,12 @@ export default function LetsTalkSection() {
             </div>
 
             <div className="pt-6">
-              <a
+              <CTAButton
                 href="mailto:info@rayonix.in?subject=Technology%20partnership"
-                className="inline-flex items-center gap-3 px-[20px] py-[13px] border border-[#e22328] text-[#e22328] hover:bg-[#e22328] hover:text-white transition-colors text-[16px] font-normal rounded-[4px] group"
+                variant="secondary"
               >
-                <span>Partner With Us</span>
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+                Partner With Us
+              </CTAButton>
             </div>
           </div>
 
@@ -100,13 +98,12 @@ export default function LetsTalkSection() {
             </div>
 
             <div className="pt-6">
-              <a
+              <CTAButton
                 href="mailto:info@rayonix.in?subject=Business%20enquiry"
-                className="inline-flex items-center gap-3 px-[20px] py-[13px] border border-[#e22328] text-[#e22328] hover:bg-[#e22328] hover:text-white transition-colors text-[16px] font-normal rounded-[4px] group"
+                variant="secondary"
               >
-                <span>Get in Touch</span>
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
+                Get in Touch
+              </CTAButton>
             </div>
           </div>
         </div>

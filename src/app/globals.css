@@ -35,6 +35,18 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Tactical Sniper Crosshair Cursor (Desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  html.custom-sniper-cursor,
+  html.custom-sniper-cursor body,
+  html.custom-sniper-cursor a,
+  html.custom-sniper-cursor button,
+  html.custom-sniper-cursor [role="button"],
+  html.custom-sniper-cursor [role="tab"] {
+    cursor: none !important;
+  }
+}
+
 body {
   margin: 0;
   padding: 16px;
