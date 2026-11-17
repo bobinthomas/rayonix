@@ -39,7 +39,7 @@ export default function FieldDroneBanner() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-[500px] sm:h-[620px] lg:h-[721px] bg-black overflow-hidden rounded-[14px]"
+      className="relative w-full h-[500px] sm:h-[620px] lg:h-[721px] bg-black overflow-hidden"
       aria-label="Rayonix AI Robotics Tactical Video"
       data-node-id="640:3919"
       data-name="Video"
