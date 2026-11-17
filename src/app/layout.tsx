@@ -1,13 +1,64 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
+const gordita = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Gordita-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Gordita-Light-Italic.woff2",
+      weight: "300",
+      style: "italic",
+    },
+    {
+      path: "../../public/fonts/Gordita-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Gordita-Regular-Italic.woff2",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../../public/fonts/Gordita-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Gordita-Medium-Italic.woff2",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "../../public/fonts/Gordita-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Gordita-Bold-Italic.woff2",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "../../public/fonts/Gordita-Black.woff2",
+      weight: "900",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Gordita-Black-Italic.woff2",
+      weight: "900",
+      style: "italic",
+    },
+  ],
   variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -85,7 +136,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${inter.variable}`}>
+    <html lang="en" className={`dark ${gordita.variable}`}>
       <body className="min-h-screen flex flex-col gap-4 bg-rayonix-canvas text-rayonix-text-primary antialiased selection:bg-rayonix-accent selection:text-white p-4">
         <Header />
         <div className="flex-1 w-full">
