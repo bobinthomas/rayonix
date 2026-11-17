@@ -86,7 +86,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`dark ${inter.variable}`}>
-      <body className="min-h-screen flex flex-col bg-rayonix-canvas text-rayonix-text-primary antialiased selection:bg-rayonix-accent selection:text-white">
+      <body className="min-h-screen flex flex-col bg-rayonix-canvas text-rayonix-text-primary antialiased selection:bg-rayonix-accent selection:text-white p-4">
         <Header />
         <div className="flex-1 w-full">
           {children}

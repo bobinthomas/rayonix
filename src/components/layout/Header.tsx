@@ -55,7 +55,7 @@ export default function Header() {
         ref={headerRef}
         onMouseEnter={handleCancelClose}
         onMouseLeave={handleCloseMegaMenu}
-        className="fixed top-0 left-0 right-0 z-50"
+        className="fixed top-4 left-4 right-4 z-50"
       >
         {/* Persistent invariant-height Header (80px at all times: zero layout jump) */}
         <header
