@@ -100,44 +100,44 @@ export default function SniperCursor() {
       }`}
       aria-hidden="true"
     >
-      {/* 1. Full-Length Vertical Line (spans top-to-bottom edge across the screen) */}
+      {/* 1. Subtle Full-Length Vertical Line (zero glow, crisp subtle hairline) */}
       <div
         ref={verticalLineRef}
-        className="fixed top-0 bottom-0 left-0 w-[1px] h-screen bg-[#f5be58]/55 shadow-[0_0_8px_rgba(245,190,88,0.45)] will-change-transform"
+        className="fixed top-0 bottom-0 left-0 w-px h-screen bg-white/[0.12] will-change-transform"
         style={{ transform: "translate3d(-100px, 0, 0)" }}
       />
 
-      {/* 2. Full-Length Horizontal Line (spans left-to-right edge across the screen) */}
+      {/* 2. Subtle Full-Length Horizontal Line (zero glow, crisp subtle hairline) */}
       <div
         ref={horizontalLineRef}
-        className="fixed top-0 left-0 right-0 h-[1px] w-screen bg-[#f5be58]/55 shadow-[0_0_8px_rgba(245,190,88,0.45)] will-change-transform"
+        className="fixed top-0 left-0 right-0 h-px w-screen bg-white/[0.12] will-change-transform"
         style={{ transform: "translate3d(0, -100px, 0)" }}
       />
 
-      {/* 3. Intersection Target Reticle & Coordinates HUD */}
+      {/* 3. Intersection Target Reticle & Coordinates HUD (Rayonix Design System) */}
       <div
         ref={intersectionRef}
         className="fixed top-0 left-0 will-change-transform"
         style={{ transform: "translate3d(-100px, -100px, 0)" }}
       >
-        {/* Glowing Intersection Target Box matching the reference image */}
+        {/* Subtle Intersection Reticle Box (no glow) */}
         <div className="relative -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
-          {/* Outer glowing square box */}
-          <div className="w-[16px] h-[16px] border border-[#f5be58] bg-[#f5be58]/15 shadow-[0_0_12px_rgba(245,190,88,0.7)]" />
-          {/* Inner precision center dot */}
-          <div className="absolute w-[3px] h-[3px] bg-white rounded-full shadow-[0_0_4px_#ffffff]" />
+          {/* Outer hairline square box */}
+          <div className="w-[14px] h-[14px] border border-white/20 bg-transparent" />
+          {/* Inner precision center dot in Rayonix Brand Red */}
+          <div className="absolute w-[2.5px] h-[2.5px] bg-[#e22328] rounded-full" />
         </div>
 
-        {/* Clean X Y Coordinates Display directly adjacent to the intersection */}
-        <div className="absolute top-[8px] left-[10px] flex items-center gap-2.5 font-mono text-[10px] tracking-wider text-[#f5be58] font-medium bg-black/75 px-1.5 py-0.5 rounded-[2px] border border-[#f5be58]/30 shadow-md whitespace-nowrap">
+        {/* Clean, Subtle X Y Coordinates Display directly adjacent to the intersection */}
+        <div className="absolute top-[8px] left-[10px] flex items-center gap-2 font-mono text-[10px] tracking-wider bg-[#080f12]/90 px-1.5 py-0.5 rounded-[2px] border border-white/[0.08] select-none whitespace-nowrap">
           <div className="flex items-center gap-1">
-            <span className="text-white/50 text-[9px]">X</span>
-            <span ref={xCoordRef}>0000</span>
+            <span className="text-[#7f8a91] text-[9px]">X</span>
+            <span ref={xCoordRef} className="text-[#f5f6f6] font-medium">0000</span>
           </div>
-          <span className="text-white/30">|</span>
+          <span className="text-white/20">|</span>
           <div className="flex items-center gap-1">
-            <span className="text-white/50 text-[9px]">Y</span>
-            <span ref={yCoordRef}>0000</span>
+            <span className="text-[#7f8a91] text-[9px]">Y</span>
+            <span ref={yCoordRef} className="text-[#f5f6f6] font-medium">0000</span>
           </div>
         </div>
       </div>
