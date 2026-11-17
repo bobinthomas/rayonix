@@ -5,8 +5,14 @@ import React, { useEffect, useRef, useState, useMemo } from "react";
 // Axion-style high-tech typographic glyph set for font transformation
 const GLYPHS = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'.";
 
-interface TransformingHeadingProps {
+export interface HeadingSegment {
   text: string;
+  className?: string;
+}
+
+interface TransformingHeadingProps {
+  text?: string;
+  segments?: HeadingSegment[];
   className?: string;
   as?: "h1" | "h2" | "h3" | "h4" | "span" | "div";
   accentDot?: boolean;
@@ -16,7 +22,8 @@ interface TransformingHeadingProps {
 }
 
 export default function TransformingHeading({
-  text,
+  text = "",
+  segments,
   className = "",
   as: Component = "h2",
   accentDot = false,
@@ -25,12 +32,31 @@ export default function TransformingHeading({
   scrambleTicks = 7,
 }: TransformingHeadingProps) {
   const containerRef = useRef<HTMLElement>(null);
-  const [displayText, setDisplayText] = useState<string>(text);
+  const fullText = useMemo(() => {
+    if (segments && segments.length > 0) {
+      return segments.map((s) => s.text).join("");
+    }
+    return text;
+  }, [text, segments]);
+
+  const [displayText, setDisplayText] = useState<string>(fullText);
   const [charStates, setCharStates] = useState<boolean[]>(() =>
-    new Array(text.length).fill(true)
+    new Array(fullText.length).fill(true)
   ); // true = resolved to normal font, false = transformed
   const [hasAnimated, setHasAnimated] = useState<boolean>(false);
   const animFrameRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Map each character index to its segment className
+  const charSegmentClasses = useMemo(() => {
+    if (!segments || segments.length === 0) return [];
+    const classes: (string | undefined)[] = [];
+    segments.forEach((seg) => {
+      for (let i = 0; i < seg.text.length; i++) {
+        classes.push(seg.className);
+      }
+    });
+    return classes;
+  }, [segments]);
 
   // Check prefers-reduced-motion
   const prefersReducedMotion = useMemo(() => {
@@ -40,18 +66,18 @@ export default function TransformingHeading({
 
   const runTransformAnimation = () => {
     if (prefersReducedMotion) {
-      setDisplayText(text);
-      setCharStates(new Array(text.length).fill(true));
+      setDisplayText(fullText);
+      setCharStates(new Array(fullText.length).fill(true));
       return;
     }
 
     if (animFrameRef.current) clearInterval(animFrameRef.current);
 
-    const length = text.length;
+    const length = fullText.length;
     // Track tick count per character
     const ticks = new Array(length).fill(0);
-    // Stagger start: each character starts after (index * 1.5) ticks
-    const startDelays = text.split("").map((_, i) => Math.floor(i * 1.2));
+    // Stagger start: each character starts after (index * 1.2) ticks
+    const startDelays = fullText.split("").map((_, i) => Math.floor(i * 1.2));
     let currentGlobalTick = 0;
 
     const interval = setInterval(() => {
@@ -62,10 +88,10 @@ export default function TransformingHeading({
       const newStates: boolean[] = [];
 
       for (let i = 0; i < length; i++) {
-        const char = text[i];
+        const char = fullText[i];
 
-        if (char === " ") {
-          newChars.push(" ");
+        if (char === " " || char === "\n") {
+          newChars.push(char);
           newStates.push(true);
           continue;
         }
@@ -99,7 +125,7 @@ export default function TransformingHeading({
       if (allDone) {
         clearInterval(interval);
         animFrameRef.current = null;
-        setDisplayText(text);
+        setDisplayText(fullText);
         setCharStates(new Array(length).fill(true));
       }
     }, speed);
@@ -131,23 +157,27 @@ export default function TransformingHeading({
       observer.disconnect();
       if (animFrameRef.current) clearInterval(animFrameRef.current);
     };
-  }, [text, speed, scrambleTicks, prefersReducedMotion]);
+  }, [fullText, speed, scrambleTicks, prefersReducedMotion]);
 
   return (
     <Component
       ref={containerRef as any}
       className={`inline-block select-none ${className}`}
-      aria-label={text}
+      aria-label={fullText}
     >
       <span aria-hidden="true" className="inline">
         {displayText.split("").map((char, index) => {
+          if (char === "\n") {
+            return <br key={index} className="block" />;
+          }
           const isResolved = charStates[index] ?? true;
+          const segmentClass = charSegmentClasses[index];
           return (
             <span
               key={index}
               className={`transition-colors duration-150 ${
                 isResolved
-                  ? "font-sans font-bold text-inherit"
+                  ? segmentClass || "font-sans font-bold text-inherit"
                   : "font-mono font-medium text-[#bdc4c8] scale-105 inline-block opacity-85"
               }`}
             >
@@ -158,14 +188,14 @@ export default function TransformingHeading({
         {accentDot && (
           <span
             style={{ color: accentColor }}
-            className="transition-transform duration-300 inline-block"
+            className="transition-transform duration-300 inline-block font-bold"
           >
             .
           </span>
         )}
       </span>
       {/* Screen-reader accessible full text */}
-      <span className="sr-only">{text}{accentDot ? "." : ""}</span>
+      <span className="sr-only">{fullText}{accentDot ? "." : ""}</span>
     </Component>
   );
 }

@@ -102,6 +102,21 @@ body {
   will-change: background-position;
 }
 
+/* Tab indicator growing progress bar */
+@keyframes tabProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.animate-tab-progress {
+  transform-origin: left;
+  animation: tabProgress 5000ms linear forwards;
+}
+
 /* Accessibility: Honor prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   [data-gradient-text] {
