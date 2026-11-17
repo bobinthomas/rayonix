@@ -16,8 +16,7 @@
   --rayonix-inset-page: 84px;
 
   /* Font fallbacks */
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
-  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+  --font-display: var(--font-sans);
   --font-mono: "SF Mono", "JetBrains Mono", Menlo, monospace;
 }
 

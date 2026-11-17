@@ -136,8 +136,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${gordita.variable}`}>
-      <body className="min-h-screen flex flex-col gap-4 bg-rayonix-canvas text-rayonix-text-primary antialiased selection:bg-rayonix-accent selection:text-white p-4">
+    <html lang="en" className={`dark ${gordita.variable} ${gordita.className}`}>
+      <body className={`${gordita.className} font-sans min-h-screen flex flex-col gap-4 bg-rayonix-canvas text-rayonix-text-primary antialiased selection:bg-rayonix-accent selection:text-white p-4`}>
         <Header />
         <div className="flex-1 w-full">
           {children}
