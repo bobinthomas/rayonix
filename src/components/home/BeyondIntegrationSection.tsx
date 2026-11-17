@@ -53,13 +53,20 @@ export default function BeyondIntegrationSection() {
             <Link
               key={item.name}
               href={item.href}
-              className="group block h-[220px] sm:h-[250px] px-6 sm:px-12 lg:px-[80px] py-[28px] border-b border-[#a3adb2] hover:bg-black/[0.02] transition-colors"
+              className="subsidiary-strip group relative block h-[220px] sm:h-[250px] px-6 sm:px-12 lg:px-[80px] py-[28px] border-b border-[#a3adb2] overflow-hidden"
             >
-              <div className="h-full flex flex-col justify-between">
-                <h3 className="text-4xl sm:text-6xl lg:text-[64px] font-bold text-[#7f8a91] group-hover:text-[#080f12] transition-colors leading-[72px]">
+              {/* Black fill that grows from bottom on hover — GPU-only transform */}
+              <span
+                className="subsidiary-fill absolute inset-0 bg-[#080f12] will-change-transform"
+                aria-hidden="true"
+              />
+
+              {/* Content layer above the fill */}
+              <div className="relative z-10 h-full flex flex-col justify-between">
+                <h3 className="subsidiary-title text-4xl sm:text-6xl lg:text-[64px] font-bold text-[#7f8a91] leading-[72px]">
                   {item.name}
                 </h3>
-                <p className="text-lg sm:text-2xl lg:text-[24px] font-medium text-[#080f12] leading-[32px]">
+                <p className="subsidiary-desc text-lg sm:text-2xl lg:text-[24px] font-medium text-[#080f12] leading-[32px]">
                   {item.description}
                 </p>
               </div>

@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
+const PADDING = 16; // 16px inset from viewport edges
+
 export default function SniperCursor() {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [isTouchDevice, setIsTouchDevice] = useState<boolean>(false);
@@ -50,19 +52,24 @@ export default function SniperCursor() {
       const { x, y } = mousePos.current;
 
       if (x !== lastX || y !== lastY) {
-        // Full-length vertical line: translate along X
+        // Vertical line position is relative to the padded container,
+        // so we subtract PADDING from the mouse position
+        const relX = x - PADDING;
+        const relY = y - PADDING;
+
+        // Full-length vertical line: translate along X within padded container
         if (verticalLineRef.current) {
-          verticalLineRef.current.style.transform = `translate3d(${x}px, 0, 0)`;
+          verticalLineRef.current.style.transform = `translate3d(${relX}px, 0, 0)`;
         }
 
-        // Full-length horizontal line: translate along Y
+        // Full-length horizontal line: translate along Y within padded container
         if (horizontalLineRef.current) {
-          horizontalLineRef.current.style.transform = `translate3d(0, ${y}px, 0)`;
+          horizontalLineRef.current.style.transform = `translate3d(0, ${relY}px, 0)`;
         }
 
-        // Intersection reticle & coordinates HUD: translate along X and Y
+        // Intersection reticle & coordinates HUD
         if (intersectionRef.current) {
-          intersectionRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+          intersectionRef.current.style.transform = `translate3d(${relX}px, ${relY}px, 0)`;
         }
 
         // Update live coordinates text directly without React re-render overhead
@@ -95,29 +102,35 @@ export default function SniperCursor() {
   return (
     <div
       ref={containerRef}
-      className={`fixed inset-0 pointer-events-none z-[999999] overflow-hidden select-none transition-opacity duration-200 ${
+      className={`fixed pointer-events-none z-[999999] overflow-hidden select-none transition-opacity duration-200 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
+      style={{
+        top: PADDING,
+        right: PADDING,
+        bottom: PADDING,
+        left: PADDING,
+      }}
       aria-hidden="true"
     >
       {/* 1. Subtle Full-Length Vertical Line (zero glow, crisp subtle hairline) */}
       <div
         ref={verticalLineRef}
-        className="fixed top-0 bottom-0 left-0 w-px h-screen bg-white/[0.12] will-change-transform"
+        className="absolute top-0 bottom-0 left-0 w-px bg-white/[0.12] will-change-transform"
         style={{ transform: "translate3d(-100px, 0, 0)" }}
       />
 
       {/* 2. Subtle Full-Length Horizontal Line (zero glow, crisp subtle hairline) */}
       <div
         ref={horizontalLineRef}
-        className="fixed top-0 left-0 right-0 h-px w-screen bg-white/[0.12] will-change-transform"
+        className="absolute top-0 left-0 right-0 h-px bg-white/[0.12] will-change-transform"
         style={{ transform: "translate3d(0, -100px, 0)" }}
       />
 
       {/* 3. Intersection Target Reticle & Coordinates HUD (Rayonix Design System) */}
       <div
         ref={intersectionRef}
-        className="fixed top-0 left-0 will-change-transform"
+        className="absolute top-0 left-0 will-change-transform"
         style={{ transform: "translate3d(-100px, -100px, 0)" }}
       >
         {/* Subtle Intersection Reticle Box (no glow) */}

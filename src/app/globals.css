@@ -128,6 +128,33 @@ body {
   animation: tabProgress 5000ms linear forwards;
 }
 
+/* Beyond Integration — Subsidiary Strip Hover: black fill grows from bottom */
+.subsidiary-fill {
+  transform: translate3d(0, 100%, 0);
+  transform-origin: bottom;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.subsidiary-strip:hover .subsidiary-fill {
+  transform: translate3d(0, 0%, 0);
+}
+
+.subsidiary-title {
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.subsidiary-strip:hover .subsidiary-title {
+  color: #ffffff;
+}
+
+.subsidiary-desc {
+  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.subsidiary-strip:hover .subsidiary-desc {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 /* Universal Cross-Browser No Scrollbar */
 .no-scrollbar::-webkit-scrollbar {
   display: none !important;

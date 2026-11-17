@@ -2,26 +2,45 @@
 
 import Image from "next/image";
 import CTAButton from "@/components/ui/CTAButton";
+import TransformingHeading from "@/components/ui/TransformingHeading";
 
 export default function LetsTalkSection() {
   return (
     <section
-      className="relative w-full bg-[#080f12] text-[#f5f6f6] px-6 sm:px-12 lg:px-[68px] pt-[64px] pb-[80px]"
+      className="relative w-full bg-[#080f12] text-[#f5f6f6] px-6 sm:px-12 lg:px-[68px] pt-[64px] pb-[80px] rounded-none"
       aria-label="Contact and Collaboration"
-      data-node-id="640:4081"
+      data-node-id="354:2993"
     >
       <div className="max-w-[1312px] mx-auto flex flex-col gap-[29px]">
-        {/* Section Heading matching Figma node 640:4082 */}
+        {/* Section Heading with Decrypt Animation matching Figma node 354:2994 */}
         <div>
-          <h2 className="text-4xl sm:text-6xl lg:text-[64px] font-bold text-[#f5f6f6] leading-tight lg:leading-[72px]">
-            Lets Talk<span className="text-[#e22328]">.</span>
-          </h2>
+          <TransformingHeading
+            as="h2"
+            segments={[
+              {
+                text: "Lets Talk",
+                className: "text-[#f5f6f6]",
+              },
+              {
+                text: ".",
+                className: "text-[#e22328] font-bold",
+              },
+            ]}
+            accentDot={false}
+            className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[72px]"
+          />
         </div>
 
-        {/* 3 Pillars matching Figma node 640:4083 */}
-        <div className="border-t border-[#262626] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#262626]">
+        {/* 3 Pillars matching Figma node 354:2995 */}
+        <div
+          className="border-t border-[#262626] grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#262626]"
+          data-node-id="354:2995"
+        >
           {/* Pillar 01: Operational Requirement */}
-          <div className="px-6 sm:px-8 py-10 sm:py-[48px] flex flex-col justify-between min-h-[380px] lg:h-[401px]">
+          <div
+            className="px-6 sm:px-8 py-10 sm:py-[48px] flex flex-col justify-between min-h-[380px] lg:h-[401px]"
+            data-node-id="354:2996"
+          >
             <div className="flex flex-col gap-6">
               <div className="relative w-[40px] h-[45px]">
                 <Image
@@ -50,7 +69,10 @@ export default function LetsTalkSection() {
           </div>
 
           {/* Pillar 02: Technology Partnership */}
-          <div className="px-6 sm:px-8 py-10 sm:py-[48px] flex flex-col justify-between min-h-[380px] lg:h-[401px]">
+          <div
+            className="px-6 sm:px-8 py-10 sm:py-[48px] flex flex-col justify-between min-h-[380px] lg:h-[401px]"
+            data-node-id="354:2997"
+          >
             <div className="flex flex-col gap-6">
               <div className="relative w-[40px] h-[45px]">
                 <Image
@@ -79,7 +101,10 @@ export default function LetsTalkSection() {
           </div>
 
           {/* Pillar 03: Connect With Team */}
-          <div className="px-6 sm:px-8 py-10 sm:py-[48px] flex flex-col justify-between min-h-[380px] lg:h-[401px]">
+          <div
+            className="px-6 sm:px-8 py-10 sm:py-[48px] flex flex-col justify-between min-h-[380px] lg:h-[401px]"
+            data-node-id="354:2998"
+          >
             <div className="flex flex-col gap-6">
               <div className="relative w-[40px] h-[45px]">
                 <Image
