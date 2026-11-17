@@ -19,8 +19,8 @@ export default function HomePage() {
       <OrganizationSchema />
       <WebSiteSchema />
 
-      {/* Clean continuous section-by-section flow matching Figma frame 640:3758 */}
-      <main className="w-full overflow-hidden">
+      {/* Clean continuous section-by-section flow matching Figma frame 640:3758 with 16px gap */}
+      <main className="w-full flex flex-col gap-4 overflow-hidden">
         {/* 01 · Hero Video Banner */}
         <HeroSection />
 
