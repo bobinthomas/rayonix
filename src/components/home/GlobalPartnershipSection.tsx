@@ -10,7 +10,7 @@ interface CountryMarker {
   region: string;
   role: string;
   isHQ?: boolean;
-  // Exact continental pixel coordinates on the 1408 x 1369 figma-node-map.png
+  // Exact continental pixel coordinates on the 1408 x 1369 World Map 2.png
   origX: number;
   origY: number;
   align?: "left" | "center" | "right";
@@ -22,8 +22,8 @@ const countryMarkers: CountryMarker[] = [
     country: "United States",
     region: "North America",
     role: "Strategic AI & Unmanned Systems",
-    origX: 328.3,
-    origY: 426.5,
+    origX: 325,
+    origY: 608,
     align: "left",
   },
   {
@@ -31,8 +31,8 @@ const countryMarkers: CountryMarker[] = [
     country: "United Kingdom",
     region: "Europe",
     role: "Defence Avionics & Communication",
-    origX: 682.1,
-    origY: 381.7,
+    origX: 662,
+    origY: 605,
     align: "center",
   },
   {
@@ -40,8 +40,8 @@ const countryMarkers: CountryMarker[] = [
     country: "Sweden",
     region: "Northern Europe",
     role: "Ground Penetrating Radar & Sensor Systems",
-    origX: 792.2,
-    origY: 397.6,
+    origX: 765,
+    origY: 565,
     align: "center",
   },
   {
@@ -49,8 +49,8 @@ const countryMarkers: CountryMarker[] = [
     country: "South Africa",
     region: "Africa",
     role: "Tactical Mobility & Border Surveillance",
-    origX: 816.4,
-    origY: 701.2,
+    origX: 775,
+    origY: 875,
     align: "center",
   },
   {
@@ -58,8 +58,8 @@ const countryMarkers: CountryMarker[] = [
     country: "Israel",
     region: "Middle East",
     role: "Battle-Tested Electro-Optics & C-UAS",
-    origX: 902.0,
-    origY: 472.1,
+    origX: 828,
+    origY: 660,
     align: "center",
   },
   {
@@ -68,8 +68,8 @@ const countryMarkers: CountryMarker[] = [
     region: "South Asia",
     role: "Rayonix Central Command & Integration Hub",
     isHQ: true,
-    origX: 1030.0,
-    origY: 542.0,
+    origX: 1028,
+    origY: 715,
     align: "center",
   },
   {
@@ -77,8 +77,8 @@ const countryMarkers: CountryMarker[] = [
     country: "Singapore",
     region: "Southeast Asia",
     role: "Robotics & Subsurface Intelligence",
-    origX: 1159.7,
-    origY: 583.3,
+    origX: 1136,
+    origY: 795,
     align: "center",
   },
   {
@@ -86,8 +86,8 @@ const countryMarkers: CountryMarker[] = [
     country: "Japan",
     region: "East Asia",
     role: "Precision Photonics & Edge Compute",
-    origX: 1317.6,
-    origY: 434.5,
+    origX: 1335,
+    origY: 625,
     align: "right",
   },
   {
@@ -95,8 +95,8 @@ const countryMarkers: CountryMarker[] = [
     country: "Australia",
     region: "Oceania",
     role: "Maritime Domain Awareness & Early Warning",
-    origX: 1322.3,
-    origY: 722.6,
+    origX: 1320,
+    origY: 890,
     align: "right",
   },
 ];
@@ -106,16 +106,17 @@ export default function GlobalPartnershipSection() {
 
   return (
     <section
-      className="relative w-full min-h-[1020px] lg:min-h-[1320px] bg-[#080f12] text-[#f5f6f6] pt-[96px] lg:pt-[116px] pb-[60px] px-6 sm:px-12 lg:px-[84px] overflow-hidden flex flex-col justify-between rounded-none"
+      className="relative w-full min-h-[1060px] lg:min-h-[1340px] bg-[#071629] text-[#f5f6f6] pt-[96px] lg:pt-[116px] pb-[60px] px-6 sm:px-12 lg:px-[84px] overflow-hidden flex flex-col justify-between rounded-none"
       aria-label="Global Technology and Indian Defence Capability"
       data-node-id="354:2941"
     >
       {/* 1. Background 3D Sci-Fi World Map & Tactical Markers inside Unified SVG Coordinate Space
-          viewBox starts at Y=-160 to provide generous dark breathing room on top of the globe for
-          the headline and subheading, while markers remain 100% locked to the map landmasses. */}
+          Using World Map 2.png (1408x1369). The top portion (0-450px) naturally blends into #071629
+          providing organic dark breathing room for the header text. All 9 target markers are mathematically
+          locked to their exact continental landmasses in the shared 1408x1369 coordinate space. */}
       <div className="absolute inset-0 select-none overflow-hidden pointer-events-none">
         <svg
-          viewBox="0 -160 1408 1529"
+          viewBox="0 0 1408 1369"
           preserveAspectRatio="xMidYMin slice"
           className="w-full h-full pointer-events-none"
           role="region"
@@ -127,13 +128,12 @@ export default function GlobalPartnershipSection() {
             </filter>
           </defs>
 
-          {/* Base Map Graphic */}
+          {/* Base Map Graphic — World Map 2 */}
           <image
-            href="/assets/figma-node-map.png"
+            href="/assets/world-map-2.png"
             width={1408}
             height={1369}
             preserveAspectRatio="none"
-            opacity={0.9}
           />
 
           {/* Pinned Tactical Markers — Coincident with map landmasses at all viewports */}
@@ -164,12 +164,15 @@ export default function GlobalPartnershipSection() {
               >
                 <title>{`${marker.country}: ${marker.role}`}</title>
 
-                {/* Expanded hit target circle — 28px radius (56px diameter) with pointerEvents="all" */}
+                {/* Expanded hit target circle — 32px radius (64px diameter) with pointerEvents="all" */}
                 <circle
-                  r={28}
+                  r={32}
                   fill="#000000"
-                  fillOpacity={0.0001}
+                  fillOpacity={0.001}
                   style={{ pointerEvents: "all" }}
+                  onMouseEnter={() => setActiveMarker(marker.id)}
+                  onMouseLeave={() => setActiveMarker(null)}
+                  onClick={() => setActiveMarker(isHovered ? null : marker.id)}
                 />
 
                 {/* SMIL Animated Radar Pulse Ring */}
@@ -217,63 +220,59 @@ export default function GlobalPartnershipSection() {
                   style={{ pointerEvents: "none" }}
                 />
 
-                {/* Tactical Military HUD Tooltip via SVG foreignObject — 100% Locked to the marker */}
-                <foreignObject
-                  x={marker.align === "left" ? 0 : marker.align === "right" ? -240 : -120}
-                  y={-92}
-                  width={240}
-                  height={86}
-                  className={`overflow-visible pointer-events-none transition-all duration-200 ${
-                    isHovered
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-0 translate-y-1.5 group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0"
-                  }`}
-                >
-                  <div
-                    className="relative bg-[#080f12]/95 backdrop-blur-md px-3.5 py-2 rounded-[2px] border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.85)] min-w-[200px] max-w-[240px] whitespace-normal select-none"
+                {/* Tactical Military HUD Tooltip via SVG foreignObject */}
+                {isHovered && (
+                  <foreignObject
+                    x={marker.align === "left" ? 0 : marker.align === "right" ? -240 : -120}
+                    y={-92}
+                    width={240}
+                    height={86}
+                    className="overflow-visible pointer-events-none"
                   >
-                    {/* Corner Hairline Brackets */}
-                    <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-[#e22328]" />
-                    <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t border-r border-[#e22328]" />
-                    <div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b border-l border-[#e22328]" />
-                    <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-[#e22328]" />
+                    <div className="relative bg-[#080f12]/95 backdrop-blur-md px-3.5 py-2 rounded-[2px] border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.85)] min-w-[200px] max-w-[240px] whitespace-normal select-none">
+                      {/* Corner Hairline Brackets */}
+                      <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-[#e22328]" />
+                      <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t border-r border-[#e22328]" />
+                      <div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b border-l border-[#e22328]" />
+                      <div className="absolute bottom-0 right-0 w-1.5 h-1.5 border-b border-r border-[#e22328]" />
 
-                    {/* Header Row: Country Name + Status Indicator */}
-                    <div className="flex items-center justify-between gap-2 pb-1 border-b border-white/10">
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className={`w-1.5 h-1.5 rounded-full ${
-                            marker.isHQ ? "bg-[#e22328] animate-pulse" : "bg-[#e22328]"
-                          }`}
-                        />
-                        <span className="text-[13px] font-bold text-[#f5f6f6] tracking-wide uppercase font-sans">
-                          {marker.country}
-                        </span>
+                      {/* Header Row: Country Name + Status Indicator */}
+                      <div className="flex items-center justify-between gap-2 pb-1 border-b border-white/10">
+                        <div className="flex items-center gap-1.5">
+                          <span
+                            className={`w-1.5 h-1.5 rounded-full ${
+                              marker.isHQ ? "bg-[#e22328] animate-pulse" : "bg-[#e22328]"
+                            }`}
+                          />
+                          <span className="text-[13px] font-bold text-[#f5f6f6] tracking-wide uppercase font-sans">
+                            {marker.country}
+                          </span>
+                        </div>
+                        {marker.isHQ && (
+                          <span className="text-[9px] font-mono tracking-wider px-1 py-0.2 bg-[#e22328]/20 text-[#e22328] font-bold border border-[#e22328]/40 rounded-[2px]">
+                            HQ
+                          </span>
+                        )}
                       </div>
-                      {marker.isHQ && (
-                        <span className="text-[9px] font-mono tracking-wider px-1 py-0.2 bg-[#e22328]/20 text-[#e22328] font-bold border border-[#e22328]/40 rounded-[2px]">
-                          HQ
-                        </span>
-                      )}
+
+                      {/* Role & Tactical Capability */}
+                      <p className="text-[11px] text-[#bdc4c8] font-mono tracking-tight leading-snug mt-1.5">
+                        {marker.role}
+                      </p>
+
+                      {/* Downward Pointer Notch */}
+                      <div
+                        className={`absolute top-full w-2 h-2 -mt-1 bg-[#080f12] border-r border-b border-white/20 rotate-45 ${
+                          marker.align === "left"
+                            ? "left-6"
+                            : marker.align === "right"
+                            ? "right-6"
+                            : "left-1/2 -translate-x-1/2"
+                        }`}
+                      />
                     </div>
-
-                    {/* Role & Tactical Capability */}
-                    <p className="text-[11px] text-[#bdc4c8] font-mono tracking-tight leading-snug mt-1.5">
-                      {marker.role}
-                    </p>
-
-                    {/* Downward Pointer Notch */}
-                    <div
-                      className={`absolute top-full w-2 h-2 -mt-1 bg-[#080f12] border-r border-b border-white/20 rotate-45 ${
-                        marker.align === "left"
-                          ? "left-6"
-                          : marker.align === "right"
-                          ? "right-6"
-                          : "left-1/2 -translate-x-1/2"
-                      }`}
-                    />
-                  </div>
-                </foreignObject>
+                  </foreignObject>
+                )}
               </g>
             );
           })}
