@@ -68,8 +68,8 @@ const countryMarkers: CountryMarker[] = [
     region: "South Asia",
     role: "Rayonix Central Command & Integration Hub",
     isHQ: true,
-    origX: 1026.4,
-    origY: 474.6,
+    origX: 1030.0,
+    origY: 542.0,
     align: "center",
   },
   {
@@ -106,17 +106,16 @@ export default function GlobalPartnershipSection() {
 
   return (
     <section
-      className="relative w-full min-h-[960px] lg:min-h-[1260px] bg-[#080f12] text-[#f5f6f6] pt-[100px] lg:pt-[116px] pb-[60px] px-6 sm:px-12 lg:px-[84px] overflow-hidden flex flex-col justify-between rounded-none"
+      className="relative w-full min-h-[1020px] lg:min-h-[1320px] bg-[#080f12] text-[#f5f6f6] pt-[96px] lg:pt-[116px] pb-[60px] px-6 sm:px-12 lg:px-[84px] overflow-hidden flex flex-col justify-between rounded-none"
       aria-label="Global Technology and Indian Defence Capability"
       data-node-id="354:2941"
     >
       {/* 1. Background 3D Sci-Fi World Map & Tactical Markers inside Unified SVG Coordinate Space
-          Both the map raster image and the target markers share the exact same 1408x1369 viewBox.
-          The browser's native C++ matrix compositor handles all scaling, making marker drift
-          physically impossible across any resolution, aspect ratio, or DPI scaling. */}
+          viewBox starts at Y=-160 to provide generous dark breathing room on top of the globe for
+          the headline and subheading, while markers remain 100% locked to the map landmasses. */}
       <div className="absolute inset-0 select-none overflow-hidden pointer-events-none">
         <svg
-          viewBox="0 0 1408 1369"
+          viewBox="0 -160 1408 1529"
           preserveAspectRatio="xMidYMin slice"
           className="w-full h-full pointer-events-none"
           role="region"
