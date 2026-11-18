@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Image from "next/image";
+import CTAButton from "@/components/ui/CTAButton";
 
 export default function HeroSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -14,6 +14,14 @@ export default function HeroSection() {
       });
     }
   }, []);
+
+  const handleScrollToNext = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    const nextSection = document.getElementById("battlespace");
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <section
@@ -33,7 +41,8 @@ export default function HeroSection() {
           poster="/assets/hero-banner.png"
           className="w-full h-full object-cover object-center"
         >
-          <source src="/assets/videos/hero.mp4" type="video/mp4" />
+          <source src="/assets/videos/website-video.mp4" type="video/mp4" />
+          <source src="/assets/videos/Website%20VIDEO.mp4" type="video/mp4" />
         </video>
 
         {/* Top vignette for navigation contrast and readability */}
@@ -43,20 +52,17 @@ export default function HeroSection() {
         <div className="absolute bottom-0 left-0 right-0 h-[160px] bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
       </div>
 
-      {/* Bottom-Left Tactical Badge: RAYONIX | ASYMMETRIC WARFARE matching uploaded reference */}
-      <div className="absolute bottom-8 sm:bottom-12 left-6 sm:left-12 lg:left-[60px] z-20 flex items-center gap-3.5 select-none">
-        <div className="relative w-[84px] h-[22px]">
-          <Image
-            src="/assets/rayonix-logo.svg"
-            alt="RAYONIX"
-            fill
-            className="object-contain object-left"
-          />
-        </div>
-        <span className="w-[1.5px] h-3.5 bg-[#e22328]" />
-        <span className="text-[11px] sm:text-[12px] font-mono uppercase tracking-[0.22em] text-[#bdc4c8]">
-          ASYMMETRIC WARFARE
-        </span>
+      {/* Centered CTA positioned 15% from bottom */}
+      <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2 z-20 w-full max-w-[92vw] sm:max-w-max flex justify-center pointer-events-auto">
+        <CTAButton
+          variant="primary"
+          href="#battlespace"
+          onClick={handleScrollToNext}
+          className="!whitespace-normal sm:!whitespace-nowrap text-center text-[13px] sm:text-[15px] md:text-[16px] font-medium tracking-normal sm:tracking-[0.02em] px-5 sm:px-7 py-3.5 sm:py-4 shadow-2xl"
+          aria-label="Technology built for what lies beyond the visible"
+        >
+          Technology built for what lies beyond the visible.
+        </CTAButton>
       </div>
     </section>
   );

@@ -27,7 +27,8 @@ export default function AnimatedCounter({
   const containerRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (typeof window === "undefined" || !containerRef.current) return;
+    const el = containerRef.current;
+    if (typeof window === "undefined" || !el) return;
 
     // Respect reduced motion
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -36,26 +37,45 @@ export default function AnimatedCounter({
     }
 
     const obj = { val: 0 };
+    let tween: gsap.core.Tween | null = null;
 
-    const tween = gsap.to(obj, {
-      val: target,
-      duration: duration,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top 85%",
-        once: true,
-      },
-      onUpdate: () => {
-        setCurrentValue(Math.max(0, Math.round(obj.val)));
-      },
-      onComplete: () => {
-        setCurrentValue(target);
-      },
+    const playCountUp = () => {
+      tween?.kill();
+      obj.val = 0;
+      setCurrentValue(0);
+
+      tween = gsap.to(obj, {
+        val: target,
+        duration: duration,
+        ease: "power2.out",
+        onUpdate: () => {
+          setCurrentValue(Math.max(0, Math.round(obj.val)));
+        },
+        onComplete: () => {
+          setCurrentValue(target);
+        },
+      });
+    };
+
+    const resetCounter = () => {
+      tween?.kill();
+      obj.val = 0;
+      setCurrentValue(0);
+    };
+
+    const st = ScrollTrigger.create({
+      trigger: el,
+      start: "top 88%",
+      end: "bottom 12%",
+      onEnter: () => playCountUp(),
+      onEnterBack: () => playCountUp(),
+      onLeave: () => resetCounter(),
+      onLeaveBack: () => resetCounter(),
     });
 
     return () => {
-      tween.kill();
+      st.kill();
+      tween?.kill();
     };
   }, [target, duration]);
 

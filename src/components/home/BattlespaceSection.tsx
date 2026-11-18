@@ -7,7 +7,8 @@ import ScrollGradientText from "@/components/ui/ScrollGradientText";
 export default function BattlespaceSection() {
   return (
     <section
-      className="relative w-full min-h-[737px] flex flex-col justify-center bg-black px-6 sm:px-12 lg:px-[64px] py-[40px] overflow-hidden"
+      id="battlespace"
+      className="relative w-full min-h-[737px] flex flex-col justify-center bg-black px-6 sm:px-12 lg:px-[64px] py-[40px] overflow-hidden scroll-mt-24"
       aria-label="The New Battlespace"
       data-node-id="640:3823"
     >
@@ -28,14 +29,14 @@ export default function BattlespaceSection() {
       </div>
 
       <div className="relative z-10 max-w-[1408px] mx-auto w-full flex flex-col gap-16 lg:gap-[150px] justify-between py-12 lg:py-16">
-        {/* Axion-style Transforming Heading: starts transformed in monospace/glyphs and settles back to bold display font */}
-        <div>
+        {/* Axion-style Transforming Heading: strictly single line on all resolutions >= 1280px */}
+        <div className="w-full xl:whitespace-nowrap overflow-visible">
           <TransformingHeading
             text="The Future of Defence Is Integrated"
             accentDot={true}
             accentColor="#e22328"
             as="h2"
-            className="text-3xl sm:text-5xl lg:text-[64px] font-bold text-[#f5f6f6] tracking-[2px] sm:tracking-[4.48px] leading-tight lg:leading-[72px]"
+            className="text-3xl sm:text-5xl lg:text-5xl xl:text-[46px] 2xl:text-[58px] min-[1800px]:text-[64px] font-bold text-[#f5f6f6] tracking-tight sm:tracking-[2px] xl:tracking-[1.5px] 2xl:tracking-[3px] leading-tight lg:leading-[72px] xl:whitespace-nowrap"
           />
         </div>
 
