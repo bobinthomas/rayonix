@@ -154,11 +154,11 @@ export default function MissionArchitectureSection() {
         ref={cardRef}
         className="sticky top-4 lg:top-[calc((100vh-792px)/2)] w-full min-h-[750px] lg:h-[792px] bg-[#080f12] overflow-hidden flex items-center justify-center px-6 sm:px-12 lg:px-[84px] py-16 lg:py-0 shadow-2xl"
       >
-        {/* Background Image: detect-decide-respond-bg.webp matching Figma */}
+        {/* Background Image: detect-decide-respond-bg.png matching user specification */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="relative w-full h-full opacity-25">
+          <div className="relative w-full h-full opacity-45">
             <Image
-              src="/assets/detect-decide-respond-bg.webp"
+              src="/assets/detect-decide-respond-bg.png"
               alt="Tactical Mission Equipment"
               fill
               priority={false}
@@ -167,8 +167,8 @@ export default function MissionArchitectureSection() {
             />
           </div>
           {/* Edge Vignette Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#080f12] via-transparent to-[#080f12]" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#080f12] via-transparent to-[#080f12]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#080f12]/90 via-transparent to-[#080f12]/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#080f12]/80 via-transparent to-[#080f12]/80" />
         </div>
 
         {/* Inner Content Grid */}
