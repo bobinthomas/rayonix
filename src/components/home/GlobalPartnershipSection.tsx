@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import TransformingHeading from "@/components/ui/TransformingHeading";
 
@@ -101,153 +101,139 @@ const countryMarkers: CountryMarker[] = [
   },
 ];
 
-const MAP_WIDTH = 1408;
-const MAP_HEIGHT = 1369;
-
 export default function GlobalPartnershipSection() {
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [coords, setCoords] = useState<Record<string, { left: number; top: number }>>({});
-
-  useEffect(() => {
-    const updatePositions = () => {
-      if (!containerRef.current) return;
-      const { clientWidth: width, clientHeight: height } = containerRef.current;
-      if (width === 0 || height === 0) return;
-
-      // Exact mathematical replication of CSS `object-cover object-top`
-      const scale = Math.max(width / MAP_WIDTH, height / MAP_HEIGHT);
-      const offsetX = (width - MAP_WIDTH * scale) / 2;
-      const offsetY = 0; // object-top aligns to top = 0
-
-      const newCoords: Record<string, { left: number; top: number }> = {};
-      countryMarkers.forEach((m) => {
-        newCoords[m.id] = {
-          left: Math.round((offsetX + m.origX * scale) * 10) / 10,
-          top: Math.round((offsetY + m.origY * scale) * 10) / 10,
-        };
-      });
-      setCoords(newCoords);
-    };
-
-    updatePositions();
-    window.addEventListener("resize", updatePositions);
-
-    let observer: ResizeObserver | null = null;
-    if (typeof ResizeObserver !== "undefined" && containerRef.current) {
-      observer = new ResizeObserver(updatePositions);
-      observer.observe(containerRef.current);
-    }
-
-    return () => {
-      window.removeEventListener("resize", updatePositions);
-      if (observer) observer.disconnect();
-    };
-  }, []);
 
   return (
     <section
-      ref={containerRef}
       className="relative w-full min-h-[960px] lg:min-h-[1260px] bg-[#080f12] text-[#f5f6f6] pt-[100px] lg:pt-[116px] pb-[60px] px-6 sm:px-12 lg:px-[84px] overflow-hidden flex flex-col justify-between rounded-none"
       aria-label="Global Technology and Indian Defence Capability"
       data-node-id="354:2941"
     >
-      {/* 1. Background 3D Sci-Fi World Map — Fills Section Edge-to-Edge with NO Mountain Wireframe */}
-      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
-        <Image
-          src="/assets/figma-node-map.png"
-          alt="Rayonix Global Defense Network"
-          fill
-          priority={false}
-          sizes="100vw"
-          className="object-cover object-top opacity-90"
-        />
+      {/* 1. Background 3D Sci-Fi World Map & Tactical Markers inside Unified SVG Coordinate Space
+          Both the map raster image and the target markers share the exact same 1408x1369 viewBox.
+          The browser's native C++ matrix compositor handles all scaling, making marker drift
+          physically impossible across any resolution, aspect ratio, or DPI scaling. */}
+      <div className="absolute inset-0 select-none overflow-hidden pointer-events-none">
+        <svg
+          viewBox="0 0 1408 1369"
+          preserveAspectRatio="xMidYMin slice"
+          className="w-full h-full pointer-events-none"
+          role="region"
+          aria-label="Interactive Global Defence Network Map"
+        >
+          <defs>
+            <filter id="hud-glow-red" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="0" stdDeviation="2.5" floodColor="#e22328" floodOpacity="0.85" />
+            </filter>
+          </defs>
 
-        {/* Interactive Tactical Hotspot Markers dynamically anchored to the edge-to-edge map */}
-        <div className="absolute inset-0 pointer-events-auto">
+          {/* Base Map Graphic */}
+          <image
+            href="/assets/figma-node-map.png"
+            width={1408}
+            height={1369}
+            preserveAspectRatio="none"
+            opacity={0.9}
+          />
+
+          {/* Pinned Tactical Markers — Coincident with map landmasses at all viewports */}
           {countryMarkers.map((marker) => {
             const isHovered = activeMarker === marker.id;
-            const pos = coords[marker.id];
-
-            // Fallback before hydration / measurement
-            const style = pos
-              ? { left: `${pos.left}px`, top: `${pos.top}px` }
-              : {
-                  left: `${(marker.origX / MAP_WIDTH) * 100}%`,
-                  top: `${(marker.origY / MAP_HEIGHT) * 100}%`,
-                };
-
             return (
-              <div
+              <g
                 key={marker.id}
-                className="absolute -translate-x-1/2 -translate-y-1/2 group cursor-pointer z-20"
-                style={style}
-                onMouseEnter={() => setActiveMarker(marker.id)}
-                onMouseLeave={() => setActiveMarker(null)}
-                onClick={() =>
-                  setActiveMarker(isHovered ? null : marker.id)
-                }
+                transform={`translate(${marker.origX}, ${marker.origY})`}
+                className={`cursor-pointer focus:outline-none group ${
+                  isHovered ? "is-active" : ""
+                }`}
+                style={{ pointerEvents: "all" }}
                 role="button"
                 tabIndex={0}
                 aria-label={`${marker.country}: ${marker.role}`}
+                onMouseEnter={() => setActiveMarker(marker.id)}
+                onMouseLeave={() => setActiveMarker(null)}
+                onClick={() => setActiveMarker(isHovered ? null : marker.id)}
+                onFocus={() => setActiveMarker(marker.id)}
+                onBlur={() => setActiveMarker(null)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
                     setActiveMarker(isHovered ? null : marker.id);
                   }
                 }}
               >
-                {/* Outer Sonar / Radar Pulse Animation */}
-                <div className="relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8">
-                  {/* Concentric Ping Ring */}
-                  <span
-                    className={`absolute inline-flex h-full w-full rounded-full opacity-75 ${
-                      marker.isHQ
-                        ? "animate-ping bg-[#e22328]"
-                        : "animate-ping bg-[#e22328]/60"
-                    }`}
-                    style={{
-                      animationDuration: marker.isHQ ? "1.8s" : "2.6s",
-                    }}
+                <title>{`${marker.country}: ${marker.role}`}</title>
+
+                {/* Expanded hit target circle — 28px radius (56px diameter) with pointerEvents="all" */}
+                <circle
+                  r={28}
+                  fill="#000000"
+                  fillOpacity={0.0001}
+                  style={{ pointerEvents: "all" }}
+                />
+
+                {/* SMIL Animated Radar Pulse Ring */}
+                <circle r={marker.isHQ ? 5 : 4} fill="#e22328" style={{ pointerEvents: "none" }}>
+                  <animate
+                    attributeName="r"
+                    values={marker.isHQ ? "5; 24; 28" : "4; 18; 22"}
+                    dur={marker.isHQ ? "1.8s" : "2.6s"}
+                    repeatCount="indefinite"
                   />
-
-                  {/* Secondary Subtle Ring */}
-                  <span
-                    className={`relative inline-flex rounded-full transition-transform duration-300 ${
-                      isHovered ? "scale-125" : "scale-100"
-                    } ${
-                      marker.isHQ
-                        ? "w-4 h-4 bg-[#e22328]/30 border border-[#e22328]"
-                        : "w-3 h-3 bg-[#e22328]/20 border border-[#e22328]/70"
-                    }`}
+                  <animate
+                    attributeName="opacity"
+                    values={marker.isHQ ? "0.85; 0.25; 0" : "0.75; 0.2; 0"}
+                    dur={marker.isHQ ? "1.8s" : "2.6s"}
+                    repeatCount="indefinite"
                   />
+                </circle>
 
-                  {/* Core Solid Red Target Dot */}
-                  <span
-                    className={`absolute rounded-full bg-[#e22328] shadow-[0_0_10px_#e22328] transition-transform duration-200 ${
-                      marker.isHQ ? "w-2.5 h-2.5" : "w-2 h-2"
-                    } ${isHovered ? "scale-125" : "scale-100"}`}
-                  >
-                    {/* Inner High-Precision Center White Dot */}
-                    <span className="absolute inset-[25%] rounded-full bg-white opacity-90" />
-                  </span>
-                </div>
+                {/* Secondary Ring */}
+                <circle
+                  r={isHovered ? (marker.isHQ ? 11 : 9) : (marker.isHQ ? 8 : 6)}
+                  fill="#e22328"
+                  fillOpacity={marker.isHQ ? 0.35 : 0.2}
+                  stroke="#e22328"
+                  strokeWidth={1}
+                  strokeOpacity={marker.isHQ ? 0.9 : 0.6}
+                  className="transition-all duration-300 group-hover:scale-125"
+                  style={{ pointerEvents: "none" }}
+                />
 
-                {/* Tactical Military HUD Country Tooltip */}
-                <div
-                  className={`absolute bottom-full mb-2.5 z-30 transition-all duration-300 ease-out ${
-                    marker.align === "left"
-                      ? "left-0 translate-x-0"
-                      : marker.align === "right"
-                      ? "right-0 translate-x-0"
-                      : "left-1/2 -translate-x-1/2"
-                  } ${
+                {/* Core Solid Red Target Dot */}
+                <circle
+                  r={isHovered ? (marker.isHQ ? 6 : 5) : (marker.isHQ ? 4.5 : 3.5)}
+                  fill="#e22328"
+                  filter="url(#hud-glow-red)"
+                  className="transition-all duration-200 group-hover:scale-125"
+                  style={{ pointerEvents: "none" }}
+                />
+
+                {/* Inner Center White Dot */}
+                <circle
+                  r={marker.isHQ ? 1.8 : 1.4}
+                  fill="#ffffff"
+                  fillOpacity={0.95}
+                  style={{ pointerEvents: "none" }}
+                />
+
+                {/* Tactical Military HUD Tooltip via SVG foreignObject — 100% Locked to the marker */}
+                <foreignObject
+                  x={marker.align === "left" ? 0 : marker.align === "right" ? -240 : -120}
+                  y={-92}
+                  width={240}
+                  height={86}
+                  className={`overflow-visible pointer-events-none transition-all duration-200 ${
                     isHovered
-                      ? "opacity-100 translate-y-0 scale-100 pointer-events-auto"
-                      : "opacity-0 translate-y-1.5 scale-95 pointer-events-none"
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-1.5 group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0"
                   }`}
                 >
-                  <div className="relative bg-[#080f12]/95 backdrop-blur-md px-3.5 py-2 rounded-[2px] border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.85)] min-w-[190px] max-w-[260px] whitespace-normal select-none">
-                    {/* Top Corner Hairline Brackets */}
+                  <div
+                    className="relative bg-[#080f12]/95 backdrop-blur-md px-3.5 py-2 rounded-[2px] border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.85)] min-w-[200px] max-w-[240px] whitespace-normal select-none"
+                  >
+                    {/* Corner Hairline Brackets */}
                     <div className="absolute top-0 left-0 w-1.5 h-1.5 border-t border-l border-[#e22328]" />
                     <div className="absolute top-0 right-0 w-1.5 h-1.5 border-t border-r border-[#e22328]" />
                     <div className="absolute bottom-0 left-0 w-1.5 h-1.5 border-b border-l border-[#e22328]" />
@@ -281,24 +267,25 @@ export default function GlobalPartnershipSection() {
                     <div
                       className={`absolute top-full w-2 h-2 -mt-1 bg-[#080f12] border-r border-b border-white/20 rotate-45 ${
                         marker.align === "left"
-                          ? "left-4"
+                          ? "left-6"
                           : marker.align === "right"
-                          ? "right-4"
+                          ? "right-6"
                           : "left-1/2 -translate-x-1/2"
                       }`}
                     />
                   </div>
-                </div>
-              </div>
+                </foreignObject>
+              </g>
             );
           })}
-        </div>
+        </svg>
       </div>
 
-      {/* 2. Content Container: Strict Left-Flush Alignment of Header, Subtext, and Logos Card */}
-      <div className="relative z-10 max-w-[1256px] mx-auto w-full flex flex-col justify-between flex-1 gap-12 lg:gap-20">
+      {/* 2. Content Container: Strict Left-Flush Alignment of Header, Subtext, and Logos Card
+          pointer-events-none allows mouse events to pass through directly to the underlying map dots */}
+      <div className="relative z-10 max-w-[1256px] mx-auto w-full flex flex-col justify-between flex-1 gap-12 lg:gap-20 pointer-events-none">
         {/* Editorial Content with Decrypt Animation matching Figma node 354:2945 */}
-        <div className="w-full">
+        <div className="w-full pointer-events-auto">
           <TransformingHeading
             as="h2"
             segments={[
@@ -327,7 +314,7 @@ export default function GlobalPartnershipSection() {
         {/* 3. Global Partner Logos Card matching Figma node 354:2952
             Strictly aligned edge-to-edge with the 1256px container column */}
         <div
-          className="w-full bg-white/[0.08] backdrop-blur-md p-[10px] sm:p-[12px] rounded-[4px] border border-white/10 shadow-2xl"
+          className="w-full bg-white/[0.08] backdrop-blur-md p-[10px] sm:p-[12px] rounded-[4px] border border-white/10 shadow-2xl pointer-events-auto"
           data-node-id="354:2952"
         >
           <div
