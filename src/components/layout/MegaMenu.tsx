@@ -69,7 +69,7 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
           {
             title: "GPR",
             description: "Ground Penetrating Radar for deep dielectric anomaly mapping",
-            href: "/domains/subsurface#gpr",
+            href: "/subsurface/detect/gpr",
           },
           {
             title: "Fibre Optic DAS",
