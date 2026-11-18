@@ -10,7 +10,7 @@ export default function Footer() {
       aria-label="Rayonix Footer"
       data-node-id="640:4087"
     >
-      <div className="max-w-[1408px] mx-auto px-6 sm:px-12 lg:px-[84px] pt-[48px] pb-8 flex flex-col gap-10">
+      <div className="max-w-[1408px] mx-auto px-6 sm:px-12 lg:px-[64px] pt-[48px] pb-8 flex flex-col gap-10">
         {/* Upper Footer: Brand info & Navigation */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 pb-10">
           {/* Left Brand Column matching Figma node 640:4088 */}
@@ -241,7 +241,7 @@ export default function Footer() {
 
       {/* Red Legal Strip matching Figma node 640:4183 */}
       <div className="w-full bg-[#e22328] py-3 px-6 sm:px-12 lg:px-[64px]">
-        <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between text-[12px] font-normal text-white gap-2">
+        <div className="max-w-[1408px] mx-auto w-full flex flex-col sm:flex-row items-center justify-between text-[12px] font-normal text-white gap-2">
           <p>© 2026 Rayonix Tech Private Limited. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link href="/privacy" prefetch={false} className="hover:underline">

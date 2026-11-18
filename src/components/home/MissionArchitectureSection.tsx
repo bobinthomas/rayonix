@@ -152,7 +152,7 @@ export default function MissionArchitectureSection() {
       {/* Sticky Card Container - Natural Figma height (792px), vertically centered in viewport */}
       <div
         ref={cardRef}
-        className="sticky top-4 lg:top-[calc((100vh-792px)/2)] w-full min-h-[750px] lg:h-[792px] bg-[#080f12] overflow-hidden flex items-center justify-center px-6 sm:px-12 lg:px-[84px] py-16 lg:py-0 shadow-2xl"
+        className="sticky top-4 lg:top-[calc((100vh-792px)/2)] w-full min-h-[750px] lg:h-[792px] bg-[#080f12] overflow-hidden flex items-center justify-center px-6 sm:px-12 lg:px-[64px] py-16 lg:py-0 shadow-2xl"
       >
         {/* Background Image: detect-decide-respond-bg.png matching user specification */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">

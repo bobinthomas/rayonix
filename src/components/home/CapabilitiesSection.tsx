@@ -62,7 +62,7 @@ export default function CapabilitiesSection() {
         />
       </div>
 
-      <div className="relative z-10 max-w-[1320px] mx-auto flex flex-col gap-6">
+      <div className="relative z-10 max-w-[1408px] mx-auto w-full flex flex-col gap-6">
         {/* Section Headline with Axion Decrypt Animation matching Figma node 354:2898 */}
         <div className="pb-2" data-node-id="354:2898">
           <TransformingHeading

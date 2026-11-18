@@ -12,7 +12,7 @@ export default function ExploreSection() {
       aria-label="Explore Rayonix"
       data-node-id="440:557"
     >
-      <div className="max-w-[1280px] mx-auto flex flex-col gap-12 lg:gap-[40px]">
+      <div className="max-w-[1408px] mx-auto w-full flex flex-col gap-12 lg:gap-[40px]">
         {/* Section Heading with Decrypt Animation matching Figma node 440:558 */}
         <div>
           <TransformingHeading

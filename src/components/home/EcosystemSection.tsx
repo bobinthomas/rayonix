@@ -211,10 +211,6 @@ export default function EcosystemSection() {
   return (
     <section
       className="relative w-full bg-[#f5f6f6] py-16 lg:py-[50px] overflow-hidden"
-      style={{
-        paddingLeft: "max(24px, calc((100% - 1320px) / 2))",
-        paddingRight: 0,
-      }}
       aria-label="One Connected Defense Ecosystem"
       data-node-id="210:1961"
       onMouseEnter={() => setIsPaused(true)}
@@ -224,62 +220,64 @@ export default function EcosystemSection() {
       }}
     >
       <div className="w-full flex flex-col gap-[30px]">
-        {/* Section Heading with Axion text-transform decrypt animation */}
-        <div className="pt-2 max-w-[1320px] pr-6 sm:pr-10">
-          <TransformingHeading
-            as="h2"
-            segments={[
-              { text: "One Connected\nDefense ", className: "text-[#080f12]" },
-              { text: "Ecosystem", className: "text-[#7f8a91]" },
-            ]}
-            accentDot={true}
-            accentColor="#e22328"
-            className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[72px]"
-          />
-        </div>
+        {/* Section Heading & Filter Tabs - Strictly aligned to master container grid */}
+        <div className="max-w-[1408px] mx-auto w-full px-6 sm:px-12 lg:px-[64px] flex flex-col gap-6">
+          <div className="pt-2">
+            <TransformingHeading
+              as="h2"
+              segments={[
+                { text: "One Connected\nDefense ", className: "text-[#080f12]" },
+                { text: "Ecosystem", className: "text-[#7f8a91]" },
+              ]}
+              accentDot={true}
+              accentColor="#e22328"
+              className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[72px]"
+            />
+          </div>
 
-        {/* 7 Filter Tabs - Solid high-contrast styling extending to right edge */}
-        <div ref={tabsContainerRef} className="w-full overflow-x-auto no-scrollbar">
-          <div className="flex items-center gap-[10px] min-w-max pb-1 pr-6 sm:pr-10">
-            {ecosystemData.map((item, idx) => {
-              const isActive = activeTab === idx;
-              return (
-                <button
-                  key={item.id}
-                  ref={(el) => {
-                    tabRefs.current[idx] = el;
-                  }}
-                  type="button"
-                  onClick={() => setActiveTab(idx)}
-                  onMouseEnter={() => setHoveredCardIndex(idx)}
-                  className={`group relative px-[12px] py-[13.5px] rounded-[4px] text-[14px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
-                    isActive
-                      ? "bg-[#10181c] text-[#f1f2f2]"
-                      : "bg-[#9da1a4] text-white hover:bg-[#868c90]"
-                  }`}
-                  aria-selected={isActive}
-                  role="tab"
-                >
-                  <span className="relative z-10">{item.tabTitle}</span>
+          {/* 7 Filter Tabs - Solid high-contrast styling */}
+          <div ref={tabsContainerRef} className="w-full overflow-x-auto no-scrollbar">
+            <div className="flex items-center gap-[10px] min-w-max pb-1">
+              {ecosystemData.map((item, idx) => {
+                const isActive = activeTab === idx;
+                return (
+                  <button
+                    key={item.id}
+                    ref={(el) => {
+                      tabRefs.current[idx] = el;
+                    }}
+                    type="button"
+                    onClick={() => setActiveTab(idx)}
+                    onMouseEnter={() => setHoveredCardIndex(idx)}
+                    className={`group relative px-[12px] py-[13.5px] rounded-[4px] text-[14px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
+                      isActive
+                        ? "bg-[#10181c] text-[#f1f2f2]"
+                        : "bg-[#9da1a4] text-white hover:bg-[#868c90]"
+                    }`}
+                    aria-selected={isActive}
+                    role="tab"
+                  >
+                    <span className="relative z-10">{item.tabTitle}</span>
 
-                  {/* Red progress bar that animates (grows) over the auto-advance interval */}
-                  {isActive && (
-                    <div
-                      key={`progress-${idx}`}
-                      className="absolute bottom-0 left-0 h-[2px] w-full bg-[#e22328] animate-tab-progress"
-                      style={{
-                        animationPlayState: isPaused ? "paused" : "running",
-                      }}
-                      onAnimationEnd={() => {
-                        if (!isPaused) {
-                          setActiveTab((prev) => (prev + 1) % ecosystemData.length);
-                        }
-                      }}
-                    />
-                  )}
-                </button>
-              );
-            })}
+                    {/* Red progress bar that animates (grows) over the auto-advance interval */}
+                    {isActive && (
+                      <div
+                        key={`progress-${idx}`}
+                        className="absolute bottom-0 left-0 h-[2px] w-full bg-[#e22328] animate-tab-progress"
+                        style={{
+                          animationPlayState: isPaused ? "paused" : "running",
+                        }}
+                        onAnimationEnd={() => {
+                          if (!isPaused) {
+                            setActiveTab((prev) => (prev + 1) % ecosystemData.length);
+                          }
+                        }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -287,6 +285,9 @@ export default function EcosystemSection() {
         <div
           ref={containerRef}
           className="relative w-full overflow-hidden"
+          style={{
+            paddingLeft: "calc(64px + max(0px, (100vw - 1408px) / 2))",
+          }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >

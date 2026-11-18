@@ -28,9 +28,9 @@ export default function BeyondIntegrationSection() {
       aria-label="Beyond Integration Built for Defence"
       data-node-id="640:3938"
     >
-      <div className="max-w-[1448px] mx-auto">
+      <div className="max-w-[1408px] mx-auto w-full">
         {/* Editorial Statement Header matching Figma node 640:3939 */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 px-6 sm:px-12 lg:px-[80px] pb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 px-6 sm:px-12 lg:px-[64px] pb-16">
           <div>
             <h2 className="text-4xl sm:text-6xl lg:text-[64px] font-bold text-[#080f12] leading-tight lg:leading-[72px]">
               Beyond Integration.
@@ -54,7 +54,7 @@ export default function BeyondIntegrationSection() {
               key={item.name}
               href={item.href}
               prefetch={false}
-              className="subsidiary-strip group relative block h-[220px] sm:h-[250px] px-6 sm:px-12 lg:px-[80px] py-[28px] border-b border-[#a3adb2] overflow-hidden"
+              className="subsidiary-strip group relative block h-[220px] sm:h-[250px] px-6 sm:px-12 lg:px-[64px] py-[28px] border-b border-[#a3adb2] overflow-hidden"
             >
               {/* Black fill that grows from bottom on hover — GPU-only transform */}
               <span

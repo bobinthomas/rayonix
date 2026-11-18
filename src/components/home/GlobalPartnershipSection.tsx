@@ -106,7 +106,7 @@ export default function GlobalPartnershipSection() {
 
   return (
     <section
-      className="relative w-full min-h-[1060px] lg:min-h-[1340px] bg-[#071629] text-[#f5f6f6] pt-[96px] lg:pt-[116px] pb-[60px] px-6 sm:px-12 lg:px-[84px] overflow-hidden flex flex-col justify-between rounded-none"
+      className="relative w-full min-h-[1060px] lg:min-h-[1340px] bg-[#071629] text-[#f5f6f6] pt-[96px] lg:pt-[116px] pb-[60px] px-6 sm:px-12 lg:px-[64px] overflow-hidden flex flex-col justify-between rounded-none"
       aria-label="Global Technology and Indian Defence Capability"
       data-node-id="354:2941"
     >
@@ -281,7 +281,7 @@ export default function GlobalPartnershipSection() {
 
       {/* 2. Content Container: Strict Left-Flush Alignment of Header, Subtext, and Logos Card
           pointer-events-none allows mouse events to pass through directly to the underlying map dots */}
-      <div className="relative z-10 max-w-[1256px] mx-auto w-full flex flex-col justify-between flex-1 gap-12 lg:gap-20 pointer-events-none">
+      <div className="relative z-10 max-w-[1408px] mx-auto w-full flex flex-col justify-between flex-1 gap-12 lg:gap-20 pointer-events-none">
         {/* Editorial Content with Decrypt Animation matching Figma node 354:2945 */}
         <div className="w-full pointer-events-auto">
           <TransformingHeading

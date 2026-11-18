@@ -69,7 +69,7 @@ export default function Header() {
               : "bg-transparent border-b border-x border-transparent"
           }`}
         >
-          <div className="max-w-[1440px] mx-auto w-full px-6 sm:px-12 lg:px-[60px] flex items-center justify-between">
+          <div className="max-w-[1408px] mx-auto w-full px-6 sm:px-12 lg:px-[64px] flex items-center justify-between">
             {/* 1. Left Section: Logo */}
             <div className="flex items-center min-w-[160px] lg:w-[220px]">
               <Link
