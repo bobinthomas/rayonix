@@ -68,17 +68,29 @@ export default function CTAButton({
   );
 
   const baseClasses =
-    "group inline-flex items-center justify-center gap-[16px] px-[20px] py-[13px] rounded-[4px] text-[16px] font-normal leading-[24px] whitespace-nowrap transition-all duration-300 select-none cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] focus-visible:ring-offset-2";
+    "group relative overflow-hidden inline-flex items-center justify-center gap-[16px] px-[20px] py-[13px] rounded-[4px] text-[16px] font-normal leading-[24px] whitespace-nowrap transition-all duration-300 select-none cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] focus-visible:ring-offset-2";
 
   const variantClasses = isPrimary
     ? "bg-[#e22328] hover:bg-[#080f12] text-[#f5f6f6] shadow-sm border border-transparent"
-    : "bg-white hover:bg-[#080f12] text-[#e22328] hover:text-[#f5f6f6] border border-[#e22328] hover:border-[#080f12] shadow-sm";
+    : "bg-transparent text-[#e22328] group-hover:text-[#f5f6f6] border border-[#e22328] shadow-sm";
 
   const disabledClasses = disabled
     ? "opacity-50 pointer-events-none cursor-not-allowed"
     : "active:scale-[0.98]";
 
   const combinedClasses = `${baseClasses} ${variantClasses} ${disabledClasses} ${className}`;
+
+  // Fill element for bottom-to-top background growth on hover
+  const renderFill = () => (
+    <span
+      className={`absolute inset-0 transition-transform duration-300 ease-out z-0 pointer-events-none ${
+        isPrimary
+          ? "bg-[#080f12] translate-y-full group-hover:translate-y-0"
+          : "bg-[#080f12] translate-y-full group-hover:translate-y-0"
+      }`}
+      aria-hidden="true"
+    />
+  );
 
   if (href) {
     return (
@@ -88,7 +100,8 @@ export default function CTAButton({
         aria-label={ariaLabel}
         onClick={onClick}
       >
-        <span className="relative z-10">{children}</span>
+        {renderFill()}
+        <span className="relative z-10 transition-colors duration-300">{children}</span>
         {renderArrow()}
       </Link>
     );
@@ -102,7 +115,8 @@ export default function CTAButton({
       disabled={disabled}
       aria-label={ariaLabel}
     >
-      <span className="relative z-10">{children}</span>
+      {renderFill()}
+      <span className="relative z-10 transition-colors duration-300">{children}</span>
       {renderArrow()}
     </button>
   );

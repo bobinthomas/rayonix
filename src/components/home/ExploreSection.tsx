@@ -3,6 +3,7 @@
 import Image from "next/image";
 import CTAButton from "@/components/ui/CTAButton";
 import TransformingHeading from "@/components/ui/TransformingHeading";
+import NewsCard from "@/components/home/NewsCard";
 
 export default function ExploreSection() {
   return (
@@ -182,12 +183,21 @@ export default function ExploreSection() {
           {/* Header Row with Explore News Button */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-2">
             <div>
-              <h3
-                className="text-3xl sm:text-5xl lg:text-[48px] font-medium text-[#080f12] leading-tight lg:leading-[56px]"
-                data-node-id="440:575"
-              >
-                The Latest from Rayonix.
-              </h3>
+              <TransformingHeading
+                as="h3"
+                segments={[
+                  {
+                    text: "The Latest from Rayonix",
+                    className: "text-[#080f12]",
+                  },
+                  {
+                    text: ".",
+                    className: "text-[#e22328] font-bold",
+                  },
+                ]}
+                accentDot={false}
+                className="text-3xl sm:text-5xl lg:text-[48px] font-medium leading-tight lg:leading-[56px]"
+              />
               <p
                 className="text-base sm:text-lg lg:text-[18px] text-[#080f12]/80 font-normal leading-[28px] max-w-[805px] mt-2"
                 data-node-id="440:577"
@@ -203,119 +213,39 @@ export default function ExploreSection() {
             </div>
           </div>
 
-          {/* 2 Featured Story News Cards matching Figma nodes 440:589 & 440:596 */}
+          {/* 2 Featured Story News Cards matching Figma nodes 440:589, 440:596 & interactive node 705:4716 */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* News 1: bg-[#253035] (Slate Dark) matching Figma node 440:589 */}
-            <div
-              className="bg-[#253035] rounded-[8px] p-8 sm:p-12 flex flex-col justify-between min-h-[580px] shadow-lg border border-white/[0.06]"
-              data-node-id="440:589"
-            >
-              <div className="space-y-4">
-                <h4
-                  className="text-xl sm:text-2xl lg:text-[24px] font-medium text-[#f5f6f6] leading-[32px] max-w-[494px]"
-                  data-node-id="I705:4758;705:4676"
-                >
-                  Israel&apos;s AI Major in $11 Million Deal with Indian Company to Make UAVs Locally
-                </h4>
-                <div className="h-px w-full bg-white/10" />
-              </div>
+            {/* News 1: Slate Dark bg-[#253035] matching Figma node 440:589 */}
+            <NewsCard
+              nodeId="440:589"
+              variant="slate"
+              title="Israel's AI Major in $11 Million Deal with Indian Company to Make UAVs Locally"
+              imageSrc="/assets/story-news1-v5.webp"
+              imageAlt="Israel AI Major UAV Deal"
+              description="Our partnership with XTEND advances local UAV manufacturing, testing and distribution, supported by technology transfer and autonomous systems."
+              buttons={[
+                { label: "Explore the Partnership", href: "/news/xtend-partnership" },
+                { label: "Read the Coverage", href: "/news/xtend-coverage" },
+              ]}
+              source="Defence HQ · TOI"
+              date="April 28, 2026"
+            />
 
-              <div
-                className="relative w-full h-[260px] sm:h-[300px] rounded-[4px] overflow-hidden my-4"
-                data-node-id="I705:4758;705:4678"
-              >
-                <Image
-                  src="/assets/story-news1-v5.webp"
-                  alt="Israel AI Major UAV Deal"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="space-y-4">
-                <p
-                  className="text-sm sm:text-base lg:text-[16px] text-[#f5f6f6]/90 font-normal leading-[24px]"
-                  data-node-id="I705:4758;705:4684"
-                >
-                  Our partnership with XTEND advances local UAV manufacturing, testing and distribution, supported by technology transfer and autonomous systems.
-                </p>
-
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <CTAButton href="/news/xtend-partnership" variant="secondary">
-                    Explore the Partnership
-                  </CTAButton>
-                  <CTAButton href="/news/xtend-coverage" variant="secondary">
-                    Read the Coverage
-                  </CTAButton>
-                </div>
-
-                <div
-                  className="flex items-center gap-3 text-[12px] text-[#7f8a91] font-normal pt-2 border-t border-white/10"
-                  data-node-id="I705:4758;705:4679"
-                >
-                  <span className="font-bold text-[#bdc4c8]">Defence HQ · TOI</span>
-                  <span>•</span>
-                  <span>April 28, 2026</span>
-                </div>
-              </div>
-            </div>
-
-            {/* News 2: bg-[#10181c] (Deep Panel Dark) matching Figma node 440:596 */}
-            <div
-              className="bg-[#10181c] rounded-[8px] p-8 sm:p-12 flex flex-col justify-between min-h-[580px] shadow-lg border border-white/[0.06]"
-              data-node-id="440:596"
-            >
-              <div className="space-y-4">
-                <h4
-                  className="text-xl sm:text-2xl lg:text-[24px] font-medium text-[#f5f6f6] leading-[32px] max-w-[494px]"
-                  data-node-id="I707:4780;705:4676"
-                >
-                  India&apos;s Drone Industry Ambitions Accelerate with XTEND Technology Transfer Deal
-                </h4>
-                <div className="h-px w-full bg-white/10" />
-              </div>
-
-              <div
-                className="relative w-full h-[260px] sm:h-[300px] rounded-[4px] overflow-hidden my-4"
-                data-node-id="I707:4780;705:4678"
-              >
-                <Image
-                  src="/assets/story-news2-v5.webp"
-                  alt="India Drone Industry Ambitions"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="space-y-4">
-                <p
-                  className="text-sm sm:text-base lg:text-[16px] text-[#f5f6f6]/90 font-normal leading-[24px]"
-                  data-node-id="I707:4780;705:4684"
-                >
-                  The agreement supports technology transfer and local manufacturing, strengthening India&apos;s capabilities in AI-enabled tactical and interceptor drone systems.
-                </p>
-
-                <div className="flex flex-wrap gap-3 pt-2">
-                  <CTAButton href="/news/xtend-partnership" variant="secondary">
-                    Explore the Partnership
-                  </CTAButton>
-                  <CTAButton href="/news/shephard-coverage" variant="secondary">
-                    Read the Coverage
-                  </CTAButton>
-                </div>
-
-                <div
-                  className="flex items-center gap-3 text-[12px] text-[#7f8a91] font-normal pt-2 border-t border-white/10"
-                  data-node-id="I707:4780;705:4679"
-                >
-                  <span className="font-bold text-[#bdc4c8]">Shephard</span>
-                  <span>•</span>
-                  <span>April 28, 2026</span>
-                </div>
-              </div>
-            </div>
+            {/* News 2: Deep Panel Dark bg-[#10181c] matching Figma node 440:596 */}
+            <NewsCard
+              nodeId="440:596"
+              variant="deep"
+              title="India's Drone Industry Ambitions Accelerate with XTEND Technology Transfer Deal"
+              imageSrc="/assets/story-news2-v5.webp"
+              imageAlt="India Drone Industry Ambitions"
+              description="The agreement supports technology transfer and local manufacturing, strengthening India's capabilities in AI-enabled tactical and interceptor drone systems."
+              buttons={[
+                { label: "Explore the Partnership", href: "/news/xtend-partnership" },
+                { label: "Read the Coverage", href: "/news/shephard-coverage" },
+              ]}
+              source="Shephard"
+              date="April 28, 2026"
+            />
           </div>
         </div>
       </div>
