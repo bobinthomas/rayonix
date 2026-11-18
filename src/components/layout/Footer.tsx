@@ -75,24 +75,28 @@ export default function Footer() {
                 <p className="text-[18px] font-normal text-[#f5f6f6]">Explore</p>
                 <Link
                   href="/solutions"
+                  prefetch={false}
                   className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
                 >
                   Capabilities
                 </Link>
                 <Link
                   href="/solutions"
+                  prefetch={false}
                   className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
                 >
                   Solutions
                 </Link>
                 <Link
-                  href="/domains/subsurface"
+                  href="/subsurface/detect/gpr"
+                  prefetch={false}
                   className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
                 >
                   Platforms
                 </Link>
                 <Link
                   href="/ecosystem"
+                  prefetch={false}
                   className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
                 >
                   Technologies
@@ -104,12 +108,14 @@ export default function Footer() {
                 <p className="text-[18px] font-normal text-[#f5f6f6]">Company</p>
                 <Link
                   href="/about"
+                  prefetch={false}
                   className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
                 >
                   About Us
                 </Link>
                 <Link
                   href="/news"
+                  prefetch={false}
                   className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
                 >
                   Newsroom
@@ -238,10 +244,10 @@ export default function Footer() {
         <div className="max-w-[1280px] mx-auto flex flex-col sm:flex-row items-center justify-between text-[12px] font-normal text-white gap-2">
           <p>© 2026 Rayonix Tech Private Limited. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="hover:underline">
+            <Link href="/privacy" prefetch={false} className="hover:underline">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:underline">
+            <Link href="/terms" prefetch={false} className="hover:underline">
               Terms of Use
             </Link>
           </div>

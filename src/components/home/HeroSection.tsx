@@ -4,15 +4,36 @@ import { useRef, useEffect } from "react";
 import CTAButton from "@/components/ui/CTAButton";
 
 export default function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    const sectionEl = sectionRef.current;
+    const videoEl = videoRef.current;
+    if (!sectionEl || !videoEl) return;
+
     // Safely trigger autoplay on mount
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Autoplay policy prevented playback; poster remains visible
-      });
-    }
+    videoEl.play().catch(() => {});
+
+    // Pause video when scrolled out of view to preserve 100% GPU/CPU for scrolling
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            videoEl.play().catch(() => {});
+          } else {
+            videoEl.pause();
+          }
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    observer.observe(sectionEl);
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const handleScrollToNext = (e: React.MouseEvent<HTMLElement>) => {
@@ -25,6 +46,7 @@ export default function HeroSection() {
 
   return (
     <section
+      ref={sectionRef}
       className="relative w-full h-[calc(100vh-32px)] sm:h-[calc(100dvh-32px)] min-h-[580px] bg-black overflow-hidden"
       aria-label="Rayonix Tactical Video Banner"
       data-node-id="640:3763"

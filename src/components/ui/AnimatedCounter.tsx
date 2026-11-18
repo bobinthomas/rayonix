@@ -23,36 +23,45 @@ export default function AnimatedCounter({
   duration = 1.8,
   className = "",
 }: AnimatedCounterProps) {
-  const [currentValue, setCurrentValue] = useState<number>(0);
   const containerRef = useRef<HTMLSpanElement>(null);
+  const displayRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const el = containerRef.current;
+    const displayEl = displayRef.current;
     if (typeof window === "undefined" || !el) return;
 
     // Respect reduced motion
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setCurrentValue(target);
+      if (displayEl) {
+        displayEl.textContent = `${prefix}${target.toLocaleString("en-US")}${suffix}`;
+      }
       return;
     }
 
     const obj = { val: 0 };
     let tween: gsap.core.Tween | null = null;
 
+    const updateDisplay = (val: number) => {
+      if (displayEl) {
+        displayEl.textContent = `${prefix}${Math.max(0, Math.round(val)).toLocaleString("en-US")}${suffix}`;
+      }
+    };
+
     const playCountUp = () => {
       tween?.kill();
       obj.val = 0;
-      setCurrentValue(0);
+      updateDisplay(0);
 
       tween = gsap.to(obj, {
         val: target,
         duration: duration,
         ease: "power2.out",
         onUpdate: () => {
-          setCurrentValue(Math.max(0, Math.round(obj.val)));
+          updateDisplay(obj.val);
         },
         onComplete: () => {
-          setCurrentValue(target);
+          updateDisplay(target);
         },
       });
     };
@@ -60,13 +69,13 @@ export default function AnimatedCounter({
     const resetCounter = () => {
       tween?.kill();
       obj.val = 0;
-      setCurrentValue(0);
+      updateDisplay(0);
     };
 
     const st = ScrollTrigger.create({
       trigger: el,
-      start: "top 88%",
-      end: "bottom 12%",
+      start: "top 90%",
+      end: "bottom 10%",
       onEnter: () => playCountUp(),
       onEnterBack: () => playCountUp(),
       onLeave: () => resetCounter(),
@@ -77,16 +86,12 @@ export default function AnimatedCounter({
       st.kill();
       tween?.kill();
     };
-  }, [target, duration]);
-
-  const formattedNumber = currentValue.toLocaleString("en-US");
+  }, [target, suffix, prefix, duration]);
 
   return (
     <span ref={containerRef} className={className}>
-      <span aria-hidden="true">
-        {prefix}
-        {formattedNumber}
-        {suffix}
+      <span ref={displayRef} aria-hidden="true">
+        {prefix}0{suffix}
       </span>
       {/* Accessible screen-reader text */}
       <span className="sr-only">

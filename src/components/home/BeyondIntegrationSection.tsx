@@ -53,6 +53,7 @@ export default function BeyondIntegrationSection() {
             <Link
               key={item.name}
               href={item.href}
+              prefetch={false}
               className="subsidiary-strip group relative block h-[220px] sm:h-[250px] px-6 sm:px-12 lg:px-[80px] py-[28px] border-b border-[#a3adb2] overflow-hidden"
             >
               {/* Black fill that grows from bottom on hover — GPU-only transform */}

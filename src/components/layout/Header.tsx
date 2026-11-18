@@ -106,7 +106,8 @@ export default function Header() {
                 }`}
               >
                 <Link
-                  href="/domains/subsurface"
+                  href="/subsurface/detect/gpr"
+                  prefetch={false}
                   className="inline-flex items-center gap-2 text-[14px] font-medium text-[#f5f6f6] hover:text-white transition-colors"
                 >
                   <span>Sub Surface</span>
@@ -131,6 +132,7 @@ export default function Header() {
               >
                 <Link
                   href="/domains/surface"
+                  prefetch={false}
                   className="inline-flex items-center gap-2 text-[14px] font-medium text-[#f5f6f6] hover:text-white transition-colors"
                 >
                   <span>Surface</span>
@@ -155,6 +157,7 @@ export default function Header() {
               >
                 <Link
                   href="/domains/aerial"
+                  prefetch={false}
                   className="inline-flex items-center gap-2 text-[14px] font-medium text-[#f5f6f6] hover:text-white transition-colors"
                 >
                   <span>Aerial</span>
@@ -182,6 +185,7 @@ export default function Header() {
               >
                 <Link
                   href="/solutions"
+                  prefetch={false}
                   className="inline-flex items-center gap-2 text-[14px] font-medium text-[#f5f6f6] hover:text-white transition-colors"
                 >
                   <span>Solutions</span>
@@ -206,6 +210,7 @@ export default function Header() {
               >
                 <Link
                   href="/about"
+                  prefetch={false}
                   className="inline-flex items-center gap-2 text-[14px] font-medium text-[#f5f6f6] hover:text-white transition-colors"
                 >
                   <span>Company</span>

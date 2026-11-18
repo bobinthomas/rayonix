@@ -96,6 +96,7 @@ export default function CTAButton({
     return (
       <Link
         href={href}
+        prefetch={false}
         className={combinedClasses}
         aria-label={ariaLabel}
         onClick={onClick}

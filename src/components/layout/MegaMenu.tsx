@@ -665,6 +665,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
                   <Link
                     key={item.title}
                     href={item.href}
+                    prefetch={false}
                     onClick={onClose}
                     className="group flex items-center justify-between p-3 rounded-[4px] transition-all duration-200 hover:bg-white/[0.04] border border-transparent hover:border-[#253035]/60"
                   >
@@ -693,6 +694,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
               <span className="truncate pr-4">{content.subtitle}</span>
               <Link
                 href={currentMode.items[0]?.href || "/"}
+                prefetch={false}
                 onClick={onClose}
                 className="text-[#e22328] font-semibold hover:underline inline-flex items-center gap-1 flex-shrink-0"
               >
@@ -741,6 +743,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
               <div className="pt-4 mt-4 border-t border-[#253035]">
                 <Link
                   href={content.spotlight.href}
+                  prefetch={false}
                   onClick={onClose}
                   className="text-[13px] font-bold text-[#e22328] inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all"
                 >

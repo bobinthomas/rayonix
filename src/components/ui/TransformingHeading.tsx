@@ -43,7 +43,7 @@ export default function TransformingHeading({
   const [charStates, setCharStates] = useState<boolean[]>(() =>
     new Array(fullText.length).fill(true)
   ); // true = resolved to normal font, false = transformed
-  const [hasAnimated, setHasAnimated] = useState<boolean>(false);
+  const hasAnimatedRef = useRef<boolean>(false);
   const animFrameRef = useRef<NodeJS.Timeout | null>(null);
 
   // Map each character index to its segment className
@@ -135,18 +135,20 @@ export default function TransformingHeading({
 
   useEffect(() => {
     const el = containerRef.current;
-    if (!el) return;
+    if (!el || hasAnimatedRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !hasAnimatedRef.current) {
+            hasAnimatedRef.current = true;
+            observer.unobserve(el);
             runTransformAnimation();
           }
         });
       },
       {
-        threshold: 0.25,
+        threshold: 0.15,
         rootMargin: "0px 0px -40px 0px",
       }
     );

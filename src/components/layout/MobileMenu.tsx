@@ -114,6 +114,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                               <Link
                                 key={item.title}
                                 href={item.href}
+                                prefetch={false}
                                 onClick={onClose}
                                 className="block text-[13px] text-[#f5f6f6] hover:text-[#e22328]"
                               >
@@ -171,6 +172,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                               <Link
                                 key={item.title}
                                 href={item.href}
+                                prefetch={false}
                                 onClick={onClose}
                                 className="block text-[13px] text-[#f5f6f6] hover:text-[#e22328]"
                               >
