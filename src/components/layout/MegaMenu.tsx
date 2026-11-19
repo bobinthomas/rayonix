@@ -24,7 +24,6 @@ export interface SpotlightCard {
   description: string;
   image: string;
   href: string;
-  ctaText: string;
 }
 
 export interface DomainMenuData {
@@ -142,7 +141,6 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
       description: "Distributed acoustic sensing and seismic analytics safeguarding sovereign perimeter corridors.",
       image: "/assets/ecosystem-1.png",
       href: "/domains/subsurface",
-      ctaText: "Read Subsurface Brief",
     },
   },
 
@@ -260,7 +258,6 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
       description: "Integrating optical radar and polarimetric thermal cameras with unmanned ground systems.",
       image: "/assets/ecosystem-2.png",
       href: "/domains/surface",
-      ctaText: "Explore Surface Systems",
     },
   },
 
@@ -373,7 +370,6 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
       description: "Neutralizing low-observable rogue drones and hostile swarm attacks in under 4 seconds.",
       image: "/assets/field-drone.png",
       href: "/domains/aerial",
-      ctaText: "Discover Aerial Systems",
     },
   },
 
@@ -481,7 +477,6 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
       description: "Deploying integrated command and sensor fusion networks across extreme operational theatres.",
       image: "/assets/command-centre.png",
       href: "/solutions",
-      ctaText: "Explore Full Solution Suite",
     },
   },
 
@@ -579,7 +574,6 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
       description: "Discover how our interdisciplinary engineering team is transforming modern military capability.",
       image: "/assets/story-company.png",
       href: "/about",
-      ctaText: "Read Company Story",
     },
   },
 };
@@ -692,14 +686,6 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
               className="pt-4 mt-3 border-t border-[#253035] flex items-center justify-between text-xs text-[#7f8e95] animate-in fade-in-50 duration-200"
             >
               <span className="truncate pr-4">{content.subtitle}</span>
-              <Link
-                href={currentMode.items[0]?.href || "/"}
-                prefetch={false}
-                onClick={onClose}
-                className="text-[#e22328] font-semibold hover:underline inline-flex items-center gap-1 flex-shrink-0"
-              >
-                View all capabilities →
-              </Link>
             </div>
           </div>
 
@@ -737,19 +723,6 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
                 <p className="text-[13px] text-[#8e9ca2] leading-relaxed mt-1.5">
                   {content.spotlight.description}
                 </p>
-              </div>
-
-              {/* Bottom Action Link */}
-              <div className="pt-4 mt-4 border-t border-[#253035]">
-                <Link
-                  href={content.spotlight.href}
-                  prefetch={false}
-                  onClick={onClose}
-                  className="text-[13px] font-bold text-[#e22328] inline-flex items-center gap-1.5 group-hover:gap-2.5 transition-all"
-                >
-                  <span>{content.spotlight.ctaText}</span>
-                  <StraightArrow className="w-4 h-4 !opacity-100 !translate-x-0" />
-                </Link>
               </div>
             </div>
           </div>
