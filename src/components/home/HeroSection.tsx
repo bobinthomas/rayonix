@@ -85,7 +85,7 @@ export default function HeroSection() {
           </span>
         </h1>
         <CTAButton
-          variant="primary"
+          variant="outline"
           href="#battlespace"
           onClick={handleScrollToNext}
           className="text-center text-[13px] sm:text-[15px] md:text-[16px] font-medium tracking-[0.02em] px-5 sm:px-7 py-3.5 sm:py-4 shadow-2xl"
