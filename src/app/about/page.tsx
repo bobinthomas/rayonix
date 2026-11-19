@@ -121,7 +121,7 @@ export default function AboutPage() {
               <HudBadge tone="muted">Sensor Matrix: Multi-Domain Fusion</HudBadge>
             </div>
             <div className="absolute right-3 bottom-3 sm:right-4 sm:bottom-4 max-w-[calc(100%-1.5rem)]">
-              <HudBadge tone="alert" className="py-[7px]">
+              <HudBadge tone="alert" icon="/assets/company/icon-live-loop.svg" className="py-[7px] gap-[10px]">
                 Autonomous Integration Test Stand: Active Live Loop
               </HudBadge>
             </div>

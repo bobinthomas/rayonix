@@ -341,7 +341,7 @@ export default function XLabsPage() {
                     <p className="text-[14px] leading-[22.75px] text-[#2f3639]">{c.body}</p>
                   </div>
                   <div className="border-t border-[#edf2f7] pt-[23px]">
-                    <ArrowLink href={c.link.href} bold>
+                    <ArrowLink href={c.link.href} bold solid>
                       {c.link.label}
                     </ArrowLink>
                   </div>
@@ -381,7 +381,7 @@ export default function XLabsPage() {
                   Join our cross-disciplinary team of RF engineers, AI researchers, and defense roboticists solving hard kinetic defense and autonomous navigation challenges.
                 </p>
               </div>
-              <ArrowLink href="/careers#engineering" bold>
+              <ArrowLink href="/careers#engineering" bold solid>
                 Explore open R&amp;D roles
               </ArrowLink>
             </div>

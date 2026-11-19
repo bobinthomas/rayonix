@@ -118,11 +118,14 @@ export function CornerTicks({ size = 16, inset = -4 }: { size?: number; inset?: 
 export function HudBadge({
   children,
   dot = false,
+  icon,
   tone = "default",
   className = "",
 }: {
   children: React.ReactNode;
   dot?: boolean;
+  /** 14px icon path shown before the label. */
+  icon?: string;
   tone?: "default" | "muted" | "alert";
   className?: string;
 }) {
@@ -133,6 +136,7 @@ export function HudBadge({
       className={`inline-flex items-center gap-2 max-w-full backdrop-blur-[12px] bg-[rgba(8,15,18,0.9)] border ${border} rounded-[2px] px-[13px] py-[5px] select-none pointer-events-none ${className}`}
     >
       {dot && <span className="size-[6px] shrink-0 rounded-full bg-[#e22328]" aria-hidden="true" />}
+      {icon && <Image src={icon} alt="" width={14} height={14} aria-hidden="true" className="shrink-0" />}
       <span className={`truncate text-[12px] leading-[18px] tracking-[0.24px] ${text}`}>{children}</span>
     </span>
   );
@@ -229,11 +233,14 @@ export function ArrowLink({
   href,
   children,
   bold = false,
+  solid = false,
   className = "",
 }: {
   href: string;
   children: React.ReactNode;
   bold?: boolean;
+  /** Filled arrow (X Labs cards) instead of the stroked one (Newsroom, About). */
+  solid?: boolean;
   className?: string;
 }) {
   return (
@@ -246,7 +253,7 @@ export function ArrowLink({
     >
       <span className="group-hover:underline underline-offset-4">{children}</span>
       <Image
-        src="/assets/company/icon-arrow-right-red.svg"
+        src={solid ? "/assets/company/icon-arrow-solid-red.svg" : "/assets/company/icon-arrow-right-red.svg"}
         alt=""
         width={16}
         height={16}
