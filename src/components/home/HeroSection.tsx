@@ -47,7 +47,7 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-[calc(100vh-32px)] sm:h-[calc(100dvh-32px)] min-h-[580px] bg-black overflow-hidden"
+      className="relative w-full h-[100svh] min-[700px]:h-[calc(100dvh-32px)] min-h-[580px] bg-black overflow-hidden"
       aria-label="Rayonix Tactical Video Banner"
       data-node-id="640:3763"
     >

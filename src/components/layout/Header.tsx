@@ -70,8 +70,8 @@ export default function Header() {
         ref={headerRef}
         onMouseEnter={handleCancelClose}
         onMouseLeave={handleCloseMegaMenu}
-        className={`fixed top-4 left-4 right-4 z-50 transform transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
-          isScrolled ? "-translate-y-4" : "translate-y-0"
+        className={`fixed top-0 left-0 right-0 min-[700px]:top-4 min-[700px]:left-4 min-[700px]:right-4 z-50 transform transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
+          isScrolled ? "translate-y-0 min-[700px]:-translate-y-4" : "translate-y-0"
         }`}
       >
         {/* Persistent invariant-height Header (80px at all times: zero layout jump) */}

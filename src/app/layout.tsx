@@ -146,7 +146,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`dark ${gordita.variable} ${gordita.className}`}>
-      <body className={`${gordita.className} font-sans min-h-screen flex flex-col gap-4 bg-rayonix-canvas text-rayonix-text-primary antialiased selection:bg-rayonix-accent selection:text-white p-4`}>
+      <body className={`${gordita.className} font-sans min-h-screen flex flex-col gap-0 min-[700px]:gap-4 bg-rayonix-canvas text-rayonix-text-primary antialiased selection:bg-rayonix-accent selection:text-white p-0 min-[700px]:p-4`}>
         <SniperCursor />
         <Header />
         <div className="flex-1 w-full">

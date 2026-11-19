@@ -147,6 +147,8 @@ export default function EcosystemSection() {
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
   const [carouselOffset, setCarouselOffset] = useState(0);
+  // Mobile (< md) accordion: one category open at a time, first open by default
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -226,10 +228,90 @@ export default function EcosystemSection() {
           </div>
         </div>
 
-        {/* 7 Filter Tabs - Anchored strictly to the 1280px grid line on the left, extends to the right */}
+        {/* Mobile (< md): accordion. All 7 categories visible; tap to reveal its card */}
+        <div className="md:hidden max-w-[1280px] mx-auto w-full px-6 flex flex-col gap-3">
+          {ecosystemData.map((item, idx) => {
+            const isOpen = openIndex === idx;
+            return (
+              <div
+                key={item.id}
+                className={`bg-white rounded-[4px] border shadow-sm transition-colors duration-300 ${
+                  isOpen ? "border-[#bdc4c8]" : "border-[#e2e8f0]"
+                }`}
+              >
+                <h3>
+                  <button
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={`ecosystem-panel-${item.id}`}
+                    onClick={() => setOpenIndex(isOpen ? null : idx)}
+                    className="w-full min-h-[56px] flex items-center gap-3 px-4 py-3 text-left cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] rounded-[4px]"
+                  >
+                    <span
+                      className={`font-mono text-[11px] tracking-wider ${
+                        isOpen ? "text-[#e22328]" : "text-[#7f8a91]"
+                      }`}
+                    >
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex-1 text-[16px] font-medium text-[#080f12] leading-snug">
+                      {item.tabTitle}
+                    </span>
+                    <span
+                      className={`relative shrink-0 w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                        isOpen ? "rotate-45" : ""
+                      }`}
+                      aria-hidden="true"
+                    >
+                      <span className="absolute left-0 right-0 top-1/2 h-[2px] -translate-y-1/2 bg-[#e22328]" />
+                      <span className="absolute top-0 bottom-0 left-1/2 w-[2px] -translate-x-1/2 bg-[#e22328]" />
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  id={`ecosystem-panel-${item.id}`}
+                  role="region"
+                  aria-label={item.tabTitle}
+                  hidden={!isOpen}
+                  className={`px-3 pb-3 ${isOpen ? "block" : "hidden"}`}
+                >
+                  <div className="eco-reveal relative w-full aspect-[16/10] rounded-[8px] overflow-hidden bg-black">
+                    <Image
+                      src={item.image}
+                      alt={item.cardTitle}
+                      fill
+                      sizes="92vw"
+                      className="object-cover"
+                    />
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(180deg, rgba(0, 0, 0, 0.064) 40%, rgba(0, 0, 0, 0.82) 100%)",
+                      }}
+                    />
+                    <div className="absolute top-0 left-0 size-[8px] bg-[#e22328] z-20" />
+                    <div className="absolute bottom-0 right-0 size-[8px] bg-[#e22328] z-20" />
+                    <div className="absolute bottom-5 left-6 right-6 z-10">
+                      <div className="relative inline-block pr-5 pb-1.5">
+                        <span className="absolute -top-2.5 -left-2.5 size-[8px] border-t border-l border-[#e22328]" />
+                        <p className="text-[17px] font-medium text-[#f5f6f6] leading-snug">
+                          <CardTitleScramble title={item.cardTitle} isActive={isOpen} isHovered={false} />
+                        </p>
+                        <span className="absolute -bottom-0.5 right-0 size-[8px] border-b border-r border-[#e22328]" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop (md+): 7 Filter Tabs - Anchored strictly to the 1280px grid line on the left, extends to the right */}
         <div
           ref={tabsContainerRef}
-          className="relative overflow-x-auto no-scrollbar"
+          className="hidden md:block relative overflow-x-auto no-scrollbar"
           style={{
             marginLeft: GRID_LEFT_CSS,
             width: GRID_WIDTH_CSS,
@@ -278,10 +360,10 @@ export default function EcosystemSection() {
           </div>
         </div>
 
-        {/* Horizontal Carousel Track - Clipped strictly at left grid line, bleeds to right */}
+        {/* Desktop (md+): Horizontal Carousel Track - Clipped strictly at left grid line, bleeds to right */}
         <div
           ref={containerRef}
-          className="relative overflow-hidden"
+          className="hidden md:block relative overflow-hidden"
           style={{
             marginLeft: GRID_LEFT_CSS,
             width: GRID_WIDTH_CSS,
