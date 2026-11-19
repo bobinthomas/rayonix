@@ -3,7 +3,7 @@ import TacticalPlaceholder from "@/components/common/TacticalPlaceholder";
 
 export function generateStaticParams() {
   return [
-    { slug: "x-labs" },
+    // x-labs has its own page: src/app/ecosystem/x-labs/page.tsx
     { slug: "nexr-optronics" },
     { slug: "mcray-xtend" },
   ];

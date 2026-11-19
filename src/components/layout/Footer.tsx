@@ -157,7 +157,7 @@ export default function Footer() {
         <div className="h-px w-full bg-[#b8bfc2]/40" />
 
         {/* Global Presence matching Figma node 640:4116 */}
-        <div className="flex flex-col gap-8 pt-4">
+        <div id="global-presence" className="flex flex-col gap-8 pt-4 scroll-mt-24">
           <div className="space-y-1">
             <h3 className="text-[24px] font-medium text-[#f5f6f6] leading-[32px]">
               Our Global Presence

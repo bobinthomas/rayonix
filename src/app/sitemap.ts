@@ -10,6 +10,7 @@ import { getAllPages } from "@/lib/cms";
 import { getPublishedStories } from "@/lib/cms";
 import { products } from "@/content/products";
 import { solutions } from "@/content/solutions";
+import { allArticles } from "@/content/company/newsroom";
 
 const SITE_URL = "https://rayonix.com";
 
@@ -60,5 +61,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...pageEntries, ...domainEntries, ...productEntries, ...solutionEntries, ...storyEntries];
+  // Company pages (Figma 553:4239 X Labs) and newsroom articles from src/content/company
+  const companyEntries: MetadataRoute.Sitemap = [
+    { url: `${SITE_URL}/ecosystem/x-labs`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    ...allArticles.map((a) => ({
+      url: `${SITE_URL}/news/${a.slug}`,
+      lastModified: new Date(a.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+  ];
+
+  return [
+    ...pageEntries,
+    ...domainEntries,
+    ...productEntries,
+    ...solutionEntries,
+    ...companyEntries,
+    ...storyEntries,
+  ];
 }
