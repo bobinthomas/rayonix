@@ -106,7 +106,7 @@ export default function CapabilitiesSection() {
           {proofPoints.map((point, idx) => (
             <div
               key={point.id}
-              className={`flex flex-col gap-2 py-6 md:py-2 ${
+              className={`flex flex-col gap-4 py-6 md:py-2 ${
                 idx === 0
                   ? "md:pr-8 lg:pr-[32px]"
                   : idx === 1
@@ -124,7 +124,7 @@ export default function CapabilitiesSection() {
             >
               {/* Animated Stat Value counting up from 0 */}
               <div
-                className="h-[72px] flex items-center text-4xl sm:text-5xl lg:text-[64px] font-bold text-[#f5f6f6] tracking-tight leading-[72px]"
+                className="h-[56px] flex items-center text-3xl sm:text-4xl lg:text-[48px] font-bold text-[#f5f6f6] tracking-tight leading-[56px]"
                 data-node-id="200:1185"
               >
                 <AnimatedCounter
@@ -136,7 +136,7 @@ export default function CapabilitiesSection() {
 
               {/* Metric Label */}
               <p
-                className="text-xl sm:text-2xl lg:text-[24px] font-medium text-[#f5f6f6] leading-[32px]"
+                className="text-lg sm:text-xl lg:text-[20px] font-medium text-[#f5f6f6] leading-[28px]"
                 data-node-id="200:1186"
               >
                 {point.label}
@@ -144,7 +144,7 @@ export default function CapabilitiesSection() {
 
               {/* Metric Description */}
               <div
-                className="text-base sm:text-lg lg:text-[18px] font-normal text-[#bdc4c8] leading-[28px]"
+                className="text-sm sm:text-base lg:text-[16px] font-normal text-[#bdc4c8] leading-[24px]"
                 data-node-id="200:1187"
               >
                 {point.description.map((line, lineIdx) => (
