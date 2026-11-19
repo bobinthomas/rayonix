@@ -102,7 +102,7 @@ export default function SniperCursor() {
   return (
     <div
       ref={containerRef}
-      className={`fixed pointer-events-none z-[999999] overflow-hidden select-none transition-opacity duration-200 ${
+      className={`sniper-cursor-container fixed pointer-events-none z-[999999] overflow-hidden select-none transition-opacity duration-200 ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
       style={{

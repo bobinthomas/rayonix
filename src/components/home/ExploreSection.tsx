@@ -224,7 +224,6 @@ export default function ExploreSection() {
               imageAlt="Israel AI Major UAV Deal"
               description="Our partnership with XTEND advances local UAV manufacturing, testing and distribution, supported by technology transfer and autonomous systems."
               buttons={[
-                { label: "Explore the Partnership", href: "/news/xtend-partnership" },
                 { label: "Read the Coverage", href: "/news/xtend-coverage" },
               ]}
               source="Defence HQ · TOI"
@@ -240,7 +239,6 @@ export default function ExploreSection() {
               imageAlt="India Drone Industry Ambitions"
               description="The agreement supports technology transfer and local manufacturing, strengthening India's capabilities in AI-enabled tactical and interceptor drone systems."
               buttons={[
-                { label: "Explore the Partnership", href: "/news/xtend-partnership" },
                 { label: "Read the Coverage", href: "/news/shephard-coverage" },
               ]}
               source="Shephard"

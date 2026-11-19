@@ -49,6 +49,21 @@ export default function Header() {
 
   const isMenuOpen = activeMegaTab !== null;
 
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      if (isMenuOpen) {
+        document.documentElement.classList.add("megamenu-open");
+      } else {
+        document.documentElement.classList.remove("megamenu-open");
+      }
+    }
+    return () => {
+      if (typeof document !== "undefined") {
+        document.documentElement.classList.remove("megamenu-open");
+      }
+    };
+  }, [isMenuOpen]);
+
   return (
     <>
       <div

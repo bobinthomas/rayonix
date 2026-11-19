@@ -37,14 +37,32 @@ html {
 
 /* Tactical Sniper Crosshair Cursor (Desktop only) */
 @media (hover: hover) and (pointer: fine) {
-  html.custom-sniper-cursor,
-  html.custom-sniper-cursor body,
-  html.custom-sniper-cursor a,
-  html.custom-sniper-cursor button,
-  html.custom-sniper-cursor [role="button"],
-  html.custom-sniper-cursor [role="tab"] {
+  html.custom-sniper-cursor:not(.megamenu-open),
+  html.custom-sniper-cursor:not(.megamenu-open) body,
+  html.custom-sniper-cursor:not(.megamenu-open) a,
+  html.custom-sniper-cursor:not(.megamenu-open) button,
+  html.custom-sniper-cursor:not(.megamenu-open) [role="button"],
+  html.custom-sniper-cursor:not(.megamenu-open) [role="tab"] {
     cursor: none !important;
   }
+
+  html.megamenu-open,
+  html.megamenu-open body {
+    cursor: default !important;
+  }
+
+  html.megamenu-open a,
+  html.megamenu-open button,
+  html.megamenu-open [role="button"],
+  html.megamenu-open [role="tab"] {
+    cursor: pointer !important;
+  }
+}
+
+html.megamenu-open .sniper-cursor-container {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 body {

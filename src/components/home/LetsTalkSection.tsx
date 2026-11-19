@@ -18,7 +18,7 @@ export default function LetsTalkSection() {
             as="h2"
             segments={[
               {
-                text: "Lets Talk",
+                text: "Mission Starts Here",
                 className: "text-[#f5f6f6]",
               },
               {

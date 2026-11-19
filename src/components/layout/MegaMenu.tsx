@@ -634,7 +634,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
                     type="button"
                     onMouseEnter={() => handleModeChange(mode.id)}
                     onClick={() => handleModeChange(mode.id)}
-                    className={`relative px-3.5 py-1.5 text-xs uppercase tracking-wider font-semibold transition-colors duration-200 rounded-[2px] flex items-center gap-2 cursor-pointer ${
+                    className={`relative px-3.5 py-1.5 text-[13px] font-medium tracking-normal transition-colors duration-200 rounded-[2px] flex items-center gap-2 cursor-pointer ${
                       isActive
                         ? "bg-[#e22328] text-white shadow-sm"
                         : "text-[#9ca8ae] hover:text-white hover:bg-white/[0.06]"

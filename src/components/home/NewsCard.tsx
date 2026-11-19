@@ -49,8 +49,8 @@ export default function NewsCard({
 
       {/* 2. Middle: Fixed 322px Container (Image slides up on hover, revealing description and buttons) */}
       <div className="relative w-full h-[322px] rounded-[4px] overflow-hidden shrink-0 my-auto">
-        {/* Story Image: In resting state fills full 322px; on hover slides UP by 120px */}
-        <div className="absolute inset-x-0 top-0 h-[322px] w-full rounded-[4px] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[120px]">
+        {/* Story Image: In resting state fills full 322px; on hover slides UP by 160px (extra 40px clearance) */}
+        <div className="absolute inset-x-0 top-0 h-[322px] w-full rounded-[4px] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[160px]">
           <Image
             src={imageSrc}
             alt={imageAlt}
