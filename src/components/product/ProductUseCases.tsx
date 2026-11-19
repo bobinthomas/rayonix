@@ -1,54 +1,21 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
-
-interface UseCaseItem {
-  id: string;
-  tag: string;
-  title: string;
-  description: string;
-}
-
-const useCases: UseCaseItem[] = [
-  {
-    id: "001",
-    tag: "USECASE/001",
-    title: "UXO & Landmine Detection",
-    description:
-      "Detecting and mapping potential unexploded ordnance, landmines and explosive remnants of war.",
-  },
-  {
-    id: "002",
-    tag: "USECASE/002",
-    title: "Underground Tunnel Detection",
-    description:
-      "Identifying concealed tunnels, underground passages and subsurface voids.",
-  },
-  {
-    id: "003",
-    tag: "USECASE/003",
-    title: "IED & Buried Threat Assessment",
-    description:
-      "Investigating subsurface anomalies and potential buried explosive threats during route and site assessments.",
-  },
-  {
-    id: "004",
-    tag: "USECASE/004",
-    title: "Military Infrastructure Mapping",
-    description:
-      "Mapping buried utilities, cables, pipelines and other subsurface infrastructure within military installations.",
-  },
-];
+import type { ProductPageContent, UseCase } from "@/content/products/types";
 
 // Cards shown per carousel page on desktop; slides are built from the array in pairs
 const CARDS_PER_PAGE = 2;
-const pages: UseCaseItem[][] = Array.from(
-  { length: Math.ceil(useCases.length / CARDS_PER_PAGE) },
-  (_, i) => useCases.slice(i * CARDS_PER_PAGE, (i + 1) * CARDS_PER_PAGE)
-);
 
-export default function GprUseCases() {
+interface ProductUseCasesProps {
+  useCases: ProductPageContent["useCases"];
+}
+
+export default function ProductUseCases({ useCases }: ProductUseCasesProps) {
+  const pages: UseCase[][] = Array.from(
+    { length: Math.ceil(useCases.items.length / CARDS_PER_PAGE) },
+    (_, i) => useCases.items.slice(i * CARDS_PER_PAGE, (i + 1) * CARDS_PER_PAGE)
+  );
+
   // Carousel page index (each page holds CARDS_PER_PAGE cards)
   const [currentPage, setCurrentPage] = useState<number>(0);
   const totalPages = pages.length;
@@ -75,10 +42,10 @@ export default function GprUseCases() {
         >
           <div className="flex flex-col gap-2">
             <h2 className="text-3xl sm:text-5xl lg:text-[48px] font-medium text-[#f5f6f6] leading-tight lg:leading-[56px] tracking-tight">
-              Use Cases
+              {useCases.heading}
             </h2>
             <p className="text-xs sm:text-[12px] text-[#7f8a91] font-normal leading-[18px]">
-              Supporting non-destructive subsurface investigation, mapping and underground object detection.
+              {useCases.description}
             </p>
           </div>
 
@@ -164,7 +131,7 @@ export default function GprUseCases() {
                         <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
                       </span>
                     </div>
-  
+
                     <div className="flex flex-col gap-4 pt-12">
                       <h3 className="text-2xl sm:text-3xl lg:text-[34px] font-normal leading-tight lg:leading-[44px] text-[#f5f6f6]">
                         {item.title}

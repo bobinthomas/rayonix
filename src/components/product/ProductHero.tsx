@@ -1,29 +1,27 @@
-"use client";
-
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import TransformingHeading from "@/components/ui/TransformingHeading";
+import type { Breadcrumb, ProductPageContent } from "@/content/products/types";
 
-interface SpecItem {
-  value: string;
-  label: string;
-  accent?: boolean;
+const TITLE_SIZES = {
+  display: "text-6xl sm:text-8xl lg:text-[128px] font-bold text-[#f5f6f6] tracking-tight leading-none",
+  long: "text-5xl sm:text-7xl lg:text-[104px] font-bold text-[#f5f6f6] tracking-tight leading-[1.05]",
+} as const;
+
+interface ProductHeroProps {
+  hero: ProductPageContent["hero"];
+  breadcrumbs: Breadcrumb[];
 }
 
-const specs: SpecItem[] = [
-  { value: "600 MHz", label: "Antenna Frequency", accent: true },
-  { value: "2.7 kg", label: "System Weight" },
-  { value: "1+ Hours", label: "Operating Time" },
-  { value: "IP65", label: "Environmental Protection Rating" },
-  { value: "620 × 216 × 80 mm", label: "System Dimensions" },
-];
+export default function ProductHero({ hero, breadcrumbs }: ProductHeroProps) {
+  const { specs } = hero;
+  const lastSpanFull = specs.length % 2 === 1;
 
-export default function GprHero() {
   return (
     <section
       className="relative w-full bg-[#080f12] text-[#f5f6f6] pt-28 sm:pt-32 pb-16 lg:pb-20"
-      aria-label="GPR Subsurface Detection and Mapping Overview"
+      aria-label={hero.ariaLabel}
       data-node-id="480:4633"
     >
       <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-10 lg:gap-12">
@@ -33,44 +31,48 @@ export default function GprHero() {
           className="flex items-center gap-2 text-sm font-medium text-[#7f8a91]"
           data-node-id="486:5632"
         >
-          <Link
-            href="/"
-            className="text-[#bdc4c8] hover:text-white transition-colors"
-          >
-            Home
-          </Link>
-          <span className="text-[#7f8a91]" aria-hidden="true">
-            /
-          </span>
-          <span className="text-[#bdc4c8]">Subsurface</span>
-          <span className="text-[#7f8a91]" aria-hidden="true">
-            /
-          </span>
-          <span className="text-[#bdc4c8]">Detect</span>
-          <span className="text-[#7f8a91]" aria-hidden="true">
-            /
-          </span>
-          <span className="text-[#e22328]" aria-current="page">
-            GPR
-          </span>
+          {breadcrumbs.map((crumb, idx) => {
+            const isLast = idx === breadcrumbs.length - 1;
+            return (
+              <React.Fragment key={crumb.href}>
+                {idx > 0 && (
+                  <span className="text-[#7f8a91]" aria-hidden="true">
+                    /
+                  </span>
+                )}
+                {isLast ? (
+                  <span className="text-[#e22328]" aria-current="page">
+                    {crumb.label}
+                  </span>
+                ) : crumb.linked ? (
+                  <Link
+                    href={crumb.href}
+                    className="text-[#bdc4c8] hover:text-white transition-colors"
+                  >
+                    {crumb.label}
+                  </Link>
+                ) : (
+                  <span className="text-[#bdc4c8]">{crumb.label}</span>
+                )}
+              </React.Fragment>
+            );
+          })}
         </nav>
 
         {/* Display Title and Intro */}
         <div className="flex flex-col gap-6 lg:gap-8 max-w-[1230px]">
           <TransformingHeading
             as="h1"
-            text="GPR"
-            className="text-6xl sm:text-8xl lg:text-[128px] font-bold text-[#f5f6f6] tracking-tight leading-none"
+            text={hero.title}
+            className={TITLE_SIZES[hero.titleSize ?? "display"]}
           />
 
           <div className="flex flex-col gap-3">
             <h2 className="text-xl sm:text-2xl lg:text-[24px] font-medium text-[#e22328] leading-[32px]">
-              Subsurface Detection & Mapping
+              {hero.eyebrow}
             </h2>
             <p className="text-base sm:text-lg lg:text-[18px] text-[#bdc4c8] font-normal leading-[28px] max-w-[1176px]">
-              Our Ground Penetrating Radar (GPR) solution uses electromagnetic
-              waves to detect buried objects, map underground structures and
-              identify subsurface anomalies without excavation.
+              {hero.intro}
             </p>
           </div>
         </div>
@@ -80,11 +82,11 @@ export default function GprHero() {
           className="relative w-full h-[380px] sm:h-[500px] lg:h-[635px] rounded-[8px] overflow-hidden border border-[#253035] bg-[#080f12] shadow-2xl group"
           data-node-id="527:1192"
         >
-          {/* Main GPR Sensor Image */}
+          {/* Main Hero Image (the page's only priority image) */}
           <div className="absolute inset-0 pointer-events-none">
             <Image
-              src="/assets/gpr-hero.webp"
-              alt="GPR Tactical Sensor Hardware Spec GPR-TR400"
+              src={hero.image.src}
+              alt={hero.image.alt}
               fill
               priority
               sizes="(max-width: 1280px) 100vw, 1280px"
@@ -101,7 +103,7 @@ export default function GprHero() {
           >
             <span className="text-[#e22328] text-xs font-mono font-bold">+</span>
             <span className="text-[#bdc4c8] text-[11px] font-mono tracking-[1.1px]">
-              LAT 33.4241° N // LON 111.9281° W
+              {hero.hud.coordinates}
             </span>
           </div>
 
@@ -111,7 +113,7 @@ export default function GprHero() {
             data-node-id="527:1211"
           >
             <span className="text-[#bdc4c8] text-[11px] font-mono tracking-[1.1px]">
-              Hardware Spec: GPR-TR400 // Air-Ground Dual
+              {hero.hud.badge}
             </span>
           </div>
 
@@ -126,7 +128,7 @@ export default function GprHero() {
           />
         </div>
 
-        {/* Floating 5-Column Specification Strip */}
+        {/* Floating Specification Strip */}
         <div
           className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 w-full"
           data-node-id="527:1216"
@@ -135,7 +137,7 @@ export default function GprHero() {
             <div
               key={idx}
               className={`relative bg-[#10181c] border border-[#253035] rounded-[4px] p-5 sm:p-6 flex flex-col justify-between overflow-hidden shadow-md transition-all duration-300 hover:border-[#38464d] ${
-                idx === 4 ? "col-span-2 sm:col-span-1" : ""
+                lastSpanFull && idx === specs.length - 1 ? "col-span-2 sm:col-span-1" : ""
               }`}
             >
               {/* Left Accent Bar */}
