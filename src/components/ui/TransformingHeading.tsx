@@ -190,7 +190,7 @@ export default function TransformingHeading({
         {accentDot && (
           <span
             style={{ color: accentColor }}
-            className="transition-transform duration-300 inline-block font-bold ml-0.5"
+            className="inline font-bold ml-0.5"
           >
             .
           </span>

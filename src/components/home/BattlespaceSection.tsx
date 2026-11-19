@@ -36,7 +36,7 @@ export default function BattlespaceSection() {
             accentDot={true}
             accentColor="#e22328"
             as="h2"
-            className="w-full text-3xl sm:text-4xl md:text-5xl xl:text-[64px] 2xl:text-[64px] font-bold text-[#f5f6f6] xl:tracking-[2px] leading-tight lg:leading-[60px] xl:leading-[72px]"
+            className="w-full text-3xl sm:text-4xl md:text-5xl xl:text-[64px] 2xl:text-[64px] font-bold text-[#f5f6f6] xl:tracking-[1px] leading-tight lg:leading-[60px] xl:leading-[72px]"
           />
         </div>
 
