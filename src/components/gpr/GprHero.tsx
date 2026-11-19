@@ -22,11 +22,11 @@ const specs: SpecItem[] = [
 export default function GprHero() {
   return (
     <section
-      className="relative w-full bg-[#080f12] text-[#f5f6f6] px-6 sm:px-12 lg:px-[64px] pt-28 sm:pt-32 pb-16 lg:pb-20"
+      className="relative w-full bg-[#080f12] text-[#f5f6f6] pt-28 sm:pt-32 pb-16 lg:pb-20"
       aria-label="GPR Subsurface Detection and Mapping Overview"
       data-node-id="480:4633"
     >
-      <div className="max-w-[1280px] mx-auto flex flex-col gap-10 lg:gap-12">
+      <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-10 lg:gap-12">
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"

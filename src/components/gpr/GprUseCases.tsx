@@ -56,11 +56,11 @@ export default function GprUseCases() {
 
   return (
     <section
-      className="relative w-full bg-[#080f12] border-t border-[#253035] text-[#f5f6f6] px-6 sm:px-12 lg:px-[64px] py-16 lg:py-24"
+      className="relative w-full bg-[#080f12] border-t border-[#253035] text-[#f5f6f6] py-16 lg:py-24"
       aria-label="Use Cases Carousel"
       data-node-id="527:2475"
     >
-      <div className="max-w-[1280px] mx-auto flex flex-col gap-10 lg:gap-12">
+      <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-10 lg:gap-12">
         {/* Header Row with Controls */}
         <div
           className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-2"

@@ -152,7 +152,7 @@ export default function MissionArchitectureSection() {
       {/* Sticky Card Container - Natural Figma height (792px), vertically centered in viewport */}
       <div
         ref={cardRef}
-        className="sticky top-4 lg:top-[calc((100vh-792px)/2)] w-full min-h-[750px] lg:h-[792px] bg-[#080f12] overflow-hidden flex items-center justify-center px-6 sm:px-12 lg:px-[64px] py-16 lg:py-0 shadow-2xl"
+        className="sticky top-4 lg:top-[calc((100vh-792px)/2)] w-full min-h-[750px] lg:h-[792px] bg-[#080f12] overflow-hidden flex items-center justify-center py-16 lg:py-0 shadow-2xl"
       >
         {/* Background Image: detect-decide-respond-bg.png matching user specification */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -172,7 +172,7 @@ export default function MissionArchitectureSection() {
         </div>
 
         {/* Inner Content Grid */}
-        <div className="relative z-10 max-w-[1408px] mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <div className="relative z-10 max-w-[1280px] mx-auto w-full px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Left Column: Big Editorial Words (Detect. Decide. Respond.) */}
           <div className="lg:col-span-5 flex flex-col justify-center">
             <h2 className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[76px] select-none text-[#f5f6f6]">

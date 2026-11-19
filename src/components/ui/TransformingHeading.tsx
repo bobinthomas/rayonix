@@ -19,7 +19,6 @@ interface TransformingHeadingProps {
   accentColor?: string;
   speed?: number; // ms per tick, default 25
   scrambleTicks?: number; // number of scrambled ticks per char, default 6
-  justifyWords?: boolean; // Spreads words edge-to-edge across container width above 1280px
 }
 
 export default function TransformingHeading({
@@ -31,7 +30,6 @@ export default function TransformingHeading({
   accentColor = "#e22328",
   speed = 28,
   scrambleTicks = 7,
-  justifyWords = false,
 }: TransformingHeadingProps) {
   const containerRef = useRef<HTMLElement>(null);
   const fullText = useMemo(() => {
@@ -163,103 +161,41 @@ export default function TransformingHeading({
     };
   }, [fullText, speed, scrambleTicks, prefersReducedMotion]);
 
-  // Build word groupings if justifyWords is enabled
-  const words = useMemo(() => {
-    if (!justifyWords) return null;
-    const result: Array<Array<{ char: string; index: number }>> = [];
-    let currentWord: Array<{ char: string; index: number }> = [];
-
-    for (let i = 0; i < displayText.length; i++) {
-      const char = displayText[i];
-      if (char === " ") {
-        if (currentWord.length > 0) {
-          result.push(currentWord);
-          currentWord = [];
-        }
-      } else {
-        currentWord.push({ char, index: i });
-      }
-    }
-    if (currentWord.length > 0) {
-      result.push(currentWord);
-    }
-    return result;
-  }, [justifyWords, displayText]);
-
   return (
     <Component
       ref={containerRef as any}
-      className={`select-none ${justifyWords ? "w-full block" : "inline-block"} ${className}`}
+      className={`select-none inline-block ${className}`}
       aria-label={fullText}
     >
-      {justifyWords && words ? (
-        <span
-          aria-hidden="true"
-          className="w-full flex flex-wrap gap-x-3 sm:gap-x-4 xl:flex-nowrap xl:justify-between items-baseline"
-        >
-          {words.map((wordGroup, wordIdx) => {
-            const isLastWord = wordIdx === words.length - 1;
-            return (
-              <span key={wordIdx} className="inline-block whitespace-nowrap">
-                {wordGroup.map(({ char, index }) => {
-                  const isResolved = charStates[index] ?? true;
-                  const segmentClass = charSegmentClasses[index];
-                  return (
-                    <span
-                      key={index}
-                      className={`transition-colors duration-150 ${
-                        isResolved
-                          ? segmentClass || "font-sans font-bold text-inherit"
-                          : "font-mono font-medium text-[#bdc4c8] scale-105 inline-block opacity-85"
-                      }`}
-                    >
-                      {char}
-                    </span>
-                  );
-                })}
-                {isLastWord && accentDot && (
-                  <span
-                    style={{ color: accentColor }}
-                    className="transition-transform duration-300 inline-block font-bold ml-0.5"
-                  >
-                    .
-                  </span>
-                )}
-              </span>
-            );
-          })}
-        </span>
-      ) : (
-        <span aria-hidden="true" className="inline">
-          {displayText.split("").map((char, index) => {
-            if (char === "\n") {
-              return <br key={index} className="block" />;
-            }
-            const isResolved = charStates[index] ?? true;
-            const segmentClass = charSegmentClasses[index];
-            return (
-              <span
-                key={index}
-                className={`transition-colors duration-150 ${
-                  isResolved
-                    ? segmentClass || "font-sans font-bold text-inherit"
-                    : "font-mono font-medium text-[#bdc4c8] scale-105 inline-block opacity-85"
-                }`}
-              >
-                {char}
-              </span>
-            );
-          })}
-          {accentDot && (
+      <span aria-hidden="true" className="inline">
+        {displayText.split("").map((char, index) => {
+          if (char === "\n") {
+            return <br key={index} className="block" />;
+          }
+          const isResolved = charStates[index] ?? true;
+          const segmentClass = charSegmentClasses[index];
+          return (
             <span
-              style={{ color: accentColor }}
-              className="transition-transform duration-300 inline-block font-bold ml-0.5"
+              key={index}
+              className={`transition-colors duration-150 ${
+                isResolved
+                  ? segmentClass || "font-sans font-bold text-inherit"
+                  : "font-mono font-medium text-[#bdc4c8] scale-105 inline-block opacity-85"
+              }`}
             >
-              .
+              {char}
             </span>
-          )}
-        </span>
-      )}
+          );
+        })}
+        {accentDot && (
+          <span
+            style={{ color: accentColor }}
+            className="transition-transform duration-300 inline-block font-bold ml-0.5"
+          >
+            .
+          </span>
+        )}
+      </span>
       {/* Screen-reader accessible full text */}
       <span className="sr-only">{fullText}{accentDot ? "." : ""}</span>
     </Component>

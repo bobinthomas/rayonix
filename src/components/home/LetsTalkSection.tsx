@@ -7,11 +7,11 @@ import TransformingHeading from "@/components/ui/TransformingHeading";
 export default function LetsTalkSection() {
   return (
     <section
-      className="relative w-full bg-[#080f12] text-[#f5f6f6] px-6 sm:px-12 lg:px-[64px] pt-[64px] pb-[80px] rounded-none"
+      className="relative w-full bg-[#080f12] text-[#f5f6f6] pt-[64px] pb-[80px] rounded-none"
       aria-label="Contact and Collaboration"
       data-node-id="354:2993"
     >
-      <div className="max-w-[1408px] mx-auto w-full flex flex-col gap-[29px]">
+      <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-[29px]">
         {/* Section Heading with Decrypt Animation matching Figma node 354:2994 */}
         <div>
           <TransformingHeading

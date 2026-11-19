@@ -618,7 +618,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
       data-testid="rayonix-mega-menu"
       onMouseLeave={onClose}
     >
-      <div className="max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-[60px] py-7 sm:py-8">
+      <div className="max-w-[1280px] mx-auto px-6 sm:px-8 py-7 sm:py-8">
         {/* Main Content Grid: Fixed vertical envelope (min-h-[380px]) so height never jumps */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch min-h-[380px]">
           

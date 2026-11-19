@@ -8,11 +8,11 @@ import NewsCard from "@/components/home/NewsCard";
 export default function ExploreSection() {
   return (
     <section
-      className="relative w-full bg-[#f5f6f6] text-[#080f12] px-6 sm:px-12 lg:px-[64px] py-16 lg:py-[80px] rounded-none"
+      className="relative w-full bg-[#f5f6f6] text-[#080f12] py-16 lg:py-[80px] rounded-none"
       aria-label="Explore Rayonix"
       data-node-id="440:557"
     >
-      <div className="max-w-[1408px] mx-auto w-full flex flex-col gap-12 lg:gap-[40px]">
+      <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-12 lg:gap-[40px]">
         {/* Section Heading with Decrypt Animation matching Figma node 440:558 */}
         <div>
           <TransformingHeading

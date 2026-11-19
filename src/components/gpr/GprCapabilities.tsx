@@ -245,11 +245,11 @@ export default function GprCapabilities() {
 
   return (
     <section
-      className="relative w-full bg-[#f4f5f7] text-[#080f12] px-6 sm:px-12 lg:px-[64px] py-16 lg:py-24"
+      className="relative w-full bg-[#f4f5f7] text-[#080f12] py-16 lg:py-24"
       aria-label="Advanced Subsurface Detection & Mapping Capabilities"
       data-node-id="527:2340"
     >
-      <div className="max-w-[1280px] mx-auto flex flex-col gap-16 lg:gap-20">
+      <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-16 lg:gap-20">
         {/* Section Header */}
         <div className="flex flex-col gap-3 max-w-[1200px]" data-node-id="527:2342">
           <h2 className="text-3xl sm:text-5xl lg:text-[48px] font-medium text-[#080f12] leading-tight lg:leading-[56px] tracking-tight">

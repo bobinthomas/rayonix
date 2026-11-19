@@ -220,8 +220,8 @@ export default function EcosystemSection() {
       }}
     >
       <div className="w-full flex flex-col gap-[30px]">
-        {/* Section Heading & Filter Tabs - Strictly aligned to master container grid */}
-        <div className="max-w-[1408px] mx-auto w-full px-6 sm:px-12 lg:px-[64px] flex flex-col gap-6">
+        {/* Section Heading & Filter Tabs - Strictly aligned to 1280px master container grid */}
+        <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-6">
           <div className="pt-2">
             <TransformingHeading
               as="h2"
@@ -286,7 +286,7 @@ export default function EcosystemSection() {
           ref={containerRef}
           className="relative w-full overflow-hidden"
           style={{
-            paddingLeft: "calc(64px + max(0px, (100vw - 1408px) / 2))",
+            paddingLeft: "calc(max(1.5rem, (100vw - 1280px) / 2 + 2rem))",
           }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}

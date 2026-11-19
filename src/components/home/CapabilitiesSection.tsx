@@ -42,7 +42,7 @@ const proofPoints: ProofPoint[] = [
 export default function CapabilitiesSection() {
   return (
     <section
-      className="relative w-full bg-[#253035] text-[#f5f6f6] px-6 sm:px-12 lg:px-[64px] pt-[72px] pb-[88px] lg:pb-[100px] overflow-hidden"
+      className="relative w-full bg-[#253035] text-[#f5f6f6] pt-[72px] pb-[88px] lg:pb-[100px] overflow-hidden"
       aria-label="Proven Capabilities · Engineered for the Mission"
       data-node-id="354:2887"
     >
@@ -62,7 +62,7 @@ export default function CapabilitiesSection() {
         />
       </div>
 
-      <div className="relative z-10 max-w-[1408px] mx-auto w-full flex flex-col gap-6">
+      <div className="relative z-10 max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-6">
         {/* Section Headline with Axion Decrypt Animation matching Figma node 354:2898 */}
         <div className="pb-2" data-node-id="354:2898">
           <TransformingHeading
