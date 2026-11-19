@@ -149,21 +149,26 @@ export default function EcosystemSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
+  // Stable ref: the content wrapper (max-w container). Never scrolls, always stable.
+  const gridContainerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const touchStartX = useRef<number | null>(null);
 
-  // Measure the exact browser-computed left position of Tab 0 to anchor the carousel
+  // Measure the left grid offset from the STABLE content container, NOT from Tab 0.
+  // This is immune to tab scrolling because gridContainerRef never moves.
   const measureGridOffset = useCallback(() => {
-    const tab0 = tabRefs.current[0];
+    const gridContainer = gridContainerRef.current;
     const section = sectionRef.current;
-    if (tab0 && section) {
-      const tab0Rect = tab0.getBoundingClientRect();
+    if (gridContainer && section) {
+      const containerRect = gridContainer.getBoundingClientRect();
       const sectionRect = section.getBoundingClientRect();
-      const offset = tab0Rect.left - sectionRect.left;
-      if (offset > 0) {
-        setLeftGridOffset(offset);
-      }
+      const computedPaddingLeft = parseFloat(
+        window.getComputedStyle(gridContainer).paddingLeft
+      ) || 0;
+      // content left = container's left edge + its padding-left
+      const offset = (containerRect.left - sectionRect.left) + computedPaddingLeft;
+      setLeftGridOffset(Math.max(0, offset));
     }
   }, []);
 
@@ -189,31 +194,9 @@ export default function EcosystemSection() {
     return () => window.removeEventListener("resize", updateOffset);
   }, [updateOffset]);
 
-  // Smart tab scrolling: scroll right ONLY when active tab overflows the right edge.
-  // NEVER scroll left (never increase scrollLeft beyond 0 from the left), keeping Tab 0 always visible.
-  useEffect(() => {
-    const container = tabsContainerRef.current;
-    const currentTabEl = tabRefs.current[activeTab];
-    if (!container || !currentTabEl) return;
-
-    const tabLeft = currentTabEl.offsetLeft;
-    const tabRight = tabLeft + currentTabEl.offsetWidth;
-    const viewRight = container.scrollLeft + container.clientWidth;
-
-    if (tabRight > viewRight) {
-      // Tab is hidden off the right edge — scroll just enough to reveal it
-      container.scrollTo({
-        left: tabRight - container.clientWidth + 16,
-        behavior: "smooth",
-      });
-    } else if (tabLeft < container.scrollLeft) {
-      // Tab is hidden off the left edge — scroll back left, but never past 0
-      container.scrollTo({
-        left: Math.max(0, tabLeft - 16),
-        behavior: "smooth",
-      });
-    }
-  }, [activeTab]);
+  // NO JS tab scrolling at all — tabs are sized to fit the container on 1280px+ screens.
+  // On narrow screens the tabs container is scrollable by touch/mouse, but we never auto-scroll
+  // because auto-scroll is what cut off Tab 0 in the past.
 
   // Touch swipe support for mobile carousel
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -249,7 +232,7 @@ export default function EcosystemSection() {
     >
       <div className="w-full flex flex-col gap-[30px]">
         {/* Section Heading & Filter Tabs - Strictly aligned to 1280px master container grid */}
-        <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-6">
+        <div ref={gridContainerRef} className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-6">
           <div className="pt-2">
             <TransformingHeading
               as="h2"
@@ -263,9 +246,9 @@ export default function EcosystemSection() {
             />
           </div>
 
-          {/* 7 Filter Tabs - Solid high-contrast styling anchored to left content grid */}
+          {/* 7 Filter Tabs — compact sizing ensures all 7 fit in the 1280px grid without overflow or scroll */}
           <div ref={tabsContainerRef} className="w-full overflow-x-auto no-scrollbar">
-            <div className="flex items-center gap-1.5 sm:gap-2 xl:gap-[10px] min-w-max pb-1">
+            <div className="flex items-center gap-[6px] sm:gap-[8px] min-w-max pb-1">
               {ecosystemData.map((item, idx) => {
                 const isActive = activeTab === idx;
                 return (
@@ -277,7 +260,7 @@ export default function EcosystemSection() {
                     type="button"
                     onClick={() => setActiveTab(idx)}
                     onMouseEnter={() => setHoveredCardIndex(idx)}
-                    className={`group relative px-2.5 sm:px-3 xl:px-[12px] py-2 sm:py-2.5 xl:py-[13.5px] rounded-[4px] text-[12px] sm:text-[13px] xl:text-[14px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
+                    className={`group relative px-[9px] sm:px-[10px] lg:px-[11px] py-[10px] sm:py-[11px] lg:py-[12px] rounded-[4px] text-[12px] sm:text-[12.5px] lg:text-[13px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
                       isActive
                         ? "bg-[#10181c] text-[#f1f2f2]"
                         : "bg-[#9da1a4] text-white hover:bg-[#868c90]"
