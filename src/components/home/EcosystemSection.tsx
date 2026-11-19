@@ -138,9 +138,9 @@ function CardTitleScramble({
   return <span>{displayText}</span>;
 }
 
-// Mathematical grid line constant matching max-w-[1280px] mx-auto px-6 sm:px-8
-const GRID_LEFT_CSS = "max(1.5rem, calc((100% - 1280px) / 2 + 2rem))";
-const GRID_WIDTH_CSS = "calc(100% - max(1.5rem, calc((100% - 1280px) / 2 + 2rem)))";
+// Mathematical grid line constant matching max-w-[1280px] mx-auto px-6 sm:px-8 (32px / 2rem on sm+)
+const GRID_LEFT_CSS = "max(2rem, calc((100% - 1280px) / 2 + 2rem))";
+const GRID_WIDTH_CSS = "calc(100% - max(2rem, calc((100% - 1280px) / 2 + 2rem)))";
 
 export default function EcosystemSection() {
   const [activeTab, setActiveTab] = useState(0);
@@ -235,7 +235,7 @@ export default function EcosystemSection() {
             width: GRID_WIDTH_CSS,
           }}
         >
-          <div className="flex items-center gap-[8px] xl:gap-[10px] min-w-max pb-1">
+          <div className="flex items-center gap-[6px] sm:gap-[8px] min-w-max pb-1">
             {ecosystemData.map((item, idx) => {
               const isActive = activeTab === idx;
               return (
@@ -247,7 +247,7 @@ export default function EcosystemSection() {
                   type="button"
                   onClick={() => setActiveTab(idx)}
                   onMouseEnter={() => setHoveredCardIndex(idx)}
-                  className={`group relative px-[11px] xl:px-[12px] py-[11px] xl:py-[13.5px] rounded-[4px] text-[13px] xl:text-[14px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
+                  className={`group relative px-[9px] sm:px-[10px] xl:px-[11px] py-[9px] sm:py-[10px] xl:py-[12px] rounded-[4px] text-[12px] sm:text-[12.5px] xl:text-[13px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
                     isActive
                       ? "bg-[#10181c] text-[#f1f2f2]"
                       : "bg-[#9da1a4] text-white hover:bg-[#868c90]"
