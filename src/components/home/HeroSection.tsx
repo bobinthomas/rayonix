@@ -47,7 +47,7 @@ export default function HeroSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full h-[100svh] min-[700px]:h-[calc(100dvh-32px)] min-h-[580px] bg-black overflow-hidden"
+      className="relative w-full h-[70svh] min-h-[440px] min-[700px]:h-[calc(100dvh-32px)] min-[700px]:min-h-[580px] bg-black overflow-hidden"
       aria-label="Rayonix Tactical Video Banner"
       data-node-id="640:3763"
     >
@@ -78,7 +78,7 @@ export default function HeroSection() {
       <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2 z-20 w-full max-w-[92vw] flex flex-col items-center gap-6 sm:gap-8 text-center pointer-events-auto">
         <h1 className="flex flex-col items-center gap-2 sm:gap-3">
           <span className="text-[32px] sm:text-5xl lg:text-[64px] font-bold leading-[1.05] tracking-[-0.03em] text-[#f5f6f6]">
-            IN(VISIBLE) WARFARE
+            IN<span className="text-[#7f8a91]">(VISIBLE)</span> WARFARE
           </span>
           <span className="text-[16px] sm:text-[20px] lg:text-[24px] font-normal leading-snug tracking-[-0.01em] text-[#bdc4c8]">
             Intelligence Beyond Boundaries.
@@ -91,7 +91,7 @@ export default function HeroSection() {
           className="text-center text-[13px] sm:text-[15px] md:text-[16px] font-medium tracking-[0.02em] px-5 sm:px-7 py-3.5 sm:py-4 shadow-2xl"
           aria-label="See beyond"
         >
-          SEE BEYOND
+          See beyond
         </CTAButton>
       </div>
     </section>
