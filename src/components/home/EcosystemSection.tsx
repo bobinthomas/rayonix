@@ -189,11 +189,29 @@ export default function EcosystemSection() {
     return () => window.removeEventListener("resize", updateOffset);
   }, [updateOffset]);
 
-  // Keep tabs container strictly locked to scrollLeft = 0 so tabs are NEVER cut off on the left
+  // Smart tab scrolling: scroll right ONLY when active tab overflows the right edge.
+  // NEVER scroll left (never increase scrollLeft beyond 0 from the left), keeping Tab 0 always visible.
   useEffect(() => {
     const container = tabsContainerRef.current;
-    if (container) {
-      container.scrollLeft = 0;
+    const currentTabEl = tabRefs.current[activeTab];
+    if (!container || !currentTabEl) return;
+
+    const tabLeft = currentTabEl.offsetLeft;
+    const tabRight = tabLeft + currentTabEl.offsetWidth;
+    const viewRight = container.scrollLeft + container.clientWidth;
+
+    if (tabRight > viewRight) {
+      // Tab is hidden off the right edge — scroll just enough to reveal it
+      container.scrollTo({
+        left: tabRight - container.clientWidth + 16,
+        behavior: "smooth",
+      });
+    } else if (tabLeft < container.scrollLeft) {
+      // Tab is hidden off the left edge — scroll back left, but never past 0
+      container.scrollTo({
+        left: Math.max(0, tabLeft - 16),
+        behavior: "smooth",
+      });
     }
   }, [activeTab]);
 

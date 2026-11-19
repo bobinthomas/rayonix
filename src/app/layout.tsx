@@ -82,6 +82,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Rayonix Tech Private Limited" }],
   creator: "Rayonix Tech",
   publisher: "Rayonix Tech Private Limited",
+  icons: {
+    icon: [
+      { url: "/assets/rayonix-header-logo.png", type: "image/png" },
+    ],
+    apple: [
+      { url: "/assets/rayonix-header-logo.png" },
+    ],
+  },
   formatDetection: {
     email: false,
     address: false,
