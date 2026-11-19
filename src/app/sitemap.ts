@@ -8,6 +8,7 @@
 import type { MetadataRoute } from "next";
 import { getAllPages } from "@/lib/cms";
 import { getPublishedStories } from "@/lib/cms";
+import { products } from "@/content/products";
 
 const SITE_URL = "https://rayonix.com";
 
@@ -42,5 +43,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...pageEntries, ...domainEntries, ...storyEntries];
+  // Product / capability pages from src/content/products
+  const productEntries: MetadataRoute.Sitemap = products.map((product) => ({
+    url: `${SITE_URL}${product.path}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...pageEntries, ...domainEntries, ...productEntries, ...storyEntries];
 }
