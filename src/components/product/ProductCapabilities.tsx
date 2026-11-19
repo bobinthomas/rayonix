@@ -6,7 +6,7 @@ import CTAButton from "@/components/ui/CTAButton";
 import type { DiagramLayer, ProductPageContent } from "@/content/products/types";
 
 interface ProductCapabilitiesProps {
-  capabilities: ProductPageContent["capabilities"];
+  capabilities: NonNullable<ProductPageContent["capabilities"]>;
   repository?: ProductPageContent["repository"];
 }
 
@@ -77,9 +77,11 @@ export default function ProductCapabilities({
           <h2 className="text-3xl sm:text-5xl lg:text-[48px] font-medium text-[#080f12] leading-tight lg:leading-[56px] tracking-tight">
             {capabilities.heading}
           </h2>
-          <p className="text-lg sm:text-xl lg:text-[24px] font-medium text-[#475569] leading-snug lg:leading-[32px]">
-            {capabilities.subheading}
-          </p>
+          {capabilities.subheading && (
+            <p className="text-lg sm:text-xl lg:text-[24px] font-medium text-[#475569] leading-snug lg:leading-[32px]">
+              {capabilities.subheading}
+            </p>
+          )}
         </div>
 
         {/* Tab Container */}

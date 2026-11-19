@@ -7,7 +7,15 @@ import type { Breadcrumb, ProductPageContent } from "@/content/products/types";
 const TITLE_SIZES = {
   display: "text-6xl sm:text-8xl lg:text-[128px] font-bold text-[#f5f6f6] tracking-tight leading-none",
   long: "text-5xl sm:text-7xl lg:text-[104px] font-bold text-[#f5f6f6] tracking-tight leading-[1.05]",
+  extended: "text-4xl sm:text-6xl lg:text-[72px] font-bold text-[#f5f6f6] tracking-tight leading-[1.1]",
 } as const;
+
+// Spec strip columns by spec count (literal strings so Tailwind keeps them).
+const SPEC_GRID: Record<number, string> = {
+  4: "grid-cols-2 lg:grid-cols-4",
+  5: "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5",
+  6: "grid-cols-2 sm:grid-cols-3",
+};
 
 interface ProductHeroProps {
   hero: ProductPageContent["hero"];
@@ -82,40 +90,57 @@ export default function ProductHero({ hero, breadcrumbs }: ProductHeroProps) {
           className="relative w-full h-[380px] sm:h-[500px] lg:h-[635px] rounded-[8px] overflow-hidden border border-[#253035] bg-[#080f12] shadow-2xl group"
           data-node-id="527:1192"
         >
-          {/* Main Hero Image (the page's only priority image) */}
-          <div className="absolute inset-0 pointer-events-none">
-            <Image
-              src={hero.image.src}
-              alt={hero.image.alt}
-              fill
-              priority
-              sizes="(max-width: 1280px) 100vw, 1280px"
-              className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-102"
+          {hero.image ? (
+            /* Main Hero Image (the page's only priority image) */
+            <div className="absolute inset-0 pointer-events-none">
+              <Image
+                src={hero.image.src}
+                alt={hero.image.alt}
+                fill
+                priority
+                sizes="(max-width: 1280px) 100vw, 1280px"
+                className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-102"
+              />
+              {/* Atmospheric overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#080f12]/80 via-transparent to-transparent pointer-events-none" />
+            </div>
+          ) : (
+            /* Placeholder until a hero visual is supplied: tactical grid panel */
+            <div
+              className="absolute inset-0 pointer-events-none bg-[#10181c]"
+              aria-hidden="true"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(189,196,200,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(189,196,200,0.06) 1px, transparent 1px), radial-gradient(ellipse at center, rgba(226,35,40,0.08), transparent 60%)",
+                backgroundSize: "48px 48px, 48px 48px, 100% 100%",
+              }}
             />
-            {/* Atmospheric overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#080f12]/80 via-transparent to-transparent pointer-events-none" />
-          </div>
+          )}
 
-          {/* HUD Top Left: Coordinates */}
-          <div
-            className="absolute top-4 sm:top-5 left-4 sm:left-5 z-10 flex items-center gap-2 select-none pointer-events-none"
-            data-node-id="527:1207"
-          >
-            <span className="text-[#e22328] text-xs font-mono font-bold">+</span>
-            <span className="text-[#bdc4c8] text-[11px] font-mono tracking-[1.1px]">
-              {hero.hud.coordinates}
-            </span>
-          </div>
+          {hero.hud && (
+            <>
+              {/* HUD Top Left: Coordinates */}
+              <div
+                className="absolute top-4 sm:top-5 left-4 sm:left-5 z-10 flex items-center gap-2 select-none pointer-events-none"
+                data-node-id="527:1207"
+              >
+                <span className="text-[#e22328] text-xs font-mono font-bold">+</span>
+                <span className="text-[#bdc4c8] text-[11px] font-mono tracking-[1.1px]">
+                  {hero.hud.coordinates}
+                </span>
+              </div>
 
-          {/* HUD Top Right: Hardware Spec Badge */}
-          <div
-            className="absolute top-4 sm:top-5 right-4 sm:right-5 z-10 backdrop-blur-[6px] bg-[#080f12]/90 border border-[#253035] px-3.5 py-1.5 rounded-[4px] select-none pointer-events-none"
-            data-node-id="527:1211"
-          >
-            <span className="text-[#bdc4c8] text-[11px] font-mono tracking-[1.1px]">
-              {hero.hud.badge}
-            </span>
-          </div>
+              {/* HUD Top Right: Hardware Spec Badge */}
+              <div
+                className="absolute top-4 sm:top-5 right-4 sm:right-5 z-10 backdrop-blur-[6px] bg-[#080f12]/90 border border-[#253035] px-3.5 py-1.5 rounded-[4px] select-none pointer-events-none"
+                data-node-id="527:1211"
+              >
+                <span className="text-[#bdc4c8] text-[11px] font-mono tracking-[1.1px]">
+                  {hero.hud.badge}
+                </span>
+              </div>
+            </>
+          )}
 
           {/* Corner Alignment Reticles */}
           <div
@@ -130,7 +155,7 @@ export default function ProductHero({ hero, breadcrumbs }: ProductHeroProps) {
 
         {/* Floating Specification Strip */}
         <div
-          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 w-full"
+          className={`grid ${SPEC_GRID[specs.length] ?? SPEC_GRID[5]} gap-3 sm:gap-4 w-full`}
           data-node-id="527:1216"
         >
           {specs.map((spec, idx) => (

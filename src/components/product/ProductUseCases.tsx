@@ -44,9 +44,11 @@ export default function ProductUseCases({ useCases }: ProductUseCasesProps) {
             <h2 className="text-3xl sm:text-5xl lg:text-[48px] font-medium text-[#f5f6f6] leading-tight lg:leading-[56px] tracking-tight">
               {useCases.heading}
             </h2>
-            <p className="text-xs sm:text-[12px] text-[#7f8a91] font-normal leading-[18px]">
-              {useCases.description}
-            </p>
+            {useCases.description && (
+              <p className="text-xs sm:text-[12px] text-[#7f8a91] font-normal leading-[18px]">
+                {useCases.description}
+              </p>
+            )}
           </div>
 
           {/* Carousel Tactical Navigation Arrows */}

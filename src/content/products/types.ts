@@ -86,21 +86,25 @@ export interface ProductPageContent {
     ariaLabel: string;
     /** Page <h1>. Short names (e.g. "GPR") use the largest display size. */
     title: string;
-    titleSize?: "display" | "long";
+    /** display: ≤ ~8 chars; long: one or two words; extended: full product names. */
+    titleSize?: "display" | "long" | "extended";
     eyebrow: string;
     intro: string;
-    image: ProductImage;
-    hud: {
+    /** Hero visual. Without one, a neutral placeholder panel is shown. */
+    image?: ProductImage;
+    /** Optional HUD labels overlaid on the hero image. */
+    hud?: {
       coordinates: string;
       badge: string;
     };
     specs: ProductSpec[];
   };
 
-  capabilities: {
+  /** Capability tabs section. Omitted on pages without capability content. */
+  capabilities?: {
     ariaLabel: string;
     heading: string;
-    subheading: string;
+    subheading?: string;
     tabs: CapabilityTab[];
   };
 
@@ -112,7 +116,7 @@ export interface ProductPageContent {
 
   useCases: {
     heading: string;
-    description: string;
+    description?: string;
     items: UseCase[];
   };
 

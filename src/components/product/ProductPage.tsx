@@ -17,10 +17,12 @@ export default function ProductPage({ content }: { content: ProductPageContent }
       />
       <main className="relative w-full min-h-screen bg-[#080f12]">
         <ProductHero hero={content.hero} breadcrumbs={content.breadcrumbs} />
-        <ProductCapabilities
-          capabilities={content.capabilities}
-          repository={content.repository}
-        />
+        {content.capabilities && (
+          <ProductCapabilities
+            capabilities={content.capabilities}
+            repository={content.repository}
+          />
+        )}
         <ProductUseCases useCases={content.useCases} />
       </main>
     </>

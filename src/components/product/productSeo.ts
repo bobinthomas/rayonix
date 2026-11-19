@@ -48,21 +48,23 @@ export function buildProductJsonLd(content: ProductPageContent) {
         {
           "@type": "Service",
           name: content.schema.name,
-          image: `${SITE_URL}${content.hero.image.src}`,
+          ...(content.hero.image && { image: `${SITE_URL}${content.hero.image.src}` }),
           description: content.schema.description,
           provider: {
             "@type": "Organization",
             name: "Rayonix",
             url: SITE_URL,
           },
-          hasOfferCatalog: {
-            "@type": "OfferCatalog",
-            name: content.capabilities.heading,
-            itemListElement: content.capabilities.tabs.map((tab) => ({
-              "@type": "Offer",
-              itemOffered: { "@type": "Service", name: tab.title },
-            })),
-          },
+          ...(content.capabilities && {
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: content.capabilities.heading,
+              itemListElement: content.capabilities.tabs.map((tab) => ({
+                "@type": "Offer",
+                itemOffered: { "@type": "Service", name: tab.title },
+              })),
+            },
+          }),
         },
       ],
     };
@@ -75,7 +77,7 @@ export function buildProductJsonLd(content: ProductPageContent) {
       {
         "@type": "Product",
         name: content.schema.name,
-        image: `${SITE_URL}${content.hero.image.src}`,
+        ...(content.hero.image && { image: `${SITE_URL}${content.hero.image.src}` }),
         description: content.schema.description,
         brand: {
           "@type": "Brand",
