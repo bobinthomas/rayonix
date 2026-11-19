@@ -189,28 +189,11 @@ export default function EcosystemSection() {
     return () => window.removeEventListener("resize", updateOffset);
   }, [updateOffset]);
 
-  // Keep active tab smoothly scrolled into view only when overflowing on narrow screens (never cut off left tabs)
+  // Keep tabs container strictly locked to scrollLeft = 0 so tabs are NEVER cut off on the left
   useEffect(() => {
     const container = tabsContainerRef.current;
-    const currentTabEl = tabRefs.current[activeTab];
-    if (container && currentTabEl) {
-      const tabLeft = currentTabEl.offsetLeft;
-      const tabRight = tabLeft + currentTabEl.offsetWidth;
-      const viewLeft = container.scrollLeft;
-      const viewRight = viewLeft + container.clientWidth;
-
-      // Only scroll if the active tab is actually clipped on the right or left edge
-      if (tabLeft < viewLeft) {
-        container.scrollTo({
-          left: Math.max(0, tabLeft - 16),
-          behavior: "smooth",
-        });
-      } else if (tabRight > viewRight) {
-        container.scrollTo({
-          left: tabRight - container.clientWidth + 24,
-          behavior: "smooth",
-        });
-      }
+    if (container) {
+      container.scrollLeft = 0;
     }
   }, [activeTab]);
 
@@ -264,7 +247,7 @@ export default function EcosystemSection() {
 
           {/* 7 Filter Tabs - Solid high-contrast styling anchored to left content grid */}
           <div ref={tabsContainerRef} className="w-full overflow-x-auto no-scrollbar">
-            <div className="flex items-center gap-[10px] min-w-max pb-1">
+            <div className="flex items-center gap-1.5 sm:gap-2 xl:gap-[10px] min-w-max pb-1">
               {ecosystemData.map((item, idx) => {
                 const isActive = activeTab === idx;
                 return (
@@ -276,7 +259,7 @@ export default function EcosystemSection() {
                     type="button"
                     onClick={() => setActiveTab(idx)}
                     onMouseEnter={() => setHoveredCardIndex(idx)}
-                    className={`group relative px-[12px] py-[13.5px] rounded-[4px] text-[14px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
+                    className={`group relative px-2.5 sm:px-3 xl:px-[12px] py-2 sm:py-2.5 xl:py-[13.5px] rounded-[4px] text-[12px] sm:text-[13px] xl:text-[14px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
                       isActive
                         ? "bg-[#10181c] text-[#f1f2f2]"
                         : "bg-[#9da1a4] text-white hover:bg-[#868c90]"
@@ -321,6 +304,7 @@ export default function EcosystemSection() {
               leftGridOffset !== null
                 ? `calc(100% - ${leftGridOffset}px)`
                 : "calc(100% - max(1.5rem, (100% - 1280px) / 2 + 2rem))",
+            clipPath: "inset(0 0 0 0)",
           }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
