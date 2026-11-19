@@ -335,7 +335,7 @@ export default function GlobalPartnershipSection() {
           data-node-id="354:2952"
         >
           <div
-            className="rounded-[2px] bg-[#fbfbfd] p-3 sm:p-4 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 lg:flex lg:flex-col"
+            className="rounded-[2px] bg-white p-3 sm:p-4 lg:p-0 grid grid-cols-2 sm:grid-cols-3 gap-y-2 lg:flex lg:flex-col lg:aspect-[1919/600] overflow-hidden"
             data-node-id="354:2953"
             role="list"
             aria-label="Global defence and technology partners"
@@ -343,12 +343,12 @@ export default function GlobalPartnershipSection() {
             {PARTNER_ROWS.map((count, rowIdx) => {
               const start = PARTNER_ROWS.slice(0, rowIdx).reduce((a, b) => a + b, 0);
               return (
-                <div key={rowIdx} className="contents lg:flex lg:justify-center lg:gap-4">
+                <div key={rowIdx} className="contents lg:flex lg:flex-1 lg:min-h-0 lg:justify-center">
                   {partners.slice(start, start + count).map((partner) => (
                     <div
                       key={partner.file}
                       role="listitem"
-                      className="rounded-[4px] border border-[#e4e7ec] bg-white overflow-hidden lg:w-[calc((100%-4*16px)/5)]"
+                      className="relative overflow-hidden h-[104px] sm:h-[120px] lg:h-auto lg:min-h-0 lg:w-[20%]"
                     >
                       <Image
                         src={`/assets/partners/${partner.file}.webp`}
@@ -357,7 +357,7 @@ export default function GlobalPartnershipSection() {
                         height={182}
                         sizes="(max-width: 639px) 45vw, (max-width: 1023px) 30vw, 240px"
                         loading="lazy"
-                        className="w-full h-auto block"
+                        className="absolute inset-0 w-full h-full object-contain mix-blend-multiply lg:scale-[1.35]"
                       />
                     </div>
                   ))}
