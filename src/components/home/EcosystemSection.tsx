@@ -138,43 +138,26 @@ function CardTitleScramble({
   return <span>{displayText}</span>;
 }
 
+// Mathematical grid line constant matching max-w-[1280px] mx-auto px-6 sm:px-8
+const GRID_LEFT_CSS = "max(1.5rem, calc((100% - 1280px) / 2 + 2rem))";
+const GRID_WIDTH_CSS = "calc(100% - max(1.5rem, calc((100% - 1280px) / 2 + 2rem)))";
+
 export default function EcosystemSection() {
   const [activeTab, setActiveTab] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [hoveredCardIndex, setHoveredCardIndex] = useState<number | null>(null);
   const [carouselOffset, setCarouselOffset] = useState(0);
-  const [leftGridOffset, setLeftGridOffset] = useState<number | null>(null);
 
   const sectionRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
-  // Stable ref: the content wrapper (max-w container). Never scrolls, always stable.
-  const gridContainerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const touchStartX = useRef<number | null>(null);
 
-  // Measure the left grid offset from the STABLE content container, NOT from Tab 0.
-  // This is immune to tab scrolling because gridContainerRef never moves.
-  const measureGridOffset = useCallback(() => {
-    const gridContainer = gridContainerRef.current;
-    const section = sectionRef.current;
-    if (gridContainer && section) {
-      const containerRect = gridContainer.getBoundingClientRect();
-      const sectionRect = section.getBoundingClientRect();
-      const computedPaddingLeft = parseFloat(
-        window.getComputedStyle(gridContainer).paddingLeft
-      ) || 0;
-      // content left = container's left edge + its padding-left
-      const offset = (containerRect.left - sectionRect.left) + computedPaddingLeft;
-      setLeftGridOffset(Math.max(0, offset));
-    }
-  }, []);
-
   // Measure and update carousel translation, clamping to eliminate right-side gaps
   const updateOffset = useCallback(() => {
-    measureGridOffset();
     const activeCard = cardRefs.current[activeTab];
     if (activeCard && trackRef.current && containerRef.current) {
       const naturalOffset = activeCard.offsetLeft;
@@ -186,17 +169,13 @@ export default function EcosystemSection() {
     } else if (activeCard) {
       setCarouselOffset(activeCard.offsetLeft);
     }
-  }, [activeTab, measureGridOffset]);
+  }, [activeTab]);
 
   useEffect(() => {
     updateOffset();
     window.addEventListener("resize", updateOffset);
     return () => window.removeEventListener("resize", updateOffset);
   }, [updateOffset]);
-
-  // NO JS tab scrolling at all — tabs are sized to fit the container on 1280px+ screens.
-  // On narrow screens the tabs container is scrollable by touch/mouse, but we never auto-scroll
-  // because auto-scroll is what cut off Tab 0 in the past.
 
   // Touch swipe support for mobile carousel
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -231,8 +210,8 @@ export default function EcosystemSection() {
       }}
     >
       <div className="w-full flex flex-col gap-[30px]">
-        {/* Section Heading & Filter Tabs - Strictly aligned to 1280px master container grid */}
-        <div ref={gridContainerRef} className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-6">
+        {/* Section Heading - Strictly aligned to 1280px master container grid */}
+        <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8">
           <div className="pt-2">
             <TransformingHeading
               as="h2"
@@ -245,50 +224,57 @@ export default function EcosystemSection() {
               className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[72px]"
             />
           </div>
+        </div>
 
-          {/* 7 Filter Tabs — compact sizing ensures all 7 fit in the 1280px grid without overflow or scroll */}
-          <div ref={tabsContainerRef} className="w-full overflow-x-auto no-scrollbar">
-            <div className="flex items-center gap-[6px] sm:gap-[8px] min-w-max pb-1">
-              {ecosystemData.map((item, idx) => {
-                const isActive = activeTab === idx;
-                return (
-                  <button
-                    key={item.id}
-                    ref={(el) => {
-                      tabRefs.current[idx] = el;
-                    }}
-                    type="button"
-                    onClick={() => setActiveTab(idx)}
-                    onMouseEnter={() => setHoveredCardIndex(idx)}
-                    className={`group relative px-[9px] sm:px-[10px] lg:px-[11px] py-[10px] sm:py-[11px] lg:py-[12px] rounded-[4px] text-[12px] sm:text-[12.5px] lg:text-[13px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
-                      isActive
-                        ? "bg-[#10181c] text-[#f1f2f2]"
-                        : "bg-[#9da1a4] text-white hover:bg-[#868c90]"
-                    }`}
-                    aria-selected={isActive}
-                    role="tab"
-                  >
-                    <span className="relative z-10">{item.tabTitle}</span>
+        {/* 7 Filter Tabs - Anchored strictly to the 1280px grid line on the left, extends to the right */}
+        <div
+          ref={tabsContainerRef}
+          className="relative overflow-x-auto no-scrollbar"
+          style={{
+            marginLeft: GRID_LEFT_CSS,
+            width: GRID_WIDTH_CSS,
+          }}
+        >
+          <div className="flex items-center gap-[8px] xl:gap-[10px] min-w-max pb-1">
+            {ecosystemData.map((item, idx) => {
+              const isActive = activeTab === idx;
+              return (
+                <button
+                  key={item.id}
+                  ref={(el) => {
+                    tabRefs.current[idx] = el;
+                  }}
+                  type="button"
+                  onClick={() => setActiveTab(idx)}
+                  onMouseEnter={() => setHoveredCardIndex(idx)}
+                  className={`group relative px-[11px] xl:px-[12px] py-[11px] xl:py-[13.5px] rounded-[4px] text-[13px] xl:text-[14px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
+                    isActive
+                      ? "bg-[#10181c] text-[#f1f2f2]"
+                      : "bg-[#9da1a4] text-white hover:bg-[#868c90]"
+                  }`}
+                  aria-selected={isActive}
+                  role="tab"
+                >
+                  <span className="relative z-10">{item.tabTitle}</span>
 
-                    {/* Red progress bar that animates (grows) over the auto-advance interval */}
-                    {isActive && (
-                      <div
-                        key={`progress-${idx}`}
-                        className="absolute bottom-0 left-0 h-[2px] w-full bg-[#e22328] animate-tab-progress"
-                        style={{
-                          animationPlayState: isPaused ? "paused" : "running",
-                        }}
-                        onAnimationEnd={() => {
-                          if (!isPaused) {
-                            setActiveTab((prev) => (prev + 1) % ecosystemData.length);
-                          }
-                        }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+                  {/* Red progress bar that animates (grows) over the auto-advance interval */}
+                  {isActive && (
+                    <div
+                      key={`progress-${idx}`}
+                      className="absolute bottom-0 left-0 h-[2px] w-full bg-[#e22328] animate-tab-progress"
+                      style={{
+                        animationPlayState: isPaused ? "paused" : "running",
+                      }}
+                      onAnimationEnd={() => {
+                        if (!isPaused) {
+                          setActiveTab((prev) => (prev + 1) % ecosystemData.length);
+                        }
+                      }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -297,14 +283,8 @@ export default function EcosystemSection() {
           ref={containerRef}
           className="relative overflow-hidden"
           style={{
-            marginLeft:
-              leftGridOffset !== null
-                ? `${leftGridOffset}px`
-                : "calc(max(1.5rem, (100% - 1280px) / 2 + 2rem))",
-            width:
-              leftGridOffset !== null
-                ? `calc(100% - ${leftGridOffset}px)`
-                : "calc(100% - max(1.5rem, (100% - 1280px) / 2 + 2rem))",
+            marginLeft: GRID_LEFT_CSS,
+            width: GRID_WIDTH_CSS,
             clipPath: "inset(0 0 0 0)",
           }}
           onTouchStart={handleTouchStart}
