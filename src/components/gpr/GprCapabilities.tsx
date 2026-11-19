@@ -318,39 +318,19 @@ export default function GprCapabilities() {
           </div>
         </div>
 
-        {/* Documentation and Datasheets Section */}
+        {/* Technical Repository Section */}
         <div className="flex flex-col gap-8 pt-4" data-node-id="792:1222">
           <div className="flex flex-col gap-2">
             <h3 className="text-3xl sm:text-4xl lg:text-[48px] font-medium text-[#7f8a91] leading-tight lg:leading-[56px] tracking-tight">
-              Documentation and datasheets
+              Technical Repository
             </h3>
             <p className="text-sm sm:text-base text-[#475569] font-normal leading-normal">
-              Technical specifications, system information and product documentation for the GPR
+              Discover GPR capabilities and specifications.
             </p>
           </div>
 
           <div className="flex flex-col divide-y divide-[#bdc4c8]/40 border-t border-b border-[#bdc4c8]/40">
-            {/* Item 1 */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-5">
-              <div className="flex flex-col">
-                <span className="text-base lg:text-[16px] font-medium text-[#080f12] leading-[26px]">
-                  GPR Platform Brochure.
-                </span>
-                <span className="text-xs lg:text-[12px] text-[#7f8a91] leading-[18px]">
-                  Overview, capability summary, deployment scenarios
-                </span>
-              </div>
-              <div>
-                <CTAButton
-                  href="/downloads/gpr-platform-brochure.pdf"
-                  variant="secondary"
-                >
-                  Download Brochure
-                </CTAButton>
-              </div>
-            </div>
-
-            {/* Item 2 */}
+            {/* Single download row */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-5">
               <div className="flex flex-col">
                 <span className="text-base lg:text-[16px] font-medium text-[#080f12] leading-[26px]">
