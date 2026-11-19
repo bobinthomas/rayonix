@@ -71,19 +71,27 @@ export default function HeroSection() {
         <div className="absolute top-0 left-0 right-0 h-[220px] bg-gradient-to-b from-black/85 via-black/40 to-transparent" />
 
         {/* Bottom edge blending */}
-        <div className="absolute bottom-0 left-0 right-0 h-[160px] bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-[320px] bg-gradient-to-t from-black/85 via-black/50 to-transparent" />
       </div>
 
-      {/* Centered CTA positioned 15% from bottom */}
-      <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2 z-20 w-full max-w-[92vw] sm:max-w-max flex justify-center pointer-events-auto">
+      {/* Centered tagline + CTA positioned 15% from bottom */}
+      <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2 z-20 w-full max-w-[92vw] flex flex-col items-center gap-6 sm:gap-8 text-center pointer-events-auto">
+        <h1 className="flex flex-col items-center gap-2 sm:gap-3">
+          <span className="text-[32px] sm:text-5xl lg:text-[64px] font-bold leading-[1.05] tracking-[-0.03em] text-[#f5f6f6]">
+            IN(VISIBLE) WARFARE
+          </span>
+          <span className="text-[16px] sm:text-[20px] lg:text-[24px] font-normal leading-snug tracking-[-0.01em] text-[#bdc4c8]">
+            Intelligence Beyond Boundaries.
+          </span>
+        </h1>
         <CTAButton
           variant="primary"
           href="#battlespace"
           onClick={handleScrollToNext}
-          className="!whitespace-normal sm:!whitespace-nowrap text-center text-[13px] sm:text-[15px] md:text-[16px] font-medium tracking-normal sm:tracking-[0.02em] px-5 sm:px-7 py-3.5 sm:py-4 shadow-2xl"
-          aria-label="Technology built for what lies beyond the visible"
+          className="text-center text-[13px] sm:text-[15px] md:text-[16px] font-medium tracking-[0.02em] px-5 sm:px-7 py-3.5 sm:py-4 shadow-2xl"
+          aria-label="See beyond"
         >
-          Technology built for what lies beyond the visible.
+          SEE BEYOND
         </CTAButton>
       </div>
     </section>
