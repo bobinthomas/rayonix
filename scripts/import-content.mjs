@@ -16,6 +16,7 @@
 
 import { mkdir, writeFile, readdir, rm } from "node:fs/promises";
 import path from "node:path";
+import { sentenceCase, fetchDocTab } from "./lib/text.mjs";
 
 const DOCS = {
   subsurface: "1LgReci7Mj49chttts7rrnnJHaXPN7CezoTLmwJktmw4",
@@ -63,55 +64,12 @@ const PAGES = [
 // Typos in the source docs, fixed on import: [find, replace].
 const CORRECTIONS = [["Protection Ratin", "Protection Rating"]];
 
-// Hero title + subtitle are shown in sentence case. Acronyms stay upper case
-// and brand spellings keep their casing. Keys are lower case; add as needed.
-const KEEP_CASE = Object.fromEntries(
-  [
-    "DAS", "GPR", "RF", "GNSS", "UAS", "UAV", "UAVs", "UGV", "UGVs", "AI", "2D", "3D",
-    "EO", "IR", "MWIR", "VIS", "FPV", "C2", "C2I", "C3I", "SPIE", "IP65", "IP67",
-    "LiDAR", "MeduzaX", "TPiCore®", "XOS", "DMS",
-  ].map((w) => [w.toLowerCase(), w])
-);
-
-function sentenceCase(text) {
-  let sentenceStart = true;
-  return text
-    .split(/(\s+)/)
-    .map((token) => {
-      if (/^\s+$/.test(token)) return token;
-      // Handle hyphen / slash compounds part by part (GNSS-Based, 2D/3D, Real-Time).
-      const out = token
-        .split(/([-/–])/)
-        .map((part, i) => {
-          if (/^[-/–]$/.test(part)) return part;
-          const m = part.match(/^([^A-Za-z0-9]*)([A-Za-z0-9®]+)(.*)$/);
-          if (!m) return part;
-          const [, pre, word, post] = m;
-          const keep = KEEP_CASE[word.toLowerCase()];
-          let w = keep ?? word.toLowerCase();
-          if (!keep && sentenceStart && i === 0) w = w.charAt(0).toUpperCase() + w.slice(1);
-          return pre + w + post;
-        })
-        .join("");
-      sentenceStart = /[.!?]$/.test(token);
-      return out;
-    })
-    .join("");
-}
+// Hero title + subtitle: sentence case via scripts/lib/text.mjs (acronym list lives there).
 
 const OUT_DIR = path.join(process.cwd(), "src/content/products/generated");
 
 // ---------------------------------------------------------------- fetch
 
-async function fetchTab(docId, tab) {
-  const url = `https://docs.google.com/document/d/${docId}/export?format=txt&tab=${tab}`;
-  const res = await fetch(url, { redirect: "follow" });
-  const type = res.headers.get("content-type") || "";
-  if (!res.ok || !type.startsWith("text/plain")) {
-    throw new Error(`Could not export ${docId} ${tab} (HTTP ${res.status}, ${type}). Is the doc shared publicly?`);
-  }
-  return res.text();
-}
 
 // ---------------------------------------------------------------- parse
 
@@ -260,7 +218,7 @@ const checkOnly = process.argv.includes("--check");
 const results = [];
 for (const page of PAGES) {
   const where = `${page.domain}/${page.tab}`;
-  const parsed = parse(await fetchTab(DOCS[page.domain], page.tab), where);
+  const parsed = parse(await fetchDocTab(DOCS[page.domain], page.tab), where);
   results.push({ page, content: toContent(page, parsed) });
 }
 

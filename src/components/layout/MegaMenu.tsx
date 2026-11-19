@@ -384,27 +384,27 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
           {
             title: "ICCS",
             description: "Integrated Command & Control System for multi-domain operations",
-            href: "/solutions#iccs",
+            href: "/solutions/iccs",
           },
           {
             title: "GMTS",
-            description: "Ground Movement Targeting System for contested borders",
-            href: "/solutions#gmts",
+            description: "Grid Monitoring & Tracking System for identity-led intelligence",
+            href: "/solutions/gmts",
           },
           {
             title: "SROP",
-            description: "Surveillance & Reconnaissance Observation Platform",
-            href: "/solutions#srop",
+            description: "Smartization of Road Opening Procedure for convoy security",
+            href: "/solutions/srop",
           },
           {
             title: "SDRR",
-            description: "Software-Defined Radar & Reconnaissance payload system",
-            href: "/solutions#sdrr",
+            description: "Sarva Drishti Rudra Rakshak integrated mobile defence system",
+            href: "/solutions/sdrr",
           },
           {
             title: "IED Detection",
             description: "Standoff explosive and buried anomaly identification",
-            href: "/solutions#ied-detection",
+            href: "/solutions/ied-detection",
           },
           {
             title: "Foliage Penetration",
@@ -413,8 +413,8 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
           },
           {
             title: "Warrior Drone Buddy",
-            description: "Autonomous loyal-wingman tactical support UAS",
-            href: "/solutions#warrior-drone-buddy",
+            description: "Compact tactical drone for rapid area surveillance",
+            href: "/solutions/warrior-drone-buddy",
           },
         ],
       },
@@ -456,12 +456,12 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
           {
             title: "Facial Recognition",
             description: "High-throughput contactless biometric identity checkpoints",
-            href: "/solutions#facial-recognition",
+            href: "/solutions/facial-recognition",
           },
           {
             title: "AI Video Analytics",
             description: "Automated crowd density, loitering, and anomaly detection",
-            href: "/solutions#video-analytics",
+            href: "/solutions/video-analytics",
           },
           {
             title: "Industrial AI",

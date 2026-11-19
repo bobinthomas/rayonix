@@ -9,6 +9,7 @@ import type { MetadataRoute } from "next";
 import { getAllPages } from "@/lib/cms";
 import { getPublishedStories } from "@/lib/cms";
 import { products } from "@/content/products";
+import { solutions } from "@/content/solutions";
 
 const SITE_URL = "https://rayonix.com";
 
@@ -51,5 +52,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  return [...pageEntries, ...domainEntries, ...productEntries, ...storyEntries];
+  // Solution pages from src/content/solutions
+  const solutionEntries: MetadataRoute.Sitemap = solutions.map((solution) => ({
+    url: `${SITE_URL}/solutions/${solution.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...pageEntries, ...domainEntries, ...productEntries, ...solutionEntries, ...storyEntries];
 }
