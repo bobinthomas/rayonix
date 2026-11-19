@@ -286,7 +286,7 @@ export default function EcosystemSection() {
           ref={containerRef}
           className="relative w-full overflow-hidden"
           style={{
-            paddingLeft: "calc(max(1.5rem, (100vw - 1280px) / 2 + 2rem))",
+            paddingLeft: "calc(max(1.5rem, (100% - 1280px) / 2 + 2rem))",
           }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
