@@ -95,32 +95,32 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
           {
             title: "Data Acquisition & Processing",
             description: "High-speed multi-channel sensor signal ingestion",
-            href: "/domains/subsurface#data-processing",
+            href: "/subsurface/decide#data-acquisition",
           },
           {
             title: "AI Analytics and Classification",
             description: "Neural network subterranean threat signature verification",
-            href: "/domains/subsurface#ai-classification",
+            href: "/subsurface/decide#ai-analytics",
           },
           {
             title: "Multisensor Fusion",
             description: "Unified spatial correlation of acoustic and seismic telemetry",
-            href: "/domains/subsurface#fusion",
+            href: "/subsurface/decide#multi-sensor-fusion",
           },
           {
             title: "Localisation & Tracking",
             description: "Sub-surface coordinate mapping and trajectory estimation",
-            href: "/domains/subsurface#tracking",
+            href: "/subsurface/decide#localisation-tracking",
           },
           {
             title: "Threat Assessment & Decision Support",
             description: "Automated risk scoring and response prioritization",
-            href: "/domains/subsurface#decision-support",
+            href: "/subsurface/decide#threat-assessment",
           },
           {
             title: "Command & Control",
             description: "Direct low-latency telemetry feeds to military C2 consoles",
-            href: "/domains/subsurface#c2",
+            href: "/subsurface/decide#command-control",
           },
         ],
       },
