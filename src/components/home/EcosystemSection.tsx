@@ -172,19 +172,28 @@ export default function EcosystemSection() {
     return () => window.removeEventListener("resize", updateOffset);
   }, [updateOffset]);
 
-  // Keep active tab smoothly scrolled horizontally within its own container only (never touch window/page scroll)
+  // Keep active tab smoothly scrolled into view only when overflowing on narrow screens (never cut off left tabs)
   useEffect(() => {
     const container = tabsContainerRef.current;
     const currentTabEl = tabRefs.current[activeTab];
     if (container && currentTabEl) {
-      const targetLeft =
-        currentTabEl.offsetLeft -
-        container.clientWidth / 2 +
-        currentTabEl.clientWidth / 2;
-      container.scrollTo({
-        left: Math.max(0, targetLeft),
-        behavior: "smooth",
-      });
+      const tabLeft = currentTabEl.offsetLeft;
+      const tabRight = tabLeft + currentTabEl.offsetWidth;
+      const viewLeft = container.scrollLeft;
+      const viewRight = viewLeft + container.clientWidth;
+
+      // Only scroll if the active tab is actually clipped on the right or left edge
+      if (tabLeft < viewLeft) {
+        container.scrollTo({
+          left: Math.max(0, tabLeft - 16),
+          behavior: "smooth",
+        });
+      } else if (tabRight > viewRight) {
+        container.scrollTo({
+          left: tabRight - container.clientWidth + 24,
+          behavior: "smooth",
+        });
+      }
     }
   }, [activeTab]);
 
@@ -220,8 +229,8 @@ export default function EcosystemSection() {
       }}
     >
       <div className="w-full flex flex-col gap-[30px]">
-        {/* Section Heading & Filter Tabs - Strictly aligned to 1280px master container grid */}
-        <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-6">
+        {/* Section Heading - Strictly aligned to 1280px master container grid */}
+        <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8">
           <div className="pt-2">
             <TransformingHeading
               as="h2"
@@ -234,59 +243,67 @@ export default function EcosystemSection() {
               className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[72px]"
             />
           </div>
+        </div>
 
-          {/* 7 Filter Tabs - Solid high-contrast styling */}
-          <div ref={tabsContainerRef} className="w-full overflow-x-auto no-scrollbar">
-            <div className="flex items-center gap-[10px] min-w-max pb-1">
-              {ecosystemData.map((item, idx) => {
-                const isActive = activeTab === idx;
-                return (
-                  <button
-                    key={item.id}
-                    ref={(el) => {
-                      tabRefs.current[idx] = el;
-                    }}
-                    type="button"
-                    onClick={() => setActiveTab(idx)}
-                    onMouseEnter={() => setHoveredCardIndex(idx)}
-                    className={`group relative px-[12px] py-[13.5px] rounded-[4px] text-[14px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
-                      isActive
-                        ? "bg-[#10181c] text-[#f1f2f2]"
-                        : "bg-[#9da1a4] text-white hover:bg-[#868c90]"
-                    }`}
-                    aria-selected={isActive}
-                    role="tab"
-                  >
-                    <span className="relative z-10">{item.tabTitle}</span>
+        {/* 7 Filter Tabs - Aligned to 1280px grid line, extending smoothly to the right */}
+        <div
+          ref={tabsContainerRef}
+          className="w-full overflow-x-auto no-scrollbar"
+          style={{
+            paddingLeft: "calc(max(1.5rem, (100% - 1280px) / 2 + 2rem))",
+            paddingRight: "calc(max(1.5rem, (100% - 1280px) / 2 + 2rem))",
+          }}
+        >
+          <div className="flex items-center gap-[10px] min-w-max pb-1">
+            {ecosystemData.map((item, idx) => {
+              const isActive = activeTab === idx;
+              return (
+                <button
+                  key={item.id}
+                  ref={(el) => {
+                    tabRefs.current[idx] = el;
+                  }}
+                  type="button"
+                  onClick={() => setActiveTab(idx)}
+                  onMouseEnter={() => setHoveredCardIndex(idx)}
+                  className={`group relative px-[12px] py-[13.5px] rounded-[4px] text-[14px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
+                    isActive
+                      ? "bg-[#10181c] text-[#f1f2f2]"
+                      : "bg-[#9da1a4] text-white hover:bg-[#868c90]"
+                  }`}
+                  aria-selected={isActive}
+                  role="tab"
+                >
+                  <span className="relative z-10">{item.tabTitle}</span>
 
-                    {/* Red progress bar that animates (grows) over the auto-advance interval */}
-                    {isActive && (
-                      <div
-                        key={`progress-${idx}`}
-                        className="absolute bottom-0 left-0 h-[2px] w-full bg-[#e22328] animate-tab-progress"
-                        style={{
-                          animationPlayState: isPaused ? "paused" : "running",
-                        }}
-                        onAnimationEnd={() => {
-                          if (!isPaused) {
-                            setActiveTab((prev) => (prev + 1) % ecosystemData.length);
-                          }
-                        }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+                  {/* Red progress bar that animates (grows) over the auto-advance interval */}
+                  {isActive && (
+                    <div
+                      key={`progress-${idx}`}
+                      className="absolute bottom-0 left-0 h-[2px] w-full bg-[#e22328] animate-tab-progress"
+                      style={{
+                        animationPlayState: isPaused ? "paused" : "running",
+                      }}
+                      onAnimationEnd={() => {
+                        if (!isPaused) {
+                          setActiveTab((prev) => (prev + 1) % ecosystemData.length);
+                        }
+                      }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Horizontal Carousel Track - Bleeds smoothly all the way to the right edge */}
+        {/* Horizontal Carousel Track - Clipped strictly at left grid line, bleeds to right */}
         <div
           ref={containerRef}
-          className="relative w-full overflow-hidden"
+          className="relative overflow-hidden"
           style={{
-            paddingLeft: "calc(max(1.5rem, (100% - 1280px) / 2 + 2rem))",
+            marginLeft: "calc(max(1.5rem, (100% - 1280px) / 2 + 2rem))",
+            width: "calc(100% - max(1.5rem, (100% - 1280px) / 2 + 2rem))",
           }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
