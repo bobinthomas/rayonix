@@ -443,7 +443,7 @@ export default function CommandIntelligenceCapabilities() {
         </div>
 
         {/* 6 Capability Tabs Navigation Bar */}
-        <div className="w-full overflow-x-auto scrollbar-none pb-2">
+        <div className="w-full overflow-x-auto no-scrollbar scrollbar-none pb-2">
           <div
             role="tablist"
             className="flex items-center gap-2 border-b border-[#253035] min-w-max pb-px"

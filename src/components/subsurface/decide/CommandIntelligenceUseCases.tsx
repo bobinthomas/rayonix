@@ -154,7 +154,7 @@ export default function CommandIntelligenceUseCases() {
           <div
             className="flex transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] gap-6"
             style={{
-              transform: `translateX(-${currentPage * 100}%)`,
+              transform: `translateX(calc(-${currentPage * 100}% - ${currentPage * 1.5}rem))`,
             }}
           >
             {/* Pair 1: Use Cases 001 & 002 */}
