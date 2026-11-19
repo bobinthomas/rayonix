@@ -101,6 +101,25 @@ const countryMarkers: CountryMarker[] = [
   },
 ];
 
+// Partner logos, in display order. Desktop rows are 5 / 4 / 5 (see PARTNER_ROWS).
+const partners = [
+  { name: "XTEND", file: "xtend" },
+  { name: "Tyndall FX", file: "tyndall-fx" },
+  { name: "Hivebotics", file: "hivebotics" },
+  { name: "KIRO", file: "kiro" },
+  { name: "GMafcon Security Technologies", file: "gmafcon" },
+  { name: "Rayonix partner mark", file: "a-mark" },
+  { name: "Orca Optronics", file: "orca-optronics" },
+  { name: "Guideline Geo", file: "guideline-geo" },
+  { name: "Cirotta", file: "cirotta" },
+  { name: "Frenel Imaging", file: "frenel-imaging" },
+  { name: "Ariel Photonics", file: "ariel-photonics" },
+  { name: "Innoviz Technologies", file: "innoviz" },
+  { name: "OSINT Losena Ltd.", file: "osint-losena" },
+  { name: "Vanguard Systems Ltd.", file: "vanguard-systems" },
+];
+const PARTNER_ROWS = [5, 4, 5];
+
 export default function GlobalPartnershipSection() {
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
 
@@ -316,17 +335,35 @@ export default function GlobalPartnershipSection() {
           data-node-id="354:2952"
         >
           <div
-            className="relative w-full aspect-[1944/535] rounded-[2px] overflow-hidden bg-[#fbfbfd]"
+            className="rounded-[2px] bg-[#fbfbfd] p-3 sm:p-4 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 lg:flex lg:flex-col"
             data-node-id="354:2953"
+            role="list"
+            aria-label="Global defence and technology partners"
           >
-            <Image
-              src="/assets/partner-logos.png"
-              alt="Rayonix Global Defense and Technology Partners"
-              fill
-              sizes="(max-width: 1408px) 100vw, 1256px"
-              className="object-cover object-left-top"
-              priority={false}
-            />
+            {PARTNER_ROWS.map((count, rowIdx) => {
+              const start = PARTNER_ROWS.slice(0, rowIdx).reduce((a, b) => a + b, 0);
+              return (
+                <div key={rowIdx} className="contents lg:flex lg:justify-center lg:gap-4">
+                  {partners.slice(start, start + count).map((partner) => (
+                    <div
+                      key={partner.file}
+                      role="listitem"
+                      className="rounded-[4px] border border-[#e4e7ec] bg-white overflow-hidden lg:w-[calc((100%-4*16px)/5)]"
+                    >
+                      <Image
+                        src={`/assets/partners/${partner.file}.webp`}
+                        alt={partner.name}
+                        width={197}
+                        height={182}
+                        sizes="(max-width: 639px) 45vw, (max-width: 1023px) 30vw, 240px"
+                        loading="lazy"
+                        className="w-full h-auto block"
+                      />
+                    </div>
+                  ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
