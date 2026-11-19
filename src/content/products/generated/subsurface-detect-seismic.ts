@@ -7,7 +7,7 @@ export const subsurfaceDetectSeismic: ProductPageContent = {
   "domain": "subsurface",
   "phase": "detect",
   "seo": {
-    "title": "SEISMIC SENSORS — Unattended Ground Sensing | Subsurface | Rayonix",
+    "title": "Seismic sensors — Unattended ground sensing | Subsurface | Rayonix",
     "description": "Our Seismic Sensor solution provides continuous ground surveillance, detecting and classifying footsteps, vehicle movements and low-flying helicopters through seismic sensing."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const subsurfaceDetectSeismic: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "SEISMIC SENSORS Overview",
-    "title": "SEISMIC SENSORS",
+    "ariaLabel": "Seismic sensors Overview",
+    "title": "Seismic sensors",
     "titleSize": "long",
-    "eyebrow": "Unattended Ground Sensing",
+    "eyebrow": "Unattended ground sensing",
     "intro": "Our Seismic Sensor solution provides continuous ground surveillance, detecting and classifying footsteps, vehicle movements and low-flying helicopters through seismic sensing.",
     "specs": [
       {
@@ -133,7 +133,7 @@ export const subsurfaceDetectSeismic: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix SEISMIC SENSORS",
+    "name": "Rayonix Seismic sensors",
     "description": "Our Seismic Sensor solution provides continuous ground surveillance, detecting and classifying footsteps, vehicle movements and low-flying helicopters through seismic sensing."
   }
 };

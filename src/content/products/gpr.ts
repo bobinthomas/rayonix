@@ -24,7 +24,7 @@ export const gpr: ProductPageContent = {
     ariaLabel: "GPR Subsurface Detection and Mapping Overview",
     title: "GPR",
     titleSize: "display",
-    eyebrow: "Subsurface Detection & Mapping",
+    eyebrow: "Subsurface detection & mapping",
     intro:
       "Our Ground Penetrating Radar (GPR) solution uses electromagnetic waves to detect buried objects, map underground structures and identify subsurface anomalies without excavation.",
     image: {

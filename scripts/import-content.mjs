@@ -63,6 +63,42 @@ const PAGES = [
 // Typos in the source docs, fixed on import: [find, replace].
 const CORRECTIONS = [["Protection Ratin", "Protection Rating"]];
 
+// Hero title + subtitle are shown in sentence case. Acronyms stay upper case
+// and brand spellings keep their casing. Keys are lower case; add as needed.
+const KEEP_CASE = Object.fromEntries(
+  [
+    "DAS", "GPR", "RF", "GNSS", "UAS", "UAV", "UAVs", "UGV", "UGVs", "AI", "2D", "3D",
+    "EO", "IR", "MWIR", "VIS", "FPV", "C2", "C2I", "C3I", "SPIE", "IP65", "IP67",
+    "LiDAR", "MeduzaX", "TPiCore®", "XOS", "DMS",
+  ].map((w) => [w.toLowerCase(), w])
+);
+
+function sentenceCase(text) {
+  let sentenceStart = true;
+  return text
+    .split(/(\s+)/)
+    .map((token) => {
+      if (/^\s+$/.test(token)) return token;
+      // Handle hyphen / slash compounds part by part (GNSS-Based, 2D/3D, Real-Time).
+      const out = token
+        .split(/([-/–])/)
+        .map((part, i) => {
+          if (/^[-/–]$/.test(part)) return part;
+          const m = part.match(/^([^A-Za-z0-9]*)([A-Za-z0-9®]+)(.*)$/);
+          if (!m) return part;
+          const [, pre, word, post] = m;
+          const keep = KEEP_CASE[word.toLowerCase()];
+          let w = keep ?? word.toLowerCase();
+          if (!keep && sentenceStart && i === 0) w = w.charAt(0).toUpperCase() + w.slice(1);
+          return pre + w + post;
+        })
+        .join("");
+      sentenceStart = /[.!?]$/.test(token);
+      return out;
+    })
+    .join("");
+}
+
 const OUT_DIR = path.join(process.cwd(), "src/content/products/generated");
 
 // ---------------------------------------------------------------- fetch
@@ -101,8 +137,8 @@ function parse(raw, where) {
     throw new Error(`${where}: ${msg} (at line ${i + 1}: "${L[i] ?? "<end>"}")`);
   };
 
-  const title = L[i++].replace(/^\d+\.\s+/, "");
-  const eyebrow = L[i++];
+  const title = sentenceCase(L[i++].replace(/^\d+\.\s+/, ""));
+  const eyebrow = sentenceCase(L[i++]);
   if (L[i] === "Description") i++;
   const intro = L[i++];
 

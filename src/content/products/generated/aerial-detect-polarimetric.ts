@@ -7,7 +7,7 @@ export const aerialDetectPolarimetric: ProductPageContent = {
   "domain": "aerial",
   "phase": "detect",
   "seo": {
-    "title": "Polarimetric Thermal Imaging — Advanced Thermal Imaging. Enhanced Detection. Greater Situational Awareness. | Aerial | Rayonix",
+    "title": "Polarimetric thermal imaging — Advanced thermal imaging. Enhanced detection. Greater situational awareness. | Aerial | Rayonix",
     "description": "Our Polarimetric Thermal Imaging combines thermal sensing with AI-powered processing to enhance detection, classification and tracking in challenging environments, even in complete darkness."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const aerialDetectPolarimetric: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "Polarimetric Thermal Imaging Overview",
-    "title": "Polarimetric Thermal Imaging",
+    "ariaLabel": "Polarimetric thermal imaging Overview",
+    "title": "Polarimetric thermal imaging",
     "titleSize": "extended",
-    "eyebrow": "Advanced Thermal Imaging. Enhanced Detection. Greater Situational Awareness.",
+    "eyebrow": "Advanced thermal imaging. Enhanced detection. Greater situational awareness.",
     "intro": "Our Polarimetric Thermal Imaging combines thermal sensing with AI-powered processing to enhance detection, classification and tracking in challenging environments, even in complete darkness.",
     "specs": [
       {
@@ -138,7 +138,7 @@ export const aerialDetectPolarimetric: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix Polarimetric Thermal Imaging",
+    "name": "Rayonix Polarimetric thermal imaging",
     "description": "Our Polarimetric Thermal Imaging combines thermal sensing with AI-powered processing to enhance detection, classification and tracking in challenging environments, even in complete darkness."
   }
 };

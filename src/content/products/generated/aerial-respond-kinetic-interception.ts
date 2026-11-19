@@ -7,7 +7,7 @@ export const aerialRespondKineticInterception: ProductPageContent = {
   "domain": "aerial",
   "phase": "respond",
   "seo": {
-    "title": "Kinetic Interception — Precision Engagement. Physical Threat Neutralisation. | Aerial | Rayonix",
+    "title": "Kinetic interception — Precision engagement. Physical threat neutralisation. | Aerial | Rayonix",
     "description": "Our Kinetic Interception systems use dedicated interceptor platforms to physically neutralise hostile aerial threats, supporting targeted engagement as part of layered Counter-UAS defence."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const aerialRespondKineticInterception: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "Kinetic Interception Overview",
-    "title": "Kinetic Interception",
+    "ariaLabel": "Kinetic interception Overview",
+    "title": "Kinetic interception",
     "titleSize": "long",
-    "eyebrow": "Precision Engagement. Physical Threat Neutralisation.",
+    "eyebrow": "Precision engagement. Physical threat neutralisation.",
     "intro": "Our Kinetic Interception systems use dedicated interceptor platforms to physically neutralise hostile aerial threats, supporting targeted engagement as part of layered Counter-UAS defence.",
     "specs": [
       {
@@ -131,7 +131,7 @@ export const aerialRespondKineticInterception: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix Kinetic Interception",
+    "name": "Rayonix Kinetic interception",
     "description": "Our Kinetic Interception systems use dedicated interceptor platforms to physically neutralise hostile aerial threats, supporting targeted engagement as part of layered Counter-UAS defence."
   }
 };

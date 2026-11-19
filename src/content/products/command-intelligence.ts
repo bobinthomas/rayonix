@@ -20,9 +20,9 @@ export const commandIntelligence: ProductPageContent = {
 
   hero: {
     ariaLabel: "Subsurface Command & Intelligence Architecture Overview",
-    title: "COMMAND & INTELLIGENCE",
+    title: "Command & intelligence",
     titleSize: "long",
-    eyebrow: "Subsurface Sensor Fusion & Decision Support",
+    eyebrow: "Subsurface sensor fusion & decision support",
     intro:
       "Our Command & Intelligence layer transforms subsurface sensor data into actionable intelligence through AI analytics, sensor fusion, localisation and threat assessment, enabling informed operational decisions.",
     image: {

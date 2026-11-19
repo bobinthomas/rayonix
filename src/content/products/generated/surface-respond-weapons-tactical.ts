@@ -7,7 +7,7 @@ export const surfaceRespondWeaponsTactical: ProductPageContent = {
   "domain": "surface",
   "phase": "respond",
   "seo": {
-    "title": "WEAPONS & TACTICAL ACCESSORIES — Precision Equipment & Tactical Capabilities | Surface | Rayonix",
+    "title": "Weapons & tactical accessories — Precision equipment & tactical capabilities | Surface | Rayonix",
     "description": "Our weapons and tactical accessories portfolio supports defence and security forces with weapon platforms, aiming solutions and mission-specific equipment for demanding operational environments."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const surfaceRespondWeaponsTactical: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "WEAPONS & TACTICAL ACCESSORIES Overview",
-    "title": "WEAPONS & TACTICAL ACCESSORIES",
+    "ariaLabel": "Weapons & tactical accessories Overview",
+    "title": "Weapons & tactical accessories",
     "titleSize": "extended",
-    "eyebrow": "Precision Equipment & Tactical Capabilities",
+    "eyebrow": "Precision equipment & tactical capabilities",
     "intro": "Our weapons and tactical accessories portfolio supports defence and security forces with weapon platforms, aiming solutions and mission-specific equipment for demanding operational environments.",
     "specs": [
       {
@@ -96,7 +96,7 @@ export const surfaceRespondWeaponsTactical: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix WEAPONS & TACTICAL ACCESSORIES",
+    "name": "Rayonix Weapons & tactical accessories",
     "description": "Our weapons and tactical accessories portfolio supports defence and security forces with weapon platforms, aiming solutions and mission-specific equipment for demanding operational environments."
   }
 };

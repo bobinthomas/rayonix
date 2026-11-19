@@ -7,7 +7,7 @@ export const surfaceDetectTerrainMapping: ProductPageContent = {
   "domain": "surface",
   "phase": "detect",
   "seo": {
-    "title": "REAL-TIME 3D TERRAIN MAPPING — Live Terrain Reconstruction & Spatial Intelligence | Surface | Rayonix",
+    "title": "Real-time 3D terrain mapping — Live terrain reconstruction & spatial intelligence | Surface | Rayonix",
     "description": "Our Real-Time 3D Terrain Mapping solution transforms live drone imagery into detailed 3D terrain models, enabling continuous spatial awareness through onboard AI and computer vision."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const surfaceDetectTerrainMapping: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "REAL-TIME 3D TERRAIN MAPPING Overview",
-    "title": "REAL-TIME 3D TERRAIN MAPPING",
+    "ariaLabel": "Real-time 3D terrain mapping Overview",
+    "title": "Real-time 3D terrain mapping",
     "titleSize": "extended",
-    "eyebrow": "Live Terrain Reconstruction & Spatial Intelligence",
+    "eyebrow": "Live terrain reconstruction & spatial intelligence",
     "intro": "Our Real-Time 3D Terrain Mapping solution transforms live drone imagery into detailed 3D terrain models, enabling continuous spatial awareness through onboard AI and computer vision.",
     "specs": [
       {
@@ -135,7 +135,7 @@ export const surfaceDetectTerrainMapping: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix REAL-TIME 3D TERRAIN MAPPING",
+    "name": "Rayonix Real-time 3D terrain mapping",
     "description": "Our Real-Time 3D Terrain Mapping solution transforms live drone imagery into detailed 3D terrain models, enabling continuous spatial awareness through onboard AI and computer vision."
   }
 };

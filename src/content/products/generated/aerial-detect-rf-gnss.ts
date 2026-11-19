@@ -7,7 +7,7 @@ export const aerialDetectRfGnss: ProductPageContent = {
   "domain": "aerial",
   "phase": "detect",
   "seo": {
-    "title": "RF & GNSS – Detection and Electronic Warfare — Advanced RF Detection & GNSS-Based Counter-Drone Capabilities | Aerial | Rayonix",
+    "title": "RF & GNSS – detection and electronic warfare — Advanced RF detection & GNSS-based counter-drone capabilities | Aerial | Rayonix",
     "description": "Our RF and GNSS solutions support aerial threat detection and electronic countermeasures through multi-protocol RF monitoring and GNSS manipulation. Designed for fixed and mobile deployments, these systems provide layered protection against evolving drone threats."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const aerialDetectRfGnss: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "RF & GNSS – Detection and Electronic Warfare Overview",
-    "title": "RF & GNSS – Detection and Electronic Warfare",
+    "ariaLabel": "RF & GNSS – detection and electronic warfare Overview",
+    "title": "RF & GNSS – detection and electronic warfare",
     "titleSize": "extended",
-    "eyebrow": "Advanced RF Detection & GNSS-Based Counter-Drone Capabilities",
+    "eyebrow": "Advanced RF detection & GNSS-based counter-drone capabilities",
     "intro": "Our RF and GNSS solutions support aerial threat detection and electronic countermeasures through multi-protocol RF monitoring and GNSS manipulation. Designed for fixed and mobile deployments, these systems provide layered protection against evolving drone threats.",
     "specs": [
       {
@@ -138,7 +138,7 @@ export const aerialDetectRfGnss: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix RF & GNSS – Detection and Electronic Warfare",
+    "name": "Rayonix RF & GNSS – detection and electronic warfare",
     "description": "Our RF and GNSS solutions support aerial threat detection and electronic countermeasures through multi-protocol RF monitoring and GNSS manipulation. Designed for fixed and mobile deployments, these systems provide layered protection against evolving drone threats."
   }
 };

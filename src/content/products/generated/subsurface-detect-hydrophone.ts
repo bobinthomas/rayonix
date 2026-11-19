@@ -7,7 +7,7 @@ export const subsurfaceDetectHydrophone: ProductPageContent = {
   "domain": "subsurface",
   "phase": "detect",
   "seo": {
-    "title": "HYDROPHONE SENSORS — Long-Range 2D/3D Hydrophone Arrays | Subsurface | Rayonix",
+    "title": "Hydrophone sensors — Long-range 2D/3D hydrophone arrays | Subsurface | Rayonix",
     "description": "Our Hydrophone Sensor solution enables persistent underwater surveillance, detecting, classifying and tracking surface and underwater targets through distributed hydrophone arrays."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const subsurfaceDetectHydrophone: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "HYDROPHONE SENSORS Overview",
-    "title": "HYDROPHONE SENSORS",
+    "ariaLabel": "Hydrophone sensors Overview",
+    "title": "Hydrophone sensors",
     "titleSize": "long",
-    "eyebrow": "Long-Range 2D/3D Hydrophone Arrays",
+    "eyebrow": "Long-range 2D/3D hydrophone arrays",
     "intro": "Our Hydrophone Sensor solution enables persistent underwater surveillance, detecting, classifying and tracking surface and underwater targets through distributed hydrophone arrays.",
     "specs": [
       {
@@ -139,7 +139,7 @@ export const subsurfaceDetectHydrophone: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix HYDROPHONE SENSORS",
+    "name": "Rayonix Hydrophone sensors",
     "description": "Our Hydrophone Sensor solution enables persistent underwater surveillance, detecting, classifying and tracking surface and underwater targets through distributed hydrophone arrays."
   }
 };

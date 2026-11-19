@@ -7,7 +7,7 @@ export const aerialDetectAcoustic: ProductPageContent = {
   "domain": "aerial",
   "phase": "detect",
   "seo": {
-    "title": "Acoustic Sensing — Passive Detection. Early Threat Identification. | Aerial | Rayonix",
+    "title": "Acoustic sensing — Passive detection. Early threat identification. | Aerial | Rayonix",
     "description": "Our Acoustic Sensing solution detects aerial threats through their unique sound signatures, enabling early identification of drones, including autonomous and fibre-guided platforms."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const aerialDetectAcoustic: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "Acoustic Sensing Overview",
-    "title": "Acoustic Sensing",
+    "ariaLabel": "Acoustic sensing Overview",
+    "title": "Acoustic sensing",
     "titleSize": "long",
-    "eyebrow": "Passive Detection. Early Threat Identification.",
+    "eyebrow": "Passive detection. Early threat identification.",
     "intro": "Our Acoustic Sensing solution detects aerial threats through their unique sound signatures, enabling early identification of drones, including autonomous and fibre-guided platforms.",
     "specs": [
       {
@@ -131,7 +131,7 @@ export const aerialDetectAcoustic: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix Acoustic Sensing",
+    "name": "Rayonix Acoustic sensing",
     "description": "Our Acoustic Sensing solution detects aerial threats through their unique sound signatures, enabling early identification of drones, including autonomous and fibre-guided platforms."
   }
 };

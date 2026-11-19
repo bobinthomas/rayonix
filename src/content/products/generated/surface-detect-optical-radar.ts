@@ -7,7 +7,7 @@ export const surfaceDetectOpticalRadar: ProductPageContent = {
   "domain": "surface",
   "phase": "detect",
   "seo": {
-    "title": "Optical Radar — Optical Radar for Aerial Threat Detection | Surface | Rayonix",
+    "title": "Optical radar — Optical radar for aerial threat detection | Surface | Rayonix",
     "description": "Our MeduzaX Optical Radar uses advanced electro-optical and thermal imaging with AI-powered recognition to detect, classify and track aerial threats. Its passive, 360° scanning capability delivers real-time situational awareness without emitting radiation."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const surfaceDetectOpticalRadar: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "Optical Radar Overview",
-    "title": "Optical Radar",
+    "ariaLabel": "Optical radar Overview",
+    "title": "Optical radar",
     "titleSize": "long",
-    "eyebrow": "Optical Radar for Aerial Threat Detection",
+    "eyebrow": "Optical radar for aerial threat detection",
     "intro": "Our MeduzaX Optical Radar uses advanced electro-optical and thermal imaging with AI-powered recognition to detect, classify and track aerial threats. Its passive, 360° scanning capability delivers real-time situational awareness without emitting radiation.",
     "specs": [
       {
@@ -138,7 +138,7 @@ export const surfaceDetectOpticalRadar: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix Optical Radar",
+    "name": "Rayonix Optical radar",
     "description": "Our MeduzaX Optical Radar uses advanced electro-optical and thermal imaging with AI-powered recognition to detect, classify and track aerial threats. Its passive, 360° scanning capability delivers real-time situational awareness without emitting radiation."
   }
 };

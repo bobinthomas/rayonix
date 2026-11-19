@@ -7,7 +7,7 @@ export const aerialDetectLidar: ProductPageContent = {
   "domain": "aerial",
   "phase": "detect",
   "seo": {
-    "title": "LiDAR – 3D Detection & Perception — Precision 3D Sensing. Real-Time Tracking. Enhanced Situational Awareness. | Aerial | Rayonix",
+    "title": "LiDAR – 3D detection & perception — Precision 3D sensing. Real-time tracking. Enhanced situational awareness. | Aerial | Rayonix",
     "description": "Our LiDAR solution uses Time-of-Flight sensing to generate detailed 3D environmental maps, enabling precise detection, classification and tracking of aerial and ground threats."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const aerialDetectLidar: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "LiDAR – 3D Detection & Perception Overview",
-    "title": "LiDAR – 3D Detection & Perception",
+    "ariaLabel": "LiDAR – 3D detection & perception Overview",
+    "title": "LiDAR – 3D detection & perception",
     "titleSize": "extended",
-    "eyebrow": "Precision 3D Sensing. Real-Time Tracking. Enhanced Situational Awareness.",
+    "eyebrow": "Precision 3D sensing. Real-time tracking. Enhanced situational awareness.",
     "intro": "Our LiDAR solution uses Time-of-Flight sensing to generate detailed 3D environmental maps, enabling precise detection, classification and tracking of aerial and ground threats.",
     "specs": [
       {
@@ -138,7 +138,7 @@ export const aerialDetectLidar: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix LiDAR – 3D Detection & Perception",
+    "name": "Rayonix LiDAR – 3D detection & perception",
     "description": "Our LiDAR solution uses Time-of-Flight sensing to generate detailed 3D environmental maps, enabling precise detection, classification and tracking of aerial and ground threats."
   }
 };

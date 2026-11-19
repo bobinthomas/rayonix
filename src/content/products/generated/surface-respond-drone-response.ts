@@ -7,7 +7,7 @@ export const surfaceRespondDroneResponse: ProductPageContent = {
   "domain": "surface",
   "phase": "respond",
   "seo": {
-    "title": "AUTONOMOUS DRONE RESPONSE — Aerial Surveillance & Rapid Response | Surface | Rayonix",
+    "title": "Autonomous drone response — Aerial surveillance & rapid response | Surface | Rayonix",
     "description": "Our Autonomous Drone Response solutions enable rapid aerial deployment through autonomous and remotely piloted platforms, supporting incident assessment, surveillance and coordinated response operations."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const surfaceRespondDroneResponse: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "AUTONOMOUS DRONE RESPONSE Overview",
-    "title": "AUTONOMOUS DRONE RESPONSE",
+    "ariaLabel": "Autonomous drone response Overview",
+    "title": "Autonomous drone response",
     "titleSize": "extended",
-    "eyebrow": "Aerial Surveillance & Rapid Response",
+    "eyebrow": "Aerial surveillance & rapid response",
     "intro": "Our Autonomous Drone Response solutions enable rapid aerial deployment through autonomous and remotely piloted platforms, supporting incident assessment, surveillance and coordinated response operations.",
     "specs": [
       {
@@ -96,7 +96,7 @@ export const surfaceRespondDroneResponse: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix AUTONOMOUS DRONE RESPONSE",
+    "name": "Rayonix Autonomous drone response",
     "description": "Our Autonomous Drone Response solutions enable rapid aerial deployment through autonomous and remotely piloted platforms, supporting incident assessment, surveillance and coordinated response operations."
   }
 };

@@ -7,7 +7,7 @@ export const surfaceDetectLidar: ProductPageContent = {
   "domain": "surface",
   "phase": "detect",
   "seo": {
-    "title": "3D LiDAR — Virtual Perimeter Surveillance & Intrusion Detection | Surface | Rayonix",
+    "title": "3D LiDAR — Virtual perimeter surveillance & intrusion detection | Surface | Rayonix",
     "description": "Our 3D LiDAR solution enables virtual perimeter surveillance through high-resolution spatial sensing, detecting and tracking personnel and vehicles entering protected zones."
   },
   "breadcrumbs": [
@@ -33,7 +33,7 @@ export const surfaceDetectLidar: ProductPageContent = {
     "ariaLabel": "3D LiDAR Overview",
     "title": "3D LiDAR",
     "titleSize": "display",
-    "eyebrow": "Virtual Perimeter Surveillance & Intrusion Detection",
+    "eyebrow": "Virtual perimeter surveillance & intrusion detection",
     "intro": "Our 3D LiDAR solution enables virtual perimeter surveillance through high-resolution spatial sensing, detecting and tracking personnel and vehicles entering protected zones.",
     "specs": [
       {

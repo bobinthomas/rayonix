@@ -7,7 +7,7 @@ export const subsurfaceDetectDas: ProductPageContent = {
   "domain": "subsurface",
   "phase": "detect",
   "seo": {
-    "title": "FIBER OPTIC DAS — Distributed Acoustic Sensing | Subsurface | Rayonix",
+    "title": "Fiber optic DAS — Distributed acoustic sensing | Subsurface | Rayonix",
     "description": "Our Fiber Optic DAS solution transforms standard optical fibre cables into distributed sensing networks, enabling continuous detection, classification and localisation of acoustic and vibration events across land-based and underwater environments."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const subsurfaceDetectDas: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "FIBER OPTIC DAS Overview",
-    "title": "FIBER OPTIC DAS",
+    "ariaLabel": "Fiber optic DAS Overview",
+    "title": "Fiber optic DAS",
     "titleSize": "long",
-    "eyebrow": "Distributed Acoustic Sensing",
+    "eyebrow": "Distributed acoustic sensing",
     "intro": "Our Fiber Optic DAS solution transforms standard optical fibre cables into distributed sensing networks, enabling continuous detection, classification and localisation of acoustic and vibration events across land-based and underwater environments.",
     "specs": [
       {
@@ -145,7 +145,7 @@ export const subsurfaceDetectDas: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix FIBER OPTIC DAS",
+    "name": "Rayonix Fiber optic DAS",
     "description": "Our Fiber Optic DAS solution transforms standard optical fibre cables into distributed sensing networks, enabling continuous detection, classification and localisation of acoustic and vibration events across land-based and underwater environments."
   }
 };

@@ -7,7 +7,7 @@ export const aerialRespondGnssSpoofing: ProductPageContent = {
   "domain": "aerial",
   "phase": "respond",
   "seo": {
-    "title": "GNSS Spoofing – Navigation Manipulation — Navigation Control. Signal Manipulation. Counter-Drone Defence. | Aerial | Rayonix",
+    "title": "GNSS spoofing – navigation manipulation — Navigation control. Signal manipulation. Counter-drone defence. | Aerial | Rayonix",
     "description": "Our GNSS Spoofing solution uses advanced electronic countermeasures to manipulate satellite navigation signals, supporting protection against unauthorised drone activity across tactical and strategic environments."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const aerialRespondGnssSpoofing: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "GNSS Spoofing – Navigation Manipulation Overview",
-    "title": "GNSS Spoofing – Navigation Manipulation",
+    "ariaLabel": "GNSS spoofing – navigation manipulation Overview",
+    "title": "GNSS spoofing – navigation manipulation",
     "titleSize": "extended",
-    "eyebrow": "Navigation Control. Signal Manipulation. Counter-Drone Defence.",
+    "eyebrow": "Navigation control. Signal manipulation. Counter-drone defence.",
     "intro": "Our GNSS Spoofing solution uses advanced electronic countermeasures to manipulate satellite navigation signals, supporting protection against unauthorised drone activity across tactical and strategic environments.",
     "specs": [
       {
@@ -131,7 +131,7 @@ export const aerialRespondGnssSpoofing: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix GNSS Spoofing – Navigation Manipulation",
+    "name": "Rayonix GNSS spoofing – navigation manipulation",
     "description": "Our GNSS Spoofing solution uses advanced electronic countermeasures to manipulate satellite navigation signals, supporting protection against unauthorised drone activity across tactical and strategic environments."
   }
 };

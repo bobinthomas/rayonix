@@ -7,7 +7,7 @@ export const surfaceDetectEfence: ProductPageContent = {
   "domain": "surface",
   "phase": "detect",
   "seo": {
-    "title": "E-FENCE — Electronic Perimeter Security & Active Deterrence | Surface | Rayonix",
+    "title": "E-fence — Electronic perimeter security & active deterrence | Surface | Rayonix",
     "description": "Our E-Fence solution combines intelligent perimeter intrusion detection with non-lethal electrical deterrence, providing continuous monitoring and active protection for secured installations."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const surfaceDetectEfence: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "E-FENCE Overview",
-    "title": "E-FENCE",
+    "ariaLabel": "E-fence Overview",
+    "title": "E-fence",
     "titleSize": "display",
-    "eyebrow": "Electronic Perimeter Security & Active Deterrence",
+    "eyebrow": "Electronic perimeter security & active deterrence",
     "intro": "Our E-Fence solution combines intelligent perimeter intrusion detection with non-lethal electrical deterrence, providing continuous monitoring and active protection for secured installations.",
     "specs": [
       {
@@ -135,7 +135,7 @@ export const surfaceDetectEfence: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix E-FENCE",
+    "name": "Rayonix E-fence",
     "description": "Our E-Fence solution combines intelligent perimeter intrusion detection with non-lethal electrical deterrence, providing continuous monitoring and active protection for secured installations."
   }
 };

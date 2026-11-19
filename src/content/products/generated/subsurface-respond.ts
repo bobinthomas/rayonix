@@ -7,7 +7,7 @@ export const subsurfaceRespond: ProductPageContent = {
   "domain": "subsurface",
   "phase": "respond",
   "seo": {
-    "title": "RESPOND — Threat Alert & Response Coordination | Subsurface | Rayonix",
+    "title": "Respond — Threat alert & response coordination | Subsurface | Rayonix",
     "description": "Our Respond layer enables timely threat alerts, incident escalation and coordinated response across underground and underwater security operations."
   },
   "breadcrumbs": [
@@ -26,10 +26,10 @@ export const subsurfaceRespond: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "RESPOND Overview",
-    "title": "RESPOND",
+    "ariaLabel": "Respond Overview",
+    "title": "Respond",
     "titleSize": "display",
-    "eyebrow": "Threat Alert & Response Coordination",
+    "eyebrow": "Threat alert & response coordination",
     "intro": "Our Respond layer enables timely threat alerts, incident escalation and coordinated response across underground and underwater security operations.",
     "specs": [
       {
@@ -135,7 +135,7 @@ export const subsurfaceRespond: ProductPageContent = {
   },
   "schema": {
     "type": "Service",
-    "name": "Rayonix RESPOND",
+    "name": "Rayonix Respond",
     "description": "Our Respond layer enables timely threat alerts, incident escalation and coordinated response across underground and underwater security operations."
   }
 };

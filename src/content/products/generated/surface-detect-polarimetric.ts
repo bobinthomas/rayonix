@@ -7,7 +7,7 @@ export const surfaceDetectPolarimetric: ProductPageContent = {
   "domain": "surface",
   "phase": "detect",
   "seo": {
-    "title": "Polarimetric Thermal Imaging — Advanced Thermal Imaging. Enhanced Detection. Greater Situational Awareness. | Surface | Rayonix",
+    "title": "Polarimetric thermal imaging — Advanced thermal imaging. Enhanced detection. Greater situational awareness. | Surface | Rayonix",
     "description": "Our Polarimetric Thermal Imaging solution combines thermal sensing with AI-powered polarimetric image processing to reveal details beyond conventional thermal imagery. It enhances object detection, classification and tracking, even in challenging environments, cluttered backgrounds and complete darkness."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const surfaceDetectPolarimetric: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "Polarimetric Thermal Imaging Overview",
-    "title": "Polarimetric Thermal Imaging",
+    "ariaLabel": "Polarimetric thermal imaging Overview",
+    "title": "Polarimetric thermal imaging",
     "titleSize": "extended",
-    "eyebrow": "Advanced Thermal Imaging. Enhanced Detection. Greater Situational Awareness.",
+    "eyebrow": "Advanced thermal imaging. Enhanced detection. Greater situational awareness.",
     "intro": "Our Polarimetric Thermal Imaging solution combines thermal sensing with AI-powered polarimetric image processing to reveal details beyond conventional thermal imagery. It enhances object detection, classification and tracking, even in challenging environments, cluttered backgrounds and complete darkness.",
     "specs": [
       {
@@ -138,7 +138,7 @@ export const surfaceDetectPolarimetric: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix Polarimetric Thermal Imaging",
+    "name": "Rayonix Polarimetric thermal imaging",
     "description": "Our Polarimetric Thermal Imaging solution combines thermal sensing with AI-powered polarimetric image processing to reveal details beyond conventional thermal imagery. It enhances object detection, classification and tracking, even in challenging environments, cluttered backgrounds and complete darkness."
   }
 };

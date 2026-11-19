@@ -7,7 +7,7 @@ export const surfaceDetectVibration: ProductPageContent = {
   "domain": "surface",
   "phase": "detect",
   "seo": {
-    "title": "VIBRATION SENSORS — Electronic Intrusion & Tamper Detection | Surface | Rayonix",
+    "title": "Vibration sensors — Electronic intrusion & tamper detection | Surface | Rayonix",
     "description": "Our Vibration Sensor solution detects abnormal vibrations and physical disturbances across protected structures and assets, identifying tampering, forced entry and intrusion attempts."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const surfaceDetectVibration: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "VIBRATION SENSORS Overview",
-    "title": "VIBRATION SENSORS",
+    "ariaLabel": "Vibration sensors Overview",
+    "title": "Vibration sensors",
     "titleSize": "long",
-    "eyebrow": "Electronic Intrusion & Tamper Detection",
+    "eyebrow": "Electronic intrusion & tamper detection",
     "intro": "Our Vibration Sensor solution detects abnormal vibrations and physical disturbances across protected structures and assets, identifying tampering, forced entry and intrusion attempts.",
     "specs": [
       {
@@ -139,7 +139,7 @@ export const surfaceDetectVibration: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix VIBRATION SENSORS",
+    "name": "Rayonix Vibration sensors",
     "description": "Our Vibration Sensor solution detects abnormal vibrations and physical disturbances across protected structures and assets, identifying tampering, forced entry and intrusion attempts."
   }
 };

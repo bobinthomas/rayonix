@@ -7,7 +7,7 @@ export const aerialRespondNetInterception: ProductPageContent = {
   "domain": "aerial",
   "phase": "respond",
   "seo": {
-    "title": "Net-Based Interception — Non-Explosive Capture. Controlled Drone Neutralisation. | Aerial | Rayonix",
+    "title": "Net-based interception — Non-explosive capture. Controlled drone neutralisation. | Aerial | Rayonix",
     "description": "Our Net-Based Interception systems enable the physical capture of unauthorised drones without explosive countermeasures, supporting controlled interception and recovery while minimising collateral damage."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const aerialRespondNetInterception: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "Net-Based Interception Overview",
-    "title": "Net-Based Interception",
+    "ariaLabel": "Net-based interception Overview",
+    "title": "Net-based interception",
     "titleSize": "extended",
-    "eyebrow": "Non-Explosive Capture. Controlled Drone Neutralisation.",
+    "eyebrow": "Non-explosive capture. Controlled drone neutralisation.",
     "intro": "Our Net-Based Interception systems enable the physical capture of unauthorised drones without explosive countermeasures, supporting controlled interception and recovery while minimising collateral damage.",
     "specs": [
       {
@@ -131,7 +131,7 @@ export const aerialRespondNetInterception: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix Net-Based Interception",
+    "name": "Rayonix Net-based interception",
     "description": "Our Net-Based Interception systems enable the physical capture of unauthorised drones without explosive countermeasures, supporting controlled interception and recovery while minimising collateral damage."
   }
 };

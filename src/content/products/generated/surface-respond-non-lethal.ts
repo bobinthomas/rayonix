@@ -7,7 +7,7 @@ export const surfaceRespondNonLethal: ProductPageContent = {
   "domain": "surface",
   "phase": "respond",
   "seo": {
-    "title": "NON-LETHAL RESPONSE SYSTEMS — Controlled Intervention & Security Solutions | Surface | Rayonix",
+    "title": "Non-lethal response systems — Controlled intervention & security solutions | Surface | Rayonix",
     "description": "Our Non-Lethal Response portfolio provides controlled intervention capabilities for security and law enforcement agencies, supporting graduated response across public security and tactical operations."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const surfaceRespondNonLethal: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "NON-LETHAL RESPONSE SYSTEMS Overview",
-    "title": "NON-LETHAL RESPONSE SYSTEMS",
+    "ariaLabel": "Non-lethal response systems Overview",
+    "title": "Non-lethal response systems",
     "titleSize": "extended",
-    "eyebrow": "Controlled Intervention & Security Solutions",
+    "eyebrow": "Controlled intervention & security solutions",
     "intro": "Our Non-Lethal Response portfolio provides controlled intervention capabilities for security and law enforcement agencies, supporting graduated response across public security and tactical operations.",
     "specs": [
       {
@@ -96,7 +96,7 @@ export const surfaceRespondNonLethal: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix NON-LETHAL RESPONSE SYSTEMS",
+    "name": "Rayonix Non-lethal response systems",
     "description": "Our Non-Lethal Response portfolio provides controlled intervention capabilities for security and law enforcement agencies, supporting graduated response across public security and tactical operations."
   }
 };

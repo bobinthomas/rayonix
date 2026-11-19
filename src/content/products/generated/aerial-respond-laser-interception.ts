@@ -7,7 +7,7 @@ export const aerialRespondLaserInterception: ProductPageContent = {
   "domain": "aerial",
   "phase": "respond",
   "seo": {
-    "title": "Laser-Based Interception — Precision Laser Engagement. Advanced Aerial Threat Defence. | Aerial | Rayonix",
+    "title": "Laser-based interception — Precision laser engagement. Advanced aerial threat defence. | Aerial | Rayonix",
     "description": "Our Laser-Based Interception systems provide directed optical countermeasures against aerial threats through optical dazzling or high-energy laser engagement, depending on system configuration."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const aerialRespondLaserInterception: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "Laser-Based Interception Overview",
-    "title": "Laser-Based Interception",
+    "ariaLabel": "Laser-based interception Overview",
+    "title": "Laser-based interception",
     "titleSize": "extended",
-    "eyebrow": "Precision Laser Engagement. Advanced Aerial Threat Defence.",
+    "eyebrow": "Precision laser engagement. Advanced aerial threat defence.",
     "intro": "Our Laser-Based Interception systems provide directed optical countermeasures against aerial threats through optical dazzling or high-energy laser engagement, depending on system configuration.",
     "specs": [
       {
@@ -131,7 +131,7 @@ export const aerialRespondLaserInterception: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix Laser-Based Interception",
+    "name": "Rayonix Laser-based interception",
     "description": "Our Laser-Based Interception systems provide directed optical countermeasures against aerial threats through optical dazzling or high-energy laser engagement, depending on system configuration."
   }
 };

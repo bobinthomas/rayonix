@@ -7,7 +7,7 @@ export const aerialRespondRfJamming: ProductPageContent = {
   "domain": "aerial",
   "phase": "respond",
   "seo": {
-    "title": "RF Jamming – Electronic Countermeasures — Datalink Suppression. Selective Interference. Drone Defence. | Aerial | Rayonix",
+    "title": "RF jamming – electronic countermeasures — Datalink suppression. Selective interference. Drone defence. | Aerial | Rayonix",
     "description": "Our RF jamming solution disrupts drone communication links through advanced electronic countermeasures, supporting protection against unauthorised UAV activity."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const aerialRespondRfJamming: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "RF Jamming – Electronic Countermeasures Overview",
-    "title": "RF Jamming – Electronic Countermeasures",
+    "ariaLabel": "RF jamming – electronic countermeasures Overview",
+    "title": "RF jamming – electronic countermeasures",
     "titleSize": "extended",
-    "eyebrow": "Datalink Suppression. Selective Interference. Drone Defence.",
+    "eyebrow": "Datalink suppression. Selective interference. Drone defence.",
     "intro": "Our RF jamming solution disrupts drone communication links through advanced electronic countermeasures, supporting protection against unauthorised UAV activity.",
     "specs": [
       {
@@ -131,7 +131,7 @@ export const aerialRespondRfJamming: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix RF Jamming – Electronic Countermeasures",
+    "name": "Rayonix RF jamming – electronic countermeasures",
     "description": "Our RF jamming solution disrupts drone communication links through advanced electronic countermeasures, supporting protection against unauthorised UAV activity."
   }
 };

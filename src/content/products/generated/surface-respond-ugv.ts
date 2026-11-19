@@ -7,7 +7,7 @@ export const surfaceRespondUgv: ProductPageContent = {
   "domain": "surface",
   "phase": "respond",
   "seo": {
-    "title": "UNMANNED GROUND SYSTEMS — Robotic Mobility & Remote Operations | Surface | Rayonix",
+    "title": "Unmanned ground systems — Robotic mobility & remote operations | Surface | Rayonix",
     "description": "Our Unmanned Ground Systems enable remote operations in hazardous and inaccessible environments through robotic mobility, integrated surveillance and mission-specific payloads."
   },
   "breadcrumbs": [
@@ -30,10 +30,10 @@ export const surfaceRespondUgv: ProductPageContent = {
     }
   ],
   "hero": {
-    "ariaLabel": "UNMANNED GROUND SYSTEMS Overview",
-    "title": "UNMANNED GROUND SYSTEMS",
+    "ariaLabel": "Unmanned ground systems Overview",
+    "title": "Unmanned ground systems",
     "titleSize": "extended",
-    "eyebrow": "Robotic Mobility & Remote Operations",
+    "eyebrow": "Robotic mobility & remote operations",
     "intro": "Our Unmanned Ground Systems enable remote operations in hazardous and inaccessible environments through robotic mobility, integrated surveillance and mission-specific payloads.",
     "specs": [
       {
@@ -96,7 +96,7 @@ export const surfaceRespondUgv: ProductPageContent = {
     ]
   },
   "schema": {
-    "name": "Rayonix UNMANNED GROUND SYSTEMS",
+    "name": "Rayonix Unmanned ground systems",
     "description": "Our Unmanned Ground Systems enable remote operations in hazardous and inaccessible environments through robotic mobility, integrated surveillance and mission-specific payloads."
   }
 };
