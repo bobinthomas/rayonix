@@ -49,14 +49,27 @@ export default function ProductCapabilities({
   repository,
 }: ProductCapabilitiesProps) {
   const { tabs } = capabilities;
+  // Desktop: one active tab. Mobile: accordion, any number open (first open by default).
   const [activeTab, setActiveTab] = useState<number>(0);
+  const [openItems, setOpenItems] = useState<Set<string>>(() => new Set([tabs[0]?.id]));
 
-  // Deep links: /page#<tab-id> opens that tab (used by mega menu links).
+  const toggleItem = (id: string) =>
+    setOpenItems((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+
+  // Deep links: /page#<tab-id> opens that tab / accordion item (used by mega menu links).
   useEffect(() => {
     const openFromHash = () => {
       const id = window.location.hash.slice(1);
       const idx = tabs.findIndex((t) => t.id === id);
-      if (idx >= 0) setActiveTab(idx);
+      if (idx >= 0) {
+        setActiveTab(idx);
+        setOpenItems((prev) => new Set(prev).add(id));
+      }
     };
     openFromHash();
     window.addEventListener("hashchange", openFromHash);
@@ -84,8 +97,63 @@ export default function ProductCapabilities({
           )}
         </div>
 
-        {/* Tab Container */}
-        <div className="flex flex-col w-full" data-node-id="615:3203">
+        {/* Mobile (< md): accordion, so every capability title is visible */}
+        <div className="md:hidden flex flex-col gap-3 w-full">
+          {tabs.map((tab) => {
+            const isOpen = openItems.has(tab.id);
+            return (
+              <div
+                key={tab.id}
+                id={`capability-item-${tab.id}`}
+                className={`bg-white rounded-[4px] border shadow-sm transition-colors duration-300 ${
+                  isOpen ? "border-[#bdc4c8]" : "border-[#e2e8f0]"
+                }`}
+              >
+                <h3>
+                  <button
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={`capability-accordion-${tab.id}`}
+                    onClick={() => toggleItem(tab.id)}
+                    className="w-full min-h-[56px] flex items-center justify-between gap-4 px-5 py-4 text-left cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] rounded-[4px]"
+                  >
+                    <span className="text-[17px] font-medium text-[#080f12] leading-snug">
+                      {tab.title}
+                    </span>
+                    <span
+                      className={`relative shrink-0 w-4 h-4 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                        isOpen ? "rotate-45" : ""
+                      }`}
+                      aria-hidden="true"
+                    >
+                      <span className="absolute left-0 right-0 top-1/2 h-[2px] -translate-y-1/2 bg-[#e22328]" />
+                      <span className="absolute top-0 bottom-0 left-1/2 w-[2px] -translate-x-1/2 bg-[#e22328]" />
+                    </span>
+                  </button>
+                </h3>
+                <div
+                  id={`capability-accordion-${tab.id}`}
+                  role="region"
+                  aria-label={tab.title}
+                  hidden={!isOpen}
+                  className={`px-5 pb-5 flex-col gap-5 ${isOpen ? "flex" : "hidden"}`}
+                >
+                  <p className="text-[15px] text-[#475569] font-normal leading-[24px]">
+                    {tab.description}
+                  </p>
+                  {tab.diagram && tab.diagram.length > 0 && (
+                    <div className="self-center flex items-center justify-center p-2 bg-[#fafbfc] rounded-[4px] border border-[#f1f5f9]">
+                      <Diagram layers={tab.diagram} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop (md+): Tab Container */}
+        <div className="hidden md:flex flex-col w-full" data-node-id="615:3203">
           {/* Horizontal Tab Bar */}
           <div
             className="flex items-center gap-4 sm:gap-8 border-b border-[#bdc4c8] overflow-x-auto no-scrollbar"

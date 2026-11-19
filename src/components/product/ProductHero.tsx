@@ -174,8 +174,18 @@ export default function ProductHero({ hero, breadcrumbs }: ProductHeroProps) {
               />
 
               <div className="flex flex-col gap-1 pl-1">
-                <span className="text-2xl sm:text-3xl lg:text-[30px] font-normal text-[#f5f6f6] tracking-tight leading-tight">
-                  {spec.value}
+                <span className="text-xl sm:text-3xl lg:text-[30px] font-normal text-[#f5f6f6] tracking-tight leading-tight [overflow-wrap:anywhere]">
+                  {/* allow a line break after "/" in long values (e.g. Pixels/Second) */}
+                  {spec.value.split("/").map((part, i, all) => (
+                    <React.Fragment key={i}>
+                      {part}
+                      {i < all.length - 1 && (
+                        <>
+                          /<wbr />
+                        </>
+                      )}
+                    </React.Fragment>
+                  ))}
                 </span>
                 <span className="text-xs sm:text-sm lg:text-[15px] font-normal text-[#7f8a91] leading-snug">
                   {spec.label}
