@@ -51,7 +51,8 @@ export interface CapabilityTab {
   label: string;
   title: string;
   description: string;
-  diagram: DiagramLayer[];
+  /** Optional illustration; the panel is text-only without one. */
+  diagram?: DiagramLayer[];
 }
 
 export interface DownloadItem {
@@ -115,8 +116,12 @@ export interface ProductPageContent {
     items: UseCase[];
   };
 
-  /** Product JSON-LD. Specs are emitted as additionalProperty. */
+  /**
+   * JSON-LD. "Product" (default) emits specs as additionalProperty;
+   * "Service" (software / C2 layers) emits capability tabs as an OfferCatalog.
+   */
   schema: {
+    type?: "Product" | "Service";
     name: string;
     description: string;
   };

@@ -134,9 +134,11 @@ export default function ProductCapabilities({
               </p>
             </div>
 
-            <div className="shrink-0 flex items-center justify-center p-2 bg-[#fafbfc] rounded-[4px] border border-[#f1f5f9]">
-              <Diagram layers={active.diagram} />
-            </div>
+            {active.diagram && active.diagram.length > 0 && (
+              <div className="shrink-0 flex items-center justify-center p-2 bg-[#fafbfc] rounded-[4px] border border-[#f1f5f9]">
+                <Diagram layers={active.diagram} />
+              </div>
+            )}
           </div>
         </div>
 

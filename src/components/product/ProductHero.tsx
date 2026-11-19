@@ -34,7 +34,7 @@ export default function ProductHero({ hero, breadcrumbs }: ProductHeroProps) {
           {breadcrumbs.map((crumb, idx) => {
             const isLast = idx === breadcrumbs.length - 1;
             return (
-              <React.Fragment key={crumb.href}>
+              <React.Fragment key={idx}>
                 {idx > 0 && (
                   <span className="text-[#7f8a91]" aria-hidden="true">
                     /

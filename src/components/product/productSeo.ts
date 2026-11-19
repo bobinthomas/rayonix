@@ -30,18 +30,48 @@ export function buildProductMetadata(content: ProductPageContent): Metadata {
 }
 
 export function buildProductJsonLd(content: ProductPageContent) {
+  const breadcrumbList = {
+    "@type": "BreadcrumbList",
+    itemListElement: content.breadcrumbs.map((crumb, idx) => ({
+      "@type": "ListItem",
+      position: idx + 1,
+      name: crumb.label,
+      item: `${SITE_URL}${crumb.href}`,
+    })),
+  };
+
+  if (content.schema.type === "Service") {
+    return {
+      "@context": "https://schema.org",
+      "@graph": [
+        breadcrumbList,
+        {
+          "@type": "Service",
+          name: content.schema.name,
+          image: `${SITE_URL}${content.hero.image.src}`,
+          description: content.schema.description,
+          provider: {
+            "@type": "Organization",
+            name: "Rayonix",
+            url: SITE_URL,
+          },
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: content.capabilities.heading,
+            itemListElement: content.capabilities.tabs.map((tab) => ({
+              "@type": "Offer",
+              itemOffered: { "@type": "Service", name: tab.title },
+            })),
+          },
+        },
+      ],
+    };
+  }
+
   return {
     "@context": "https://schema.org",
     "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: content.breadcrumbs.map((crumb, idx) => ({
-          "@type": "ListItem",
-          position: idx + 1,
-          name: crumb.label,
-          item: `${SITE_URL}${crumb.href}`,
-        })),
-      },
+      breadcrumbList,
       {
         "@type": "Product",
         name: content.schema.name,
