@@ -116,11 +116,12 @@ export default function HeroSection() {
         <div className="absolute bottom-0 left-0 right-0 h-[320px] bg-gradient-to-t from-black/85 via-black/50 to-transparent" />
       </div>
 
-      {/* Centered tagline + CTA positioned 15% from bottom */}
-      <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2 z-20 w-full max-w-[92vw] flex flex-col items-center gap-6 sm:gap-8 text-center pointer-events-auto">
-        <h1 className="flex flex-col items-center gap-2 sm:gap-3">
+      {/* Left-aligned tagline + CTA on the site grid, 15% from bottom */}
+      <div className="absolute bottom-[15%] inset-x-0 z-20 pointer-events-none">
+      <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col items-start gap-6 sm:gap-8 text-left pointer-events-auto">
+        <h1 className="flex flex-col items-start gap-2 sm:gap-3">
           <span className="text-[32px] sm:text-5xl lg:text-[64px] font-bold leading-[1.05] tracking-[0.05em] text-[#f5f6f6]">
-            In<span className="text-[#7f8a91]">(visible)</span> warfare
+            In<span className="text-[#7f8a91]">(Visible)</span> Warfare
           </span>
           <span className="text-[16px] sm:text-[20px] lg:text-[24px] font-normal leading-snug tracking-[-0.01em] text-[#bdc4c8]">
             Intelligence Beyond Boundaries.
@@ -130,11 +131,12 @@ export default function HeroSection() {
           variant="outline"
           href="#battlespace"
           onClick={handleScrollToNext}
-          className="text-center text-[13px] sm:text-[15px] md:text-[16px] font-medium tracking-[0.02em] px-5 sm:px-7 py-3.5 sm:py-4 shadow-2xl"
-          aria-label="See beyond"
+          className="text-[13px] sm:text-[15px] md:text-[16px] font-medium tracking-[0.02em] px-5 sm:px-7 py-3.5 sm:py-4 shadow-2xl"
+          aria-label="See Beyond"
         >
-          See beyond
+          See Beyond
         </CTAButton>
+      </div>
       </div>
     </section>
   );
