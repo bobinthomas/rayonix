@@ -50,44 +50,37 @@ function CapabilityCard({ item, index }: { item: SolutionItem; index: number }) 
   );
 }
 
-function ApplicationCard({
-  item,
-  index,
-  fullRow,
-}: {
-  item: SolutionItem;
-  index: number;
-  fullRow: boolean;
-}) {
+/** Template visual for the Applications section (Figma "GPR 1", 851:1025) until a solution sets its own. */
+const DEFAULT_APPLICATIONS_IMAGE = {
+  src: "/assets/gpr-hero-drone.webp",
+  alt: "Rayonix multirotor drone with a ground penetrating radar payload in the field",
+};
+
+/** Figma component "Solution / Application item": grey index, title, description, top hairline. */
+function ApplicationItem({ item, index }: { item: SolutionItem; index: number }) {
   return (
-    <div
-      className={`bg-[#080f12] border border-[#253035] p-6 sm:p-8 lg:p-12 flex flex-col justify-between gap-12 lg:min-h-[360px] ${
-        fullRow ? "sm:col-span-2" : ""
-      }`}
-      data-name="Solution / Application card"
+    <li
+      className="flex gap-5 border-t border-[#253035] py-6 lg:py-8"
+      data-name="Solution / Application item"
     >
-      <div className="flex items-center justify-between">
-        <span className="type-eyebrow text-[#bdc4c8]">
-          Application / {pad(index)}
-        </span>
-        <Image src="/assets/solutions/indicator.svg" alt="" width={9} height={9} aria-hidden="true" />
+      <span
+        className="w-8 shrink-0 type-body-lg font-medium tabular-nums text-[#7f8a91]"
+        aria-hidden="true"
+      >
+        {pad(index)}
+      </span>
+      <div className="flex min-w-0 flex-col gap-2">
+        <h3 className="type-body-lg font-medium text-[#f5f6f6]">{item.title}</h3>
+        <p className="type-body text-[#7f8a91]">{item.body}</p>
       </div>
-      <div className="flex flex-col gap-4">
-        <h3 className="type-statement text-[#f5f6f6]">
-          {item.title}
-        </h3>
-        <p className="type-body-lg text-[#bdc4c8]">
-          {item.body}
-        </p>
-      </div>
-    </div>
+    </li>
   );
 }
 
 export default function SolutionPage({ content }: { content: SolutionPageContent }) {
   const { hero, capabilities, applications, valueProposition, cta } = content;
   const rows = capabilityRows(capabilities.items.length);
-  const oddApps = applications.items.length % 2 === 1;
+  const applicationsImage = applications.image ?? DEFAULT_APPLICATIONS_IMAGE;
 
   return (
     <>
@@ -214,22 +207,34 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
           aria-label="Applications"
           data-node-id="838:846"
         >
-          <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-10 lg:gap-[104px]">
+          <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-10 lg:gap-14">
             <div className="flex flex-col gap-3">
               <Eyebrow>Applications</Eyebrow>
               <h2 className="type-h2 text-[#f5f6f6]">
                 {applications.heading}
               </h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" data-node-id="838:860">
-              {applications.items.map((item, idx) => (
-                <ApplicationCard
-                  key={item.title}
-                  item={item}
-                  index={idx + 1}
-                  fullRow={oddApps && idx === applications.items.length - 1}
+            {/* List + visual: the visual stretches to the list height on desktop. */}
+            <div className="flex flex-col gap-10 lg:flex-row lg:items-stretch lg:gap-20" data-node-id="838:860">
+              <ol className="flex-1 min-w-0 border-b border-[#253035]" data-node-id="862:815">
+                {applications.items.map((item, idx) => (
+                  <ApplicationItem key={item.title} item={item} index={idx + 1} />
+                ))}
+              </ol>
+              <div
+                className="relative w-full aspect-[16/10] lg:aspect-auto lg:w-[560px] lg:shrink-0 rounded-[8px] overflow-hidden border border-[#253035] bg-[#10181c]"
+                data-node-id="862:844"
+              >
+                <Image
+                  src={applicationsImage.src}
+                  alt={applicationsImage.alt}
+                  fill
+                  sizes="(min-width: 1024px) 560px, 100vw"
+                  className="object-cover object-center"
                 />
-              ))}
+                <div className="absolute bottom-4 left-4 size-4 border-b-2 border-l-2 border-[#e22328] pointer-events-none" aria-hidden="true" />
+                <div className="absolute bottom-4 right-4 size-4 border-b-2 border-r-2 border-[#e22328] pointer-events-none" aria-hidden="true" />
+              </div>
             </div>
           </div>
         </section>
