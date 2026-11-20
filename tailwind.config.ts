@@ -1,4 +1,34 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
+import type { CSSRuleObject } from "tailwindcss/types/config";
+import { tokens } from "./src/lib/tokens";
+
+/**
+ * Generates one responsive class per type role from tokens.typography.scale:
+ *   .type-hero, .type-h2, .type-body-lg, .type-eyebrow, …
+ * Mobile values apply by default; desktop values from the lg breakpoint up.
+ */
+const typeScale = plugin(({ addComponents }) => {
+  const { scale, desktopBreakpoint } = tokens.typography;
+  const kebab = (s: string) => s.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`);
+  const components: CSSRuleObject = {};
+
+  for (const [role, t] of Object.entries(scale)) {
+    components[`.type-${kebab(role)}`] = {
+      fontSize: t.mobile.fontSize,
+      lineHeight: t.mobile.lineHeight,
+      fontWeight: t.fontWeight,
+      letterSpacing: t.letterSpacing,
+      ...("textTransform" in t ? { textTransform: t.textTransform } : {}),
+      [`@media (min-width: ${desktopBreakpoint})`]: {
+        fontSize: t.desktop.fontSize,
+        lineHeight: t.desktop.lineHeight,
+      },
+    };
+  }
+
+  addComponents(components);
+});
 
 const config: Config = {
   content: [
@@ -49,7 +79,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [typeScale],
 };
 
 export default config;

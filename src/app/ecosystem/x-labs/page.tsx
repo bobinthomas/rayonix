@@ -146,7 +146,7 @@ export default function XLabsPage() {
               </HudBadge>
             </div>
             <div className="absolute right-4 bottom-4 hidden sm:block">
-              <span className="inline-flex items-center gap-2 backdrop-blur-[12px] bg-[rgba(8,15,18,0.9)] border border-[#253035] rounded-[4px] px-[15px] py-[9px] text-[12px] leading-[16px] select-none">
+              <span className="inline-flex items-center gap-2 backdrop-blur-[12px] bg-[rgba(8,15,18,0.9)] border border-[#253035] rounded-[4px] px-[15px] py-[9px] type-caption select-none">
                 <span className="text-[#7f8a91]">Telemetry Lock:</span>
                 <span className="text-[#f5f6f6]">99.84% Swarm Synchronized</span>
               </span>
@@ -165,11 +165,11 @@ export default function XLabsPage() {
                 i === 2 ? "lg:border-l lg:border-[#253035] lg:pl-4" : ""
               }`}
             >
-              <span className="flex items-end gap-[6px] whitespace-nowrap text-[24px] sm:text-[36px] font-bold leading-[40px] tracking-[-0.9px] text-[#f5f6f6]">
+              <span className="flex items-end gap-[6px] whitespace-nowrap type-stat text-[#f5f6f6]">
                 {m.value}
                 <span className="mb-3 size-[6px] shrink-0 rounded-full bg-[#e22328]" aria-hidden="true" />
               </span>
-              <span className="text-[14px] leading-[20px] text-[#7f8a91]">{m.label}</span>
+              <span className="type-small text-[#7f8a91]">{m.label}</span>
             </li>
           ))}
         </ul>
@@ -193,10 +193,10 @@ export default function XLabsPage() {
                   <span className="size-12 rounded-[4px] bg-[#fff1f1] flex items-center justify-center">
                     <Image src={`/assets/company/${c.icon}`} alt="" width={24} height={24} aria-hidden="true" />
                   </span>
-                  <h3 className="text-[20px] font-bold leading-[28px] text-[#080f12]">{c.title}</h3>
-                  <p className="text-[14px] leading-[22.75px] text-[#2f3639]">{c.body}</p>
+                  <h3 className="type-h3 text-[#080f12]">{c.title}</h3>
+                  <p className="type-small text-[#2f3639]">{c.body}</p>
                 </div>
-                <p className="flex items-center gap-2 border-t border-[#edf2f7] pt-[17px] text-[12px] font-bold leading-[16px] text-[#e22328]">
+                <p className="flex items-center gap-2 border-t border-[#edf2f7] pt-[17px] type-eyebrow text-[#e22328]">
                   <span className="size-[6px] rounded-full bg-[#e22328]" aria-hidden="true" />
                   {c.tag}
                 </p>
@@ -210,8 +210,8 @@ export default function XLabsPage() {
       <CompanySection tone="dark" ariaLabel="What we focus on">
         <div className="flex flex-col gap-10 lg:gap-14">
           <div className="flex flex-col gap-3">
-            <h2 className="text-[30px] sm:text-[36px] font-bold leading-[40px] tracking-[-0.9px] text-[#f5f6f6]">What We Focus On</h2>
-            <p className="text-[16px] sm:text-[18px] leading-[26px] sm:leading-[28px] text-[#7f8a91]">
+            <h2 className="type-h2 text-[#f5f6f6]">What We Focus On</h2>
+            <p className="type-body-lg text-[#7f8a91]">
               From theoretical physics to ruggedized hardware, our dedicated research pillars span the full modernization frontier.
             </p>
           </div>
@@ -220,14 +220,14 @@ export default function XLabsPage() {
               <li key={p.title} className="flex flex-col gap-8 bg-[#10181c] border border-[#253035] rounded-[4px] p-[29px]">
                 <div className="flex flex-col gap-5">
                   <div className="flex items-center justify-between">
-                    <span className="text-[24px] font-bold leading-[32px] text-[#e22328]">{pad(i + 1)}</span>
+                    <span className="type-h3 text-[#e22328]">{pad(i + 1)}</span>
                     <span className="size-10 rounded-[4px] bg-[#1a2124] border border-[#253035] flex items-center justify-center">
                       <Image src={`/assets/company/${p.icon}`} alt="" width={20} height={20} aria-hidden="true" />
                     </span>
                   </div>
                   <div className="flex flex-col gap-[7px]">
-                    <h3 className="text-[20px] font-bold leading-[28px] text-[#f5f6f6]">{p.title}</h3>
-                    <p className="text-[14px] leading-[22.75px] text-[#7f8a91]">{p.body}</p>
+                    <h3 className="type-h3 text-[#f5f6f6]">{p.title}</h3>
+                    <p className="type-small text-[#7f8a91]">{p.body}</p>
                   </div>
                 </div>
                 <div className="border-t border-[#253035] pt-[21px]">
@@ -255,11 +255,11 @@ export default function XLabsPage() {
               >
                 <div className="flex flex-col gap-4">
                   <div className="flex items-baseline justify-between gap-3 border-b border-[#edf2f7] pb-[17px]">
-                    <span className="text-[30px] font-bold leading-[36px] text-[#e22328]">{pad(i + 1)}</span>
-                    <span className="text-[12px] leading-[16px] text-[#2f3639] text-right">{c.stat}</span>
+                    <span className="type-stat text-[#e22328]">{pad(i + 1)}</span>
+                    <span className="type-caption text-[#2f3639] text-right">{c.stat}</span>
                   </div>
-                  <h3 className="text-[20px] font-bold leading-[28px] text-[#080f12]">{c.title}</h3>
-                  <p className="text-[14px] leading-[22.75px] text-[#2f3639]">{c.body}</p>
+                  <h3 className="type-h3 text-[#080f12]">{c.title}</h3>
+                  <p className="type-small text-[#2f3639]">{c.body}</p>
                 </div>
                 <div className="border-t border-[#edf2f7] pt-[17px]">
                   <DotList items={c.points} className="text-[#080f12]" gap="gap-2" />
@@ -299,13 +299,13 @@ export default function XLabsPage() {
               <li key={s.title} className="flex flex-col justify-between gap-4 bg-[#10181c] border border-[#253035] rounded-[4px] p-[21px]">
                 <div className="flex flex-col gap-[7px]">
                   <div className="flex items-center justify-between">
-                    <span className="text-[12px] font-bold leading-[16px] text-[#e22328]">Stage {pad(i + 1)}</span>
+                    <span className="type-eyebrow text-[#e22328]">Stage {pad(i + 1)}</span>
                     <span className="size-2 rounded-full bg-[#e22328]" aria-hidden="true" />
                   </div>
-                  <h3 className="text-[16px] font-bold leading-[24px] text-[#f5f6f6]">{s.title}</h3>
-                  <p className="text-[12px] leading-[19.5px] text-[#7f8a91]">{s.body}</p>
+                  <h3 className="type-h3 text-[#f5f6f6]">{s.title}</h3>
+                  <p className="type-caption text-[#7f8a91]">{s.body}</p>
                 </div>
-                <p className="border-t border-[#253035] pt-[13px] text-[11px] leading-[16.5px] text-[#bdc4c8]">{s.tag}</p>
+                <p className="border-t border-[#253035] pt-[13px] type-caption text-[#bdc4c8]">{s.tag}</p>
               </li>
             ))}
           </ol>
@@ -337,8 +337,8 @@ export default function XLabsPage() {
                 </div>
                 <div className="flex-1 flex flex-col justify-between gap-8 p-6 sm:p-8">
                   <div className="flex flex-col gap-3">
-                    <h3 className="text-[22px] sm:text-[24px] font-bold leading-[32px] text-[#080f12]">{c.title}</h3>
-                    <p className="text-[14px] leading-[22.75px] text-[#2f3639]">{c.body}</p>
+                    <h3 className="type-h3 text-[#080f12]">{c.title}</h3>
+                    <p className="type-small text-[#2f3639]">{c.body}</p>
                   </div>
                   <div className="border-t border-[#edf2f7] pt-[23px]">
                     <ArrowLink href={c.link.href} bold solid>
@@ -355,15 +355,15 @@ export default function XLabsPage() {
       {/* Partner with X Labs (556:6067) */}
       <CompanySection tone="dark" ariaLabel="Partner with X Labs">
         <div className="flex flex-col gap-10 lg:gap-12">
-          <h2 className="max-w-[836px] text-3xl sm:text-[40px] lg:text-[48px] font-medium leading-tight lg:leading-[56px] text-[#f5f6f6]">
+          <h2 className="max-w-[836px] type-h2 text-[#f5f6f6]">
             Partner With X Labs or Build With Us
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             <div className="flex flex-col justify-between gap-8 bg-[#10181c] border border-[#253035] rounded-[4px] p-6 sm:p-[41px]">
               <div className="flex flex-col gap-4 pt-1">
-                <p className="text-[12px] leading-[16px] text-[#e22328]">Defence Industry &amp; Allied Sovereignty</p>
-                <h3 className="text-[24px] font-bold leading-[32px] tracking-[-0.6px] text-[#f5f6f6]">Co-Develop with X Labs</h3>
-                <p className="text-[16px] leading-[26px] text-[#7f8a91]">
+                <p className="type-eyebrow text-[#e22328]">Defence Industry &amp; Allied Sovereignty</p>
+                <h3 className="type-h3 text-[#f5f6f6]">Co-Develop with X Labs</h3>
+                <p className="type-body text-[#7f8a91]">
                   Partner on defense grants, custom sensor payloads, and joint operational trials across our sovereign test facilities and simulation testbeds.
                 </p>
               </div>
@@ -375,9 +375,9 @@ export default function XLabsPage() {
             </div>
             <div className="flex flex-col justify-between gap-8 bg-[#10181c] border border-[#253035] rounded-[4px] p-6 sm:p-[41px]">
               <div className="flex flex-col gap-4 pt-1">
-                <p className="text-[12px] leading-[16px] text-[#e22328]">Careers &amp; Research Fellowships</p>
-                <h3 className="text-[24px] font-bold leading-[32px] tracking-[-0.6px] text-[#f5f6f6]">Build What&apos;s Next</h3>
-                <p className="text-[16px] leading-[26px] text-[#7f8a91]">
+                <p className="type-eyebrow text-[#e22328]">Careers &amp; Research Fellowships</p>
+                <h3 className="type-h3 text-[#f5f6f6]">Build What&apos;s Next</h3>
+                <p className="type-body text-[#7f8a91]">
                   Join our cross-disciplinary team of RF engineers, AI researchers, and defense roboticists solving hard kinetic defense and autonomous navigation challenges.
                 </p>
               </div>

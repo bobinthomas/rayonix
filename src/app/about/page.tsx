@@ -90,9 +90,9 @@ export default function AboutPage() {
                   <a
                     href={item.href}
                     aria-current={i === 0 ? "true" : undefined}
-                    className={`block pb-3 text-[16px] leading-[24px] border-b-2 transition-colors ${
+                    className={`block pb-3 type-body border-b-2 transition-colors ${
                       i === 0
-                        ? "border-[#e22328] text-[#e22328] font-semibold"
+                        ? "border-[#e22328] text-[#e22328] font-bold"
                         : "border-transparent text-[#bdc4c8] hover:text-white"
                     }`}
                   >
@@ -133,7 +133,7 @@ export default function AboutPage() {
       {/* Mission & Vision (556:7208) */}
       <CompanySection tone="light" id="mission" ariaLabel="Mission and vision">
         <div className="flex flex-col gap-10 lg:gap-14">
-          <h2 className="text-3xl sm:text-[40px] lg:text-[48px] font-normal leading-tight lg:leading-[56px] tracking-[-1.2px] text-[#080f12]">
+          <h2 className="type-h2 text-[#080f12]">
             Architecting Autonomy for Sovereign Supremacy
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-14">
@@ -145,8 +145,8 @@ export default function AboutPage() {
                 <span className="absolute left-0 top-8 bottom-8 w-1 bg-[#e22328] rounded-r-[2px]" aria-hidden="true" />
                 <div className="pl-4 flex flex-col gap-6">
                   <div className="flex flex-col gap-3">
-                    <h3 className="text-[26px] lg:text-[32px] leading-[40px] tracking-[-0.8px] text-[#080f12]">{p.title}</h3>
-                    <p className="text-[16px] lg:text-[18px] leading-[26px] lg:leading-[29.25px] text-[#47494a]">{p.body}</p>
+                    <h3 className="type-statement text-[#080f12]">{p.title}</h3>
+                    <p className="type-body-lg text-[#47494a]">{p.body}</p>
                   </div>
                   <ul className="flex flex-col gap-[14px] border-t border-[rgba(189,196,200,0.15)] pt-[17px]">
                     {p.points.map((pt) => (
@@ -154,7 +154,7 @@ export default function AboutPage() {
                         <span className="mt-1 size-4 shrink-0 rounded-full bg-[rgba(226,35,40,0.1)] flex items-center justify-center">
                           <Image src="/assets/company/icon-check.svg" alt="" width={12} height={12} aria-hidden="true" />
                         </span>
-                        <span className="text-[15px] lg:text-[16px] leading-[24px] text-[#080f12]">{pt}</span>
+                        <span className="type-body text-[#080f12]">{pt}</span>
                       </li>
                     ))}
                   </ul>
@@ -184,13 +184,13 @@ export default function AboutPage() {
                 i > 0 ? "border-t md:border-t-0 md:border-l border-[#253035] md:pl-[33px]" : ""
               }`}
             >
-              <p className="flex items-end gap-2 text-[48px] lg:text-[64px] leading-[56px] lg:leading-[72px] tracking-[-1.6px]">
+              <p className="flex items-end gap-2 type-stat">
                 {k.value}
                 <span className="mb-[15px] size-[10px] shrink-0 rounded-full bg-[#e22328] shadow-[0px_0px_12px_0px_#e22328]" aria-hidden="true" />
               </p>
               <div className="flex flex-col gap-1">
-                <h3 className="text-[22px] lg:text-[24px] font-normal leading-[32px]">{k.title}</h3>
-                <p className="text-[14px] leading-[21px] tracking-[0.14px] text-[#bdc4c8]">{k.body}</p>
+                <h3 className="type-h3 ">{k.title}</h3>
+                <p className="type-small text-[#bdc4c8]">{k.body}</p>
               </div>
             </li>
           ))}
@@ -200,7 +200,7 @@ export default function AboutPage() {
       {/* Certifications & global footprint (556:7308) */}
       <CompanySection tone="light" id="certifications" ariaLabel="Certifications and international reach">
         <div className="flex flex-col gap-10 lg:gap-16">
-          <h2 className="text-3xl sm:text-[40px] lg:text-[48px] font-normal leading-tight lg:leading-[56px] tracking-[-1.2px] text-[#080f12]">
+          <h2 className="type-h2 text-[#080f12]">
             Defense Certifications &amp; International Reach
           </h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
@@ -213,8 +213,8 @@ export default function AboutPage() {
                   <Image src={`/assets/company/${c.icon}`} alt="" width={24} height={24} aria-hidden="true" />
                 </span>
                 <div className="flex flex-col gap-1">
-                  <h3 className="text-[22px] lg:text-[24px] leading-[32px] text-[#080f12]">{c.title}</h3>
-                  <p className="text-[14px] leading-[20px] tracking-[0.14px] text-[#47494a]">{c.body}</p>
+                  <h3 className="type-h3 text-[#080f12]">{c.title}</h3>
+                  <p className="type-small text-[#47494a]">{c.body}</p>
                 </div>
               </li>
             ))}
@@ -243,20 +243,20 @@ export default function AboutPage() {
             <div className="lg:col-span-4 flex flex-col gap-8 p-6 sm:p-10">
               <div className="flex flex-col gap-6">
                 <div className="flex flex-col gap-[6px]">
-                  <p className="text-[12px] font-semibold leading-[18px] tracking-[0.24px] text-[#e22328]">Strategic Nodes</p>
-                  <h3 className="text-[24px] leading-[32px] text-[#f5f6f6]">Operational Hubs</h3>
+                  <p className="type-eyebrow text-[#e22328]">Strategic Nodes</p>
+                  <h3 className="type-h3 text-[#f5f6f6]">Operational Hubs</h3>
                 </div>
                 <ul className="flex flex-col gap-4">
                   {HUBS.map((h) => (
                     <li key={h.name} className="flex flex-col gap-1 bg-[#080f12] border border-[#253035] rounded-[2px] p-[17px]">
-                      <span className="text-[12px] leading-[18px] tracking-[0.24px] text-[#7f8a91]">{h.kind}</span>
-                      <span className="text-[16px] font-semibold leading-[24px] text-[#f5f6f6]">{h.name}</span>
-                      <span className="text-[14px] leading-[20px] tracking-[0.14px] text-[#bdc4c8]">{h.body}</span>
+                      <span className="type-caption text-[#7f8a91]">{h.kind}</span>
+                      <span className="type-body font-medium text-[#f5f6f6]">{h.name}</span>
+                      <span className="type-small text-[#bdc4c8]">{h.body}</span>
                     </li>
                   ))}
                 </ul>
               </div>
-              <ArrowLink href="#global-presence" bold className="text-[16px] leading-[24px]">
+              <ArrowLink href="#global-presence" bold className="type-cta">
                 Explore global presence
               </ArrowLink>
             </div>

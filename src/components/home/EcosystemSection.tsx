@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import TransformingHeading from "@/components/ui/TransformingHeading";
+import PillTab from "@/components/ui/PillTab";
 
 interface EcosystemItem {
   id: string;
@@ -223,7 +224,7 @@ export default function EcosystemSection() {
               ]}
               accentDot={true}
               accentColor="#e22328"
-              className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[72px]"
+              className="type-hero"
             />
           </div>
         </div>
@@ -254,7 +255,7 @@ export default function EcosystemSection() {
                     >
                       {String(idx + 1).padStart(2, "0")}
                     </span>
-                    <span className="flex-1 text-[16px] font-medium text-[#080f12] leading-snug">
+                    <span className="flex-1 type-body font-medium text-[#080f12] ">
                       {item.tabTitle}
                     </span>
                     <span
@@ -295,7 +296,7 @@ export default function EcosystemSection() {
                     <div className="absolute bottom-5 left-6 right-6 z-10">
                       <div className="relative inline-block pr-5 pb-1.5">
                         <span className="absolute -top-2.5 -left-2.5 size-[8px] border-t border-l border-[#e22328]" />
-                        <p className="text-[17px] font-medium text-[#f5f6f6] leading-snug">
+                        <p className="type-body-lg font-medium text-[#f5f6f6] ">
                           <CardTitleScramble title={item.cardTitle} isActive={isOpen} isHovered={false} />
                         </p>
                         <span className="absolute -bottom-0.5 right-0 size-[8px] border-b border-r border-[#e22328]" />
@@ -321,40 +322,19 @@ export default function EcosystemSection() {
             {ecosystemData.map((item, idx) => {
               const isActive = activeTab === idx;
               return (
-                <button
+                <PillTab
                   key={item.id}
                   ref={(el) => {
                     tabRefs.current[idx] = el;
                   }}
-                  type="button"
+                  active={isActive}
+                  paused={isPaused}
                   onClick={() => setActiveTab(idx)}
                   onMouseEnter={() => setHoveredCardIndex(idx)}
-                  className={`group relative px-[9px] sm:px-[10px] xl:px-[11px] py-[9px] sm:py-[10px] xl:py-[12px] rounded-[4px] text-[12px] sm:text-[12.5px] xl:text-[13px] font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none ${
-                    isActive
-                      ? "bg-[#10181c] text-[#f1f2f2]"
-                      : "bg-[#9da1a4] text-white hover:bg-[#868c90]"
-                  }`}
-                  aria-selected={isActive}
-                  role="tab"
+                  onProgressEnd={() => setActiveTab((prev) => (prev + 1) % ecosystemData.length)}
                 >
-                  <span className="relative z-10">{item.tabTitle}</span>
-
-                  {/* Red progress bar that animates (grows) over the auto-advance interval */}
-                  {isActive && (
-                    <div
-                      key={`progress-${idx}`}
-                      className="absolute bottom-0 left-0 h-[2px] w-full bg-[#e22328] animate-tab-progress"
-                      style={{
-                        animationPlayState: isPaused ? "paused" : "running",
-                      }}
-                      onAnimationEnd={() => {
-                        if (!isPaused) {
-                          setActiveTab((prev) => (prev + 1) % ecosystemData.length);
-                        }
-                      }}
-                    />
-                  )}
-                </button>
+                  {item.tabTitle}
+                </PillTab>
               );
             })}
           </div>
@@ -440,7 +420,7 @@ export default function EcosystemSection() {
                       {/* Top-left mini bracket */}
                       <span className="absolute -top-3 -left-3 size-[10px] border-t border-l border-[#e22328]" />
 
-                      <h3 className="text-lg sm:text-2xl font-medium text-[#f5f6f6] leading-snug sm:leading-[32px]">
+                      <h3 className="type-h3 text-[#f5f6f6] ">
                         <CardTitleScramble
                           title={item.cardTitle}
                           isActive={isActive}

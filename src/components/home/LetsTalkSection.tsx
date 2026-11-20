@@ -27,7 +27,7 @@ export default function LetsTalkSection() {
               },
             ]}
             accentDot={false}
-            className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[72px]"
+            className="type-hero"
           />
         </div>
 
@@ -50,10 +50,10 @@ export default function LetsTalkSection() {
                   className="object-contain"
                 />
               </div>
-              <h3 className="text-xl sm:text-2xl lg:text-[24px] font-medium text-[#f5f6f6] leading-[32px]">
+              <h3 className="type-h3 text-[#f5f6f6] ">
                 Have an Operational Requirement?
               </h3>
-              <p className="text-[16px] font-normal text-[#5c6e75] leading-[24px]">
+              <p className="type-body text-[#5c6e75] ">
                 We assess mission-specific requirements and engineer integrated defence solutions tailored to operational needs.
               </p>
             </div>
@@ -82,10 +82,10 @@ export default function LetsTalkSection() {
                   className="object-contain"
                 />
               </div>
-              <h3 className="text-xl sm:text-2xl lg:text-[24px] font-medium text-[#f5f6f6] leading-[32px]">
+              <h3 className="type-h3 text-[#f5f6f6] ">
                 Exploring a Technology Partnership?
               </h3>
-              <p className="text-[16px] font-normal text-[#5c6e75] leading-[24px]">
+              <p className="type-body text-[#5c6e75] ">
                 We collaborate with global technology companies on system integration, manufacturing and market opportunities.
               </p>
             </div>
@@ -114,10 +114,10 @@ export default function LetsTalkSection() {
                   className="object-contain"
                 />
               </div>
-              <h3 className="text-xl sm:text-2xl lg:text-[24px] font-medium text-[#f5f6f6] leading-[32px]">
+              <h3 className="type-h3 text-[#f5f6f6] ">
                 Want to Connect With Our Team?
               </h3>
-              <p className="text-[16px] font-normal text-[#5c6e75] leading-[24px]">
+              <p className="type-body text-[#5c6e75] ">
                 Reach out to discuss business enquiries, technology capabilities and potential collaborations.
               </p>
             </div>

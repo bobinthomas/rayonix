@@ -175,7 +175,7 @@ export default function MissionArchitectureSection() {
         <div className="relative z-10 max-w-[1280px] mx-auto w-full px-6 sm:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           {/* Left Column: Big Editorial Words (Detect. Decide. Respond.) */}
           <div className="lg:col-span-5 flex flex-col justify-center">
-            <h2 className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[76px] select-none text-[#f5f6f6]">
+            <h2 className="type-hero select-none text-[#f5f6f6]">
               {pillars.map((pillar, idx) => (
                 <button
                   key={pillar.id}
@@ -216,18 +216,18 @@ export default function MissionArchitectureSection() {
                   ref={(el) => {
                     numberRefs.current[idx] = el;
                   }}
-                  className="text-[14px] font-medium transition-colors duration-300"
+                  className="type-small font-medium transition-colors duration-300"
                 >
                   {pillar.number}
                 </span>
 
                 {/* Heading */}
-                <h3 className="text-2xl sm:text-[32px] font-normal leading-[40px] text-[#f5f6f6]">
+                <h3 className="type-statement text-[#f5f6f6]">
                   {pillar.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-[16px] sm:text-[18px] font-normal leading-[28px] text-[#a3adb2]">
+                <p className="type-body-lg text-[#a3adb2]">
                   {pillar.description}
                 </p>
               </div>

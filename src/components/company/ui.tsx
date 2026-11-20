@@ -13,7 +13,7 @@ export type Crumb = { label: string; href?: string };
 /** Figma "Breadcrumb" component: ancestors link, last item is aria-current. */
 export function Breadcrumb({ items }: { items: Crumb[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-[14px] font-medium leading-[20px]">
+    <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 type-small font-medium">
       {items.map((item, i) => {
         const last = i === items.length - 1;
         return (
@@ -66,11 +66,11 @@ export function CompanyHero({
     <TransformingHeading
       as="h1"
       text={title}
-      className="text-[36px] sm:text-5xl lg:text-[64px] font-bold leading-[1.15] lg:leading-[72px] text-[#f5f6f6]"
+      className="type-hero text-[#f5f6f6]"
     />
   );
   const introText = (
-    <p className="text-[16px] sm:text-[18px] font-normal leading-[26px] sm:leading-[28px] text-[#bdc4c8]">{intro}</p>
+    <p className="type-body-lg text-[#bdc4c8]">{intro}</p>
   );
 
   return (
@@ -137,7 +137,7 @@ export function HudBadge({
     >
       {dot && <span className="size-[6px] shrink-0 rounded-full bg-[#e22328]" aria-hidden="true" />}
       {icon && <Image src={icon} alt="" width={14} height={14} aria-hidden="true" className="shrink-0" />}
-      <span className={`truncate text-[12px] leading-[18px] tracking-[0.24px] ${text}`}>{children}</span>
+      <span className={`truncate type-caption ${text}`}>{children}</span>
     </span>
   );
 }
@@ -195,7 +195,7 @@ export function SectionHeader({
   return (
     <div className="flex flex-col gap-3">
       <h2
-        className={`text-3xl sm:text-[40px] lg:text-[48px] font-medium leading-tight lg:leading-[56px] ${
+        className={`type-h2 ${
           tone === "light" ? "text-[#080f12]" : "text-[#f5f6f6]"
         }`}
       >
@@ -203,7 +203,7 @@ export function SectionHeader({
       </h2>
       {lead && (
         <p
-          className={`max-w-[1180px] text-[16px] sm:text-[18px] leading-[26px] sm:leading-[28px] ${
+          className={`max-w-[1180px] type-body-lg ${
             tone === "light" ? "text-[#2f3639]" : "text-[#7f8a91]"
           }`}
         >
@@ -221,7 +221,7 @@ export function DotList({ items, className = "text-[#bdc4c8]", gap = "gap-[10px]
       {items.map((item) => (
         <li key={item} className="flex items-center gap-2">
           <span className="size-[6px] shrink-0 rounded-full bg-[#e22328]" aria-hidden="true" />
-          <span className={`text-[12px] leading-[16px] ${className}`}>{item}</span>
+          <span className={`type-caption ${className}`}>{item}</span>
         </li>
       ))}
     </ul>
@@ -247,8 +247,8 @@ export function ArrowLink({
     <Link
       href={href}
       prefetch={false}
-      className={`group inline-flex items-center gap-[6px] text-[14px] leading-[20px] text-[#e22328] ${
-        bold ? "font-bold" : "tracking-[0.84px]"
+      className={`group inline-flex items-center gap-[6px] type-cta text-[#e22328] ${
+        bold ? "font-bold" : ""
       } ${className}`}
     >
       <span className="group-hover:underline underline-offset-4">{children}</span>

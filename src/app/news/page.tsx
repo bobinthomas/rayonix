@@ -42,19 +42,19 @@ export default function NewsPage() {
           <div className="flex flex-col justify-between gap-6 p-6 sm:p-10 lg:p-12">
             <div className="flex flex-col gap-4">
               <div className="flex flex-col items-start gap-3">
-                <span className="bg-[#e22328] rounded-[2px] px-3 py-1 text-[12px] font-medium leading-[18px] text-[#fffbff]">
+                <span className="bg-[#e22328] rounded-[2px] px-3 py-1 type-caption font-medium text-[#fffbff]">
                   {f.tag}
                 </span>
-                <p className="text-[12px] leading-[18px] tracking-[0.24px] text-[#7f8a91]">
+                <p className="type-caption text-[#7f8a91]">
                   <time dateTime={f.date}>{formatNewsDate(f.date)}</time>
                   {f.location && <> • {f.location}</>}
                 </p>
               </div>
-              <h2 className="pt-1 text-[22px] sm:text-[24px] leading-[33px] tracking-[-0.6px] text-[#f5f6f6]">{f.title}</h2>
-              <p className="text-[16px] leading-[26px] text-[#bdc4c8]">{f.summary}</p>
+              <h2 className="pt-1 type-h3 text-[#f5f6f6]">{f.title}</h2>
+              <p className="type-body text-[#bdc4c8]">{f.summary}</p>
             </div>
             <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#253035] pt-8">
-              <p className="text-[12px] leading-[18px] tracking-[0.24px] text-[#7f8a91]">
+              <p className="type-caption text-[#7f8a91]">
                 {[f.kind, f.readTime].filter(Boolean).join(" • ")}
               </p>
               <CTAButton href={`/news/${f.slug}`} variant="primary">

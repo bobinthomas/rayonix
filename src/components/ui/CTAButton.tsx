@@ -78,7 +78,7 @@ export default function CTAButton({
   );
 
   const baseClasses =
-    "group relative overflow-hidden inline-flex items-center justify-center gap-[16px] px-[20px] py-[13px] rounded-[4px] text-[16px] font-normal leading-[24px] whitespace-nowrap transition-all duration-300 select-none cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] focus-visible:ring-offset-2";
+    "group relative overflow-hidden inline-flex items-center justify-center gap-[16px] px-[20px] py-[13px] rounded-[4px] type-cta whitespace-nowrap transition-all duration-300 select-none cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] focus-visible:ring-offset-2";
 
   const variantClasses = isOutline
     ? variant === "outline-dark"

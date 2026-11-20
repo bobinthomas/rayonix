@@ -32,7 +32,7 @@ export default function BeyondIntegrationSection() {
         {/* Editorial Statement Header matching Figma node 640:3939 */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 px-6 sm:px-8 pb-16">
           <div>
-            <h2 className="text-4xl sm:text-6xl lg:text-[64px] font-bold text-[#080f12] leading-tight lg:leading-[72px]">
+            <h2 className="type-hero text-[#080f12] ">
               Beyond Integration.
               <br />
               Built for <span className="text-[#7f8a91]">Defense</span>
@@ -68,10 +68,10 @@ export default function BeyondIntegrationSection() {
 
                 {/* Content layer above the fill */}
                 <div className="relative z-10 h-full flex flex-col justify-between">
-                  <h3 className="subsidiary-title text-4xl sm:text-6xl lg:text-[64px] font-bold text-[#7f8a91] leading-[72px]">
+                  <h3 className="subsidiary-title type-hero text-[#7f8a91] ">
                     {item.name}
                   </h3>
-                  <p className="subsidiary-desc text-lg sm:text-2xl lg:text-[24px] font-medium text-[#080f12] leading-[32px]">
+                  <p className="subsidiary-desc type-h3 text-[#080f12] ">
                     {item.description}
                   </p>
                 </div>

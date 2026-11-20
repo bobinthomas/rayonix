@@ -101,7 +101,7 @@ const countryMarkers: CountryMarker[] = [
   },
 ];
 
-// Partner logos, in Figma display order (8 per row on desktop, left-aligned).
+// Partner logos, in Figma display order (7 per row from md up: 14 logos = 2 equal rows; 2 per row on mobile).
 const partners = [
   { name: "XTEND", file: "xtend" },
   { name: "Hivebotics", file: "hivebotics" },
@@ -319,10 +319,10 @@ export default function GlobalPartnershipSection() {
               },
             ]}
             accentDot={false}
-            className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[72px]"
+            className="type-hero"
           />
 
-          <p className="text-base sm:text-lg lg:text-[18px] text-[#bdc4c8] font-normal leading-[28px] max-w-[1080px] mt-6">
+          <p className="type-body-lg text-[#bdc4c8] max-w-[1080px] mt-6">
             We bring field-proven defence technologies from across the world to India through strategic global partnerships, combining international expertise with local integration and deployment capabilities.
           </p>
         </div>
@@ -334,7 +334,7 @@ export default function GlobalPartnershipSection() {
           data-node-id="354:2952"
         >
           <ul
-            className="rounded-[2px] bg-[#f6f7f9] p-4 sm:p-6 lg:p-8 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4 lg:gap-[14px]"
+            className="rounded-[2px] bg-[#f6f7f9] p-4 sm:p-6 lg:p-8 grid grid-cols-2 md:grid-cols-7 gap-3 sm:gap-4 lg:gap-[14px]"
             data-node-id="354:2953"
             aria-label="Global defence and technology partners"
           >
@@ -348,7 +348,7 @@ export default function GlobalPartnershipSection() {
                   alt={partner.name}
                   width={526}
                   height={486}
-                  sizes="(max-width: 639px) 45vw, (max-width: 1023px) 22vw, 150px"
+                  sizes="(max-width: 767px) 45vw, (max-width: 1279px) 14vw, 175px"
                   loading="lazy"
                   className="absolute inset-0 w-full h-full object-contain"
                 />

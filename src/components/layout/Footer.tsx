@@ -26,10 +26,10 @@ export default function Footer() {
                 />
               </div>
             </Link>
-            <p className="text-[16px] font-normal text-[#a3adb2]">
+            <p className="type-body text-[#a3adb2]">
               Detect. Decide. Respond.
             </p>
-            <p className="pt-6 text-[18px] font-normal text-[#f5f6f6] leading-[28px] max-w-[284px]">
+            <p className="pt-6 type-body-lg text-[#f5f6f6] max-w-[284px]">
               Technology built for what lies beyond the visible.
             </p>
           </div>
@@ -38,7 +38,7 @@ export default function Footer() {
           <div className="lg:col-span-8 flex flex-col gap-10">
             {/* Newsletter matching Figma node 640:4177 */}
             <div className="flex flex-col gap-3">
-              <p className="text-[16px] font-normal text-[#808080]">
+              <p className="type-body text-[#808080]">
                 Subscribe for Rayonix Update, Insights & News.
               </p>
               <form
@@ -48,7 +48,7 @@ export default function Footer() {
                 <input
                   type="email"
                   placeholder="Email address"
-                  className="flex-1 text-[16px] text-[#080f12] placeholder-[#808080] bg-transparent focus:outline-none"
+                  className="flex-1 type-body text-[#080f12] placeholder-[#808080] bg-transparent focus:outline-none"
                   required
                 />
                 <button
@@ -72,32 +72,32 @@ export default function Footer() {
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
               {/* Explore Column */}
               <div className="flex flex-col gap-3.5">
-                <p className="text-[18px] font-normal text-[#f5f6f6]">Explore</p>
+                <p className="type-body-lg text-[#f5f6f6]">Explore</p>
                 <Link
                   href="/solutions"
                   prefetch={false}
-                  className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
+                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
                 >
                   Capabilities
                 </Link>
                 <Link
                   href="/solutions"
                   prefetch={false}
-                  className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
+                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
                 >
                   Solutions
                 </Link>
                 <Link
                   href="/subsurface/detect/gpr"
                   prefetch={false}
-                  className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
+                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
                 >
                   Platforms
                 </Link>
                 <Link
                   href="/ecosystem"
                   prefetch={false}
-                  className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
+                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
                 >
                   Technologies
                 </Link>
@@ -105,24 +105,24 @@ export default function Footer() {
 
               {/* Company Column */}
               <div className="flex flex-col gap-3.5">
-                <p className="text-[18px] font-normal text-[#f5f6f6]">Company</p>
+                <p className="type-body-lg text-[#f5f6f6]">Company</p>
                 <Link
                   href="/about"
                   prefetch={false}
-                  className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
+                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
                 >
                   About Us
                 </Link>
                 <Link
                   href="/news"
                   prefetch={false}
-                  className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
+                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
                 >
                   Newsroom
                 </Link>
                 <a
                   href="mailto:info@rayonix.in?subject=Business%20enquiry"
-                  className="text-[16px] text-[#a3adb2] hover:text-white transition-colors"
+                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
                 >
                   Contact Us
                 </a>
@@ -130,7 +130,7 @@ export default function Footer() {
 
               {/* Connect Column */}
               <div className="flex flex-col gap-3.5">
-                <p className="text-[18px] font-normal text-[#f5f6f6]">Connect</p>
+                <p className="type-body-lg text-[#f5f6f6]">Connect</p>
                 <a
                   href="https://linkedin.com/company/rayonix"
                   target="_blank"
@@ -159,10 +159,10 @@ export default function Footer() {
         {/* Global Presence matching Figma node 640:4116 */}
         <div id="global-presence" className="flex flex-col gap-8 pt-4 scroll-mt-24">
           <div className="space-y-1">
-            <h3 className="text-[24px] font-medium text-[#f5f6f6] leading-[32px]">
+            <h3 className="type-h3 text-[#f5f6f6] ">
               Our Global Presence
             </h3>
-            <p className="text-[18px] font-normal text-[#f5f6f6] leading-[28px]">
+            <p className="type-body-lg text-[#f5f6f6] ">
               Rooted in India. Connected to the World.
             </p>
           </div>
@@ -178,14 +178,14 @@ export default function Footer() {
                   className="object-contain"
                 />
               </div>
-              <div className="flex flex-col gap-1 text-[16px]">
-                <p className="text-[18px] text-[#bdbdbd] font-normal leading-[28px]">
+              <div className="flex flex-col gap-1 type-body">
+                <p className="type-body-lg text-[#bdbdbd] ">
                   INDIA | Headquarters
                 </p>
-                <p className="text-[14px] text-[#808080] font-medium">
+                <p className="type-small font-medium text-[#808080] ">
                   Rayonix Tech Private Limited
                 </p>
-                <p className="text-[14px] text-[#808080] font-medium">
+                <p className="type-small font-medium text-[#808080] ">
                   Delhi - Hyderabad - Mumbai - Chennai - Bangalore
                 </p>
                 <p className="text-[#808080] font-normal pt-1 leading-[24px]">
@@ -208,11 +208,11 @@ export default function Footer() {
                   className="object-contain"
                 />
               </div>
-              <div className="flex flex-col gap-1 text-[16px]">
-                <p className="text-[18px] text-[#bdbdbd] font-normal leading-[28px]">
+              <div className="flex flex-col gap-1 type-body">
+                <p className="type-body-lg text-[#bdbdbd] ">
                   AUSTRALIA | Global Presence
                 </p>
-                <p className="text-[14px] text-[#808080] font-medium">
+                <p className="type-small font-medium text-[#808080] ">
                   Rayonix Australia Pty Ltd
                 </p>
                 <p className="text-[#808080] font-normal pt-1 leading-[24px]">
@@ -242,7 +242,7 @@ export default function Footer() {
 
       {/* Red Legal Strip matching Figma node 640:4183 */}
       <div className="w-full bg-[#e22328] py-3">
-        <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between text-[12px] font-normal text-white gap-2">
+        <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between type-caption text-white gap-2">
           <p>© 2026 Rayonix Tech Private Limited. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link href="/privacy" prefetch={false} className="hover:underline">

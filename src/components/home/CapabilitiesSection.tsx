@@ -86,7 +86,7 @@ export default function CapabilitiesSection() {
               },
             ]}
             accentDot={false}
-            className="text-3xl sm:text-5xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[72px]"
+            className="type-hero"
           />
         </div>
 
@@ -124,7 +124,7 @@ export default function CapabilitiesSection() {
             >
               {/* Animated Stat Value counting up from 0 */}
               <div
-                className="h-[56px] flex items-center text-3xl sm:text-4xl lg:text-[48px] font-bold text-[#f5f6f6] tracking-tight leading-[56px]"
+                className="h-[56px] flex items-center type-h2 text-[#f5f6f6] "
                 data-node-id="200:1185"
               >
                 <AnimatedCounter
@@ -136,7 +136,7 @@ export default function CapabilitiesSection() {
 
               {/* Metric Label */}
               <p
-                className="text-lg sm:text-xl lg:text-[20px] font-medium text-[#f5f6f6] leading-[28px]"
+                className="type-h3 text-[#f5f6f6] "
                 data-node-id="200:1186"
               >
                 {point.label}
@@ -144,7 +144,7 @@ export default function CapabilitiesSection() {
 
               {/* Metric Description */}
               <div
-                className="text-sm sm:text-base lg:text-[16px] font-normal text-[#bdc4c8] leading-[24px]"
+                className="type-body text-[#bdc4c8] "
                 data-node-id="200:1187"
               >
                 {point.description.map((line, lineIdx) => (

@@ -36,12 +36,12 @@ export default function BattlespaceSection() {
             accentDot={true}
             accentColor="#e22328"
             as="h2"
-            className="w-full text-3xl sm:text-4xl md:text-5xl xl:text-[64px] 2xl:text-[64px] font-bold text-[#f5f6f6] xl:tracking-[1px] leading-tight lg:leading-[60px] xl:leading-[72px]"
+            className="w-full type-hero text-[#f5f6f6] "
           />
         </div>
 
         {/* Editorial Text with scroll-driven gradient fill animation */}
-        <ScrollGradientText className="w-full space-y-6 sm:space-y-8 text-xl sm:text-2xl lg:text-[32px] font-normal leading-relaxed lg:leading-[40px]">
+        <ScrollGradientText className="w-full space-y-6 sm:space-y-8 type-statement">
           <p data-gradient-text>
             Today&apos;s asymmetric threats transcend conventional boundaries,
             demanding intelligent, interconnected defence capabilities.

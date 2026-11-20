@@ -28,7 +28,7 @@ export default function ExploreSection() {
               },
             ]}
             accentDot={false}
-            className="text-4xl sm:text-6xl lg:text-[64px] font-bold tracking-tight leading-tight lg:leading-[72px]"
+            className="type-hero"
           />
         </div>
 
@@ -55,19 +55,19 @@ export default function ExploreSection() {
             data-node-id="440:561"
           >
             <span
-              className="text-[14px] font-medium text-[#e8141a] tracking-wider uppercase"
+              className="type-eyebrow text-[#e8141a] "
               data-node-id="440:562"
             >
               01 / COMPANY
             </span>
             <h3
-              className="text-3xl sm:text-5xl lg:text-[48px] font-medium text-[#f5f6f6] leading-tight lg:leading-[56px]"
+              className="type-h2 text-[#f5f6f6] "
               data-node-id="440:563"
             >
               The Rayonix Story.
             </h3>
             <p
-              className="text-base sm:text-lg lg:text-[18px] text-[#f5f6f6]/90 font-normal leading-[28px]"
+              className="type-body-lg text-[#f5f6f6]/90 "
               data-node-id="440:564"
             >
               Discover our mission, vision and approach to advancing defence technology.
@@ -103,19 +103,19 @@ export default function ExploreSection() {
               data-node-id="440:569"
             >
               <span
-                className="text-[14px] font-medium text-[#f5f6f6]/80 tracking-wider uppercase"
+                className="type-eyebrow text-[#f5f6f6]/80 "
                 data-node-id="440:570"
               >
                 02 / ECOSYSTEM
               </span>
               <h3
-                className="text-2xl sm:text-4xl lg:text-[48px] font-medium text-[#f5f6f6] leading-tight lg:leading-[56px]"
+                className="type-h2 text-[#f5f6f6] "
                 data-node-id="440:571"
               >
                 The Rayonix Ecosystem.
               </h3>
               <p
-                className="text-sm sm:text-base lg:text-[18px] text-[#f5f6f6]/90 font-normal leading-[28px]"
+                className="type-body-lg text-[#f5f6f6]/90 "
                 data-node-id="440:572"
               >
                 Explore the specialised engineering, innovation and manufacturing entities behind our capabilities.
@@ -149,19 +149,19 @@ export default function ExploreSection() {
               data-node-id="440:584"
             >
               <span
-                className="text-[14px] font-medium text-[#f5f6f6]/80 tracking-wider uppercase"
+                className="type-eyebrow text-[#f5f6f6]/80 "
                 data-node-id="440:585"
               >
                 04 / CAREERS
               </span>
               <h3
-                className="text-2xl sm:text-4xl lg:text-[48px] font-medium text-[#f5f6f6] leading-tight lg:leading-[56px]"
+                className="type-h2 text-[#f5f6f6] "
                 data-node-id="440:586"
               >
                 Build What’s Next.
               </h3>
               <p
-                className="text-sm sm:text-base lg:text-[18px] text-[#f5f6f6]/90 font-normal leading-[28px]"
+                className="type-body-lg text-[#f5f6f6]/90 "
                 data-node-id="440:587"
               >
                 Explore opportunities to work across engineering, technology and defence innovation.
@@ -196,10 +196,10 @@ export default function ExploreSection() {
                   },
                 ]}
                 accentDot={false}
-                className="text-3xl sm:text-5xl lg:text-[48px] font-medium leading-tight lg:leading-[56px]"
+                className="type-h2 "
               />
               <p
-                className="text-base sm:text-lg lg:text-[18px] text-[#080f12]/80 font-normal leading-[28px] max-w-[805px] mt-2"
+                className="type-body-lg text-[#080f12]/80 max-w-[805px] mt-2"
                 data-node-id="440:577"
               >
                 Stay connected with our latest announcements, strategic partnerships, media coverage and developments shaping the future of defence technology.

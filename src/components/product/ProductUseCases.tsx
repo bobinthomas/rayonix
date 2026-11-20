@@ -74,11 +74,11 @@ export default function ProductUseCases({ useCases }: ProductUseCasesProps) {
           data-node-id="527:2477"
         >
           <div className="flex flex-col gap-2">
-            <h2 className="text-3xl sm:text-5xl lg:text-[48px] font-medium text-[#f5f6f6] leading-tight lg:leading-[56px] tracking-tight">
+            <h2 className="type-h2 text-[#f5f6f6] ">
               {useCases.heading}
             </h2>
             {useCases.description && (
-              <p className="text-xs sm:text-[12px] text-[#7f8a91] font-normal leading-[18px]">
+              <p className="type-caption text-[#7f8a91] ">
                 {useCases.description}
               </p>
             )}
@@ -156,7 +156,7 @@ export default function ProductUseCases({ useCases }: ProductUseCasesProps) {
                 className="snap-start shrink-0 w-[85%] border border-[#253035] rounded-[4px] bg-[#080f12] p-6 flex flex-col gap-8"
               >
                 <div className="flex items-center justify-between w-full">
-                  <span className="font-mono text-[13px] font-medium tracking-[1px] text-[#bdc4c8] uppercase">
+                  <span className="type-eyebrow text-[#bdc4c8] ">
                     {item.tag}
                   </span>
                   <span className="relative flex h-2.5 w-2.5">
@@ -165,10 +165,10 @@ export default function ProductUseCases({ useCases }: ProductUseCasesProps) {
                   </span>
                 </div>
                 <div className="flex flex-col gap-3">
-                  <h3 className="text-2xl font-normal leading-tight text-[#f5f6f6]">
+                  <h3 className="type-h3 text-[#f5f6f6]">
                     {item.title}
                   </h3>
-                  <p className="text-[17px] font-normal leading-relaxed text-[#bdc4c8]">
+                  <p className="type-body-lg text-[#bdc4c8]">
                     {item.description}
                   </p>
                 </div>
@@ -215,7 +215,7 @@ export default function ProductUseCases({ useCases }: ProductUseCasesProps) {
                     className="p-8 sm:p-12 lg:p-[48px] min-h-[460px] lg:h-[536px] flex flex-col justify-between relative group hover:bg-[#0c1418] transition-colors duration-300"
                   >
                     <div className="flex items-center justify-between w-full">
-                      <span className="font-mono text-[13px] font-medium tracking-[1px] text-[#bdc4c8] uppercase">
+                      <span className="type-eyebrow text-[#bdc4c8] ">
                         {item.tag}
                       </span>
                       <span className="relative flex h-2.5 w-2.5">
@@ -225,10 +225,10 @@ export default function ProductUseCases({ useCases }: ProductUseCasesProps) {
                     </div>
 
                     <div className="flex flex-col gap-4 pt-12">
-                      <h3 className="text-2xl sm:text-3xl lg:text-[34px] font-normal leading-tight lg:leading-[44px] text-[#f5f6f6]">
+                      <h3 className="type-statement text-[#f5f6f6]">
                         {item.title}
                       </h3>
-                      <p className="text-lg sm:text-xl lg:text-[26px] font-normal leading-relaxed lg:leading-[35px] text-[#bdc4c8]">
+                      <p className="type-body-lg text-[#bdc4c8]">
                         {item.description}
                       </p>
                     </div>

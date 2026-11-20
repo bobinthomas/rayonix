@@ -5,9 +5,9 @@ import TransformingHeading from "@/components/ui/TransformingHeading";
 import type { Breadcrumb, ProductPageContent } from "@/content/products/types";
 
 const TITLE_SIZES = {
-  display: "text-6xl sm:text-8xl lg:text-[128px] font-bold text-[#f5f6f6] tracking-tight leading-none",
-  long: "text-5xl sm:text-7xl lg:text-[104px] font-bold text-[#f5f6f6] tracking-tight leading-[1.05]",
-  extended: "text-4xl sm:text-6xl lg:text-[72px] font-bold text-[#f5f6f6] tracking-tight leading-[1.1]",
+  display: "type-display text-[#f5f6f6] ",
+  long: "type-display-long text-[#f5f6f6] ",
+  extended: "type-hero text-[#f5f6f6] ",
 } as const;
 
 // Spec strip columns by spec count (literal strings so Tailwind keeps them).
@@ -36,7 +36,7 @@ export default function ProductHero({ hero, breadcrumbs }: ProductHeroProps) {
         {/* Breadcrumb Navigation */}
         <nav
           aria-label="Breadcrumb"
-          className="flex items-center gap-2 text-sm font-medium text-[#7f8a91]"
+          className="flex items-center gap-2 type-small font-medium text-[#7f8a91]"
           data-node-id="486:5632"
         >
           {breadcrumbs.map((crumb, idx) => {
@@ -76,10 +76,10 @@ export default function ProductHero({ hero, breadcrumbs }: ProductHeroProps) {
           />
 
           <div className="flex flex-col gap-3">
-            <h2 className="text-xl sm:text-2xl lg:text-[24px] font-medium text-[#e22328] leading-[32px]">
+            <h2 className="type-h3 text-[#e22328] ">
               {hero.eyebrow}
             </h2>
-            <p className="text-base sm:text-lg lg:text-[18px] text-[#bdc4c8] font-normal leading-[28px] max-w-[1176px]">
+            <p className="type-body-lg text-[#bdc4c8] max-w-[1176px]">
               {hero.intro}
             </p>
           </div>
@@ -174,7 +174,7 @@ export default function ProductHero({ hero, breadcrumbs }: ProductHeroProps) {
               />
 
               <div className="flex flex-col gap-1 pl-1">
-                <span className="text-xl sm:text-3xl lg:text-[30px] font-normal text-[#f5f6f6] tracking-tight leading-tight [overflow-wrap:anywhere]">
+                <span className="type-statement text-[#f5f6f6] [overflow-wrap:anywhere]">
                   {/* allow a line break after "/" in long values (e.g. Pixels/Second) */}
                   {spec.value.split("/").map((part, i, all) => (
                     <React.Fragment key={i}>
@@ -187,7 +187,7 @@ export default function ProductHero({ hero, breadcrumbs }: ProductHeroProps) {
                     </React.Fragment>
                   ))}
                 </span>
-                <span className="text-xs sm:text-sm lg:text-[15px] font-normal text-[#7f8a91] leading-snug">
+                <span className="type-small text-[#7f8a91] ">
                   {spec.label}
                 </span>
               </div>

@@ -76,7 +76,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       <nav className="flex-1 overflow-y-auto px-6 py-6 divide-y divide-[#253035]/60">
         {/* Operational Domains */}
         <div className="pb-6 space-y-2">
-          <p className="text-[11px] font-semibold tracking-wider uppercase text-[#e22328] mb-3">
+          <p className="type-eyebrow text-[#e22328] mb-3">
             Operational Domains
           </p>
 
@@ -88,7 +88,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <button
                   type="button"
                   onClick={() => toggleTab(tab)}
-                  className="w-full flex items-center justify-between py-2 text-[18px] font-medium text-[#f5f6f6] hover:text-[#e22328] transition-colors"
+                  className="w-full flex items-center justify-between py-2 type-body-lg font-medium text-[#f5f6f6] hover:text-[#e22328] transition-colors"
                 >
                   <span className="capitalize">{data.title}</span>
                   <ChevronDown
@@ -100,13 +100,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
                 {isExpanded && (
                   <div className="pl-3 py-2 space-y-3 bg-[#10181c]/60 rounded-md my-1">
-                    <p className="text-[12px] text-[#bdc4c8] leading-relaxed">
+                    <p className="type-caption text-[#bdc4c8] ">
                       {data.subtitle}
                     </p>
                     <div className="space-y-3 pt-1">
                       {data.modes.map((mode) => (
                         <div key={mode.id} className="space-y-1.5">
-                          <span className="text-[11px] font-mono text-[#e22328] uppercase font-semibold">
+                          <span className="type-eyebrow text-[#e22328] ">
                             {mode.label}
                           </span>
                           <div className="pl-2 space-y-2">
@@ -116,7 +116,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                 href={item.href}
                                 prefetch={false}
                                 onClick={onClose}
-                                className="block text-[13px] text-[#f5f6f6] hover:text-[#e22328]"
+                                className="block type-small text-[#f5f6f6] hover:text-[#e22328]"
                               >
                                 {item.title}
                               </Link>
@@ -134,7 +134,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
         {/* Solutions & Company */}
         <div className="py-6 space-y-2">
-          <p className="text-[11px] font-semibold tracking-wider uppercase text-[#7f8a91] mb-3">
+          <p className="type-eyebrow text-[#7f8a91] mb-3">
             Solutions & Company
           </p>
 
@@ -146,7 +146,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <button
                   type="button"
                   onClick={() => toggleTab(tab)}
-                  className="w-full flex items-center justify-between py-2 text-[18px] font-medium text-[#f5f6f6] hover:text-[#e22328] transition-colors"
+                  className="w-full flex items-center justify-between py-2 type-body-lg font-medium text-[#f5f6f6] hover:text-[#e22328] transition-colors"
                 >
                   <span className="capitalize">{tab === "solutions" ? "Solutions" : "Company"}</span>
                   <ChevronDown
@@ -158,13 +158,13 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
                 {isExpanded && (
                   <div className="pl-3 py-2 space-y-3 bg-[#10181c]/60 rounded-md my-1">
-                    <p className="text-[12px] text-[#bdc4c8] leading-relaxed">
+                    <p className="type-caption text-[#bdc4c8] ">
                       {data.subtitle}
                     </p>
                     <div className="space-y-3 pt-1">
                       {data.modes.map((mode) => (
                         <div key={mode.id} className="space-y-1.5">
-                          <span className="text-[11px] font-mono text-[#e22328] uppercase font-semibold">
+                          <span className="type-eyebrow text-[#e22328] ">
                             {mode.label}
                           </span>
                           <div className="pl-2 space-y-2">
@@ -174,7 +174,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                                 href={item.href}
                                 prefetch={false}
                                 onClick={onClose}
-                                className="block text-[13px] text-[#f5f6f6] hover:text-[#e22328]"
+                                className="block type-small text-[#f5f6f6] hover:text-[#e22328]"
                               >
                                 {item.title}
                               </Link>
@@ -196,11 +196,11 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         <Link
           href="mailto:info@rayonix.in?subject=Command%20Enquiry"
           onClick={onClose}
-          className="w-full flex items-center justify-center px-6 py-3.5 text-sm font-semibold tracking-wide text-white bg-[#e22328] hover:bg-[#c8171c] transition-colors rounded-[4px] shadow-sm"
+          className="w-full flex items-center justify-center px-6 py-3.5 type-cta text-white bg-[#e22328] hover:bg-[#c8171c] transition-colors rounded-[4px] shadow-sm"
         >
           Contact Our Command Team
         </Link>
-        <p className="mt-3 text-center text-xs text-[#7f8a91]">
+        <p className="mt-3 text-center type-caption text-[#7f8a91]">
           IN(VISIBLE) WARFARE · Sovereign Defence Technology
         </p>
       </div>

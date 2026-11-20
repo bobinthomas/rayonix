@@ -33,18 +33,18 @@ export default function TacticalPlaceholder({
         {/* Category & Badge */}
         <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-[rgba(226,35,40,0.3)] bg-[rgba(226,35,40,0.06)] backdrop-blur-sm">
           <span className="w-1.5 h-1.5 rounded-full bg-[#e22328] animate-pulse" />
-          <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-[#e22328]">
+          <span className="type-eyebrow text-[#e22328]">
             {badge}
           </span>
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#f5f6f6] leading-tight">
+        <h1 className="type-hero text-[#f5f6f6] ">
           {title}
         </h1>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg text-[#8e9ca2] max-w-[620px] leading-relaxed">
+        <p className="type-body-lg text-[#8e9ca2] max-w-[620px] ">
           {subtitle}
         </p>
 

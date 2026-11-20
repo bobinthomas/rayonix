@@ -24,7 +24,7 @@ function capabilityRows(n: number): number[] {
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-[13px] sm:text-[14px] font-medium leading-[20px] tracking-[1.12px] uppercase text-[#e22328]">
+    <p className="type-eyebrow text-[#e22328]">
       {children}
     </p>
   );
@@ -37,14 +37,14 @@ function CapabilityCard({ item, index }: { item: SolutionItem; index: number }) 
       data-name="Solution / Capability card"
     >
       <div className="flex items-center gap-4">
-        <span className="text-[14px] font-medium leading-[20px] text-[#e22328]">{pad(index)}</span>
+        <span className="type-small font-medium text-[#e22328]">{pad(index)}</span>
         <span className="flex-1 h-px bg-[#dde2e8]" aria-hidden="true" />
       </div>
       <div className="flex flex-col gap-3">
-        <h3 className="text-[20px] sm:text-[24px] font-medium leading-[28px] sm:leading-[32px] text-[#080f12]">
+        <h3 className="type-h3 text-[#080f12]">
           {item.title}
         </h3>
-        <p className="text-[16px] font-normal leading-[24px] text-[#475569]">{item.body}</p>
+        <p className="type-body text-[#475569]">{item.body}</p>
       </div>
     </div>
   );
@@ -67,16 +67,16 @@ function ApplicationCard({
       data-name="Solution / Application card"
     >
       <div className="flex items-center justify-between">
-        <span className="text-[13px] sm:text-[14px] font-medium leading-[20px] tracking-[1.12px] text-[#bdc4c8]">
+        <span className="type-eyebrow text-[#bdc4c8]">
           Application / {pad(index)}
         </span>
         <Image src="/assets/solutions/indicator.svg" alt="" width={9} height={9} aria-hidden="true" />
       </div>
       <div className="flex flex-col gap-4">
-        <h3 className="text-[24px] sm:text-[28px] lg:text-[32px] font-normal leading-[32px] lg:leading-[40px] text-[#f5f6f6]">
+        <h3 className="type-statement text-[#f5f6f6]">
           {item.title}
         </h3>
-        <p className="text-[16px] lg:text-[18px] font-normal leading-[24px] lg:leading-[28px] text-[#bdc4c8]">
+        <p className="type-body-lg text-[#bdc4c8]">
           {item.body}
         </p>
       </div>
@@ -103,7 +103,7 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
           data-node-id="838:708"
         >
           <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-10 lg:gap-16">
-            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 text-sm font-medium" data-node-id="838:712">
+            <nav aria-label="Breadcrumb" className="flex flex-wrap items-center gap-2 type-small font-medium" data-node-id="838:712">
               <Link href="/" className="text-[#bdc4c8] hover:text-white transition-colors">
                 Home
               </Link>
@@ -124,10 +124,10 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
               <TransformingHeading
                 as="h1"
                 text={hero.headline.join("\n")}
-                className="max-w-[1100px] text-[36px] sm:text-5xl lg:text-[64px] font-bold leading-[1.15] lg:leading-[72px] text-[#f5f6f6]"
+                className="max-w-[1100px] type-hero text-[#f5f6f6]"
               />
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-12">
-                <p className="max-w-[820px] text-[16px] sm:text-[18px] font-normal leading-[26px] sm:leading-[28px] text-[#bdc4c8]">
+                <p className="max-w-[820px] type-body-lg text-[#bdc4c8]">
                   {hero.intro}
                 </p>
                 <div className="shrink-0 lg:pt-4">
@@ -189,7 +189,7 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
           <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-10 lg:gap-14">
             <div className="flex flex-col gap-3 pt-2">
               <Eyebrow>Key Capabilities</Eyebrow>
-              <h2 className="text-3xl sm:text-5xl lg:text-[48px] font-medium leading-tight lg:leading-[56px] text-[#080f12]">
+              <h2 className="type-h2 text-[#080f12]">
                 {capabilities.heading}
               </h2>
             </div>
@@ -217,7 +217,7 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
           <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-10 lg:gap-[104px]">
             <div className="flex flex-col gap-3">
               <Eyebrow>Applications</Eyebrow>
-              <h2 className="text-3xl sm:text-5xl lg:text-[48px] font-medium leading-tight lg:leading-[56px] text-[#f5f6f6]">
+              <h2 className="type-h2 text-[#f5f6f6]">
                 {applications.heading}
               </h2>
             </div>
@@ -243,17 +243,17 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
             <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-10 lg:gap-14">
               <div className="flex flex-col gap-3">
                 <Eyebrow>Value Proposition</Eyebrow>
-                <h2 className="text-3xl sm:text-5xl lg:text-[48px] font-medium leading-tight lg:leading-[56px] text-[#f5f6f6]">
+                <h2 className="type-h2 text-[#f5f6f6]">
                   {valueProposition.heading}
                 </h2>
               </div>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-8">
                 {valueProposition.items.map((item) => (
                   <li key={item.title} className="border-l-2 border-[#e22328] pl-5 flex flex-col gap-2">
-                    <h3 className="text-[20px] sm:text-[24px] font-medium leading-[28px] sm:leading-[32px] text-[#f5f6f6]">
+                    <h3 className="type-h3 text-[#f5f6f6]">
                       {item.title}
                     </h3>
-                    <p className="text-[16px] lg:text-[18px] leading-[24px] lg:leading-[28px] text-[#bdc4c8]">
+                    <p className="type-body-lg text-[#bdc4c8]">
                       {item.body}
                     </p>
                   </li>
@@ -275,10 +275,10 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
               data-node-id="840:845"
             >
               <span className="absolute left-0 top-0 bottom-0 w-1 bg-[#e22328]" aria-hidden="true" />
-              <h2 className="max-w-[1100px] text-3xl sm:text-5xl lg:text-[48px] font-medium leading-tight lg:leading-[56px] text-[#f5f6f6]">
+              <h2 className="max-w-[1100px] type-h2 text-[#f5f6f6]">
                 {cta.heading}
               </h2>
-              <p className="max-w-[860px] text-[16px] sm:text-[18px] leading-[26px] sm:leading-[28px] text-[#bdc4c8]">
+              <p className="max-w-[860px] type-body-lg text-[#bdc4c8]">
                 {cta.text}
               </p>
               <div className="flex flex-wrap gap-4 pt-4">

@@ -628,7 +628,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
                     type="button"
                     onMouseEnter={() => handleModeChange(mode.id)}
                     onClick={() => handleModeChange(mode.id)}
-                    className={`relative px-3.5 py-1.5 text-[13px] font-medium tracking-normal transition-colors duration-200 rounded-[2px] flex items-center gap-2 cursor-pointer ${
+                    className={`relative px-3.5 py-1.5 type-small font-medium transition-colors duration-200 rounded-[2px] flex items-center gap-2 cursor-pointer ${
                       isActive
                         ? "bg-[#e22328] text-white shadow-sm"
                         : "text-[#9ca8ae] hover:text-white hover:bg-white/[0.06]"
@@ -664,10 +664,10 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
                     className="group flex items-center justify-between p-3 rounded-[4px] transition-all duration-200 hover:bg-white/[0.04] border border-transparent hover:border-[#253035]/60"
                   >
                     <div className="pr-3">
-                      <h4 className="text-[14px] font-semibold text-[#f5f6f6] group-hover:text-[#e22328] transition-colors leading-snug">
+                      <h4 className="type-small font-medium text-[#f5f6f6] group-hover:text-[#e22328] transition-colors ">
                         {item.title}
                       </h4>
-                      <p className="text-[12px] text-[#8e9ca2] leading-relaxed mt-0.5 line-clamp-2">
+                      <p className="type-caption text-[#8e9ca2] mt-0.5 line-clamp-2">
                         {item.description}
                       </p>
                     </div>
@@ -683,7 +683,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
             {/* Bottom Quick Bar */}
             <div
               key={activeTab}
-              className="pt-4 mt-3 border-t border-[#253035] flex items-center justify-between text-xs text-[#7f8e95] animate-in fade-in-50 duration-200"
+              className="pt-4 mt-3 border-t border-[#253035] flex items-center justify-between type-caption text-[#7f8e95] animate-in fade-in-50 duration-200"
             >
               <span className="truncate pr-4">{content.subtitle}</span>
             </div>
@@ -698,7 +698,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
               <div>
                 {/* Header Tag */}
                 <div className="flex items-center justify-between mb-3.5">
-                  <span className="text-[11px] font-bold tracking-wider uppercase text-[#e22328]">
+                  <span className="type-eyebrow text-[#e22328]">
                     {content.spotlight.tag}
                   </span>
                   <span className="w-1.5 h-1.5 rounded-full bg-[#e22328] animate-pulse" />
@@ -717,10 +717,10 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
                 </div>
 
                 {/* Title & Description */}
-                <h3 className="text-[15px] font-bold text-[#f5f6f6] leading-snug group-hover:text-[#e22328] transition-colors">
+                <h3 className="type-body font-medium text-[#f5f6f6] group-hover:text-[#e22328] transition-colors">
                   {content.spotlight.title}
                 </h3>
-                <p className="text-[13px] text-[#8e9ca2] leading-relaxed mt-1.5">
+                <p className="type-small text-[#8e9ca2] mt-1.5">
                   {content.spotlight.description}
                 </p>
               </div>

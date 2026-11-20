@@ -37,52 +37,107 @@ export const tokens = {
       display: "var(--font-display)",
       mono: "var(--font-mono)",
     },
+    /**
+     * Type scale — the ONLY sizes the site should use.
+     * Each role compiles to a Tailwind class `type-<role>` (see tailwind.config.ts)
+     * that is mobile-first and switches to `desktop` at the `lg` breakpoint (1024px).
+     * Use the class instead of hand-written text-[NNpx] / leading-[NNpx] / tracking-[…].
+     *
+     * Gordita ships 400 / 500 / 700 only in practice — never use 600 (renders as 700).
+     */
+    desktopBreakpoint: "1024px",
     scale: {
+      /** Product hero, short names (e.g. "GPR") */
+      display: {
+        mobile: { fontSize: "60px", lineHeight: "60px" },
+        desktop: { fontSize: "128px", lineHeight: "128px" },
+        fontWeight: "700",
+        letterSpacing: "-0.025em",
+      },
+      /** Product hero, longer names (e.g. "Command & intelligence") */
+      displayLong: {
+        mobile: { fontSize: "48px", lineHeight: "52px" },
+        desktop: { fontSize: "104px", lineHeight: "108px" },
+        fontWeight: "700",
+        letterSpacing: "-0.025em",
+      },
+      /** Page hero H1 on every non-product page; also big home section statements */
       hero: {
-        fontSize: "4rem", // 64px
-        lineHeight: "4.5rem", // 72px
+        mobile: { fontSize: "36px", lineHeight: "44px" },
+        desktop: { fontSize: "64px", lineHeight: "72px" },
         fontWeight: "700",
         letterSpacing: "-0.035em",
       },
-      sectionHeading: {
-        fontSize: "3rem", // 48px
-        lineHeight: "3.5rem", // 56px
+      /** Section heading (H2) */
+      h2: {
+        mobile: { fontSize: "30px", lineHeight: "38px" },
+        desktop: { fontSize: "48px", lineHeight: "56px" },
         fontWeight: "500",
         letterSpacing: "-0.025em",
       },
-      heading: {
-        fontSize: "2rem", // 32px
-        lineHeight: "2.5rem", // 40px
+      /** Large statement copy / featured card titles (e.g. Battlespace paragraph, "Detect.") */
+      statement: {
+        mobile: { fontSize: "22px", lineHeight: "32px" },
+        desktop: { fontSize: "32px", lineHeight: "40px" },
         fontWeight: "400",
-        letterSpacing: "-0.02em",
+        letterSpacing: "-0.01em",
       },
-      cardTitle: {
-        fontSize: "1.5rem", // 24px
-        lineHeight: "2rem", // 32px
+      /** Figures: "15+", "600 MHz", "14+" */
+      stat: {
+        mobile: { fontSize: "26px", lineHeight: "32px" },
+        desktop: { fontSize: "40px", lineHeight: "48px" },
+        fontWeight: "500",
+        letterSpacing: "-0.025em",
+      },
+      /** Card / sub-section title (H3) */
+      h3: {
+        mobile: { fontSize: "20px", lineHeight: "28px" },
+        desktop: { fontSize: "24px", lineHeight: "32px" },
         fontWeight: "500",
         letterSpacing: "-0.015em",
       },
-      bodyLarge: {
-        fontSize: "1.125rem", // 18px
-        lineHeight: "1.75rem", // 28px
+      /** Lead / intro paragraph */
+      bodyLg: {
+        mobile: { fontSize: "16px", lineHeight: "26px" },
+        desktop: { fontSize: "18px", lineHeight: "28px" },
         fontWeight: "400",
+        letterSpacing: "0",
       },
+      /** Default paragraph */
       body: {
-        fontSize: "1rem", // 16px
-        lineHeight: "1.5rem", // 24px
+        mobile: { fontSize: "16px", lineHeight: "24px" },
+        desktop: { fontSize: "16px", lineHeight: "24px" },
         fontWeight: "400",
+        letterSpacing: "0",
       },
-      label: {
-        fontSize: "0.875rem", // 14px
-        lineHeight: "1.25rem", // 20px
-        fontWeight: "500",
-        letterSpacing: "0.06em",
-        textTransform: "uppercase" as const,
+      /** Secondary text, card descriptions, nav sub-items */
+      small: {
+        mobile: { fontSize: "14px", lineHeight: "20px" },
+        desktop: { fontSize: "14px", lineHeight: "20px" },
+        fontWeight: "400",
+        letterSpacing: "0",
       },
+      /** Dates, legal, metadata */
       caption: {
-        fontSize: "0.75rem", // 12px
-        lineHeight: "1.125rem", // 18px
+        mobile: { fontSize: "12px", lineHeight: "18px" },
+        desktop: { fontSize: "12px", lineHeight: "18px" },
         fontWeight: "400",
+        letterSpacing: "0",
+      },
+      /** Buttons and text CTAs ("Learn more", "Read article") */
+      cta: {
+        mobile: { fontSize: "16px", lineHeight: "24px" },
+        desktop: { fontSize: "16px", lineHeight: "24px" },
+        fontWeight: "500",
+        letterSpacing: "0",
+      },
+      /** Eyebrows / kicker labels ("01 / Company", "Usecase/001") */
+      eyebrow: {
+        mobile: { fontSize: "12px", lineHeight: "16px" },
+        desktop: { fontSize: "13px", lineHeight: "20px" },
+        fontWeight: "500",
+        letterSpacing: "0.08em",
+        textTransform: "uppercase",
       },
     },
   },

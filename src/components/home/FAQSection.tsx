@@ -24,17 +24,17 @@ export default function FAQSection({ faqs }: FAQSectionProps) {
         <div className="max-w-3xl mb-12">
           <div className="inline-flex items-center gap-2 mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-rayonix-accent" />
-            <span className="text-[12px] font-semibold tracking-label uppercase text-[#a3adb2]">
+            <span className="type-eyebrow text-[#a3adb2]">
               07 / KNOWLEDGE & FREQUENT QUESTIONS
             </span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white tracking-hero">
+          <h2 className="type-hero text-white ">
             Frequently Asked Questions
             <span className="text-rayonix-accent">.</span>
           </h2>
 
-          <p className="mt-4 text-[#a3adb2] text-base sm:text-lg">
+          <p className="mt-4 text-[#a3adb2] type-body-lg">
             Essential facts on Rayonix autonomous systems, global operations, and mission architectures.
           </p>
         </div>
@@ -51,7 +51,7 @@ export default function FAQSection({ faqs }: FAQSectionProps) {
                   className="w-full flex items-center justify-between text-left gap-6 group focus:outline-none"
                   aria-expanded={isOpen}
                 >
-                  <span className="text-xl sm:text-2xl font-medium text-white group-hover:text-rayonix-accent transition-colors">
+                  <span className="type-h3 text-white group-hover:text-rayonix-accent transition-colors">
                     {faq.question}
                   </span>
                   <div
@@ -68,7 +68,7 @@ export default function FAQSection({ faqs }: FAQSectionProps) {
                 </button>
 
                 {isOpen && (
-                  <div className="mt-4 pr-12 text-base sm:text-lg text-[#bdc4c8] font-normal leading-relaxed animate-in fade-in duration-200">
+                  <div className="mt-4 pr-12 type-body-lg text-[#bdc4c8] animate-in fade-in duration-200">
                     <p>{faq.answer}</p>
                   </div>
                 )}
@@ -78,7 +78,7 @@ export default function FAQSection({ faqs }: FAQSectionProps) {
         </div>
 
         {/* Helpdesk Callout */}
-        <div className="mt-12 text-sm text-[#7f8a91]">
+        <div className="mt-12 type-small text-[#7f8a91]">
           Have a specific defence or enterprise inquiry?{" "}
           <a
             href="mailto:info@rayonix.in"

@@ -41,7 +41,7 @@ export default function NewsCard({
     >
       {/* 1. Header: Headline + Thin Divider */}
       <div className="space-y-3.5 shrink-0">
-        <h4 className="text-xl sm:text-2xl lg:text-[24px] font-medium text-[#f5f6f6] leading-[32px] line-clamp-2 min-h-[64px] flex items-center">
+        <h4 className="type-h3 text-[#f5f6f6] line-clamp-2 min-h-[64px] flex items-center">
           {title}
         </h4>
         <div className="h-px w-full bg-white/10" />
@@ -62,7 +62,7 @@ export default function NewsCard({
 
         {/* Revealed Content: Starts translated down, on hover slides up into view */}
         <div className="absolute inset-x-0 bottom-0 flex flex-col justify-end gap-[12px] pb-1 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-[140px] opacity-0 pointer-events-none group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto">
-          <p className="text-sm sm:text-base lg:text-[16px] text-[#f5f6f6] font-normal leading-[22px] sm:leading-[24px] line-clamp-3">
+          <p className="type-body text-[#f5f6f6] line-clamp-3">
             {description}
           </p>
 
@@ -71,7 +71,7 @@ export default function NewsCard({
               <a
                 key={idx}
                 href={btn.href}
-                className="group/btn relative inline-flex items-center justify-center gap-3 sm:gap-4 px-4 sm:px-5 py-2.5 sm:py-3 h-[46px] sm:h-[52px] rounded-[4px] border border-[#e22328] overflow-hidden transition-all duration-300 select-none cursor-pointer text-sm sm:text-base font-normal leading-normal whitespace-nowrap"
+                className="group/btn relative inline-flex items-center justify-center gap-3 sm:gap-4 px-4 sm:px-5 py-2.5 sm:py-3 h-[46px] sm:h-[52px] rounded-[4px] border border-[#e22328] overflow-hidden transition-all duration-300 select-none cursor-pointer type-cta whitespace-nowrap"
               >
                 {/* Black background grows from bottom to top on hover */}
                 <span
@@ -116,7 +116,7 @@ export default function NewsCard({
       </div>
 
       {/* 3. Footer: Story Metadata */}
-      <div className="flex items-center gap-2.5 text-[12px] text-[#7f8a91] font-normal shrink-0">
+      <div className="flex items-center gap-2.5 type-caption text-[#7f8a91] shrink-0">
         <span className="font-bold text-[#f5f6f6]">{source}</span>
         <span className="text-white/30">•</span>
         <span>{date}</span>
