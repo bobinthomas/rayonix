@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
+import Image from "next/image";
 import CTAButton from "@/components/ui/CTAButton";
 
 export default function HeroSection() {
@@ -12,27 +13,64 @@ export default function HeroSection() {
     const videoEl = videoRef.current;
     if (!sectionEl || !videoEl) return;
 
-    // Safely trigger autoplay on mount
-    videoEl.play().catch(() => {});
+    // Poster image is the LCP element. The video is attached only after the page
+    // has loaded and the main thread is idle, so it never competes with critical
+    // resources. Skipped entirely for reduced-motion and data-saver users.
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+    if (reducedMotion || saveData) return;
 
-    // Pause video when scrolled out of view to preserve 100% GPU/CPU for scrolling
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            videoEl.play().catch(() => {});
-          } else {
-            videoEl.pause();
-          }
-        });
-      },
-      { threshold: 0.05 }
-    );
+    let observer: IntersectionObserver | undefined;
+    let idleId: number | undefined;
+    let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
-    observer.observe(sectionEl);
+    const attachVideo = () => {
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      videoEl.src = isMobile
+        ? "/assets/videos/website-hero-mobile.mp4"
+        : "/assets/videos/website-hero-web.mp4";
+      videoEl.addEventListener(
+        "playing",
+        () => videoEl.classList.remove("opacity-0"),
+        { once: true }
+      );
+      videoEl.play().catch(() => {});
+
+      // Pause video when scrolled out of view to preserve GPU/CPU for scrolling
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              videoEl.play().catch(() => {});
+            } else {
+              videoEl.pause();
+            }
+          });
+        },
+        { threshold: 0.05 }
+      );
+      observer.observe(sectionEl);
+    };
+
+    const schedule = () => {
+      if ("requestIdleCallback" in window) {
+        idleId = window.requestIdleCallback(attachVideo, { timeout: 2000 });
+      } else {
+        timeoutId = setTimeout(attachVideo, 200);
+      }
+    };
+
+    if (document.readyState === "complete") {
+      schedule();
+    } else {
+      window.addEventListener("load", schedule, { once: true });
+    }
 
     return () => {
-      observer.disconnect();
+      window.removeEventListener("load", schedule);
+      if (idleId !== undefined) window.cancelIdleCallback(idleId);
+      if (timeoutId !== undefined) clearTimeout(timeoutId);
+      observer?.disconnect();
     };
   }, []);
 
@@ -53,19 +91,23 @@ export default function HeroSection() {
     >
       {/* Background Hero Video with Poster Fallback */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <Image
+          src="/assets/hero-poster.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
         <video
           ref={videoRef}
-          autoPlay
           muted
           loop
           playsInline
-          preload="auto"
-          poster="/assets/hero-banner.png"
-          className="w-full h-full object-cover object-center"
-        >
-          <source src="/assets/videos/website-video.mp4" type="video/mp4" />
-          <source src="/assets/videos/Website%20VIDEO.mp4" type="video/mp4" />
-        </video>
+          preload="none"
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-opacity duration-700"
+        />
 
         {/* Top vignette for navigation contrast and readability */}
         <div className="absolute top-0 left-0 right-0 h-[220px] bg-gradient-to-b from-black/85 via-black/40 to-transparent" />

@@ -353,8 +353,8 @@ export default function GlobalPartnershipSection() {
                       <Image
                         src={`/assets/partners/${partner.file}.webp`}
                         alt={partner.name}
-                        width={197}
-                        height={182}
+                        width={600}
+                        height={600}
                         sizes="(max-width: 639px) 45vw, (max-width: 1023px) 30vw, 240px"
                         loading="lazy"
                         className="absolute inset-0 w-full h-full object-contain mix-blend-multiply lg:scale-[1.35]"
