@@ -5,6 +5,7 @@ import { gmts } from "./gmts";
 import { srop } from "./srop";
 import { sdrr } from "./sdrr";
 import { iedDetection } from "./ied-detection";
+import { foliagePenetration } from "./foliage-penetration";
 import { warriorDroneBuddy } from "./warrior-drone-buddy";
 import { criticalInfrastructureProtection } from "./critical-infrastructure-protection";
 import { facialRecognition } from "./facial-recognition";
@@ -16,6 +17,7 @@ export const generatedSolutions: SolutionPageContent[] = [
   srop,
   sdrr,
   iedDetection,
+  foliagePenetration,
   warriorDroneBuddy,
   criticalInfrastructureProtection,
   facialRecognition,

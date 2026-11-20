@@ -13,7 +13,7 @@ export const criticalInfrastructureProtection: SolutionPageContent = {
   "hero": {
     "eyebrow": "Critical Infrastructure Protection",
     "headline": [
-      "Securing critical infrastructure through intelligent, connected systems."
+      "Intelligent protection for critical infrastructure"
     ],
     "intro": "An integrated security ecosystem combining AI-powered surveillance, IoT sensors, autonomous drones and predictive analytics to protect critical assets, monitor operational environments and enable proactive threat response.",
     "cta": {

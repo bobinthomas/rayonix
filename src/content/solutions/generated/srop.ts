@@ -13,7 +13,7 @@ export const srop: SolutionPageContent = {
   "hero": {
     "eyebrow": "SROP · Smartization of Road Opening Procedure",
     "headline": [
-      "From route surveillance to secure convoy movement."
+      "Turning route surveillance into operational intelligence"
     ],
     "intro": "An integrated convoy protection solution combining fixed-wing drones, quadcopters, AI analytics and advanced threat detection to monitor routes, identify changes and support safe convoy movement.",
     "cta": {

@@ -13,8 +13,7 @@ export const iedDetection: SolutionPageContent = {
   "hero": {
     "eyebrow": "IED Detection · Improvised Explosive Device Detection",
     "headline": [
-      "Detect what lies beneath.",
-      "Protect every mission."
+      "Securing missions through intelligent underground threat detection"
     ],
     "intro": "An integrated subsurface detection solution combining GPR, Spectroscopy, Magnetometer and Photogrammetry to identify concealed explosive threats and underground anomalies, supporting safer route clearance and threat assessment.",
     "cta": {

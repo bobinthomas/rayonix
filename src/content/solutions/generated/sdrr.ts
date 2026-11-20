@@ -13,8 +13,7 @@ export const sdrr: SolutionPageContent = {
   "hero": {
     "eyebrow": "SDRR · Sarva Drishti Rudra Rakshak",
     "headline": [
-      "Complete surveillance. Integrated protection.",
-      "One command."
+      "Bringing advanced surveillance to the frontline"
     ],
     "intro": "An integrated mobile defence system combining aerial surveillance, long-range cameras, human and object detection radar, and counter-drone capabilities for enhanced situational awareness and security operations.",
     "cta": {

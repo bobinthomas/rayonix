@@ -409,7 +409,7 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
           {
             title: "Foliage Penetration",
             description: "Synthetic aperture radar for dense canopy visibility",
-            href: "/solutions#foliage-penetration",
+            href: "/solutions/foliage-penetration",
           },
           {
             title: "Warrior Drone Buddy",

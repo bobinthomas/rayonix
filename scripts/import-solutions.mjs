@@ -20,13 +20,14 @@ const CONTACT = "info@rayonix.in";
 
 // tab -> page. Slugs match the mega menu ids. `brochure`: PDF path once supplied
 // (the secondary "Download … brochure" button only renders when set).
-// Not imported: t.hu75sks9wt5a (older ICCS draft; Figma uses t.a6pu2vlkcet7), t.9ayu7ztzyncv (empty).
+// Not imported: t.hu75sks9wt5a (older ICCS draft; Figma uses t.a6pu2vlkcet7), t.9ayu7ztzyncv (empty "Defence & Homeland" group tab).
 const PAGES = [
   { tab: "t.a6pu2vlkcet7", slug: "iccs", category: "Defence & Homeland", name: "ICCS", eyebrow: "ICCS · Integrated Command & Control System" },
   { tab: "t.jdbmdlyreenb", slug: "gmts", category: "Defence & Homeland", name: "GMTS", eyebrow: "GMTS · Grid Monitoring & Tracking System" },
   { tab: "t.sqi68cgl1mqz", slug: "srop", category: "Defence & Homeland", name: "SROP", eyebrow: "SROP · Smartization of Road Opening Procedure" },
   { tab: "t.nf4nkb3ax27l", slug: "sdrr", category: "Defence & Homeland", name: "SDRR", eyebrow: "SDRR · Sarva Drishti Rudra Rakshak" },
   { tab: "t.38f34ii4e6sq", slug: "ied-detection", category: "Defence & Homeland", name: "IED Detection", eyebrow: "IED Detection · Improvised Explosive Device Detection" },
+  { tab: "t.ad4vnxy16r3", slug: "foliage-penetration", category: "Defence & Homeland", name: "Foliage Penetration", eyebrow: "Foliage Penetration · Through-Cover Surveillance Module" },
   { tab: "t.70yvoftifqyh", slug: "warrior-drone-buddy", category: "Defence & Homeland", name: "Warrior Drone Buddy", eyebrow: "Warrior Drone Buddy · Tactical Drone System" },
   { tab: "t.hkq5mu84kuf7", slug: "critical-infrastructure-protection", category: "Critical Infrastructure Protection", name: "Critical Infrastructure Protection", eyebrow: "Critical Infrastructure Protection" },
   { tab: "t.1g5gf9n0e1kr", slug: "facial-recognition", category: "Enterprise", name: "SEEKER", eyebrow: "SEEKER · AI-Powered Facial Recognition System" },
@@ -39,9 +40,18 @@ const OUT_DIR = path.join(process.cwd(), "src/content/solutions/generated");
 
 const SECTION = /^0?\d\.\s+(Hero|Key Capabilities|Applications|Value Proposition|Call to Action)$/;
 
+// The txt export marks doc comments inline as "[a]" and lists them in a footer
+// ("[a]Comment text"). Drop both so reviewer notes never reach the site.
+function stripComments(text) {
+  return text
+    .split(/\r?\n/)
+    .filter((l) => !/^\s*\[[a-z]{1,2}\]/.test(l))
+    .join("\n")
+    .replace(/\s*\[[a-z]{1,2}\]/g, "");
+}
+
 function clean(raw) {
-  return raw
-    .replace(/^﻿/, "")
+  return stripComments(raw.replace(/^﻿/, ""))
     .split(/\r?\n/)
     .map((l) => l.replace(/\s+/g, " ").trim())
     .filter(Boolean);
@@ -117,6 +127,14 @@ function buttonLabel(text, name) {
   return s.replace(re, name);
 }
 
+// Doc headlines that run two sentences together without a full stop. Keyed by
+// the doc text (case-insensitive); once the doc is fixed the entry stops matching.
+const HEADLINE_FIXES = {
+  "every identity recognised every threat anticipated": "Every identity recognised. Every threat anticipated.",
+  "intelligent surveillance real-time insights": "Intelligent surveillance. Real-time insights.",
+};
+const fixHeadline = (text) => HEADLINE_FIXES[text.trim().toLowerCase()] ?? text;
+
 // Headline as at most two lines (Figma shows two): group sentences evenly.
 function twoLines(text) {
   const s = text.split(/(?<=[.!?])\s+/).filter(Boolean);
@@ -141,7 +159,7 @@ function toContent(page, p) {
     },
     hero: {
       eyebrow: page.eyebrow,
-      headline: twoLines(sentenceCase(p.headline)),
+      headline: twoLines(sentenceCase(fixHeadline(p.headline))),
       intro: p.intro,
       cta: { label: buttonLabel(p.heroCta, page.name), href: enquiry },
       badge: `Solution: ${page.name} // ${fullName}`,

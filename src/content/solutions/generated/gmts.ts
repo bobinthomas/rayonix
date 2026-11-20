@@ -13,8 +13,7 @@ export const gmts: SolutionPageContent = {
   "hero": {
     "eyebrow": "GMTS · Grid Monitoring & Tracking System",
     "headline": [
-      "From identity detection to intelligence.",
-      "Every movement matters."
+      "Intelligence beyond identification"
     ],
     "intro": "An intelligent check post automation and tracking system enabling real-time identity detection, movement tracking and intelligence gathering across multiple locations.",
     "cta": {
