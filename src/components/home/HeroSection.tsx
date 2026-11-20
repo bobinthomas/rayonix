@@ -119,8 +119,8 @@ export default function HeroSection() {
       {/* Centered tagline + CTA positioned 15% from bottom */}
       <div className="absolute bottom-[15%] left-1/2 -translate-x-1/2 z-20 w-full max-w-[92vw] flex flex-col items-center gap-6 sm:gap-8 text-center pointer-events-auto">
         <h1 className="flex flex-col items-center gap-2 sm:gap-3">
-          <span className="text-[32px] sm:text-5xl lg:text-[64px] font-bold leading-[1.05] tracking-[-0.03em] text-[#f5f6f6]">
-            IN<span className="text-[#7f8a91]">(VISIBLE)</span> WARFARE
+          <span className="text-[32px] sm:text-5xl lg:text-[64px] font-bold leading-[1.05] tracking-[0.05em] text-[#f5f6f6]">
+            In<span className="text-[#7f8a91]">(visible)</span> warfare
           </span>
           <span className="text-[16px] sm:text-[20px] lg:text-[24px] font-normal leading-snug tracking-[-0.01em] text-[#bdc4c8]">
             Intelligence Beyond Boundaries.

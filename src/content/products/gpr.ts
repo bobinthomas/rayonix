@@ -28,12 +28,8 @@ export const gpr: ProductPageContent = {
     intro:
       "Our Ground Penetrating Radar (GPR) solution uses electromagnetic waves to detect buried objects, map underground structures and identify subsurface anomalies without excavation.",
     image: {
-      src: "/assets/gpr-hero.webp",
-      alt: "GPR Tactical Sensor Hardware Spec GPR-TR400",
-    },
-    hud: {
-      coordinates: "LAT 33.4241° N // LON 111.9281° W",
-      badge: "Hardware Spec: GPR-TR400 // Air-Ground Dual",
+      src: "/assets/gpr-hero-drone.webp",
+      alt: "Drone-mounted GPR sensor unit resting in a grass field",
     },
     specs: [
       { value: "600 MHz", label: "Antenna Frequency", accent: true },

@@ -101,24 +101,23 @@ const countryMarkers: CountryMarker[] = [
   },
 ];
 
-// Partner logos, in display order. Desktop rows are 5 / 4 / 5 (see PARTNER_ROWS).
+// Partner logos, in Figma display order (8 per row on desktop, left-aligned).
 const partners = [
   { name: "XTEND", file: "xtend" },
-  { name: "Tyndall FX", file: "tyndall-fx" },
   { name: "Hivebotics", file: "hivebotics" },
+  { name: "Orca Optronics", file: "orca-optronics" },
   { name: "KIRO", file: "kiro" },
   { name: "GMafcon Security Technologies", file: "gmafcon" },
   { name: "Rayonix partner mark", file: "a-mark" },
-  { name: "Orca Optronics", file: "orca-optronics" },
+  { name: "OSINT Losena Ltd.", file: "osint-losena" },
+  { name: "Frenel Imaging", file: "frenel-imaging" },
   { name: "Guideline Geo", file: "guideline-geo" },
   { name: "Cirotta", file: "cirotta" },
-  { name: "Frenel Imaging", file: "frenel-imaging" },
+  { name: "Vanguard Systems Ltd.", file: "vanguard-systems" },
   { name: "Ariel Photonics", file: "ariel-photonics" },
   { name: "Innoviz Technologies", file: "innoviz" },
-  { name: "OSINT Losena Ltd.", file: "osint-losena" },
-  { name: "Vanguard Systems Ltd.", file: "vanguard-systems" },
+  { name: "Tyndall FX", file: "tyndall-fx" },
 ];
-const PARTNER_ROWS = [5, 4, 5];
 
 export default function GlobalPartnershipSection() {
   const [activeMarker, setActiveMarker] = useState<string | null>(null);
@@ -334,37 +333,28 @@ export default function GlobalPartnershipSection() {
           className="w-full bg-white/[0.08] backdrop-blur-md p-[10px] sm:p-[12px] rounded-[4px] border border-white/10 shadow-2xl pointer-events-auto"
           data-node-id="354:2952"
         >
-          <div
-            className="rounded-[2px] bg-white p-3 sm:p-4 lg:p-0 flex flex-wrap justify-center gap-y-2 lg:gap-y-0 lg:flex-col lg:flex-nowrap lg:aspect-[1919/600] overflow-hidden"
+          <ul
+            className="rounded-[2px] bg-[#f6f7f9] p-4 sm:p-6 lg:p-8 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4 lg:gap-[14px]"
             data-node-id="354:2953"
-            role="list"
             aria-label="Global defence and technology partners"
           >
-            {PARTNER_ROWS.map((count, rowIdx) => {
-              const start = PARTNER_ROWS.slice(0, rowIdx).reduce((a, b) => a + b, 0);
-              return (
-                <div key={rowIdx} className="contents lg:flex lg:flex-1 lg:min-h-0 lg:justify-center">
-                  {partners.slice(start, start + count).map((partner) => (
-                    <div
-                      key={partner.file}
-                      role="listitem"
-                      className="relative w-1/2 sm:w-1/3 aspect-[576/300] lg:aspect-auto lg:h-auto lg:min-h-0 lg:w-[20%]"
-                    >
-                      <Image
-                        src={`/assets/partners/${partner.file}.webp`}
-                        alt={partner.name}
-                        width={576}
-                        height={300}
-                        sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 384px"
-                        loading="lazy"
-                        className="absolute inset-0 w-full h-full object-contain"
-                      />
-                    </div>
-                  ))}
-                </div>
-              );
-            })}
-          </div>
+            {partners.map((partner) => (
+              <li
+                key={partner.file}
+                className="relative aspect-[263/243] rounded-[8px] border border-[#e4e7ec] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)]"
+              >
+                <Image
+                  src={`/assets/partners/${partner.file}.webp`}
+                  alt={partner.name}
+                  width={526}
+                  height={486}
+                  sizes="(max-width: 639px) 45vw, (max-width: 1023px) 22vw, 150px"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-contain"
+                />
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
