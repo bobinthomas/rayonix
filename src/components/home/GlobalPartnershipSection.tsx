@@ -335,7 +335,7 @@ export default function GlobalPartnershipSection() {
           data-node-id="354:2952"
         >
           <div
-            className="rounded-[2px] bg-white p-3 sm:p-4 lg:p-0 grid grid-cols-2 sm:grid-cols-3 gap-y-2 lg:flex lg:flex-col lg:aspect-[1919/600] overflow-hidden"
+            className="rounded-[2px] bg-white p-3 sm:p-4 lg:p-0 flex flex-wrap justify-center gap-y-2 lg:gap-y-0 lg:flex-col lg:flex-nowrap lg:aspect-[1919/600] overflow-hidden"
             data-node-id="354:2953"
             role="list"
             aria-label="Global defence and technology partners"
@@ -348,16 +348,16 @@ export default function GlobalPartnershipSection() {
                     <div
                       key={partner.file}
                       role="listitem"
-                      className="relative overflow-hidden h-[104px] sm:h-[120px] lg:h-auto lg:min-h-0 lg:w-[20%]"
+                      className="relative w-1/2 sm:w-1/3 aspect-[576/300] lg:aspect-auto lg:h-auto lg:min-h-0 lg:w-[20%]"
                     >
                       <Image
                         src={`/assets/partners/${partner.file}.webp`}
                         alt={partner.name}
-                        width={600}
-                        height={600}
-                        sizes="(max-width: 639px) 45vw, (max-width: 1023px) 30vw, 240px"
+                        width={576}
+                        height={300}
+                        sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 384px"
                         loading="lazy"
-                        className="absolute inset-0 w-full h-full object-contain mix-blend-multiply lg:scale-[1.35]"
+                        className="absolute inset-0 w-full h-full object-contain"
                       />
                     </div>
                   ))}
