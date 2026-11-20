@@ -40,7 +40,12 @@ export interface SolutionPageContent {
   };
 
   capabilities: { heading: string; items: SolutionItem[] };
-  applications: { heading: string; items: SolutionItem[] };
+  applications: {
+    heading: string;
+    items: SolutionItem[];
+    /** Visual beside the applications list. Falls back to the template image when omitted. */
+    image?: { src: string; alt: string };
+  };
   /** Optional section (not in the Figma template; used by a few pages). */
   valueProposition?: { heading: string; items: SolutionItem[] };
 
