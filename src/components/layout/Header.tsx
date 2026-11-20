@@ -68,7 +68,6 @@ export default function Header() {
     <>
       <div
         ref={headerRef}
-        onMouseEnter={handleCancelClose}
         onMouseLeave={handleCloseMegaMenu}
         className={`fixed top-0 left-0 right-0 min-[700px]:top-4 min-[700px]:left-4 min-[700px]:right-4 z-50 transform transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
           isScrolled ? "translate-y-0 min-[700px]:-translate-y-4" : "translate-y-0"
@@ -114,6 +113,7 @@ export default function Header() {
               {/* Sub Surface */}
               <div
                 onMouseEnter={() => handleTabEnter("subsurface")}
+                onMouseLeave={handleCloseMegaMenu}
                 className={`relative flex items-center h-full cursor-pointer transition-all ${
                   activeMegaTab === "subsurface"
                     ? "border-b-[3px] border-[#e22328]"
@@ -139,6 +139,7 @@ export default function Header() {
               {/* Surface */}
               <div
                 onMouseEnter={() => handleTabEnter("surface")}
+                onMouseLeave={handleCloseMegaMenu}
                 className={`relative flex items-center h-full cursor-pointer transition-all ${
                   activeMegaTab === "surface"
                     ? "border-b-[3px] border-[#e22328]"
@@ -164,6 +165,7 @@ export default function Header() {
               {/* Aerial */}
               <div
                 onMouseEnter={() => handleTabEnter("aerial")}
+                onMouseLeave={handleCloseMegaMenu}
                 className={`relative flex items-center h-full cursor-pointer transition-all ${
                   activeMegaTab === "aerial"
                     ? "border-b-[3px] border-[#e22328]"
@@ -192,6 +194,7 @@ export default function Header() {
               {/* Solutions */}
               <div
                 onMouseEnter={() => handleTabEnter("solutions")}
+                onMouseLeave={handleCloseMegaMenu}
                 className={`relative flex items-center h-full cursor-pointer transition-all ${
                   activeMegaTab === "solutions"
                     ? "border-b-[3px] border-[#e22328]"
@@ -217,6 +220,7 @@ export default function Header() {
               {/* Company */}
               <div
                 onMouseEnter={() => handleTabEnter("company")}
+                onMouseLeave={handleCloseMegaMenu}
                 className={`relative flex items-center h-full cursor-pointer transition-all ${
                   activeMegaTab === "company"
                     ? "border-b-[3px] border-[#e22328]"

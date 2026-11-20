@@ -123,7 +123,7 @@ export default function HeroSection() {
           <span className="text-[32px] sm:text-5xl lg:text-[64px] font-bold leading-[1.05] tracking-[0.05em] text-[#f5f6f6]">
             In<span className="text-[#7f8a91]">(Visible)</span> Warfare
           </span>
-          <span className="text-[16px] sm:text-[20px] lg:text-[24px] font-normal leading-snug tracking-[-0.01em] text-[#bdc4c8]">
+          <span className="text-[22px] sm:text-[32px] lg:text-[43px] font-normal leading-snug tracking-[-0.01em] text-white">
             Intelligence Beyond Boundaries.
           </span>
         </h1>
