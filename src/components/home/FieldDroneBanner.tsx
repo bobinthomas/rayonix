@@ -57,8 +57,6 @@ export default function FieldDroneBanner() {
         >
           {/* Optimized 1080p web version with faststart for instantaneous playback */}
           <source src="/assets/videos/ai-robotics-web.mp4" type="video/mp4" />
-          <source src="/assets/videos/ai-robotics.mp4" type="video/mp4" />
-          <source src="/assets/videos/Ai%20Robotics.mp4" type="video/mp4" />
         </video>
 
         {/* Subtle top & bottom edge gradients for seamless container blending */}
