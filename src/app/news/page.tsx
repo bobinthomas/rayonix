@@ -4,6 +4,7 @@ import CTAButton from "@/components/ui/CTAButton";
 import { BreadcrumbSchema } from "@/lib/seo/json-ld";
 import { CompanyHero, CompanySection } from "@/components/company/ui";
 import NewsArchive from "@/components/company/NewsArchive";
+import PressCoverage from "@/components/company/PressCoverage";
 import { articles, featuredArticle, formatNewsDate } from "@/content/company/newsroom";
 
 export const metadata: Metadata = {
@@ -84,6 +85,12 @@ export default function NewsPage() {
       {/* Filterable archive (556:8169) */}
       <CompanySection tone="light" ariaLabel="Press releases and field bulletins">
         <NewsArchive articles={articles} featured={featuredArticle} />
+      </CompanySection>
+
+      {/* Third-party press coverage (headlines as published; cards link out) */}
+      <CompanySection tone="dark" ariaLabel="Press coverage">
+        <h2 className="type-h3 text-[#f5f6f6] mb-8">Press coverage</h2>
+        <PressCoverage />
       </CompanySection>
     </main>
     </>

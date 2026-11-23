@@ -87,6 +87,13 @@ export default function Footer() {
                 >
                   Newsroom
                 </Link>
+                <Link
+                  href="/blog"
+                  prefetch={false}
+                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
+                >
+                  Blog
+                </Link>
                 <a
                   href="mailto:info@rayonix.in?subject=Business%20enquiry"
                   className="type-body text-[#a3adb2] hover:text-white transition-colors"
