@@ -26,8 +26,8 @@ export const commandIntelligence: ProductPageContent = {
     intro:
       "Our Command & Intelligence layer transforms subsurface sensor data into actionable intelligence through AI analytics, sensor fusion, localisation and threat assessment, enabling informed operational decisions.",
     image: {
-      src: "/assets/command-centre.webp",
-      alt: "Rayonix Subsurface Command & Intelligence Tactical Operational Console",
+      src: "/assets/banners/subsurface-decide.webp",
+      alt: "Subsurface Command & Intelligence banner",
     },
     hud: {
       coordinates: "GRID: X 0442 · Y 0891",

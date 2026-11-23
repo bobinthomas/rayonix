@@ -27,6 +27,25 @@ const titles: Record<string, { title: string; subtitle: string }> = {
   },
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const info = titles[slug] || {
+    title: "Defence Ecosystem Partner",
+    subtitle: "Specialized military engineering and integration facility.",
+  };
+
+  return {
+    title: info.title,
+    description: info.subtitle,
+    alternates: { canonical: `/ecosystem/${slug}` },
+    robots: { index: false, follow: true },
+  };
+}
+
 export default async function EcosystemSlugPage({
   params,
 }: {

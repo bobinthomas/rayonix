@@ -3,6 +3,7 @@ import ProductHero from "./ProductHero";
 import ProductCapabilities from "./ProductCapabilities";
 import ProductUseCases from "./ProductUseCases";
 import { buildProductJsonLd } from "./productSeo";
+import Reveal from "@/components/ui/Reveal";
 
 /**
  * Product / capability page template (GPR design).
@@ -18,12 +19,16 @@ export default function ProductPage({ content }: { content: ProductPageContent }
       <main className="relative w-full min-h-screen bg-[#080f12]">
         <ProductHero hero={content.hero} breadcrumbs={content.breadcrumbs} />
         {content.capabilities && (
-          <ProductCapabilities
-            capabilities={content.capabilities}
-            repository={content.repository}
-          />
+          <Reveal>
+            <ProductCapabilities
+              capabilities={content.capabilities}
+              repository={content.repository}
+            />
+          </Reveal>
         )}
-        <ProductUseCases useCases={content.useCases} />
+        <Reveal>
+          <ProductUseCases useCases={content.useCases} />
+        </Reveal>
       </main>
     </>
   );

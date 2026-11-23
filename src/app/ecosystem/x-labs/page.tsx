@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import CTAButton from "@/components/ui/CTAButton";
+import { BreadcrumbSchema } from "@/lib/seo/json-ld";
 import {
   ArrowLink,
   CompanyHero,
@@ -32,7 +33,7 @@ const MISSION_CARDS = [
   {
     icon: "icon-xlabs-agility.svg",
     title: "Mission-Driven Agility",
-    body: "Direct feedback loops from front-line warfighters and tactical defense agencies into laboratory engineering sprints, accelerating deployment readiness.",
+    body: "Direct feedback loops from front-line warfighters and tactical defence agencies into laboratory engineering sprints, accelerating deployment readiness.",
     tag: "Operational User Feedback",
   },
   {
@@ -91,7 +92,7 @@ const IMPACT = [
   },
   {
     stat: "100% Domestic Supply",
-    title: "Sovereign Defense Self-Reliance",
+    title: "Sovereign Defence Self-Reliance",
     body: "Complete domestic supply chain integration and secure hardware roots of trust eliminate foreign dependencies across frontline sovereign assets.",
     points: ["ITAR-Compliant Architecture", "Cryptographic Key Isolation"],
   },
@@ -128,7 +129,15 @@ const pad = (n: number) => String(n).padStart(2, "0");
 
 export default function XLabsPage() {
   return (
-    <main className="relative w-full min-h-screen bg-[#080f12]">
+    <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Ecosystem", href: "/ecosystem" },
+          { name: "X Labs", href: "/ecosystem/x-labs" },
+        ]}
+      />
+      <main className="relative w-full min-h-screen bg-[#080f12]">
       <CompanyHero
         ariaLabel="X Labs"
         crumbs={[{ label: "Home", href: "/" }, { label: "Company" }, { label: "X Factor" }, { label: "X Labs" }]}
@@ -364,7 +373,7 @@ export default function XLabsPage() {
                 <p className="type-eyebrow text-[#e22328]">Defence Industry &amp; Allied Sovereignty</p>
                 <h3 className="type-h3 text-[#f5f6f6]">Co-Develop with X Labs</h3>
                 <p className="type-body text-[#7f8a91]">
-                  Partner on defense grants, custom sensor payloads, and joint operational trials across our sovereign test facilities and simulation testbeds.
+                  Partner on defence grants, custom sensor payloads, and joint operational trials across our sovereign test facilities and simulation testbeds.
                 </p>
               </div>
               <div>
@@ -378,7 +387,7 @@ export default function XLabsPage() {
                 <p className="type-eyebrow text-[#e22328]">Careers &amp; Research Fellowships</p>
                 <h3 className="type-h3 text-[#f5f6f6]">Build What&apos;s Next</h3>
                 <p className="type-body text-[#7f8a91]">
-                  Join our cross-disciplinary team of RF engineers, AI researchers, and defense roboticists solving hard kinetic defense and autonomous navigation challenges.
+                  Join our cross-disciplinary team of RF engineers, AI researchers, and defence roboticists solving hard kinetic defence and autonomous navigation challenges.
                 </p>
               </div>
               <ArrowLink href="/careers#engineering" bold solid>
@@ -389,5 +398,6 @@ export default function XLabsPage() {
         </div>
       </CompanySection>
     </main>
+    </>
   );
 }

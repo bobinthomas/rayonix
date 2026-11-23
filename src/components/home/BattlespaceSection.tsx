@@ -12,10 +12,10 @@ export default function BattlespaceSection() {
       aria-label="The New Battlespace"
       data-node-id="640:3823"
     >
-      {/* Background Image: battlespace-bg.png */}
+      {/* Background Image: battlespace-bg.webp */}
       <div className="absolute inset-0 pointer-events-none">
         <Image
-          src="/assets/battlespace-bg.png"
+          src="/assets/battlespace-bg.webp"
           alt="The New Battlespace"
           fill
           priority={false}

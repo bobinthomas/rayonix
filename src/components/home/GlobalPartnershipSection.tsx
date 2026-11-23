@@ -148,7 +148,7 @@ export default function GlobalPartnershipSection() {
 
           {/* Base Map Graphic — World Map 2 */}
           <image
-            href="/assets/world-map-2.png"
+            href="/assets/world-map-2.webp"
             width={1408}
             height={1369}
             preserveAspectRatio="none"

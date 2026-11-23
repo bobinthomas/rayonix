@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import CTAButton from "@/components/ui/CTAButton";
+import { BreadcrumbSchema } from "@/lib/seo/json-ld";
 import { CompanyHero, CompanySection } from "@/components/company/ui";
 import NewsArchive from "@/components/company/NewsArchive";
 import { articles, featuredArticle, formatNewsDate } from "@/content/company/newsroom";
@@ -8,7 +9,7 @@ import { articles, featuredArticle, formatNewsDate } from "@/content/company/new
 export const metadata: Metadata = {
   title: "Newsroom | Rayonix Defence Technologies",
   description:
-    "Official announcements, field testing milestones, defense symposium showcases, and strategic partnerships from Rayonix's global engineering hubs.",
+    "Official announcements, field testing milestones, defence symposium showcases, and strategic partnerships from Rayonix's global engineering hubs.",
   alternates: { canonical: "/news" },
 };
 
@@ -16,12 +17,20 @@ export const metadata: Metadata = {
 export default function NewsPage() {
   const f = featuredArticle;
   return (
-    <main className="relative w-full min-h-screen bg-[#080f12]">
+    <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Company", href: "/about" },
+          { name: "Newsroom", href: "/news" },
+        ]}
+      />
+      <main className="relative w-full min-h-screen bg-[#080f12]">
       <CompanyHero
         ariaLabel="Newsroom"
         crumbs={[{ label: "Home", href: "/" }, { label: "Company" }, { label: "Newsroom" }]}
         title="The latest from Rayonix."
-        intro="Official announcements, field testing milestones, defense symposium showcases, and strategic partnerships from our global engineering hubs."
+        intro="Official announcements, field testing milestones, defence symposium showcases, and strategic partnerships from our global engineering hubs."
         introBeside
       >
         {/* Featured press card (556:8134) */}
@@ -77,5 +86,6 @@ export default function NewsPage() {
         <NewsArchive articles={articles} featured={featuredArticle} />
       </CompanySection>
     </main>
+    </>
   );
 }

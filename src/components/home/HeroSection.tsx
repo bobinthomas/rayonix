@@ -101,6 +101,8 @@ export default function HeroSection() {
         />
         <video
           ref={videoRef}
+          width={1920}
+          height={1080}
           muted
           loop
           playsInline

@@ -73,8 +73,8 @@ export default function ExploreSection() {
               Discover our mission, vision and approach to advancing defence technology.
             </p>
             <div className="pt-2">
-              <CTAButton href="/about" variant="primary">
-                Learn More
+              <CTAButton href="/about" variant="primary" aria-label="Learn about the Rayonix story">
+                Learn about Rayonix
               </CTAButton>
             </div>
           </div>
@@ -121,14 +121,14 @@ export default function ExploreSection() {
                 Explore the specialised engineering, innovation and manufacturing entities behind our capabilities.
               </p>
               <div className="pt-2">
-                <CTAButton href="/ecosystem" variant="primary">
-                  Learn More
+                <CTAButton href="/ecosystem" variant="primary" aria-label="Explore the Rayonix ecosystem">
+                  Explore the Ecosystem
                 </CTAButton>
               </div>
             </div>
           </div>
 
-          {/* Card 04 / CAREERS */}
+          {/* Card 03 / CAREERS */}
           <div
             className="relative w-full h-[480px] sm:h-[510px] rounded-[12px] overflow-hidden border border-[#c4c9cc] bg-black shadow-md flex flex-col justify-end p-8 sm:p-10 group"
             data-node-id="440:579"
@@ -152,7 +152,7 @@ export default function ExploreSection() {
                 className="type-eyebrow text-[#f5f6f6]/80 "
                 data-node-id="440:585"
               >
-                04 / CAREERS
+                03 / CAREERS
               </span>
               <h3
                 className="type-h2 text-[#f5f6f6] "
@@ -167,8 +167,8 @@ export default function ExploreSection() {
                 Explore opportunities to work across engineering, technology and defence innovation.
               </p>
               <div className="pt-2">
-                <CTAButton href="/careers" variant="primary">
-                  Learn More
+                <CTAButton href="/careers" variant="primary" aria-label="Explore careers at Rayonix">
+                  Explore Careers
                 </CTAButton>
               </div>
             </div>
@@ -224,7 +224,7 @@ export default function ExploreSection() {
               imageAlt="Israel AI Major UAV Deal"
               description="Our partnership with XTEND advances local UAV manufacturing, testing and distribution, supported by technology transfer and autonomous systems."
               buttons={[
-                { label: "Read the Coverage", href: "/news/xtend-coverage" },
+                { label: "Read the Xtend coverage", href: "/news/xtend-coverage" },
               ]}
               source="Defence HQ · TOI"
               date="April 28, 2026"
@@ -239,7 +239,7 @@ export default function ExploreSection() {
               imageAlt="India Drone Industry Ambitions"
               description="The agreement supports technology transfer and local manufacturing, strengthening India's capabilities in AI-enabled tactical and interceptor drone systems."
               buttons={[
-                { label: "Read the Coverage", href: "/news/shephard-coverage" },
+                { label: "Read the Shephard coverage", href: "/news/shephard-coverage" },
               ]}
               source="Shephard"
               date="April 28, 2026"

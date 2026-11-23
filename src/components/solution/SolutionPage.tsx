@@ -5,6 +5,7 @@ import CTAButton from "@/components/ui/CTAButton";
 import TransformingHeading from "@/components/ui/TransformingHeading";
 import type { SolutionItem, SolutionPageContent } from "@/content/solutions/types";
 import { buildSolutionJsonLd } from "./solutionSeo";
+import Reveal from "@/components/ui/Reveal";
 
 /**
  * Solutions page template (Figma 838:703 "Rayonix / Solutions / Template · ICCS").
@@ -156,12 +157,6 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
                   }}
                 />
               )}
-              <div className="absolute top-4 sm:top-5 left-4 z-10 hidden sm:flex items-center gap-2 select-none pointer-events-none">
-                <span className="text-[#e22328] text-[11px] font-mono">+</span>
-                <span className="text-[#bdc4c8] text-[11px] font-mono tracking-[1.1px]">
-                  LAT 33.4241° N // LON 111.9281° W
-                </span>
-              </div>
               <div className="absolute top-4 sm:top-5 right-4 z-10 backdrop-blur-[4px] bg-[#080f12]/90 border border-[#253035] px-3 py-1 select-none pointer-events-none max-w-[calc(100%-2rem)]">
                 <span className="block truncate text-[#bdc4c8] text-[11px] font-mono tracking-[1.1px]">
                   {hero.badge}
@@ -174,6 +169,7 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
         </section>
 
         {/* 02 · Key Capabilities */}
+        <Reveal>
         <section
           className="relative w-full bg-[#f4f5f7] text-[#080f12] py-16 lg:py-24"
           aria-label="Key capabilities"
@@ -200,8 +196,10 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
             </div>
           </div>
         </section>
+        </Reveal>
 
         {/* 03 · Applications */}
+        <Reveal>
         <section
           className="relative w-full bg-[#080f12] border-t border-[#253035] text-[#f5f6f6] py-16 lg:py-24"
           aria-label="Applications"
@@ -238,9 +236,11 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
             </div>
           </div>
         </section>
+        </Reveal>
 
         {/* Optional · Value Proposition (not in the Figma template; styled to match) */}
         {valueProposition && (
+          <Reveal>
           <section
             className="relative w-full bg-[#080f12] border-t border-[#253035] text-[#f5f6f6] py-16 lg:py-24"
             aria-label="Value proposition"
@@ -266,9 +266,11 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
               </ul>
             </div>
           </section>
+          </Reveal>
         )}
 
         {/* 04 · Call to Action */}
+        <Reveal>
         <section
           className="relative w-full bg-[#080f12] pt-8 pb-20 lg:pb-28"
           aria-label="Call to action"
@@ -299,6 +301,7 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
             </div>
           </div>
         </section>
+        </Reveal>
       </main>
     </>
   );

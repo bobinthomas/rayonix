@@ -1,13 +1,4 @@
-/**
- * Dynamic Sitemap
- *
- * Auto-generates sitemap.xml from CMS page data.
- * Synced with all published pages and dynamic content.
- */
-
 import type { MetadataRoute } from "next";
-import { getAllPages } from "@/lib/cms";
-import { getPublishedStories } from "@/lib/cms";
 import { products } from "@/content/products";
 import { solutions } from "@/content/solutions";
 import { allArticles } from "@/content/company/newsroom";
@@ -15,69 +6,62 @@ import { allArticles } from "@/content/company/newsroom";
 const SITE_URL = "https://rayonix.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Static pages from CMS
-  const pages = await getAllPages();
-  const pageEntries: MetadataRoute.Sitemap = pages.map((page) => ({
-    url: `${SITE_URL}${page.slug === "/" ? "" : page.slug}`,
-    lastModified: new Date(),
-    changeFrequency: page.slug === "/" ? "weekly" : "monthly",
-    priority: page.priority ?? 0.5,
-  }));
+  // Core live pages
+  const coreEntries: MetadataRoute.Sitemap = [
+    {
+      url: `${SITE_URL}`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 1.0,
+    },
+    {
+      url: `${SITE_URL}/about`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/news`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/ecosystem/x-labs`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+  ];
 
-  // Dynamic story/news pages
-  const stories = await getPublishedStories();
-  const storyEntries: MetadataRoute.Sitemap = stories.map((story) => ({
-    url: `${SITE_URL}/news/${story.slug}`,
-    lastModified: new Date(story.publishedAt),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
-
-  // Domain pages
-  const domainEntries: MetadataRoute.Sitemap = [
-    "subsurface",
-    "surface",
-    "aerial",
-  ].map((domain) => ({
-    url: `${SITE_URL}/domains/${domain}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
-
-  // Product / capability pages from src/content/products
-  const productEntries: MetadataRoute.Sitemap = products.map((product) => ({
+  // Live product pages
+  const productEntries: MetadataRoute.Sitemap = products.filter((product) => product.indexable !== false).map((product) => ({
     url: `${SITE_URL}${product.path}`,
     lastModified: new Date(),
-    changeFrequency: "monthly" as const,
+    changeFrequency: "monthly",
     priority: 0.8,
   }));
 
-  // Solution pages from src/content/solutions
+  // Live solution pages
   const solutionEntries: MetadataRoute.Sitemap = solutions.map((solution) => ({
     url: `${SITE_URL}/solutions/${solution.slug}`,
     lastModified: new Date(),
-    changeFrequency: "monthly" as const,
+    changeFrequency: "monthly",
     priority: 0.8,
   }));
 
-  // Company pages (Figma 553:4239 X Labs) and newsroom articles from src/content/company
-  const companyEntries: MetadataRoute.Sitemap = [
-    { url: `${SITE_URL}/ecosystem/x-labs`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    ...allArticles.map((a) => ({
-      url: `${SITE_URL}/news/${a.slug}`,
-      lastModified: new Date(a.date),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    })),
-  ];
+  // Real published newsroom articles
+  const articleEntries: MetadataRoute.Sitemap = allArticles.map((article) => ({
+    url: `${SITE_URL}/news/${article.slug}`,
+    lastModified: new Date(article.date),
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
 
   return [
-    ...pageEntries,
-    ...domainEntries,
+    ...coreEntries,
     ...productEntries,
     ...solutionEntries,
-    ...companyEntries,
-    ...storyEntries,
+    ...articleEntries,
   ];
 }

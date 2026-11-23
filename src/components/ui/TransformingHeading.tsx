@@ -164,24 +164,28 @@ export default function TransformingHeading({
   return (
     <Component
       ref={containerRef as any}
-      className={`select-none inline-block ${className}`}
+      className={`relative select-none inline-block ${className}`}
       aria-label={fullText}
     >
-      <span aria-hidden="true" className="inline">
-        {displayText.split("").map((char, index) => {
+      {/* Visible text in normal flow, one span per character, so the layout is final from first paint (CLS = 0).
+          A scrambling character hides its real glyph and draws the scrambled glyph in an absolutely
+          positioned ::after on that same character. Absolute boxes do not affect layout, so the
+          animation cannot reflow lines or overlap the content below. */}
+      <span aria-hidden="true" className="block">
+        {fullText.split("").map((char, i) => {
           if (char === "\n") {
-            return <br key={index} className="block" />;
+            return <br key={i} className="block" />;
           }
-          const isResolved = charStates[index] ?? true;
-          const segmentClass = charSegmentClasses[index];
+          const resolved = charStates[i] ?? true;
+          const glyph = resolved ? "" : displayText[i] ?? "";
+          const segClass =
+            charSegmentClasses[i] || "font-sans font-bold text-inherit";
           return (
             <span
-              key={index}
-              className={`transition-colors duration-150 ${
-                isResolved
-                  ? segmentClass || "font-sans font-bold text-inherit"
-                  : "font-mono font-medium text-[#bdc4c8] scale-105 inline-block opacity-85"
-              }`}
+              key={i}
+              data-g={glyph}
+              className={`${segClass} relative after:absolute after:left-0 after:top-0 after:font-mono after:font-medium after:text-[#bdc4c8] after:opacity-85 after:content-[attr(data-g)]`}
+              style={resolved ? undefined : { color: "transparent" }}
             >
               {char}
             </span>
@@ -196,8 +200,12 @@ export default function TransformingHeading({
           </span>
         )}
       </span>
+
       {/* Screen-reader accessible full text */}
-      <span className="sr-only">{fullText}{accentDot ? "." : ""}</span>
+      <span className="sr-only">
+        {fullText}
+        {accentDot ? "." : ""}
+      </span>
     </Component>
   );
 }

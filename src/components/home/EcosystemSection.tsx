@@ -204,7 +204,7 @@ export default function EcosystemSection() {
     <section
       ref={sectionRef}
       className="relative w-full bg-[#f5f6f6] py-16 lg:py-[50px] overflow-hidden"
-      aria-label="One Connected Defense Ecosystem"
+      aria-label="One Connected Defence Ecosystem"
       data-node-id="210:1961"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => {
@@ -219,7 +219,7 @@ export default function EcosystemSection() {
             <TransformingHeading
               as="h2"
               segments={[
-                { text: "One Connected\nDefense ", className: "text-[#080f12]" },
+                { text: "One Connected\nDefence ", className: "text-[#080f12]" },
                 { text: "Ecosystem", className: "text-[#7f8a91]" },
               ]}
               accentDot={true}
@@ -318,12 +318,18 @@ export default function EcosystemSection() {
             width: GRID_WIDTH_CSS,
           }}
         >
-          <div className="flex items-center gap-[6px] sm:gap-[8px] min-w-max pb-1">
+          <div
+            className="flex items-center gap-[6px] sm:gap-[8px] min-w-max pb-1"
+            role="tablist"
+            aria-label="Defence Ecosystem Categories"
+          >
             {ecosystemData.map((item, idx) => {
               const isActive = activeTab === idx;
               return (
                 <PillTab
                   key={item.id}
+                  id={`ecosystem-tab-${item.id}`}
+                  aria-controls={`ecosystem-card-${item.id}`}
                   ref={(el) => {
                     tabRefs.current[idx] = el;
                   }}
@@ -366,6 +372,7 @@ export default function EcosystemSection() {
               return (
                 <div
                   key={item.id}
+                  id={`ecosystem-card-${item.id}`}
                   ref={(el) => {
                     cardRefs.current[idx] = el;
                   }}
@@ -379,8 +386,8 @@ export default function EcosystemSection() {
                       ? "opacity-100"
                       : "opacity-90 hover:opacity-100"
                   }`}
-                  role="group"
-                  aria-label={item.cardTitle}
+                  role="tabpanel"
+                  aria-labelledby={`ecosystem-tab-${item.id}`}
                 >
                   {/* Background Image & Gradients */}
                   <div className="absolute inset-0 pointer-events-none overflow-hidden">

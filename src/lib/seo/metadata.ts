@@ -12,6 +12,19 @@ const SITE_NAME = "Rayonix";
 const DEFAULT_OG_IMAGE = "/og-image.jpg";
 
 /**
+ * Clamps a description string to maxLen characters, truncating on a word boundary.
+ */
+export function clampDescription(text: string, maxLen = 155): string {
+  if (!text || text.length <= maxLen) return text;
+  const truncated = text.slice(0, maxLen - 3);
+  const lastSpace = truncated.lastIndexOf(" ");
+  if (lastSpace > 100) {
+    return truncated.slice(0, lastSpace) + "...";
+  }
+  return truncated.trim() + "...";
+}
+
+/**
  * Build a full Next.js Metadata object from CMS PageSEO data
  */
 export function buildMetadata(page: PageSEO): Metadata {

@@ -9,9 +9,12 @@
   --rayonix-footer-background: #000000;
   --rayonix-border-subtle: #253035;
   --rayonix-accent-brand: #e22328;
+  --rayonix-accent-on-dark: #f0494d;
+  --rayonix-accent-on-light: #c81d22;
   --rayonix-text-primary: #f5f6f6;
   --rayonix-text-secondary: #bdc4c8;
-  --rayonix-text-muted: #7f8a91;
+  --rayonix-text-muted: #5b676e;
+  --rayonix-text-muted-dark: #7f8a91;
   --rayonix-text-inverse: #080f12;
   --rayonix-inset-page: 84px;
 
@@ -99,17 +102,28 @@ body {
   border-right: 1px solid var(--rayonix-border-subtle);
 }
 
-/* Display Typography Tracking */
+/* Display Typography Tracking & Word Spacing */
 .tracking-hero {
   letter-spacing: -0.035em;
+  word-spacing: 0.06em;
 }
 
 .tracking-section {
   letter-spacing: -0.025em;
+  word-spacing: 0.05em;
 }
 
 .tracking-label {
   letter-spacing: 0.08em;
+}
+
+.type-display,
+.type-display-long,
+.type-hero,
+.type-h2,
+.type-statement,
+.type-h3 {
+  word-spacing: 0.05em;
 }
 
 /* Scroll-scrubbed text gradient animation matching Axion */
@@ -165,6 +179,44 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .eco-reveal {
     animation: none;
+  }
+}
+
+/* ---- Subtle motion system (GPU-only: opacity + transform) ---- */
+@keyframes anim-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes anim-fade-up {
+  from { opacity: 0; transform: translate3d(0, 6px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* Fill mode "backwards" only: no transform is left behind after the animation,
+   so fixed-position children are not affected. */
+.anim-fade-in { animation: anim-fade 220ms ease-out backwards; }
+.anim-fade-up { animation: anim-fade-up 260ms cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+
+/* Route change: whole page fades and rises slightly (see src/app/template.tsx) */
+.page-enter { animation: anim-fade-up 320ms cubic-bezier(0.16, 1, 0.3, 1) backwards; }
+
+/* Section reveal (see src/components/ui/Reveal.tsx). Visible by default;
+   only elements that start below the fold get the hidden state. */
+.reveal { transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 700ms cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal[data-reveal="hidden"] { opacity: 0; transform: translate3d(0, 14px, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-in,
+  .anim-fade-up,
+  .page-enter {
+    animation: none;
+  }
+  .reveal,
+  .reveal[data-reveal="hidden"] {
+    transition: none;
+    opacity: 1;
+    transform: none;
   }
 }
 

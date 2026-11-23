@@ -46,30 +46,34 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 md:hidden bg-[#080f12]/95 backdrop-blur-[24px] flex flex-col justify-between animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 md:hidden bg-[#080f12]/95 backdrop-blur-[24px] flex flex-col justify-between anim-fade-in"
       role="dialog"
       aria-modal="true"
       aria-label="Mobile Navigation"
     >
-      {/* Top Bar */}
-      <div className="h-[80px] px-6 flex items-center justify-between border-b border-[#253035]">
-        <Link href="/" onClick={onClose} className="flex items-center">
-          <Image
-            src="/assets/rayonix-logo.svg"
-            alt="Rayonix"
-            width={130}
-            height={36}
-            className="object-contain"
-          />
-        </Link>
-        <button
-          type="button"
-          onClick={onClose}
-          className="p-2 text-[#f5f6f6] hover:text-white focus:outline-none"
-          aria-label="Close Mobile Menu"
-        >
-          <X className="w-6 h-6" />
-        </button>
+      {/* Top Bar: same logo size, padding and centring as the page header, so the logo does not jump */}
+      <div className="h-[80px] border-b border-[#253035]" style={{ borderInline: "1px solid transparent" }}>
+        <div className="max-w-[1280px] mx-auto w-full h-full px-6 sm:px-8 flex items-center justify-between">
+          <Link href="/" onClick={onClose} className="flex items-center" aria-label="Rayonix Home">
+            <div className="relative w-[144px] h-[40px]">
+              <Image
+                src="/assets/rayonix-logo.svg"
+                alt="Rayonix"
+                width={144}
+                height={40}
+                className="object-contain"
+              />
+            </div>
+          </Link>
+          <button
+            type="button"
+            onClick={onClose}
+            className="p-2 text-[#f5f6f6] hover:text-white focus:outline-none"
+            aria-label="Close Mobile Menu"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
       </div>
 
       {/* Nav List with Expandable Mega Menu items */}
@@ -87,6 +91,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <div key={tab} className="border-b border-white/5 pb-2">
                 <button
                   type="button"
+                  aria-expanded={isExpanded}
+                  aria-controls={`mobile-menu-section-${tab}`}
                   onClick={() => toggleTab(tab)}
                   className="w-full flex items-center justify-between py-2 type-body-lg font-medium text-[#f5f6f6] hover:text-[#e22328] transition-colors"
                 >
@@ -99,7 +105,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 </button>
 
                 {isExpanded && (
-                  <div className="pl-3 py-2 space-y-3 bg-[#10181c]/60 rounded-md my-1">
+                  <div id={`mobile-menu-section-${tab}`} className="pl-3 py-2 space-y-3 bg-[#10181c]/60 rounded-md my-1">
                     <p className="type-caption text-[#bdc4c8] ">
                       {data.subtitle}
                     </p>
@@ -145,6 +151,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <div key={tab} className="border-b border-white/5 pb-2">
                 <button
                   type="button"
+                  aria-expanded={isExpanded}
+                  aria-controls={`mobile-menu-section-${tab}`}
                   onClick={() => toggleTab(tab)}
                   className="w-full flex items-center justify-between py-2 type-body-lg font-medium text-[#f5f6f6] hover:text-[#e22328] transition-colors"
                 >
@@ -157,7 +165,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 </button>
 
                 {isExpanded && (
-                  <div className="pl-3 py-2 space-y-3 bg-[#10181c]/60 rounded-md my-1">
+                  <div id={`mobile-menu-section-${tab}`} className="pl-3 py-2 space-y-3 bg-[#10181c]/60 rounded-md my-1">
                     <p className="type-caption text-[#bdc4c8] ">
                       {data.subtitle}
                     </p>

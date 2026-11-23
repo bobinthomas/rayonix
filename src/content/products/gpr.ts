@@ -28,8 +28,8 @@ export const gpr: ProductPageContent = {
     intro:
       "Our Ground Penetrating Radar (GPR) solution uses electromagnetic waves to detect buried objects, map underground structures and identify subsurface anomalies without excavation.",
     image: {
-      src: "/assets/gpr-hero-drone.webp",
-      alt: "Drone-mounted GPR sensor unit resting in a grass field",
+      src: "/assets/banners/subsurface-detect-gpr.webp",
+      alt: "Ground Penetrating Radar (GPR) banner",
     },
     specs: [
       { value: "600 MHz", label: "Antenna Frequency", accent: true },
@@ -120,19 +120,6 @@ export const gpr: ProductPageContent = {
           { src: `${G}/radar-cart.svg`, alt: "Surface Radar Cart", width: 42, height: 34, left: 32, bottom: 16 },
           { src: `${G}/borehole-probe.svg`, alt: "Borehole Probe", width: 16, height: 40, right: 36, bottom: 12 },
         ],
-      },
-    ],
-  },
-
-  repository: {
-    heading: "Technical Repository",
-    description: "Discover GPR capabilities and specifications.",
-    items: [
-      {
-        title: "GPR Technical Specifications",
-        subtitle: "Full datasheet: UAV, payload, mission software",
-        href: "/downloads/gpr-technical-specifications.pdf",
-        ctaLabel: "Download Brochure",
       },
     ],
   },

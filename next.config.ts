@@ -20,6 +20,30 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
+  async redirects() {
+    return [
+      {
+        source: "/domains/subsurface",
+        destination: "/subsurface/detect/gpr",
+        permanent: true,
+      },
+      {
+        source: "/sub-surface/detect/gpr",
+        destination: "/subsurface/detect/gpr",
+        permanent: true,
+      },
+      {
+        source: "/subsurface/command-intelligence",
+        destination: "/subsurface/decide",
+        permanent: true,
+      },
+      {
+        source: "/subsurface/decide/command-intelligence",
+        destination: "/subsurface/decide",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

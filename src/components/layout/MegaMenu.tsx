@@ -139,8 +139,8 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
       tag: "SUBTERRANEAN DEFENCE",
       title: "Subsurface Threat Matrix: Eliminating Underground Blind Spots",
       description: "Distributed acoustic sensing and seismic analytics safeguarding sovereign perimeter corridors.",
-      image: "/assets/ecosystem-1.png",
-      href: "/domains/subsurface",
+      image: "/assets/ecosystem-1.webp",
+      href: "/subsurface/detect/gpr",
     },
   },
 
@@ -168,11 +168,6 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
             href: "/surface/detect/lidar",
           },
           {
-            title: "Acoustic Sensor",
-            description: "Directional gunshot, engine, and impact sound triangulation",
-            href: "/domains/surface#acoustic",
-          },
-          {
             title: "Vibration Sensors",
             description: "Unattended ground sensors for covert border perimeter breaches",
             href: "/surface/detect/vibration",
@@ -195,33 +190,33 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
         items: [
           {
             title: "Data Acquisition & Processing",
-            description: "Real-time edge ingestion of optical and radar telemetry",
-            href: "/domains/surface#data-processing",
+            description: "Collects and processes GPR, seismic, acoustic and hydrophone sensor data into structured information.",
+            href: "/surface/decide#data-acquisition",
           },
           {
-            title: "AI Analytics and Classification",
-            description: "Automated target recognition and behavioral classification",
-            href: "/domains/surface#ai-classification",
+            title: "AI Analytics & Classification",
+            description: "Identifies anomalies, recognises signal patterns and classifies detected activities.",
+            href: "/surface/decide#ai-analytics",
           },
           {
-            title: "Multisensor Fusion",
-            description: "Correlation of optical, thermal, radar, and acoustic signals",
-            href: "/domains/surface#fusion",
+            title: "Multi-Sensor Fusion",
+            description: "Correlates data from multiple sensors to create a unified intelligence picture.",
+            href: "/surface/decide#multi-sensor-fusion",
           },
           {
             title: "Localisation & Tracking",
-            description: "Simultaneous multi-target geospatial position lock",
-            href: "/domains/surface#tracking",
+            description: "Determines the location of detected activities and monitors movement patterns.",
+            href: "/surface/decide#localisation-tracking",
           },
           {
             title: "Threat Assessment & Decision Support",
-            description: "Predictive threat trajectory and tactical intervention advice",
-            href: "/domains/surface#decision-support",
+            description: "Evaluates potential threats, prioritises incidents and supports informed decisions.",
+            href: "/surface/decide#threat-assessment",
           },
           {
             title: "Command & Control",
-            description: "Common Operating Picture (COP) integration for land operations",
-            href: "/domains/surface#c2",
+            description: "Enables centralised monitoring, geospatial visualisation and coordinated incident management through an integrated C3I platform.",
+            href: "/surface/decide#command-control",
           },
         ],
       },
@@ -254,9 +249,9 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
     ],
     spotlight: {
       tag: "LAND & LITTORAL",
-      title: "Autonomous Perimeter Defense: 24/7 All-Weather Dominance",
+      title: "Autonomous Perimeter Defence: 24/7 All-Weather Dominance",
       description: "Integrating optical radar and polarimetric thermal cameras with unmanned ground systems.",
-      image: "/assets/ecosystem-2.png",
+      image: "/assets/ecosystem-2.webp",
       href: "/domains/surface",
     },
   },
@@ -302,33 +297,33 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
         items: [
           {
             title: "Data Acquisition & Processing",
-            description: "Edge sensor processing for extreme-speed airborne triage",
-            href: "/domains/aerial#data-processing",
+            description: "Collects and processes GPR, seismic, acoustic and hydrophone sensor data into structured information.",
+            href: "/aerial/decide#data-acquisition",
           },
           {
-            title: "AI Analytics and Classification",
-            description: "Deep learning classification of aerial threats and UAS types",
-            href: "/domains/aerial#ai-classification",
+            title: "AI Analytics & Classification",
+            description: "Identifies anomalies, recognises signal patterns and classifies detected activities.",
+            href: "/aerial/decide#ai-analytics",
           },
           {
-            title: "Multisensor Fusion",
-            description: "Unified air picture combining RF, radar, and optical telemetry",
-            href: "/domains/aerial#fusion",
+            title: "Multi-Sensor Fusion",
+            description: "Correlates data from multiple sensors to create a unified intelligence picture.",
+            href: "/aerial/decide#multi-sensor-fusion",
           },
           {
             title: "Localisation & Tracking",
-            description: "High-precision 3D flight trajectory calculation",
-            href: "/domains/aerial#tracking",
+            description: "Determines the location of detected activities and monitors movement patterns.",
+            href: "/aerial/decide#localisation-tracking",
           },
           {
             title: "Threat Assessment & Decision Support",
-            description: "Kinetic risk assessment and weapon-target pairing",
-            href: "/domains/aerial#decision-support",
+            description: "Evaluates potential threats, prioritises incidents and supports informed decisions.",
+            href: "/aerial/decide#threat-assessment",
           },
           {
             title: "Command & Control",
-            description: "Integrated anti-drone air defense console",
-            href: "/domains/aerial#c2",
+            description: "Enables centralised monitoring, geospatial visualisation and coordinated incident management through an integrated C3I platform.",
+            href: "/aerial/decide#command-control",
           },
         ],
       },
@@ -368,7 +363,7 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
       tag: "AIR DOMINANCE",
       title: "Layered Counter-UAS & Autonomous Aerial Interception",
       description: "Neutralizing low-observable rogue drones and hostile swarm attacks in under 4 seconds.",
-      image: "/assets/field-drone.png",
+      image: "/assets/field-drone.webp",
       href: "/domains/aerial",
     },
   },
@@ -423,29 +418,9 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
         label: "Critical Infrastructure Protection",
         items: [
           {
-            title: "Perimeter Intrusion Detection",
-            description: "Automated perimeter defense for nuclear and energy sites",
-            href: "/solutions#perimeter-intrusion",
-          },
-          {
-            title: "Automated Drone Surveillance",
-            description: "Scheduled autonomous patrol drones with docking stations",
-            href: "/solutions#drone-surveillance",
-          },
-          {
-            title: "Thermal Perimeter Security",
-            description: "Continuous 360° thermal imaging for facility borders",
-            href: "/solutions#thermal-security",
-          },
-          {
-            title: "Command & Monitoring Centre",
-            description: "Multi-screen centralized security operations console",
-            href: "/solutions#command-monitoring",
-          },
-          {
-            title: "Integrated Asset Protection",
-            description: "Multi-layered physical, acoustic, and RF security shielding",
-            href: "/solutions#asset-protection",
+            title: "Critical Infrastructure Protection",
+            description: "Automated perimeter defence, drone surveillance, and asset protection",
+            href: "/solutions/critical-infrastructure-protection",
           },
         ],
       },
@@ -463,19 +438,14 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
             description: "Automated crowd density, loitering, and anomaly detection",
             href: "/solutions/video-analytics",
           },
-          {
-            title: "Industrial AI",
-            description: "Automated safety compliance and edge vision for enterprise",
-            href: "/solutions#industrial-ai",
-          },
         ],
       },
     ],
     spotlight: {
       tag: "TACTICAL DEPLOYMENT",
-      title: "Sovereign Defense Systems & Critical Infrastructure Security",
+      title: "Sovereign Defence Systems & Critical Infrastructure Security",
       description: "Deploying integrated command and sensor fusion networks across extreme operational theatres.",
-      image: "/assets/command-centre.png",
+      image: "/assets/command-centre.webp",
       href: "/solutions",
     },
   },
@@ -495,18 +465,13 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
           },
           {
             title: "Certifications",
-            description: "Mil-Spec, AS9100D, and ISO defense manufacturing standards",
+            description: "Mil-Spec, AS9100D, and ISO defence manufacturing standards",
             href: "/about#certifications",
           },
           {
             title: "Global Presence",
-            description: "Facilities across India and strategic defense corridors",
+            description: "Facilities across India and strategic defence corridors",
             href: "/about#presence",
-          },
-          {
-            title: "Leadership",
-            description: "Defence veterans, robotics architects, and visionaries",
-            href: "/about#leadership",
           },
           {
             title: "Partners",
@@ -534,11 +499,6 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
             description: "Ruggedized battlefield communications and edge compute",
             href: "/ecosystem/mcray-xtend",
           },
-          {
-            title: "Indigenous Innovation",
-            description: "100% sovereign defense technology designed under Make in India",
-            href: "/ecosystem#indigenous",
-          },
         ],
       },
       {
@@ -546,33 +506,18 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
         label: "Careers",
         items: [
           {
-            title: "Life at Rayonix",
-            description: "High-impact mission culture engineering critical technologies",
-            href: "/careers#culture",
-          },
-          {
-            title: "Engineering Roles",
-            description: "Embedded software, computer vision, and systems engineering",
-            href: "/careers#engineering",
-          },
-          {
-            title: "Autonomy & Robotics",
-            description: "Swarm intelligence and robotics research fellows",
-            href: "/careers#robotics",
-          },
-          {
-            title: "Apply Now",
-            description: "Submit your credentials directly to our talent acquisition team",
-            href: "/careers#apply",
+            title: "Careers at Rayonix",
+            description: "Join our team engineering sovereign defence and autonomous technologies",
+            href: "/careers",
           },
         ],
       },
     ],
     spotlight: {
       tag: "THE RAYONIX STORY",
-      title: "Building Sovereign Defense Tech: The Journey from R&D to Frontline",
+      title: "Building Sovereign Defence Tech: The Journey from R&D to Frontline",
       description: "Discover how our interdisciplinary engineering team is transforming modern military capability.",
-      image: "/assets/story-company.png",
+      image: "/assets/story-company.webp",
       href: "/about",
     },
   },
@@ -608,6 +553,9 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
 
   return (
     <div
+      id="rayonix-mega-menu-panel"
+      role="region"
+      aria-label={`${content.title} navigation panel`}
       className="w-full bg-[#10181c] text-[#f5f6f6] rounded-none border-b border-x border-[#253035] shadow-[0_24px_60px_-15px_rgba(0,0,0,0.85)] overflow-hidden"
       data-testid="rayonix-mega-menu"
       onMouseLeave={onClose}
@@ -619,16 +567,20 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
           {/* Left / Middle Section (8 cols) */}
           <div className="lg:col-span-8 flex flex-col justify-between">
             {/* Mode / Category Selector Bar */}
-            <div className="flex items-center gap-2 sm:gap-2.5 border-b border-[#253035] pb-3 mb-5 overflow-x-auto scrollbar-none">
+            <div className="flex items-center gap-2 sm:gap-2.5 border-b border-[#253035] pb-3 mb-5 overflow-x-auto scrollbar-none" role="tablist" aria-label="Operational modes">
               {content.modes.map((mode) => {
                 const isActive = mode.id === currentMode.id;
                 return (
                   <button
                     key={mode.id}
                     type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-pressed={isActive}
+                    onFocus={() => handleModeChange(mode.id)}
                     onMouseEnter={() => handleModeChange(mode.id)}
                     onClick={() => handleModeChange(mode.id)}
-                    className={`relative px-3.5 py-1.5 type-small font-medium transition-colors duration-200 rounded-[2px] flex items-center gap-2 cursor-pointer ${
+                    className={`relative px-3.5 py-1.5 type-small font-medium transition-colors duration-200 rounded-[2px] flex items-center gap-2 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] ${
                       isActive
                         ? "bg-[#e22328] text-white shadow-sm"
                         : "text-[#9ca8ae] hover:text-white hover:bg-white/[0.06]"
@@ -653,7 +605,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
             <div className="min-h-[230px] flex items-start">
               <div
                 key={`${activeTab}-${currentMode.id}`}
-                className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-1.5 w-full transition-all duration-300 ease-out animate-in fade-in-50 slide-in-from-bottom-1"
+                className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-1.5 w-full transition-all duration-300 ease-out anim-fade-up"
               >
                 {currentMode.items.map((item) => (
                   <Link
@@ -661,7 +613,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
                     href={item.href}
                     prefetch={false}
                     onClick={onClose}
-                    className="group flex items-center justify-between p-3 rounded-[4px] transition-all duration-200 hover:bg-white/[0.04] border border-transparent hover:border-[#253035]/60"
+                    className="group flex items-center justify-between p-3 rounded-[4px] transition-all duration-200 hover:bg-white/[0.04] border border-transparent hover:border-[#253035]/60 outline-none focus-visible:ring-1 focus-visible:ring-[#e22328]"
                   >
                     <div className="pr-3">
                       <h4 className="type-small font-medium text-[#f5f6f6] group-hover:text-[#e22328] transition-colors ">
@@ -683,7 +635,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
             {/* Bottom Quick Bar */}
             <div
               key={activeTab}
-              className="pt-4 mt-3 border-t border-[#253035] flex items-center justify-between type-caption text-[#7f8e95] animate-in fade-in-50 duration-200"
+              className="pt-4 mt-3 border-t border-[#253035] flex items-center justify-between type-caption text-[#7f8e95] anim-fade-in"
             >
               <span className="truncate pr-4">{content.subtitle}</span>
             </div>
@@ -691,9 +643,12 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
 
           {/* Right Column (4 cols): Spotlight Card with smooth cross-fade */}
           <div className="lg:col-span-4 flex flex-col">
-            <div
+            <Link
               key={activeTab}
-              className="h-full bg-[#162025] border border-[#253035] rounded-[4px] p-5 sm:p-6 flex flex-col justify-between group hover:border-[#e22328]/40 transition-all duration-300 shadow-md animate-in fade-in-50"
+              href={content.spotlight.href}
+              onClick={onClose}
+              prefetch={false}
+              className="h-full bg-[#162025] border border-[#253035] rounded-[4px] p-5 sm:p-6 flex flex-col justify-between group hover:border-[#e22328]/40 transition-all duration-300 shadow-md anim-fade-in cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328]"
             >
               <div>
                 {/* Header Tag */}
@@ -724,7 +679,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
                   {content.spotlight.description}
                 </p>
               </div>
-            </div>
+            </Link>
           </div>
 
         </div>

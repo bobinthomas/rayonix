@@ -82,11 +82,11 @@ export default function CTAButton({
 
   const variantClasses = isOutline
     ? variant === "outline-dark"
-      ? "bg-transparent text-[#080f12] border border-[#080f12] hover:border-[#e22328]"
-      : "bg-transparent text-[#f5f6f6] border border-[#f5f6f6] hover:border-[#e22328]"
+      ? "bg-transparent text-[#080f12] border border-[#080f12] hover:border-[#c81d22]"
+      : "bg-transparent text-[#f5f6f6] border border-[#f5f6f6] hover:border-[#f0494d]"
     : isPrimary
-    ? "bg-[#e22328] hover:bg-[#080f12] text-[#f5f6f6] shadow-sm border border-transparent"
-    : "bg-transparent text-[#e22328] group-hover:text-[#f5f6f6] border border-[#e22328] shadow-sm";
+    ? "bg-[#cc1f24] hover:bg-[#080f12] text-[#f5f6f6] shadow-sm border border-transparent"
+    : "bg-transparent text-[#f0494d] group-hover:text-[#f5f6f6] border border-[#f0494d] shadow-sm";
 
   const disabledClasses = disabled
     ? "opacity-50 pointer-events-none cursor-not-allowed"

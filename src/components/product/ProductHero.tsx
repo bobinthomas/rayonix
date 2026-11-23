@@ -118,28 +118,14 @@ export default function ProductHero({ hero, breadcrumbs }: ProductHeroProps) {
           )}
 
           {hero.hud && (
-            <>
-              {/* HUD Top Left: Coordinates */}
-              <div
-                className="absolute top-4 sm:top-5 left-4 sm:left-5 z-10 flex items-center gap-2 select-none pointer-events-none"
-                data-node-id="527:1207"
-              >
-                <span className="text-[#e22328] text-xs font-mono font-bold">+</span>
-                <span className="text-[#bdc4c8] text-[11px] font-mono tracking-[1.1px]">
-                  {hero.hud.coordinates}
-                </span>
-              </div>
-
-              {/* HUD Top Right: Hardware Spec Badge */}
-              <div
-                className="absolute top-4 sm:top-5 right-4 sm:right-5 z-10 backdrop-blur-[6px] bg-[#080f12]/90 border border-[#253035] px-3.5 py-1.5 rounded-[4px] select-none pointer-events-none"
-                data-node-id="527:1211"
-              >
-                <span className="text-[#bdc4c8] text-[11px] font-mono tracking-[1.1px]">
-                  {hero.hud.badge}
-                </span>
-              </div>
-            </>
+            /* HUD frame kept as a graphic element; its text labels are not rendered */
+            <div
+              className="absolute top-4 sm:top-5 left-4 sm:left-5 z-10 select-none pointer-events-none"
+              aria-hidden="true"
+              data-node-id="527:1207"
+            >
+              <span className="text-[#e22328] text-xs font-mono font-bold">+</span>
+            </div>
           )}
 
           {/* Corner Alignment Reticles */}

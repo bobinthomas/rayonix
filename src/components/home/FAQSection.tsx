@@ -68,7 +68,7 @@ export default function FAQSection({ faqs }: FAQSectionProps) {
                 </button>
 
                 {isOpen && (
-                  <div className="mt-4 pr-12 type-body-lg text-[#bdc4c8] animate-in fade-in duration-200">
+                  <div className="mt-4 pr-12 type-body-lg text-[#bdc4c8] anim-fade-in">
                     <p>{faq.answer}</p>
                   </div>
                 )}

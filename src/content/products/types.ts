@@ -72,6 +72,11 @@ export interface UseCase {
 export interface ProductPageContent {
   /** Canonical path, e.g. "/subsurface/detect/gpr". */
   path: string;
+  /**
+   * Set false to serve the page with noindex and leave it out of the sitemap
+   * (used while client copy is pending approval). Defaults to indexable.
+   */
+  indexable?: boolean;
   domain: "subsurface" | "surface" | "aerial";
   phase: "detect" | "decide" | "respond";
 

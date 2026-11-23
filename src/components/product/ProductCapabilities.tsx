@@ -72,6 +72,10 @@ export default function ProductCapabilities({
       if (idx >= 0) {
         setActiveTab(idx);
         setOpenItems((prev) => new Set(prev).add(id));
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
       }
     };
     openFromHash();
@@ -98,6 +102,17 @@ export default function ProductCapabilities({
               {capabilities.subheading}
             </p>
           )}
+        </div>
+
+        {/* Anchor targets for deep links from mega menu (/subsurface/decide#<id>) */}
+        <div className="relative w-full h-0 pointer-events-none" aria-hidden="true">
+          {tabs.map((tab) => (
+            <div
+              key={tab.id}
+              id={tab.id}
+              className="scroll-mt-28 h-0 w-0"
+            />
+          ))}
         </div>
 
         {/* Mobile (< md): accordion, so every capability title is visible */}

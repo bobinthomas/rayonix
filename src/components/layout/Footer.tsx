@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import NewsletterForm from "./NewsletterForm";
 
 export default function Footer() {
   return (
@@ -37,34 +38,7 @@ export default function Footer() {
           {/* Right Section: Newsletter + Navigation Links */}
           <div className="lg:col-span-8 flex flex-col gap-10">
             {/* Newsletter matching Figma node 640:4177 */}
-            <div className="flex flex-col gap-3">
-              <p className="type-body text-[#808080]">
-                Subscribe for Rayonix Update, Insights & News.
-              </p>
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="flex items-center w-full max-w-[880px] h-[54px] bg-white rounded-[4px] px-5 shadow-sm focus-within:ring-2 focus-within:ring-[#e22328]"
-              >
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  className="flex-1 type-body text-[#080f12] placeholder-[#808080] bg-transparent focus:outline-none"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="p-1 hover:opacity-80 transition-opacity"
-                  aria-label="Subscribe"
-                >
-                  <Image
-                    src="/assets/arrow-send.svg"
-                    alt=""
-                    width={20}
-                    height={20}
-                  />
-                </button>
-              </form>
-            </div>
+            <NewsletterForm />
 
             <div className="h-px w-full bg-[#b8bfc2]/40" />
 
@@ -73,13 +47,6 @@ export default function Footer() {
               {/* Explore Column */}
               <div className="flex flex-col gap-3.5">
                 <p className="type-body-lg text-[#f5f6f6]">Explore</p>
-                <Link
-                  href="/solutions"
-                  prefetch={false}
-                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
-                >
-                  Capabilities
-                </Link>
                 <Link
                   href="/solutions"
                   prefetch={false}
@@ -159,9 +126,9 @@ export default function Footer() {
         {/* Global Presence matching Figma node 640:4116 */}
         <div id="global-presence" className="flex flex-col gap-8 pt-4 scroll-mt-24">
           <div className="space-y-1">
-            <h3 className="type-h3 text-[#f5f6f6] ">
+            <h2 className="type-h3 text-[#f5f6f6] ">
               Our Global Presence
-            </h3>
+            </h2>
             <p className="type-body-lg text-[#f5f6f6] ">
               Rooted in India. Connected to the World.
             </p>
@@ -174,7 +141,8 @@ export default function Footer() {
                 <Image
                   src="/assets/flag-india.svg"
                   alt="India Flag"
-                  fill
+                  width={46}
+                  height={30}
                   className="object-contain"
                 />
               </div>
@@ -182,13 +150,13 @@ export default function Footer() {
                 <p className="type-body-lg text-[#bdbdbd] ">
                   INDIA | Headquarters
                 </p>
-                <p className="type-small font-medium text-[#808080] ">
+                <p className="type-small font-medium text-[#a3acb1] ">
                   Rayonix Tech Private Limited
                 </p>
-                <p className="type-small font-medium text-[#808080] ">
+                <p className="type-small font-medium text-[#a3acb1] ">
                   Delhi - Hyderabad - Mumbai - Chennai - Bangalore
                 </p>
-                <p className="text-[#808080] font-normal pt-1 leading-[24px]">
+                <p className="text-[#a3acb1] font-normal pt-1 leading-[24px]">
                   HO. : Plot 89, 4th Floor, Sector 44, Gurugram - 122003
                   <br />
                   Phone: +91 89397 92592
@@ -204,7 +172,8 @@ export default function Footer() {
                 <Image
                   src="/assets/flag-australia.svg"
                   alt="Australia Flag"
-                  fill
+                  width={46}
+                  height={30}
                   className="object-contain"
                 />
               </div>
@@ -212,15 +181,13 @@ export default function Footer() {
                 <p className="type-body-lg text-[#bdbdbd] ">
                   AUSTRALIA | Global Presence
                 </p>
-                <p className="type-small font-medium text-[#808080] ">
+                <p className="type-small font-medium text-[#a3acb1] ">
                   Rayonix Australia Pty Ltd
                 </p>
-                <p className="text-[#808080] font-normal pt-1 leading-[24px]">
+                <p className="text-[#a3acb1] font-normal pt-1 leading-[24px]">
                   PO Box 4021, Carlton,
                   <br />
                   NSW 2218, Australia
-                  <br />
-                  Phone: +91 000-0000-
                   <br />
                   Email: info@rayonix.au
                 </p>
@@ -234,8 +201,9 @@ export default function Footer() {
           <Image
             src="/assets/rayonix-wordmark.svg"
             alt="RAYONIX"
-            fill
-            className="object-contain object-center"
+            width={1200}
+            height={361}
+            className="w-auto h-auto max-w-full max-h-full object-contain object-center"
           />
         </div>
       </div>

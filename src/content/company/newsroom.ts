@@ -29,12 +29,12 @@ export interface NewsArticle {
 export const featuredArticle: NewsArticle = {
   slug: "aero-india-integrated-suite",
   category: "exhibition",
-  tag: "Exhibition & Defense Showcase",
+  tag: "Exhibition & Defence Showcase",
   date: "2026-02-18",
   location: "Bengaluru, India",
   title: "Rayonix Showcases Integrated Subsurface & Aerial Suite at Aero India",
   summary:
-    "Demonstrating operational live feeds of autonomous subterranean tunnel detection alongside tactical swarm loitering munitions to sovereign defense delegations and allied procurement leaders.",
+    "Demonstrating operational live feeds of autonomous subterranean tunnel detection alongside tactical swarm loitering munitions to sovereign defence delegations and allied procurement leaders.",
   kind: "Press Release",
   readTime: "4 min read",
   image: {
@@ -71,7 +71,7 @@ export const articles: NewsArticle[] = [
     category: "announcement",
     tag: "Partnerships & Grants",
     date: "2025-12-28",
-    title: "Rayonix and Australia Bilateral Defense Integration Facility Formed in Canberra",
+    title: "Rayonix and Australia Bilateral Defence Integration Facility Formed in Canberra",
     summary:
       "Accelerating collaborative sovereign testing for subsurface autonomous acoustics and multi-sensor edge intelligence.",
   },

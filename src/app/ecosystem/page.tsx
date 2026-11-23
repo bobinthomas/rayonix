@@ -2,9 +2,11 @@ import { Metadata } from "next";
 import TacticalPlaceholder from "@/components/common/TacticalPlaceholder";
 
 export const metadata: Metadata = {
-  title: "Defence Ecosystem | Rayonix",
+  title: "Defence Ecosystem",
   description:
     "Rayonix ecosystem uniting X Labs, neXr Optronics, and Mcray Xtend for indigenous defence manufacturing.",
+  alternates: { canonical: "/ecosystem" },
+  robots: { index: false, follow: true },
 };
 
 export default function EcosystemPage() {

@@ -11,21 +11,28 @@ export default function FieldDroneBanner() {
     const container = containerRef.current;
     if (!video || !container) return;
 
-    // Use IntersectionObserver to play video when visible and pause when off-screen
+    let isAttached = false;
+
+    // Use IntersectionObserver to lazy-load video source and play when approaching viewport
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            video.play().catch(() => {
-              // Browser autoplay policy handler
-            });
+            if (!isAttached) {
+              video.src = "/assets/videos/ai-robotics-web.mp4";
+              isAttached = true;
+            }
+            video.play().catch(() => {});
           } else {
-            video.pause();
+            if (isAttached) {
+              video.pause();
+            }
           }
         });
       },
       {
-        threshold: 0.15,
+        rootMargin: "300px 0px",
+        threshold: 0.1,
       }
     );
 
@@ -47,17 +54,15 @@ export default function FieldDroneBanner() {
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <video
           ref={videoRef}
-          autoPlay
+          width={1920}
+          height={1080}
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           poster="/assets/ai-robotics-poster.webp"
           className="w-full h-full object-cover object-center"
-        >
-          {/* Optimized 1080p web version with faststart for instantaneous playback */}
-          <source src="/assets/videos/ai-robotics-web.mp4" type="video/mp4" />
-        </video>
+        />
 
         {/* Subtle top & bottom edge gradients for seamless container blending */}
         <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black/40 to-transparent" />

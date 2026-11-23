@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { SolutionPageContent } from "@/content/solutions/types";
+import { clampDescription } from "@/lib/seo/metadata";
 
 // Same base as product pages (see components/product/productSeo.ts).
 const SITE_URL = "https://rayonix-site.pages.dev";
@@ -8,18 +9,19 @@ const pathOf = (c: SolutionPageContent) => `/solutions/${c.slug}`;
 
 export function buildSolutionMetadata(content: SolutionPageContent): Metadata {
   const { title, description } = content.seo;
+  const clampedDesc = clampDescription(description);
   return {
-    title,
-    description,
+    title: { absolute: title },
+    description: clampedDesc,
     openGraph: {
       title,
-      description,
+      description: clampedDesc,
       url: `${SITE_URL}${pathOf(content)}`,
       siteName: "Rayonix",
       locale: "en_US",
       type: "website",
     },
-    twitter: { card: "summary_large_image", title, description },
+    twitter: { card: "summary_large_image", title, description: clampedDesc },
     alternates: { canonical: pathOf(content) },
   };
 }

@@ -64,11 +64,26 @@ export default function Header() {
     };
   }, [isMenuOpen]);
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape" && activeMegaTab) {
+      e.preventDefault();
+      setActiveMegaTab(null);
+    }
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLDivElement>) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+      setActiveMegaTab(null);
+    }
+  };
+
   return (
     <>
       <div
         ref={headerRef}
         onMouseLeave={handleCloseMegaMenu}
+        onKeyDown={handleKeyDown}
+        onBlur={handleBlur}
         className={`fixed top-0 left-0 right-0 min-[700px]:top-4 min-[700px]:left-4 min-[700px]:right-4 z-50 transform transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
           isScrolled ? "translate-y-0 min-[700px]:-translate-y-4" : "translate-y-0"
         }`}
@@ -114,7 +129,7 @@ export default function Header() {
               <div
                 onMouseEnter={() => handleTabEnter("subsurface")}
                 onMouseLeave={handleCloseMegaMenu}
-                className={`relative flex items-center h-full cursor-pointer transition-all ${
+                className={`relative flex items-center h-full transition-all ${
                   activeMegaTab === "subsurface"
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
@@ -123,9 +138,35 @@ export default function Header() {
                 <Link
                   href="/subsurface/detect/gpr"
                   prefetch={false}
-                  className="inline-flex items-center gap-2 type-small font-medium text-[#f5f6f6] hover:text-white transition-colors"
+                  onKeyDown={(e) => {
+                    if (e.key === "ArrowDown") {
+                      e.preventDefault();
+                      handleTabEnter("subsurface");
+                    }
+                  }}
+                  className="inline-flex items-center type-small font-medium text-[#f5f6f6] hover:text-white transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2"
                 >
                   <span>Sub Surface</span>
+                </Link>
+                <button
+                  type="button"
+                  aria-expanded={activeMegaTab === "subsurface"}
+                  aria-controls="rayonix-mega-menu-panel"
+                  aria-haspopup="true"
+                  aria-label="Toggle Sub Surface navigation menu"
+                  onClick={() =>
+                    activeMegaTab === "subsurface"
+                      ? setActiveMegaTab(null)
+                      : handleTabEnter("subsurface")
+                  }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+                      e.preventDefault();
+                      handleTabEnter("subsurface");
+                    }
+                  }}
+                  className="ml-1 p-1 inline-flex items-center justify-center text-[#f5f6f6]/70 hover:text-white focus:outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] rounded-[2px]"
+                >
                   <ChevronDown
                     className={`w-3.5 h-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       activeMegaTab === "subsurface"
@@ -133,14 +174,14 @@ export default function Header() {
                         : "text-[#f5f6f6]/70"
                     }`}
                   />
-                </Link>
+                </button>
               </div>
 
               {/* Surface */}
               <div
                 onMouseEnter={() => handleTabEnter("surface")}
                 onMouseLeave={handleCloseMegaMenu}
-                className={`relative flex items-center h-full cursor-pointer transition-all ${
+                className={`relative flex items-center h-full transition-all ${
                   activeMegaTab === "surface"
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
@@ -149,9 +190,35 @@ export default function Header() {
                 <Link
                   href="/domains/surface"
                   prefetch={false}
-                  className="inline-flex items-center gap-2 type-small font-medium text-[#f5f6f6] hover:text-white transition-colors"
+                  onKeyDown={(e) => {
+                    if (e.key === "ArrowDown") {
+                      e.preventDefault();
+                      handleTabEnter("surface");
+                    }
+                  }}
+                  className="inline-flex items-center type-small font-medium text-[#f5f6f6] hover:text-white transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2"
                 >
                   <span>Surface</span>
+                </Link>
+                <button
+                  type="button"
+                  aria-expanded={activeMegaTab === "surface"}
+                  aria-controls="rayonix-mega-menu-panel"
+                  aria-haspopup="true"
+                  aria-label="Toggle Surface navigation menu"
+                  onClick={() =>
+                    activeMegaTab === "surface"
+                      ? setActiveMegaTab(null)
+                      : handleTabEnter("surface")
+                  }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+                      e.preventDefault();
+                      handleTabEnter("surface");
+                    }
+                  }}
+                  className="ml-1 p-1 inline-flex items-center justify-center text-[#f5f6f6]/70 hover:text-white focus:outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] rounded-[2px]"
+                >
                   <ChevronDown
                     className={`w-3.5 h-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       activeMegaTab === "surface"
@@ -159,14 +226,14 @@ export default function Header() {
                         : "text-[#f5f6f6]/70"
                     }`}
                   />
-                </Link>
+                </button>
               </div>
 
               {/* Aerial */}
               <div
                 onMouseEnter={() => handleTabEnter("aerial")}
                 onMouseLeave={handleCloseMegaMenu}
-                className={`relative flex items-center h-full cursor-pointer transition-all ${
+                className={`relative flex items-center h-full transition-all ${
                   activeMegaTab === "aerial"
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
@@ -175,9 +242,35 @@ export default function Header() {
                 <Link
                   href="/domains/aerial"
                   prefetch={false}
-                  className="inline-flex items-center gap-2 type-small font-medium text-[#f5f6f6] hover:text-white transition-colors"
+                  onKeyDown={(e) => {
+                    if (e.key === "ArrowDown") {
+                      e.preventDefault();
+                      handleTabEnter("aerial");
+                    }
+                  }}
+                  className="inline-flex items-center type-small font-medium text-[#f5f6f6] hover:text-white transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2"
                 >
                   <span>Aerial</span>
+                </Link>
+                <button
+                  type="button"
+                  aria-expanded={activeMegaTab === "aerial"}
+                  aria-controls="rayonix-mega-menu-panel"
+                  aria-haspopup="true"
+                  aria-label="Toggle Aerial navigation menu"
+                  onClick={() =>
+                    activeMegaTab === "aerial"
+                      ? setActiveMegaTab(null)
+                      : handleTabEnter("aerial")
+                  }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+                      e.preventDefault();
+                      handleTabEnter("aerial");
+                    }
+                  }}
+                  className="ml-1 p-1 inline-flex items-center justify-center text-[#f5f6f6]/70 hover:text-white focus:outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] rounded-[2px]"
+                >
                   <ChevronDown
                     className={`w-3.5 h-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       activeMegaTab === "aerial"
@@ -185,7 +278,7 @@ export default function Header() {
                         : "text-[#f5f6f6]/70"
                     }`}
                   />
-                </Link>
+                </button>
               </div>
             </nav>
 
@@ -195,7 +288,7 @@ export default function Header() {
               <div
                 onMouseEnter={() => handleTabEnter("solutions")}
                 onMouseLeave={handleCloseMegaMenu}
-                className={`relative flex items-center h-full cursor-pointer transition-all ${
+                className={`relative flex items-center h-full transition-all ${
                   activeMegaTab === "solutions"
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
@@ -204,9 +297,35 @@ export default function Header() {
                 <Link
                   href="/solutions"
                   prefetch={false}
-                  className="inline-flex items-center gap-2 type-small font-medium text-[#f5f6f6] hover:text-white transition-colors"
+                  onKeyDown={(e) => {
+                    if (e.key === "ArrowDown") {
+                      e.preventDefault();
+                      handleTabEnter("solutions");
+                    }
+                  }}
+                  className="inline-flex items-center type-small font-medium text-[#f5f6f6] hover:text-white transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2"
                 >
                   <span>Solutions</span>
+                </Link>
+                <button
+                  type="button"
+                  aria-expanded={activeMegaTab === "solutions"}
+                  aria-controls="rayonix-mega-menu-panel"
+                  aria-haspopup="true"
+                  aria-label="Toggle Solutions navigation menu"
+                  onClick={() =>
+                    activeMegaTab === "solutions"
+                      ? setActiveMegaTab(null)
+                      : handleTabEnter("solutions")
+                  }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+                      e.preventDefault();
+                      handleTabEnter("solutions");
+                    }
+                  }}
+                  className="ml-1 p-1 inline-flex items-center justify-center text-[#f5f6f6]/70 hover:text-white focus:outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] rounded-[2px]"
+                >
                   <ChevronDown
                     className={`w-3.5 h-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       activeMegaTab === "solutions"
@@ -214,14 +333,14 @@ export default function Header() {
                         : "text-[#f5f6f6]/70"
                     }`}
                   />
-                </Link>
+                </button>
               </div>
 
               {/* Company */}
               <div
                 onMouseEnter={() => handleTabEnter("company")}
                 onMouseLeave={handleCloseMegaMenu}
-                className={`relative flex items-center h-full cursor-pointer transition-all ${
+                className={`relative flex items-center h-full transition-all ${
                   activeMegaTab === "company"
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
@@ -230,9 +349,35 @@ export default function Header() {
                 <Link
                   href="/about"
                   prefetch={false}
-                  className="inline-flex items-center gap-2 type-small font-medium text-[#f5f6f6] hover:text-white transition-colors"
+                  onKeyDown={(e) => {
+                    if (e.key === "ArrowDown") {
+                      e.preventDefault();
+                      handleTabEnter("company");
+                    }
+                  }}
+                  className="inline-flex items-center type-small font-medium text-[#f5f6f6] hover:text-white transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2"
                 >
                   <span>Company</span>
+                </Link>
+                <button
+                  type="button"
+                  aria-expanded={activeMegaTab === "company"}
+                  aria-controls="rayonix-mega-menu-panel"
+                  aria-haspopup="true"
+                  aria-label="Toggle Company navigation menu"
+                  onClick={() =>
+                    activeMegaTab === "company"
+                      ? setActiveMegaTab(null)
+                      : handleTabEnter("company")
+                  }
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") {
+                      e.preventDefault();
+                      handleTabEnter("company");
+                    }
+                  }}
+                  className="ml-1 p-1 inline-flex items-center justify-center text-[#f5f6f6]/70 hover:text-white focus:outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] rounded-[2px]"
+                >
                   <ChevronDown
                     className={`w-3.5 h-3.5 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                       activeMegaTab === "company"
@@ -240,7 +385,7 @@ export default function Header() {
                         : "text-[#f5f6f6]/70"
                     }`}
                   />
-                </Link>
+                </button>
               </div>
             </div>
 

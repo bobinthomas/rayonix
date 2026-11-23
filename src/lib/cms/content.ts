@@ -369,13 +369,8 @@ A: Defence forces, homeland security agencies, and strategic partners requiring 
     heading: "Canonical URLs",
     body: `- Homepage: https://rayonix.com
 - About / Company Story: https://rayonix.com/about
-- Ecosystem: https://rayonix.com/ecosystem
-- Subsurface Domain: https://rayonix.com/domains/subsurface
-- Surface Domain: https://rayonix.com/domains/surface
-- Aerial Domain: https://rayonix.com/domains/aerial
-- Careers: https://rayonix.com/careers
-- News & Insights: https://rayonix.com/news
-- Contact: https://rayonix.com/contact`,
+- Subsurface Domain: https://rayonix.com/subsurface/detect/gpr
+- News & Insights: https://rayonix.com/news`,
     sortOrder: 4,
   },
 ];

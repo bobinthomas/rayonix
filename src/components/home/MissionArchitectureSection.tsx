@@ -154,11 +154,11 @@ export default function MissionArchitectureSection() {
         ref={cardRef}
         className="sticky top-0 min-[700px]:top-4 lg:top-[calc((100vh-792px)/2)] w-full min-h-[750px] lg:h-[792px] bg-[#080f12] overflow-hidden flex items-center justify-center py-16 lg:py-0 shadow-2xl"
       >
-        {/* Background Image: detect-decide-respond-bg.png matching user specification */}
+        {/* Background Image: detect-decide-respond-bg.webp matching user specification */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="relative w-full h-full opacity-45">
             <Image
-              src="/assets/detect-decide-respond-bg.png"
+              src="/assets/detect-decide-respond-bg.webp"
               alt="Tactical Mission Equipment"
               fill
               priority={false}

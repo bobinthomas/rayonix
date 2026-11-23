@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { OrganizationSchema, WebSiteSchema } from "@/lib/seo/json-ld";
 import HeroSection from "@/components/home/HeroSection";
 import BattlespaceSection from "@/components/home/BattlespaceSection";
@@ -9,8 +10,15 @@ import BeyondIntegrationSection from "@/components/home/BeyondIntegrationSection
 import GlobalPartnershipSection from "@/components/home/GlobalPartnershipSection";
 import ExploreSection from "@/components/home/ExploreSection";
 import LetsTalkSection from "@/components/home/LetsTalkSection";
+import Reveal from "@/components/ui/Reveal";
 
 export const revalidate = 86400; // Static edge caching with on-demand revalidation
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function HomePage() {
   return (
@@ -25,31 +33,31 @@ export default function HomePage() {
         <HeroSection />
 
         {/* 02 · The New Battlespace (Two Soldiers in Fog) */}
-        <BattlespaceSection />
+        <Reveal><BattlespaceSection /></Reveal>
 
         {/* 03 · One Connected Defence Ecosystem (Light Section) */}
-        <EcosystemSection />
+        <Reveal><EcosystemSection /></Reveal>
 
-        {/* 04 · Detect. Decide. Respond. (Mission Architecture) */}
+        {/* 04 · Detect. Decide. Respond. (Mission Architecture) — scroll-pinned via GSAP, not wrapped */}
         <MissionArchitectureSection />
 
         {/* 05 · Engineered for the Mission. Proven in the Field. (Dark Slate) */}
-        <CapabilitiesSection />
+        <Reveal><CapabilitiesSection /></Reveal>
 
         {/* 06 · Tactical Field Drone Banner */}
-        <FieldDroneBanner />
+        <Reveal><FieldDroneBanner /></Reveal>
 
         {/* 07 · Beyond Integration. Built for Defence. (Light Section - X Labs, neXr, Mcray) */}
-        <BeyondIntegrationSection />
+        <Reveal><BeyondIntegrationSection /></Reveal>
 
         {/* 08 · Global Technology. Indian Defence Capability. (World Map & Partner Logos) */}
-        <GlobalPartnershipSection />
+        <Reveal><GlobalPartnershipSection /></Reveal>
 
         {/* 09 · Explore Rayonix (Light Section - Stories, Ecosystem, Careers, News) */}
-        <ExploreSection />
+        <Reveal><ExploreSection /></Reveal>
 
         {/* 10 · Lets Talk (3 Consultation Pillars) */}
-        <LetsTalkSection />
+        <Reveal><LetsTalkSection /></Reveal>
       </main>
     </>
   );

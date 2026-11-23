@@ -147,11 +147,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${gordita.variable} ${gordita.className}`}>
       <body className={`${gordita.className} font-sans min-h-screen flex flex-col gap-0 min-[700px]:gap-4 bg-rayonix-canvas text-rayonix-text-primary antialiased selection:bg-rayonix-accent selection:text-white p-0 min-[700px]:p-4`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#e22328] focus:text-white focus:rounded-[4px] focus:outline-none focus:ring-2 focus:ring-white focus:shadow-lg type-body font-medium"
+        >
+          Skip to main content
+        </a>
         <SniperCursor />
         <Header />
-        <div className="flex-1 w-full">
+        <main id="main-content" tabIndex={-1} className="flex-1 w-full outline-none">
           {children}
-        </div>
+        </main>
         <Footer />
       </body>
     </html>

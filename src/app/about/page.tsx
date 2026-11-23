@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { BreadcrumbSchema } from "@/lib/seo/json-ld";
 import {
   ArrowLink,
   CompanyHero,
@@ -11,7 +12,7 @@ import {
 export const metadata: Metadata = {
   title: "About Rayonix | Global Technology, Indian Defence Capability",
   description:
-    "Rayonix builds integrated sensing, intelligence, and response systems engineered for modern multi-domain defense and critical enterprise security.",
+    "Rayonix builds integrated sensing, intelligence, and response systems engineered for modern multi-domain defence and critical enterprise security.",
   alternates: { canonical: "/about" },
 };
 
@@ -21,6 +22,7 @@ const SUBNAV = [
   { label: "Overview", href: "#mission" },
   { label: "Certifications", href: "#certifications" },
   { label: "Global presence", href: "#presence" },
+  { label: "Partners", href: "#partners" },
 ];
 
 const PILLARS = [
@@ -35,10 +37,10 @@ const PILLARS = [
   },
   {
     title: "Our Vision",
-    body: "To establish global leadership in unified autonomous defense ecosystems built in India for the world.",
+    body: "To establish global leadership in unified autonomous defence ecosystems built in India for the world.",
     points: [
       "Sovereign supply chain security & 100% indigenous IP",
-      "Interoperable allied defense partnerships",
+      "Interoperable allied defence partnerships",
       "Continuous multi-domain deterrent dominance",
     ],
   },
@@ -47,12 +49,12 @@ const PILLARS = [
 const KPIS = [
   { value: "15+", title: "Deployed Systems", body: "Across contested border frontiers & naval corridors." },
   { value: "18,000 ft", title: "Extreme Altitude Proven", body: "Sub-zero trials in rugged Himalayan passes (-40°C)." },
-  { value: "12+", title: "Global Partner Nations", body: "Joint defense evaluation & sovereign bilateral tech programs." },
+  { value: "12+", title: "Global Partner Nations", body: "Joint defence evaluation & sovereign bilateral tech programs." },
 ];
 
 const CREDENTIALS = [
   { icon: "icon-cert-iso.svg", title: "ISO 9001", body: "Quality Management Systems for high-reliability manufacturing." },
-  { icon: "icon-cert-as9100.svg", title: "AS9100D", body: "Aviation, Space and Defense Engineering manufacturing standards." },
+  { icon: "icon-cert-as9100.svg", title: "AS9100D", body: "Aviation, Space and Defence Engineering manufacturing standards." },
   { icon: "icon-cert-milstd.svg", title: "MIL-STD-810H", body: "Environmental Engineering & extreme laboratory durability testing." },
   { icon: "icon-cert-india.svg", title: "Make in India Defence", body: "100% Indigenous Design, Development & sovereign manufacturing." },
 ];
@@ -66,18 +68,43 @@ const HUBS = [
   {
     kind: "Bilateral Hub",
     name: "Canberra Joint Evaluation Facility (Australia)",
-    body: "Field validation, maritime corridor telemetry, and defense tech interoperability.",
+    body: "Field validation, maritime corridor telemetry, and defence tech interoperability.",
   },
+];
+
+const PARTNERS = [
+  { name: "XTEND", file: "xtend" },
+  { name: "Hivebotics", file: "hivebotics" },
+  { name: "Orca Optronics", file: "orca-optronics" },
+  { name: "KIRO", file: "kiro" },
+  { name: "GMafcon Security Technologies", file: "gmafcon" },
+  { name: "Rayonix partner mark", file: "a-mark" },
+  { name: "OSINT Losena Ltd.", file: "osint-losena" },
+  { name: "Frenel Imaging", file: "frenel-imaging" },
+  { name: "Guideline Geo", file: "guideline-geo" },
+  { name: "Cirotta", file: "cirotta" },
+  { name: "Vanguard Systems Ltd.", file: "vanguard-systems" },
+  { name: "Ariel Photonics", file: "ariel-photonics" },
+  { name: "Innoviz Technologies", file: "innoviz" },
+  { name: "Tyndall FX", file: "tyndall-fx" },
 ];
 
 export default function AboutPage() {
   return (
-    <main className="relative w-full min-h-screen bg-[#080f12]">
+    <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Company", href: "/about" },
+          { name: "About Us", href: "/about" },
+        ]}
+      />
+      <main className="relative w-full min-h-screen bg-[#080f12]">
       <CompanyHero
         ariaLabel="About Rayonix"
         crumbs={[{ label: "Home", href: "/" }, { label: "Company" }, { label: "About us" }]}
         title={"Global technology.\nIndian defence capability."}
-        intro="Rayonix builds integrated sensing, intelligence, and response systems engineered for modern multi-domain defense and critical enterprise security."
+        intro="Rayonix builds integrated sensing, intelligence, and response systems engineered for modern multi-domain defence and critical enterprise security."
         introBeside
         subnav={
           <nav
@@ -201,7 +228,7 @@ export default function AboutPage() {
       <CompanySection tone="light" id="certifications" ariaLabel="Certifications and international reach">
         <div className="flex flex-col gap-10 lg:gap-16">
           <h2 className="type-h2 text-[#080f12]">
-            Defense Certifications &amp; International Reach
+            Defence Certifications &amp; International Reach
           </h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             {CREDENTIALS.map((c) => (
@@ -263,6 +290,44 @@ export default function AboutPage() {
           </div>
         </div>
       </CompanySection>
+
+      {/* Global Strategic Partners (id="partners") */}
+      <CompanySection tone="dark" id="partners" ariaLabel="Global strategic partners" className="scroll-mt-28">
+        <div className="flex flex-col gap-8 lg:gap-12">
+          <div className="flex flex-col gap-3">
+            <p className="type-eyebrow text-[#e22328]">Global Alliances</p>
+            <h2 className="type-h2 text-[#f5f6f6]">Strategic Partners &amp; Collaborators</h2>
+            <p className="type-body-lg text-[#bdc4c8] max-w-[800px]">
+              We collaborate with premier international defence innovators, integrating battle-proven capabilities with sovereign Make-in-India systems.
+            </p>
+          </div>
+
+          <div className="w-full bg-white/[0.04] backdrop-blur-md p-3 sm:p-4 rounded-[4px] border border-white/10 shadow-2xl">
+            <ul
+              className="rounded-[2px] bg-[#f6f7f9] p-4 sm:p-6 lg:p-8 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3 sm:gap-4 lg:gap-[14px]"
+              aria-label="Global defence and technology partners"
+            >
+              {PARTNERS.map((partner) => (
+                <li
+                  key={partner.file}
+                  className="relative aspect-[263/243] rounded-[8px] border border-[#e4e7ec] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)]"
+                >
+                  <Image
+                    src={`/assets/partners/${partner.file}.webp`}
+                    alt={partner.name}
+                    width={526}
+                    height={486}
+                    sizes="(max-width: 767px) 45vw, (max-width: 1279px) 14vw, 175px"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-contain p-2"
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </CompanySection>
     </main>
+    </>
   );
 }

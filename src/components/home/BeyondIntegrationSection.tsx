@@ -35,7 +35,7 @@ export default function BeyondIntegrationSection() {
             <h2 className="type-hero text-[#080f12] ">
               Beyond Integration.
               <br />
-              Built for <span className="text-[#7f8a91]">Defense</span>
+              Built for <span className="text-[#7f8a91]">Defence</span>
               <span className="text-[#e22328]">.</span>
             </h2>
           </div>

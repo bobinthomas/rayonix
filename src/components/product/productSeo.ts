@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ProductPageContent } from "@/content/products/types";
+import { clampDescription } from "@/lib/seo/metadata";
 
 // Matches the URLs product pages already publish. Note: src/lib/seo uses
 // https://rayonix.com; the two should be unified once the domain is final.
@@ -7,12 +8,13 @@ const SITE_URL = "https://rayonix-site.pages.dev";
 
 export function buildProductMetadata(content: ProductPageContent): Metadata {
   const { title, description } = content.seo;
+  const clampedDesc = clampDescription(description);
   return {
-    title,
-    description,
+    title: { absolute: title },
+    description: clampedDesc,
     openGraph: {
       title,
-      description,
+      description: clampedDesc,
       url: `${SITE_URL}${content.path}`,
       siteName: "Rayonix",
       locale: "en_US",
@@ -21,11 +23,12 @@ export function buildProductMetadata(content: ProductPageContent): Metadata {
     twitter: {
       card: "summary_large_image",
       title,
-      description,
+      description: clampedDesc,
     },
     alternates: {
       canonical: content.path,
     },
+    ...(content.indexable === false ? { robots: { index: false, follow: true } } : {}),
   };
 }
 

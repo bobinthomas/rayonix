@@ -1,22 +1,14 @@
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
 import TacticalPlaceholder from "@/components/common/TacticalPlaceholder";
 
 export function generateStaticParams() {
   return [
-    { slug: "subsurface" },
     { slug: "surface" },
     { slug: "aerial" },
   ];
 }
 
-const domainInfo: Record<string, { title: string; subtitle: string; redirect?: string }> = {
-  subsurface: {
-    title: "Subsurface Domain Systems",
-    subtitle:
-      "Deep underground and underwater detection, mapping, and seismic intelligence systems.",
-    redirect: "/subsurface/detect/gpr",
-  },
+const domainInfo: Record<string, { title: string; subtitle: string }> = {
   surface: {
     title: "Surface Warfare & Ground Systems",
     subtitle:
@@ -29,6 +21,25 @@ const domainInfo: Record<string, { title: string; subtitle: string; redirect?: s
   },
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const domain = domainInfo[slug] || {
+    title: "Operational Domain",
+    subtitle: "Advanced multispectral defence hardware architecture.",
+  };
+
+  return {
+    title: domain.title,
+    description: domain.subtitle,
+    alternates: { canonical: `/domains/${slug}` },
+    robots: { index: false, follow: true },
+  };
+}
+
 export default async function DomainSlugPage({
   params,
 }: {
@@ -39,11 +50,6 @@ export default async function DomainSlugPage({
     title: "Operational Domain",
     subtitle: "Advanced multispectral defence hardware architecture.",
   };
-
-  // If visiting subsurface, seamlessly route to the active GPR platform
-  if (slug === "subsurface") {
-    redirect("/subsurface/detect/gpr");
-  }
 
   return (
     <TacticalPlaceholder

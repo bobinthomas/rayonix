@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Reveal from "@/components/ui/Reveal";
 import Link from "next/link";
 import TransformingHeading from "@/components/ui/TransformingHeading";
 
@@ -177,7 +178,7 @@ export function CompanySection({
       : "bg-[#080f12] text-[#f5f6f6] border-t border-[#253035]";
   return (
     <section id={id} aria-label={ariaLabel} className={`relative w-full scroll-mt-24 py-16 lg:py-20 ${colours} ${className}`}>
-      <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8">{children}</div>
+      <Reveal className="max-w-[1280px] mx-auto w-full px-6 sm:px-8">{children}</Reveal>
     </section>
   );
 }

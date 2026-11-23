@@ -30,3 +30,4 @@ Every page must maintain Lighthouse scores >= 98 (`LCP < 1.2s`, `INP < 50ms`, `C
 - **SEO:** Semantic HTML5 (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`), single `<h1>` per page, full Next.js Metadata API, dynamic `sitemap.ts`, and `robots.ts`.
 - **JSON-LD:** Inject valid `Organization`, `WebSite`, `BreadcrumbList`, `Service`/`Product`, `Article`, and `FAQPage` schemas on relevant routes.
 - **GEO:** Write clear entity definitions, Q&A headings, and factual summary blocks, and maintain an auto-generated `/llms.txt` route summarizing company facts and canonical URLs for AI crawlers.
+ 
