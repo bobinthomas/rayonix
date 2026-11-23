@@ -13,8 +13,7 @@ export const facialRecognition: SolutionPageContent = {
   "hero": {
     "eyebrow": "SEEKER · AI-Powered Facial Recognition System",
     "headline": [
-      "Every identity recognised.",
-      "Every threat anticipated."
+      "Turning visual intelligence into action"
     ],
     "intro": "An AI-powered facial recognition solution that integrates with existing CCTV infrastructure to identify authorised personnel, detect watchlisted individuals and monitor unauthorised access across security-sensitive areas.",
     "cta": {

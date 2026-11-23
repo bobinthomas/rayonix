@@ -85,7 +85,14 @@ function parse(raw, where) {
     return line.slice(prefix.length).trim();
   };
 
-  const [headline, intro, heroCta] = need("Hero");
+  // Hero = one or more headline lines, then the intro, then "CTA: …". Some pages
+  // (SROP) have a two-line headline, so everything before the intro is headline.
+  const hero = need("Hero");
+  const ctaIdx = hero.findIndex((l) => l.startsWith("CTA:"));
+  if (ctaIdx < 2) throw new Error(`${where}: Hero needs a headline, an intro and a "CTA:" line`);
+  const headline = hero.slice(0, ctaIdx - 1).join(" ");
+  const intro = hero[ctaIdx - 1];
+  const heroCta = hero[ctaIdx];
   const [capHeading, ...capRest] = need("Key Capabilities");
   const [appHeading, ...appRest] = need("Applications");
   const [ctaHeading, ctaText, primary, secondary] = need("Call to Action");
@@ -127,14 +134,6 @@ function buttonLabel(text, name) {
   return s.replace(re, name);
 }
 
-// Doc headlines that run two sentences together without a full stop. Keyed by
-// the doc text (case-insensitive); once the doc is fixed the entry stops matching.
-const HEADLINE_FIXES = {
-  "every identity recognised every threat anticipated": "Every identity recognised. Every threat anticipated.",
-  "intelligent surveillance real-time insights": "Intelligent surveillance. Real-time insights.",
-};
-const fixHeadline = (text) => HEADLINE_FIXES[text.trim().toLowerCase()] ?? text;
-
 // Headline as at most two lines (Figma shows two): group sentences evenly.
 function twoLines(text) {
   const s = text.split(/(?<=[.!?])\s+/).filter(Boolean);
@@ -159,7 +158,7 @@ function toContent(page, p) {
     },
     hero: {
       eyebrow: page.eyebrow,
-      headline: twoLines(sentenceCase(fixHeadline(p.headline))),
+      headline: twoLines(sentenceCase(p.headline)),
       intro: p.intro,
       cta: { label: buttonLabel(p.heroCta, page.name), href: enquiry },
       badge: `Solution: ${page.name} // ${fullName}`,

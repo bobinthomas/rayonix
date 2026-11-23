@@ -13,8 +13,7 @@ export const iccs: SolutionPageContent = {
   "hero": {
     "eyebrow": "ICCS · Integrated Command & Control System",
     "headline": [
-      "From detection to response.",
-      "One unified command."
+      "Integrated intelligence to coordinated response."
     ],
     "intro": "An AI-driven security platform integrating surveillance cameras, ground sensors and autonomous drones for continuous monitoring and coordinated threat response.",
     "cta": {

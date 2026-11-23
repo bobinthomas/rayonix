@@ -13,8 +13,7 @@ export const videoAnalytics: SolutionPageContent = {
   "hero": {
     "eyebrow": "AI Video Analytics · AIBOX",
     "headline": [
-      "Intelligent surveillance.",
-      "Real-time insights."
+      "Intelligence in every frame"
     ],
     "intro": "A compact, AI-powered video analytics solution enabling real-time detection, classification and monitoring through intelligent edge processing and integrated video management.",
     "cta": {

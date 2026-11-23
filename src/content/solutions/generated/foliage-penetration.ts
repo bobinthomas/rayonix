@@ -13,7 +13,7 @@ export const foliagePenetration: SolutionPageContent = {
   "hero": {
     "eyebrow": "Foliage Penetration · Through-Cover Surveillance Module",
     "headline": [
-      "Reveal the hidden and see through the unseen"
+      "Surveillance through dense foliage."
     ],
     "intro": "An advanced surveillance solution designed to detect and classify human movement through dense foliage, forest cover and camouflage, even in limited visibility conditions.",
     "cta": {

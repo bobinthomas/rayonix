@@ -13,7 +13,7 @@ export const warriorDroneBuddy: SolutionPageContent = {
   "hero": {
     "eyebrow": "Warrior Drone Buddy · Tactical Drone System",
     "headline": [
-      "Rapid reconnaissance for mission-ready intelligence"
+      "An extra eye for every mission."
     ],
     "intro": "A compact tactical drone system designed for rapid area surveillance, delivering real-time visuals and continuous feedback to support field assessment and operational decision-making.",
     "cta": {
