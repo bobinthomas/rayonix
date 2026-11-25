@@ -28,7 +28,7 @@ const nextConfig: NextConfig = {
       {
         source: "/sub-surface/:path*",
         destination: "/subsurface/:path*",
-        permanent: true,
+        statusCode: 301,
       },
       // Retired coverage stubs and placeholder news stories (see src/content/news.ts).
       ...[
@@ -39,16 +39,16 @@ const nextConfig: NextConfig = {
         "extreme-cold-testing-gpr-18000-ft",
         "x-labs-swarm-d-loitering-munition",
         "australia-bilateral-integration-facility-canberra",
-      ].map((slug) => ({ source: `/news/${slug}`, destination: "/news", permanent: true })),
+      ].map((slug) => ({ source: `/news/${slug}`, destination: "/news", statusCode: 301 })),
       {
         source: "/subsurface/command-intelligence",
         destination: "/subsurface/decide",
-        permanent: true,
+        statusCode: 301,
       },
       {
         source: "/subsurface/decide/command-intelligence",
         destination: "/subsurface/decide",
-        permanent: true,
+        statusCode: 301,
       },
     ];
   },

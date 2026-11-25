@@ -10,7 +10,8 @@
     "start": "next start",
     "lint": "next lint",
     "preview": "pnpm pages:build && wrangler pages dev .vercel/output/static",
-    "deploy": "node scripts/deploy.js"
+    "deploy": "node scripts/deploy.js",
+    "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
