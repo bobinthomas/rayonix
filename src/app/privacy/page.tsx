@@ -1,19 +1,16 @@
-import { Metadata } from "next";
-import TacticalPlaceholder from "@/components/common/TacticalPlaceholder";
+import type { Metadata } from "next";
+import LegalPage from "@/components/company/LegalPage";
+import { pageMetadata } from "@/lib/seo/metadata";
+import { LEGAL } from "@/content/legal";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy",
-  description: "Data handling, information security, and privacy policies of Rayonix.",
-  alternates: { canonical: "/privacy" },
-  robots: { index: false, follow: true },
-};
+const page = LEGAL.privacy;
+
+export const metadata: Metadata = pageMetadata({
+  title: page.title,
+  description: page.summary,
+  path: page.path,
+});
 
 export default function PrivacyPage() {
-  return (
-    <TacticalPlaceholder
-      badge="SECURITY & COMPLIANCE"
-      title="Privacy Policy"
-      subtitle="Rayonix is dedicated to strict data sovereignty, military-grade encryption, and adherence to international privacy protocols."
-    />
-  );
+  return <LegalPage {...page} />;
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { SolutionPageContent } from "@/content/solutions/types";
-import { clampDescription } from "@/lib/seo/metadata";
+import { clampDescription, DEFAULT_OG_IMAGE } from "@/lib/seo/metadata";
 
 // Same base as product pages (see components/product/productSeo.ts).
 const SITE_URL = "https://rayonix-site.pages.dev";
@@ -20,8 +20,9 @@ export function buildSolutionMetadata(content: SolutionPageContent): Metadata {
       siteName: "Rayonix",
       locale: "en_US",
       type: "website",
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Rayonix" }],
     },
-    twitter: { card: "summary_large_image", title, description: clampedDesc },
+    twitter: { card: "summary_large_image", title, description: clampedDesc, images: [DEFAULT_OG_IMAGE] },
     alternates: { canonical: pathOf(content) },
   };
 }

@@ -12,7 +12,7 @@ export interface Breadcrumb {
   label: string;
   /** Path used in BreadcrumbList JSON-LD (e.g. "/subsurface/detect"). */
   href: string;
-  /** Render as a visible link. Only "Home" is linked today. */
+  /** Render as a visible link (Home, the domain overview and the stage section). */
   linked?: boolean;
 }
 
@@ -77,6 +77,8 @@ export interface ProductPageContent {
    * (used while client copy is pending approval). Defaults to indexable.
    */
   indexable?: boolean;
+  /** Hide the Use Cases block (e.g. while only copied placeholder use cases exist). */
+  hideUseCases?: boolean;
   domain: "subsurface" | "surface" | "aerial";
   phase: "detect" | "decide" | "respond";
 

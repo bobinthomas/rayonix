@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CTAButton from "@/components/ui/CTAButton";
+import { solutionGroupId } from "@/content/solutions/groups";
 import TransformingHeading from "@/components/ui/TransformingHeading";
 import type { SolutionItem, SolutionPageContent } from "@/content/solutions/types";
 import { buildSolutionJsonLd } from "./solutionSeo";
@@ -89,7 +90,7 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildSolutionJsonLd(content)) }}
       />
-      <main className="relative w-full min-h-screen bg-[#080f12]">
+      <div className="relative w-full min-h-screen bg-[#080f12]">
         {/* 01 · Hero */}
         <section
           className="relative w-full bg-[#080f12] text-[#f5f6f6] pt-28 sm:pt-32 pb-16 lg:pb-24"
@@ -106,7 +107,9 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
                 Solutions
               </Link>
               <span className="text-[#7f8a91]" aria-hidden="true">/</span>
-              <span className="text-[#bdc4c8]">{content.category}</span>
+              <Link href={`/solutions#${solutionGroupId(content.category)}`} className="text-[#bdc4c8] hover:text-white transition-colors">
+                {content.category}
+              </Link>
               <span className="text-[#7f8a91]" aria-hidden="true">/</span>
               <span className="text-[#e22328]" aria-current="page">
                 {content.name}
@@ -302,7 +305,7 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
           </div>
         </section>
         </Reveal>
-      </main>
+      </div>
     </>
   );
 }

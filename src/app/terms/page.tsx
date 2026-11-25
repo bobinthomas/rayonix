@@ -1,19 +1,16 @@
-import { Metadata } from "next";
-import TacticalPlaceholder from "@/components/common/TacticalPlaceholder";
+import type { Metadata } from "next";
+import LegalPage from "@/components/company/LegalPage";
+import { pageMetadata } from "@/lib/seo/metadata";
+import { LEGAL } from "@/content/legal";
 
-export const metadata: Metadata = {
-  title: "Terms of Use",
-  description: "Terms and conditions of access to Rayonix defence platforms and documentation.",
-  alternates: { canonical: "/terms" },
-  robots: { index: false, follow: true },
-};
+const page = LEGAL.terms;
+
+export const metadata: Metadata = pageMetadata({
+  title: page.title,
+  description: page.summary,
+  path: page.path,
+});
 
 export default function TermsPage() {
-  return (
-    <TacticalPlaceholder
-      badge="LEGAL & REGULATORY"
-      title="Terms of Use"
-      subtitle="Access to Rayonix web systems, datasheets, and intellectual assets is governed by applicable defence export control regulations and bilateral confidentiality agreements."
-    />
-  );
+  return <LegalPage {...page} />;
 }

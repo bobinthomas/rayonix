@@ -5,7 +5,7 @@ import { blogPosts, formatBlogMonth } from "@/content/company/blog";
 
 // Kept noindex until the client approves the go-live.
 export const metadata: Metadata = {
-  title: "Blog | Rayonix",
+  title: "Blog",
   description: "Articles from Rayonix on defence technology and partnerships.",
   alternates: { canonical: "/blog" },
   robots: { index: false, follow: true },

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ProductPageContent } from "@/content/products/types";
-import { clampDescription } from "@/lib/seo/metadata";
+import { clampDescription, DEFAULT_OG_IMAGE } from "@/lib/seo/metadata";
 
 // Matches the URLs product pages already publish. Note: src/lib/seo uses
 // https://rayonix.com; the two should be unified once the domain is final.
@@ -19,11 +19,13 @@ export function buildProductMetadata(content: ProductPageContent): Metadata {
       siteName: "Rayonix",
       locale: "en_US",
       type: "website",
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Rayonix" }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: clampedDesc,
+      images: [DEFAULT_OG_IMAGE],
     },
     alternates: {
       canonical: content.path,

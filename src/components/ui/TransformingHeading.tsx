@@ -165,7 +165,6 @@ export default function TransformingHeading({
     <Component
       ref={containerRef as any}
       className={`relative select-none inline-block ${className}`}
-      aria-label={fullText}
     >
       {/* Visible text in normal flow, one span per character, so the layout is final from first paint (CLS = 0).
           A scrambling character hides its real glyph and draws the scrambled glyph in an absolutely
@@ -183,6 +182,7 @@ export default function TransformingHeading({
           return (
             <span
               key={i}
+              aria-hidden="true"
               data-g={glyph}
               className={`${segClass} relative after:absolute after:left-0 after:top-0 after:font-mono after:font-medium after:text-[#bdc4c8] after:opacity-85 after:content-[attr(data-g)]`}
               style={resolved ? undefined : { color: "transparent" }}
@@ -193,6 +193,7 @@ export default function TransformingHeading({
         })}
         {accentDot && (
           <span
+            aria-hidden="true"
             style={{ color: accentColor }}
             className="inline font-bold ml-0.5"
           >
@@ -201,7 +202,7 @@ export default function TransformingHeading({
         )}
       </span>
 
-      {/* Screen-reader accessible full text */}
+      {/* Screen-reader text: the only accessible name (letters above are aria-hidden). */}
       <span className="sr-only">
         {fullText}
         {accentDot ? "." : ""}
