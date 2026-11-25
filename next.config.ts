@@ -20,13 +20,26 @@ const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react"],
   },
+  // Redirects are applied by next-on-pages on Cloudflare Pages (a public/_redirects
+  // file is not used: the generated _worker.js handles every request).
   async redirects() {
     return [
+      // Old duplicate route spelling.
       {
-        source: "/sub-surface/detect/gpr",
-        destination: "/subsurface/detect/gpr",
+        source: "/sub-surface/:path*",
+        destination: "/subsurface/:path*",
         permanent: true,
       },
+      // Retired coverage stubs and placeholder news stories (see src/content/news.ts).
+      ...[
+        "xtend-coverage",
+        "shephard-coverage",
+        "xtend-partnership",
+        "aero-india-integrated-suite",
+        "extreme-cold-testing-gpr-18000-ft",
+        "x-labs-swarm-d-loitering-munition",
+        "australia-bilateral-integration-facility-canberra",
+      ].map((slug) => ({ source: `/news/${slug}`, destination: "/news", permanent: true })),
       {
         source: "/subsurface/command-intelligence",
         destination: "/subsurface/decide",

@@ -7,31 +7,30 @@ const SITE_URL = "https://rayonix.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Core live pages
+  const page = (
+    path: string,
+    priority: number,
+    changeFrequency: "weekly" | "monthly" | "yearly" = "monthly"
+  ) => ({ url: `${SITE_URL}${path}`, lastModified: new Date(), changeFrequency, priority });
+
   const coreEntries: MetadataRoute.Sitemap = [
-    {
-      url: `${SITE_URL}`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1.0,
-    },
-    {
-      url: `${SITE_URL}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/news`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.7,
-    },
-    {
-      url: `${SITE_URL}/ecosystem/x-labs`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
+    page("", 1.0, "weekly"),
+    page("/about", 0.8),
+    page("/capabilities", 0.8),
+    page("/platforms", 0.8),
+    page("/domains/subsurface", 0.8),
+    page("/domains/surface", 0.8),
+    page("/domains/aerial", 0.8),
+    page("/solutions", 0.8),
+    page("/ecosystem", 0.7),
+    page("/ecosystem/x-labs", 0.7),
+    page("/ecosystem/nexr-optronics", 0.7),
+    page("/ecosystem/mcray-xtend", 0.7),
+    page("/news", 0.7, "weekly"),
+    page("/contact", 0.7),
+    page("/careers", 0.6),
+    page("/privacy", 0.3, "yearly"),
+    page("/terms", 0.3, "yearly"),
   ];
 
   // Live product pages
