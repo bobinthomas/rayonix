@@ -4,6 +4,29 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import TransformingHeading from "@/components/ui/TransformingHeading";
 import PillTab from "@/components/ui/PillTab";
+import Link from "next/link";
+import CapabilityChips from "@/components/common/CapabilityChips";
+import { CAPABILITIES_INTRO, CAPABILITY_AREAS, type CapabilityArea } from "@/content/capabilities";
+
+/** Headline, description, chips and "Explore" link for one capability area (same order as the tabs). */
+function AreaPanel({ area }: { area: CapabilityArea }) {
+  return (
+    <div className="flex flex-col gap-4">
+      <p className="type-h3 text-[#080f12]">{area.headline}</p>
+      <p className="type-body text-[#2f3639] max-w-[880px]">{area.description}</p>
+      <CapabilityChips items={area.capabilities} tone="light" label={`${area.name} key capabilities`} />
+      <div>
+        <Link
+          href={`/capabilities#${area.id}`}
+          prefetch={false}
+          className="type-cta text-[#e22328] underline-offset-4 hover:underline"
+        >
+          Explore<span className="sr-only"> {area.name}</span> <span aria-hidden="true">→</span>
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 interface EcosystemItem {
   id: string;
@@ -227,6 +250,7 @@ export default function EcosystemSection() {
               className="type-hero"
             />
           </div>
+          <p className="mt-6 type-body-lg text-[#2f3639] max-w-[880px]">{CAPABILITIES_INTRO.body}</p>
         </div>
 
         {/* Mobile (< md): accordion. All 7 categories visible; tap to reveal its card */}
@@ -302,6 +326,9 @@ export default function EcosystemSection() {
                         <span className="absolute -bottom-0.5 right-0 size-[8px] border-b border-r border-[#e22328]" />
                       </div>
                     </div>
+                  </div>
+                  <div className="pt-4 px-1">
+                    <AreaPanel area={CAPABILITY_AREAS[idx]} />
                   </div>
                 </div>
               </div>
@@ -381,10 +408,10 @@ export default function EcosystemSection() {
                   }}
                   onMouseEnter={() => setHoveredCardIndex(idx)}
                   onMouseLeave={() => setHoveredCardIndex(null)}
-                  className={`group relative w-[88vw] sm:w-[680px] lg:w-[976px] h-[468px] rounded-[14px] overflow-hidden shrink-0 shadow-lg bg-black cursor-pointer transition-opacity duration-500 ${
+                  className={`group relative w-[88vw] sm:w-[680px] lg:w-[976px] h-[468px] rounded-[14px] overflow-hidden shrink-0 shadow-lg bg-black transition-opacity duration-500 ${
                     isActive
-                      ? "opacity-100"
-                      : "opacity-90 hover:opacity-100"
+                      ? "opacity-100 cursor-default"
+                      : "opacity-90 hover:opacity-100 cursor-pointer"
                   }`}
                   role="tabpanel"
                   aria-labelledby={`ecosystem-tab-${item.id}`}
@@ -443,6 +470,11 @@ export default function EcosystemSection() {
               );
             })}
           </div>
+        </div>
+
+        {/* Desktop (md+): active area detail */}
+        <div className="hidden md:block max-w-[1280px] mx-auto w-full px-6 sm:px-8" aria-live="polite">
+          <AreaPanel area={CAPABILITY_AREAS[activeTab]} />
         </div>
       </div>
     </section>
