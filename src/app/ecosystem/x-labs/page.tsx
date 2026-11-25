@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import CTAButton from "@/components/ui/CTAButton";
 import { BreadcrumbSchema } from "@/lib/seo/json-ld";
+import { pageMetadata } from "@/lib/seo/metadata";
+import { getEcosystemCompany } from "@/content/ecosystem";
+import { contactHref } from "@/content/site";
 import {
   ArrowLink,
   CompanyHero,
@@ -13,14 +16,18 @@ import {
   SectionHeader,
 } from "@/components/company/ui";
 
-export const metadata: Metadata = {
-  title: "X Labs | Rayonix R&D",
-  description:
-    "X Labs explores, develops and validates technologies designed around emerging defence requirements, moving capabilities from concept to real-world application.",
-  alternates: { canonical: "/ecosystem/x-labs" },
-};
+const XLABS = getEcosystemCompany("x-labs")!;
 
-/** Figma 553:4239 "X Labs". Copy as supplied in the design. */
+export const metadata: Metadata = pageMetadata({
+  title: `X Labs: ${XLABS.headline}`,
+  description: XLABS.intro,
+  path: "/ecosystem/x-labs",
+});
+
+/**
+ * Figma 553:4239 "X Labs". Hero and focus areas use the client copy in
+ * src/content/ecosystem.ts; the remaining sections are as supplied in the design.
+ */
 
 const METRICS = [
   { value: "14+", label: "Patents Filed" },
@@ -50,31 +57,12 @@ const MISSION_CARDS = [
   },
 ];
 
-const PILLARS = [
-  {
-    icon: "icon-pillar-research.svg",
-    title: "Research",
-    body: "We explore technologies with future mission potential.",
-    points: ["Quantum RF Sensing", "Low-SWaP Neuromorphic Inference", "Photonic Waveforms"],
-  },
-  {
-    icon: "icon-pillar-development.svg",
-    title: "Development",
-    body: "We transform ideas into functional capabilities.",
-    points: ["High-G Shock Hardening", "Distributed Geophone Arrays", "SDR Architecture"],
-  },
-  {
-    icon: "icon-pillar-prototyping.svg",
-    title: "Prototyping",
-    body: "We rapidly develop and refine concepts.",
-    points: ["Carbon-Fiber Tactical Airframes", "Rapid Additive Manufacturing", "3D LiDAR Perception Rigs"],
-  },
-  {
-    icon: "icon-pillar-validation.svg",
-    title: "Validation",
-    body: "We test capabilities against operational requirements.",
-    points: ["Extreme Environment (-40°C to +55°C)", "18,000 ft Himalayan Trials", "Electronic Warfare Stress Suites"],
-  },
+/** Icons for the four focus-area cards, in order. */
+const FOCUS_ICONS = [
+  "icon-pillar-research.svg",
+  "icon-pillar-development.svg",
+  "icon-pillar-prototyping.svg",
+  "icon-pillar-validation.svg",
 ];
 
 const IMPACT = [
@@ -113,7 +101,7 @@ const SHOWCASE = [
     badge: "Subsurface • Detect",
     title: "Ground Penetrating Radar (GPR)",
     body: "Stepped-frequency continuous-wave subsurface imaging sensor capable of detecting deeply buried anomalies and covert subterranean tunnels down to 15m.",
-    link: { label: "View product", href: "/sub-surface/detect/gpr" },
+    link: { label: "View product", href: "/subsurface/detect/gpr" },
   },
   {
     image: "/assets/company/xlabs-card-loitering.webp",
@@ -137,12 +125,13 @@ export default function XLabsPage() {
           { name: "X Labs", href: "/ecosystem/x-labs" },
         ]}
       />
-      <main className="relative w-full min-h-screen bg-[#080f12]">
+      <div className="relative w-full min-h-screen bg-[#080f12]">
       <CompanyHero
         ariaLabel="X Labs"
-        crumbs={[{ label: "Home", href: "/" }, { label: "Company" }, { label: "X Factor" }, { label: "X Labs" }]}
-        title={"X Labs: where ideas become\nmission capabilities."}
-        intro="We explore, develop and validate technologies designed around emerging defence requirements."
+        eyebrow={XLABS.name}
+        crumbs={[{ label: "Home", href: "/" }, { label: "Ecosystem", href: "/ecosystem" }, { label: "X Labs" }]}
+        title={XLABS.headline}
+        intro={XLABS.intro}
       >
         {/* Tactical visual (553:4895) */}
         <div className="relative border border-[#253035] rounded-[4px] p-2 sm:p-[9px]">
@@ -215,33 +204,20 @@ export default function XLabsPage() {
         </div>
       </CompanySection>
 
-      {/* What we focus on (556:5616) */}
-      <CompanySection tone="dark" ariaLabel="What we focus on">
+      {/* Key focus areas (client copy) */}
+      <CompanySection tone="dark" id="focus-areas" ariaLabel={XLABS.listHeading}>
         <div className="flex flex-col gap-10 lg:gap-14">
-          <div className="flex flex-col gap-3">
-            <h2 className="type-h2 text-[#f5f6f6]">What We Focus On</h2>
-            <p className="type-body-lg text-[#7f8a91]">
-              From theoretical physics to ruggedized hardware, our dedicated research pillars span the full modernization frontier.
-            </p>
-          </div>
+          <h2 className="type-h2 text-[#f5f6f6]">{XLABS.listHeading}</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-            {PILLARS.map((p, i) => (
-              <li key={p.title} className="flex flex-col gap-8 bg-[#10181c] border border-[#253035] rounded-[4px] p-[29px]">
-                <div className="flex flex-col gap-5">
-                  <div className="flex items-center justify-between">
-                    <span className="type-h3 text-[#e22328]">{pad(i + 1)}</span>
-                    <span className="size-10 rounded-[4px] bg-[#1a2124] border border-[#253035] flex items-center justify-center">
-                      <Image src={`/assets/company/${p.icon}`} alt="" width={20} height={20} aria-hidden="true" />
-                    </span>
-                  </div>
-                  <div className="flex flex-col gap-[7px]">
-                    <h3 className="type-h3 text-[#f5f6f6]">{p.title}</h3>
-                    <p className="type-small text-[#7f8a91]">{p.body}</p>
-                  </div>
+            {XLABS.capabilities.map((f, i) => (
+              <li key={f.label} className="flex flex-col gap-8 bg-[#10181c] border border-[#253035] rounded-[4px] p-[29px]">
+                <div className="flex items-center justify-between">
+                  <span className="type-h3 text-[#e22328]">{pad(i + 1)}</span>
+                  <span className="size-10 rounded-[4px] bg-[#1a2124] border border-[#253035] flex items-center justify-center">
+                    <Image src={`/assets/company/${FOCUS_ICONS[i % FOCUS_ICONS.length]}`} alt="" width={20} height={20} aria-hidden="true" />
+                  </span>
                 </div>
-                <div className="border-t border-[#253035] pt-[21px]">
-                  <DotList items={p.points} />
-                </div>
+                <h3 className="type-h3 text-[#f5f6f6]">{f.label}</h3>
               </li>
             ))}
           </ul>
@@ -361,6 +337,13 @@ export default function XLabsPage() {
         </div>
       </CompanySection>
 
+      {/* Closing line (client copy) */}
+      <section aria-label="Closing line" className="w-full bg-[#080f12] border-t border-[#253035] py-16 lg:py-24">
+        <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8">
+          <p className="type-hero text-[#f5f6f6] max-w-[1100px]">{XLABS.closingLine}</p>
+        </div>
+      </section>
+
       {/* Partner with X Labs (556:6067) */}
       <CompanySection tone="dark" ariaLabel="Partner with X Labs">
         <div className="flex flex-col gap-10 lg:gap-12">
@@ -377,7 +360,7 @@ export default function XLabsPage() {
                 </p>
               </div>
               <div>
-                <CTAButton href="mailto:info@rayonix.in?subject=X%20Labs%20R%26D%20partnership" variant="primary">
+                <CTAButton href={contactHref("partnerships")} variant="primary">
                   Initiate R&amp;D partnership
                 </CTAButton>
               </div>
@@ -390,14 +373,14 @@ export default function XLabsPage() {
                   Join our cross-disciplinary team of RF engineers, AI researchers, and defence roboticists solving hard kinetic defence and autonomous navigation challenges.
                 </p>
               </div>
-              <ArrowLink href="/careers#engineering" bold solid>
+              <ArrowLink href="/careers#open-positions" bold solid>
                 Explore open R&amp;D roles
               </ArrowLink>
             </div>
           </div>
         </div>
       </CompanySection>
-    </main>
+    </div>
     </>
   );
 }

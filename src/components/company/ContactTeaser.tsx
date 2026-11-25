@@ -1,8 +1,19 @@
 import CTAButton from "@/components/ui/CTAButton";
 import { CONTACT_TEASER } from "@/content/contact";
 
-/** Closing band: "Let's Start a Conversation." with one button to /contact. */
-export default function ContactTeaser({ headingLevel = "h2" }: { headingLevel?: "h2" | "h3" }) {
+/**
+ * Closing band: "Let's Start a Conversation." with one button.
+ * Defaults to /contact; pages pass a preselected subject (e.g. /contact?subject=partnerships).
+ */
+export default function ContactTeaser({
+  headingLevel = "h2",
+  href = "/contact",
+  label = CONTACT_TEASER.cta,
+}: {
+  headingLevel?: "h2" | "h3";
+  href?: string;
+  label?: string;
+}) {
   const Heading = headingLevel;
   return (
     <section
@@ -16,8 +27,8 @@ export default function ContactTeaser({ headingLevel = "h2" }: { headingLevel?: 
           <Heading className="max-w-[1100px] type-h2 text-[#f5f6f6]">{CONTACT_TEASER.heading}</Heading>
           <p className="max-w-[860px] type-body-lg text-[#bdc4c8]">{CONTACT_TEASER.body}</p>
           <div className="pt-4">
-            <CTAButton href="/contact" variant="primary">
-              {CONTACT_TEASER.cta}
+            <CTAButton href={href} variant="primary">
+              {label}
             </CTAButton>
           </div>
         </div>
