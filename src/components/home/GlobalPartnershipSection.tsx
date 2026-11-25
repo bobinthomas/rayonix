@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import TransformingHeading from "@/components/ui/TransformingHeading";
 
 interface CountryMarker {
@@ -325,6 +326,13 @@ export default function GlobalPartnershipSection() {
           <p className="type-body-lg text-[#bdc4c8] max-w-[1080px] mt-6">
             We bring field-proven defence technologies from across the world to India through strategic global partnerships, combining international expertise with local integration and deployment capabilities.
           </p>
+          <Link
+            href="/contact#global-presence"
+            prefetch={false}
+            className="mt-6 inline-flex items-center gap-2 type-cta text-[#f5f6f6] hover:text-[#e22328] underline-offset-4 hover:underline"
+          >
+            Explore global presence <span aria-hidden="true">→</span>
+          </Link>
         </div>
 
         {/* 3. Global Partner Logos Card matching Figma node 354:2952

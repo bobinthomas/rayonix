@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -38,6 +39,12 @@ const pillars: MissionPillar[] = [
     description:
       "Enable coordinated, mission-specific responses by integrating autonomous systems, command centres and operational assets into a unified response framework.",
   },
+];
+
+const DOMAINS = [
+  { slug: "subsurface", label: "Subsurface" },
+  { slug: "surface", label: "Surface" },
+  { slug: "aerial", label: "Aerial" },
 ];
 
 export default function MissionArchitectureSection() {
@@ -229,6 +236,24 @@ export default function MissionArchitectureSection() {
                 {/* Description */}
                 <p className="type-body-lg text-[#a3adb2]">
                   {pillar.description}
+                </p>
+
+                {/* Domain links for this stage */}
+                <p className="flex flex-wrap items-center gap-2 type-small">
+                  {DOMAINS.map((d, i) => (
+                    <span key={d.slug} className="flex items-center gap-2">
+                      {i > 0 && <span className="text-[#5c6e75]" aria-hidden="true">·</span>}
+                      <Link
+                        href={`/domains/${d.slug}#${pillar.id}`}
+                        prefetch={false}
+                        onClick={(e) => e.stopPropagation()}
+                        aria-label={`${d.label} ${pillar.title.replace(".", "")}`}
+                        className="text-[#f5f6f6] hover:text-[#e22328] underline-offset-4 hover:underline"
+                      >
+                        {d.label}
+                      </Link>
+                    </span>
+                  ))}
                 </p>
               </div>
             ))}

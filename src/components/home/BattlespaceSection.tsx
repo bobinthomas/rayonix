@@ -3,6 +3,7 @@
 import Image from "next/image";
 import TransformingHeading from "@/components/ui/TransformingHeading";
 import ScrollGradientText from "@/components/ui/ScrollGradientText";
+import CTAButton from "@/components/ui/CTAButton";
 
 export default function BattlespaceSection() {
   return (
@@ -51,6 +52,12 @@ export default function BattlespaceSection() {
             integrated defence systems tailored to mission-specific requirements.
           </p>
         </ScrollGradientText>
+
+        <div>
+          <CTAButton href="/capabilities" variant="outline">
+            Explore Capabilities
+          </CTAButton>
+        </div>
       </div>
     </section>
   );

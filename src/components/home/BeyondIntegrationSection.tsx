@@ -2,24 +2,15 @@
 
 import Link from "next/link";
 import CTAButton from "@/components/ui/CTAButton";
+import { ECOSYSTEM_COMPANIES } from "@/content/ecosystem";
 
-const subsidiaries = [
-  {
-    name: "X Labs",
-    description: "Inhouse - Research, innovation and technology development.",
-    href: "/ecosystem/x-labs",
-  },
-  {
-    name: "neXr Optronics",
-    description: "Electro-optical systems manufacturing.",
-    href: "/ecosystem/nexr-optronics",
-  },
-  {
-    name: "Mcray Xtend",
-    description: "Advanced UAV Manufacturing",
-    href: "/ecosystem/mcray-xtend",
-  },
-];
+// Client copy (src/content/ecosystem.ts). Display names follow the existing homepage casing.
+const subsidiaries = ECOSYSTEM_COMPANIES.map((c) => ({
+  name: c.slug === "mcray-xtend" ? "Mcray Xtend" : c.name,
+  headline: c.headline,
+  intro: c.intro,
+  href: `/ecosystem/${c.slug}`,
+}));
 
 export default function BeyondIntegrationSection() {
   return (
@@ -56,7 +47,7 @@ export default function BeyondIntegrationSection() {
                 key={item.name}
                 href={item.href}
                 prefetch={false}
-                className={`subsidiary-strip group relative block h-[220px] sm:h-[250px] px-6 sm:px-8 py-[28px] overflow-hidden ${
+                className={`subsidiary-strip group relative block min-h-[220px] sm:min-h-[250px] px-6 sm:px-8 py-[28px] overflow-hidden ${
                   !isLast ? "border-b border-[#a3adb2]" : ""
                 }`}
               >
@@ -67,13 +58,14 @@ export default function BeyondIntegrationSection() {
                 />
 
                 {/* Content layer above the fill */}
-                <div className="relative z-10 h-full flex flex-col justify-between">
-                  <h3 className="subsidiary-title type-hero text-[#7f8a91] ">
+                <div className="relative z-10 h-full min-h-[164px] sm:min-h-[194px] grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-10 content-between lg:content-stretch">
+                  <h3 className="lg:col-span-5 subsidiary-title type-hero text-[#7f8a91] ">
                     {item.name}
                   </h3>
-                  <p className="subsidiary-desc type-h3 text-[#080f12] ">
-                    {item.description}
-                  </p>
+                  <div className="lg:col-span-7 flex flex-col justify-end gap-2">
+                    <p className="subsidiary-desc type-h3 text-[#080f12] ">{item.headline}</p>
+                    <p className="subsidiary-desc type-body text-[#080f12]/80 ">{item.intro}</p>
+                  </div>
                 </div>
               </Link>
             );

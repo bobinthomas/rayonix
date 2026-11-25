@@ -4,6 +4,8 @@ import Image from "next/image";
 import CTAButton from "@/components/ui/CTAButton";
 import TransformingHeading from "@/components/ui/TransformingHeading";
 import NewsCard from "@/components/home/NewsCard";
+import { CAREERS_LABEL } from "@/content/site";
+import { NEWSROOM_INTRO, formatNewsDate, homepageNews } from "@/content/news";
 
 export default function ExploreSection() {
   return (
@@ -152,7 +154,7 @@ export default function ExploreSection() {
                 className="type-eyebrow text-[#f5f6f6]/80 "
                 data-node-id="440:585"
               >
-                03 / CAREERS
+                03 / {CAREERS_LABEL.toUpperCase()}
               </span>
               <h3
                 className="type-h2 text-[#f5f6f6] "
@@ -167,8 +169,8 @@ export default function ExploreSection() {
                 Explore opportunities to work across engineering, technology and defence innovation.
               </p>
               <div className="pt-2">
-                <CTAButton href="/careers" variant="primary" aria-label="Explore careers at Rayonix">
-                  Explore Careers
+                <CTAButton href="/careers" variant="primary" aria-label={`${CAREERS_LABEL} at Rayonix`}>
+                  {CAREERS_LABEL}
                 </CTAButton>
               </div>
             </div>
@@ -187,7 +189,7 @@ export default function ExploreSection() {
                 as="h3"
                 segments={[
                   {
-                    text: "The Latest from Rayonix",
+                    text: NEWSROOM_INTRO.heading.replace(/\.$/, ""),
                     className: "text-[#080f12]",
                   },
                   {
@@ -202,48 +204,32 @@ export default function ExploreSection() {
                 className="type-body-lg text-[#080f12]/80 max-w-[805px] mt-2"
                 data-node-id="440:577"
               >
-                Stay connected with our latest announcements, strategic partnerships, media coverage and developments shaping the future of defence technology.
+                {NEWSROOM_INTRO.body}
               </p>
             </div>
 
             <div>
               <CTAButton href="/news" variant="secondary">
-                Explore News
+                {NEWSROOM_INTRO.cta}
               </CTAButton>
             </div>
           </div>
 
-          {/* 2 Featured Story News Cards matching Figma nodes 440:589, 440:596 & interactive node 705:4716 */}
+          {/* Newest stories from src/content/news.ts */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* News 1: Slate Dark bg-[#253035] matching Figma node 440:589 */}
-            <NewsCard
-              nodeId="440:589"
-              variant="slate"
-              title="Israel's AI Major in $11 Million Deal with Indian Company to Make UAVs Locally"
-              imageSrc="/assets/story-news1-v5.webp"
-              imageAlt="Israel AI Major UAV Deal"
-              description="Our partnership with XTEND advances local UAV manufacturing, testing and distribution, supported by technology transfer and autonomous systems."
-              buttons={[
-                { label: "Read the Xtend coverage", href: "/news/xtend-coverage" },
-              ]}
-              source="Defence HQ · TOI"
-              date="April 28, 2026"
-            />
-
-            {/* News 2: Deep Panel Dark bg-[#10181c] matching Figma node 440:596 */}
-            <NewsCard
-              nodeId="440:596"
-              variant="deep"
-              title="India's Drone Industry Ambitions Accelerate with XTEND Technology Transfer Deal"
-              imageSrc="/assets/story-news2-v5.webp"
-              imageAlt="India Drone Industry Ambitions"
-              description="The agreement supports technology transfer and local manufacturing, strengthening India's capabilities in AI-enabled tactical and interceptor drone systems."
-              buttons={[
-                { label: "Read the Shephard coverage", href: "/news/shephard-coverage" },
-              ]}
-              source="Shephard"
-              date="April 28, 2026"
-            />
+            {homepageNews.slice(0, 4).map((story, i) => (
+              <NewsCard
+                key={story.slug}
+                variant={i % 3 === 0 ? "slate" : "deep"}
+                title={story.title}
+                imageSrc={story.image?.src}
+                imageAlt={story.image?.alt ?? ""}
+                description={story.summary[0] ?? ""}
+                buttons={story.buttons}
+                source={story.source ?? story.category}
+                date={formatNewsDate(story.date) ?? ""}
+              />
+            ))}
           </div>
         </div>
       </div>
