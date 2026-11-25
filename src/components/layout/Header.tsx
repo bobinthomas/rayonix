@@ -125,7 +125,7 @@ export default function Header() {
               className="hidden md:flex flex-1 items-center justify-center gap-8 lg:gap-12 h-[80px]"
               aria-label="Domain Navigation"
             >
-              {/* Sub Surface */}
+              {/* Subsurface */}
               <div
                 onMouseEnter={() => handleTabEnter("subsurface")}
                 onMouseLeave={handleCloseMegaMenu}
@@ -136,7 +136,7 @@ export default function Header() {
                 }`}
               >
                 <Link
-                  href="/subsurface/detect/gpr"
+                  href="/domains/subsurface"
                   prefetch={false}
                   onKeyDown={(e) => {
                     if (e.key === "ArrowDown") {
@@ -146,14 +146,14 @@ export default function Header() {
                   }}
                   className="inline-flex items-center type-small font-medium text-[#f5f6f6] hover:text-white transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2"
                 >
-                  <span>Sub Surface</span>
+                  <span>Subsurface</span>
                 </Link>
                 <button
                   type="button"
                   aria-expanded={activeMegaTab === "subsurface"}
                   aria-controls="rayonix-mega-menu-panel"
                   aria-haspopup="true"
-                  aria-label="Toggle Sub Surface navigation menu"
+                  aria-label="Toggle Subsurface navigation menu"
                   onClick={() =>
                     activeMegaTab === "subsurface"
                       ? setActiveMegaTab(null)

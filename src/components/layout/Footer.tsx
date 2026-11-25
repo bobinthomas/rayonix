@@ -3,6 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import NewsletterForm from "./NewsletterForm";
+import { FOOTER_BRAND, FOOTER_COLUMNS, FOOTER_LEGAL } from "@/content/footer";
+import { CLOSING_BRAND_LINE, CONTACT, COPYRIGHT, GLOBAL_PRESENCE, OFFICES } from "@/content/site";
+
+const FLAG_SRC: Record<string, string> = {
+  india: "/assets/flag-india.svg",
+  australia: "/assets/flag-australia.svg",
+};
 
 export default function Footer() {
   return (
@@ -27,12 +34,8 @@ export default function Footer() {
                 />
               </div>
             </Link>
-            <p className="type-body text-[#a3adb2]">
-              Detect. Decide. Respond.
-            </p>
-            <p className="pt-6 type-body-lg text-[#f5f6f6] max-w-[284px]">
-              Technology built for what lies beyond the visible.
-            </p>
+            <p className="type-body text-[#a3adb2]">{FOOTER_BRAND.tagline}</p>
+            <p className="pt-6 type-body-lg text-[#f5f6f6] max-w-[284px]">{FOOTER_BRAND.line}</p>
           </div>
 
           {/* Right Section: Newsletter + Navigation Links */}
@@ -44,69 +47,27 @@ export default function Footer() {
 
             {/* Navigation Columns matching Figma node 640:4096 */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
-              {/* Explore Column */}
-              <div className="flex flex-col gap-3.5">
-                <p className="type-body-lg text-[#f5f6f6]">Explore</p>
-                <Link
-                  href="/solutions"
-                  prefetch={false}
-                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
-                >
-                  Solutions
-                </Link>
-                <Link
-                  href="/subsurface/detect/gpr"
-                  prefetch={false}
-                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
-                >
-                  Platforms
-                </Link>
-                <Link
-                  href="/ecosystem"
-                  prefetch={false}
-                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
-                >
-                  Technologies
-                </Link>
-              </div>
-
-              {/* Company Column */}
-              <div className="flex flex-col gap-3.5">
-                <p className="type-body-lg text-[#f5f6f6]">Company</p>
-                <Link
-                  href="/about"
-                  prefetch={false}
-                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
-                >
-                  About Us
-                </Link>
-                <Link
-                  href="/news"
-                  prefetch={false}
-                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
-                >
-                  Newsroom
-                </Link>
-                <Link
-                  href="/blog"
-                  prefetch={false}
-                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
-                >
-                  Blog
-                </Link>
-                <a
-                  href="mailto:info@rayonix.in?subject=Business%20enquiry"
-                  className="type-body text-[#a3adb2] hover:text-white transition-colors"
-                >
-                  Contact Us
-                </a>
-              </div>
+              {FOOTER_COLUMNS.map((col) => (
+                <nav key={col.heading} aria-label={col.heading} className="flex flex-col gap-3.5">
+                  <p className="type-body-lg text-[#f5f6f6]">{col.heading}</p>
+                  {col.links.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      prefetch={false}
+                      className="type-body text-[#a3adb2] hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] rounded-[2px]"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </nav>
+              ))}
 
               {/* Connect Column */}
               <div className="flex flex-col gap-3.5">
                 <p className="type-body-lg text-[#f5f6f6]">Connect</p>
                 <a
-                  href="https://linkedin.com/company/rayonix"
+                  href={CONTACT.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[#f5f6f6] hover:text-[#e22328] transition-colors inline-flex items-center"
@@ -131,75 +92,44 @@ export default function Footer() {
         <div className="h-px w-full bg-[#b8bfc2]/40" />
 
         {/* Global Presence matching Figma node 640:4116 */}
-        <div id="global-presence" className="flex flex-col gap-8 pt-4 scroll-mt-24">
+        <div className="flex flex-col gap-8 pt-4">
           <div className="space-y-1">
-            <h2 className="type-h3 text-[#f5f6f6] ">
-              Our Global Presence
-            </h2>
-            <p className="type-body-lg text-[#f5f6f6] ">
-              Rooted in India. Connected to the World.
-            </p>
+            <h2 className="type-h3 text-[#f5f6f6] ">{GLOBAL_PRESENCE.heading}</h2>
+            <p className="type-body-lg text-[#f5f6f6] ">{GLOBAL_PRESENCE.subheading}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
-            {/* India Contact matching Figma node 640:4121 */}
-            <div className="flex items-start gap-4">
-              <div className="relative w-[46px] h-[30px] shrink-0 mt-1">
-                <Image
-                  src="/assets/flag-india.svg"
-                  alt="India Flag"
-                  width={46}
-                  height={30}
-                  className="object-contain"
-                />
+            {OFFICES.map((office) => (
+              <div key={office.id} className="flex items-start gap-4">
+                <div className="relative w-[46px] h-[30px] shrink-0 mt-1">
+                  <Image src={FLAG_SRC[office.id]} alt="" width={46} height={30} className="object-contain" />
+                </div>
+                <div className="flex flex-col gap-1 type-body">
+                  <p className="type-body-lg text-[#bdbdbd] ">
+                    {office.region} | {office.role}
+                  </p>
+                  <p className="type-small font-medium text-[#a3acb1] ">{office.entity}</p>
+                  {office.cities && <p className="type-small font-medium text-[#a3acb1] ">{office.cities}</p>}
+                  <address className="not-italic text-[#a3acb1] font-normal pt-1 leading-[24px]">
+                    {office.address}
+                    {office.phone && (
+                      <>
+                        <br />
+                        Phone:{" "}
+                        <a href={office.phone.href} className="hover:text-white underline-offset-4 hover:underline">
+                          {office.phone.display}
+                        </a>
+                      </>
+                    )}
+                    <br />
+                    Email:{" "}
+                    <a href={`mailto:${office.email}`} className="hover:text-white underline-offset-4 hover:underline">
+                      {office.email}
+                    </a>
+                  </address>
+                </div>
               </div>
-              <div className="flex flex-col gap-1 type-body">
-                <p className="type-body-lg text-[#bdbdbd] ">
-                  INDIA | Headquarters
-                </p>
-                <p className="type-small font-medium text-[#a3acb1] ">
-                  Rayonix Tech Private Limited
-                </p>
-                <p className="type-small font-medium text-[#a3acb1] ">
-                  Delhi - Hyderabad - Mumbai - Chennai - Bangalore
-                </p>
-                <p className="text-[#a3acb1] font-normal pt-1 leading-[24px]">
-                  HO. : Plot 89, 4th Floor, Sector 44, Gurugram - 122003
-                  <br />
-                  Phone: +91 89397 92592
-                  <br />
-                  Email: info@rayonix.in
-                </p>
-              </div>
-            </div>
-
-            {/* Australia Contact matching Figma node 640:4157 */}
-            <div className="flex items-start gap-4">
-              <div className="relative w-[46px] h-[30px] shrink-0 mt-1">
-                <Image
-                  src="/assets/flag-australia.svg"
-                  alt="Australia Flag"
-                  width={46}
-                  height={30}
-                  className="object-contain"
-                />
-              </div>
-              <div className="flex flex-col gap-1 type-body">
-                <p className="type-body-lg text-[#bdbdbd] ">
-                  AUSTRALIA | Global Presence
-                </p>
-                <p className="type-small font-medium text-[#a3acb1] ">
-                  Rayonix Australia Pty Ltd
-                </p>
-                <p className="text-[#a3acb1] font-normal pt-1 leading-[24px]">
-                  PO Box 4021, Carlton,
-                  <br />
-                  NSW 2218, Australia
-                  <br />
-                  Email: info@rayonix.au
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -207,7 +137,7 @@ export default function Footer() {
         <div className="relative w-full h-[180px] sm:h-[260px] lg:h-[361px] my-6 flex items-center justify-center opacity-70 pointer-events-none">
           <Image
             src="/assets/rayonix-wordmark.svg"
-            alt="RAYONIX"
+            alt=""
             width={1200}
             height={361}
             className="w-auto h-auto max-w-full max-h-full object-contain object-center"
@@ -218,16 +148,15 @@ export default function Footer() {
       {/* Red Legal Strip matching Figma node 640:4183 */}
       <div className="w-full bg-[#e22328] py-3">
         <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between type-caption text-white gap-2">
-          <p>© 2026 Rayonix Tech Private Limited. All rights reserved.</p>
+          <p>{COPYRIGHT}</p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" prefetch={false} className="hover:underline">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" prefetch={false} className="hover:underline">
-              Terms of Use
-            </Link>
+            {FOOTER_LEGAL.map((link) => (
+              <Link key={link.href} href={link.href} prefetch={false} className="hover:underline">
+                {link.label}
+              </Link>
+            ))}
           </div>
-          <p>Invisible Warfare. Visible Impact.</p>
+          <p>{CLOSING_BRAND_LINE}</p>
         </div>
       </div>
     </footer>

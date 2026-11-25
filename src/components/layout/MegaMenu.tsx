@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { COMPANY_MENU, XFACTOR_MENU } from "@/content/navigation";
+import { FLAGS } from "@/content/site";
 
 export type MegaMenuTab = "subsurface" | "surface" | "aerial" | "solutions" | "company";
 
@@ -124,8 +126,8 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
         ],
       },
       {
-        id: "response",
-        label: "Response",
+        id: "respond",
+        label: "Respond",
         items: [
           {
             title: "Threat Alert and Response Co-ordination",
@@ -140,7 +142,7 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
       title: "Subsurface Threat Matrix: Eliminating Underground Blind Spots",
       description: "Distributed acoustic sensing and seismic analytics safeguarding sovereign perimeter corridors.",
       image: "/assets/ecosystem-1.webp",
-      href: "/subsurface/detect/gpr",
+      href: "/domains/subsurface",
     },
   },
 
@@ -453,66 +455,10 @@ export const megaMenuData: Record<MegaMenuTab, DomainMenuData> = {
   company: {
     title: "About us",
     subtitle: "Pioneering indigenous defence technologies, sovereign engineering, and asymmetric warfare capabilities",
-    modes: [
-      {
-        id: "company",
-        label: "Company",
-        items: [
-          {
-            title: "Mission & Vision",
-            description: "Pioneering sovereign asymmetric warfare technology",
-            href: "/about#mission",
-          },
-          {
-            title: "Certifications",
-            description: "Mil-Spec, AS9100D, and ISO defence manufacturing standards",
-            href: "/about#certifications",
-          },
-          {
-            title: "Global Presence",
-            description: "Facilities across India and strategic defence corridors",
-            href: "/about#presence",
-          },
-          {
-            title: "Partners",
-            description: "Global strategic technology and industrial collaborators",
-            href: "/about#partners",
-          },
-        ],
-      },
-      {
-        id: "xfactor",
-        label: "X Factor",
-        items: [
-          {
-            title: "X Labs (R&D)",
-            description: "Applied robotics, neural sensor fusion, and edge autonomy",
-            href: "/ecosystem/x-labs",
-          },
-          {
-            title: "neXr Optronics",
-            description: "High-resolution thermal cores, night vision, and electro-optics",
-            href: "/ecosystem/nexr-optronics",
-          },
-          {
-            title: "Mcray Xtend",
-            description: "Ruggedized battlefield communications and edge compute",
-            href: "/ecosystem/mcray-xtend",
-          },
-        ],
-      },
-      {
-        id: "respond",
-        label: "Careers",
-        items: [
-          {
-            title: "Careers at Rayonix",
-            description: "Join our team engineering sovereign defence and autonomous technologies",
-            href: "/careers",
-          },
-        ],
-      },
-    ],
+    // Client structure (src/content/navigation.ts). X Factor tab is behind FLAGS.SHOW_XFACTOR_IN_COMPANY_MENU.
+    modes: FLAGS.SHOW_XFACTOR_IN_COMPANY_MENU
+      ? [COMPANY_MENU[0], XFACTOR_MENU, ...COMPANY_MENU.slice(1)]
+      : COMPANY_MENU,
     spotlight: {
       tag: "THE RAYONIX STORY",
       title: "Building Sovereign Defence Tech: The Journey from R&D to Frontline",
@@ -537,7 +483,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
     surface: "detect",
     aerial: "detect",
     solutions: "defence",
-    company: "company",
+    company: "about",
   });
 
   const currentModeId = activeModes[activeTab] || content.modes[0]?.id || "detect";

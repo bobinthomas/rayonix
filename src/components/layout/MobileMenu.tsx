@@ -202,7 +202,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       {/* Bottom CTA */}
       <div className="p-6 border-t border-[#253035] bg-[#10181c]">
         <Link
-          href="mailto:info@rayonix.in?subject=Command%20Enquiry"
+          href="/contact"
           onClick={onClose}
           className="w-full flex items-center justify-center px-6 py-3.5 type-cta text-white bg-[#e22328] hover:bg-[#c8171c] transition-colors rounded-[4px] shadow-sm"
         >
