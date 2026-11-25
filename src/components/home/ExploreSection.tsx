@@ -217,10 +217,10 @@ export default function ExploreSection() {
 
           {/* Newest stories from src/content/news.ts */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {homepageNews.slice(0, 4).map((story, i) => (
+            {homepageNews.slice(0, 2).map((story, i) => (
               <NewsCard
                 key={story.slug}
-                variant={i % 3 === 0 ? "slate" : "deep"}
+                variant={i === 0 ? "slate" : "deep"}
                 title={story.title}
                 imageSrc={story.image?.src}
                 imageAlt={story.image?.alt ?? ""}
