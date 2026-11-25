@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { products } from "@/content/products";
 import { solutions } from "@/content/solutions";
-import { allArticles } from "@/content/company/newsroom";
+import { publishedArticles } from "@/content/news";
 
 const SITE_URL = "https://rayonix.com";
 
@@ -51,9 +51,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Real published newsroom articles
-  const articleEntries: MetadataRoute.Sitemap = allArticles.map((article) => ({
+  const articleEntries: MetadataRoute.Sitemap = publishedArticles.map((article) => ({
     url: `${SITE_URL}/news/${article.slug}`,
-    lastModified: new Date(article.date),
+    ...(article.date && /^\d{4}-\d{2}-\d{2}$/.test(article.date) ? { lastModified: new Date(article.date) } : {}),
     changeFrequency: "monthly",
     priority: 0.6,
   }));

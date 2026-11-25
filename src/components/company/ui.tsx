@@ -61,7 +61,7 @@ export function CompanyHero({
   id?: string;
   crumbs: Crumb[];
   title: string;
-  intro: string;
+  intro?: string;
   introBeside?: boolean;
   subnav?: React.ReactNode;
   children?: React.ReactNode;
@@ -74,9 +74,7 @@ export function CompanyHero({
       className="type-hero text-[#f5f6f6]"
     />
   );
-  const introText = (
-    <p className="type-body-lg text-[#bdc4c8]">{intro}</p>
-  );
+  const introText = intro ? <p className="type-body-lg text-[#bdc4c8]">{intro}</p> : null;
 
   return (
     <section

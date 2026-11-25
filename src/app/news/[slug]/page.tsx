@@ -1,112 +1,115 @@
 import type { Metadata } from "next";
-import TacticalPlaceholder from "@/components/common/TacticalPlaceholder";
-import { CompanyHero, CompanySection } from "@/components/company/ui";
-import { allArticles, getArticle, formatNewsDate } from "@/content/company/newsroom";
-import { getCoverageBySlug } from "@/content/company/coverage";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 import { BreadcrumbSchema, ArticleSchema } from "@/lib/seo/json-ld";
+import { pageMetadata } from "@/lib/seo/metadata";
+import { CompanyHero, CompanySection } from "@/components/company/ui";
+import { formatNewsDate, getStory, publishedArticles } from "@/content/news";
 
-/** Press coverage linked from the home page. Slugs with a matching press item show that item. */
-const COVERAGE = ["xtend-partnership", "xtend-coverage", "shephard-coverage"];
-
+/** Article pages exist only for published announcements. Coverage links out; retired slugs redirect to /news. */
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return [...COVERAGE, ...allArticles.map((a) => a.slug)].map((slug) => ({ slug }));
+  return publishedArticles.map((s) => ({ slug: s.slug }));
 }
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const article = getArticle(slug);
-  const item = getCoverageBySlug(slug);
-  if (article) {
-    return {
-      title: article.title,
-      description: article.summary,
-      alternates: { canonical: `/news/${slug}` },
-    };
-  }
-  if (item) {
-    return {
-      title: `${item.title} | Rayonix`,
-      description: `Press coverage of Rayonix in ${item.source}.`,
-      alternates: { canonical: `/news/${slug}` },
-    };
-  }
-  return {
-    title: `Coverage: ${slug} | Newsroom | Rayonix`,
-    description: `Full dispatch text and media assets for ${slug} are being indexed.`,
-    alternates: { canonical: `/news/${slug}` },
-    robots: { index: false, follow: true },
-  };
+  const story = getStory(slug);
+  if (!story) return {};
+  return pageMetadata({
+    title: story.title,
+    description: story.summary[0] ?? story.title,
+    path: `/news/${slug}`,
+    type: "article",
+  });
 }
 
-export default async function NewsSlugPage({ params }: Props) {
+export default async function NewsArticlePage({ params }: Props) {
   const { slug } = await params;
-  const article = getArticle(slug);
+  const story = getStory(slug);
+  if (!story || !story.published || !story.article) notFound();
 
-  if (article) {
-    return (
-      <>
-        <BreadcrumbSchema
-          items={[
-            { name: "Home", href: "/" },
-            { name: "Newsroom", href: "/news" },
-            { name: article.title, href: `/news/${article.slug}` },
-          ]}
-        />
-        <ArticleSchema
-          title={article.title}
-          description={article.summary}
-          url={`/news/${article.slug}`}
-          datePublished={article.date}
-          image={article.image?.src}
-          authorName="Rayonix Defence Technologies"
-        />
-        <TacticalPlaceholder
-          badge={`NEWSROOM · ${article.tag.toUpperCase()}`}
-          title={article.title}
-          subtitle={article.summary}
-        />
-      </>
-    );
-  }
-
-  const item = getCoverageBySlug(slug);
-  if (item) {
-    return (
-      <main className="relative w-full min-h-screen bg-[#080f12]">
-        <CompanyHero
-          ariaLabel={item.title}
-          crumbs={[{ label: "Home", href: "/" }, { label: "Newsroom", href: "/news" }, { label: "Coverage" }]}
-          title={item.title}
-          intro={`${item.source} · ${formatNewsDate(item.date)}`}
-        >
-          <span className="sr-only">Press coverage</span>
-        </CompanyHero>
-        <CompanySection tone="dark" ariaLabel="Read the coverage">
-          <p className="type-body-lg text-[#bdc4c8] max-w-[760px]">
-            This coverage is published by {item.source}. Read the full article on their site.
-          </p>
-          <a
-            href={item.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-block type-body font-medium text-[#f5f6f6] hover:text-[#e22328] transition-colors"
-          >
-            Read in {item.source} →
-          </a>
-        </CompanySection>
-      </main>
-    );
-  }
+  const date = formatNewsDate(story.date);
+  const body = story.article.body ?? story.summary;
 
   return (
-    <TacticalPlaceholder
-      badge="PRESS COVERAGE · DISPATCH"
-      title="Strategic Defence Announcement"
-      subtitle={`Full dispatch text and media assets for "${slug}" are being indexed.`}
-    />
+    <>
+      <BreadcrumbSchema
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Newsroom", href: "/news" },
+          { name: story.title, href: `/news/${story.slug}` },
+        ]}
+      />
+      {story.date && /^\d{4}-\d{2}-\d{2}$/.test(story.date) && (
+        <ArticleSchema
+          title={story.title}
+          description={story.summary[0] ?? story.title}
+          url={`/news/${story.slug}`}
+          datePublished={story.date}
+          image={story.image?.src}
+          authorName="Rayonix Defence Technologies"
+        />
+      )}
+      <div className="relative w-full min-h-screen bg-[#080f12]">
+        <CompanyHero
+          ariaLabel={story.title}
+          eyebrow={story.category}
+          crumbs={[{ label: "Home", href: "/" }, { label: "Newsroom", href: "/news" }, { label: "Announcement" }]}
+          title={story.title}
+          intro={date ?? undefined}
+        />
+
+        <CompanySection tone="light" ariaLabel="Article">
+          <article className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+            <div className="lg:col-span-8 flex flex-col gap-6">
+              {body.map((p) => (
+                <p key={p} className="type-body-lg text-[#2f3639]">
+                  {p}
+                </p>
+              ))}
+              {story.article.sourceLink && (
+                <p className="type-body text-[#2f3639]">
+                  Source:{" "}
+                  <a
+                    href={story.article.sourceLink.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#e22328] underline underline-offset-4"
+                  >
+                    {story.article.sourceLink.label}
+                    <span className="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </p>
+              )}
+              <div className="pt-4">
+                <Link href="/news" prefetch={false} className="type-cta text-[#e22328] underline-offset-4 hover:underline">
+                  <span aria-hidden="true">←</span> Back to Newsroom
+                </Link>
+              </div>
+            </div>
+            {story.article.related.length > 0 && (
+              <aside aria-labelledby="related-heading" className="lg:col-span-4 flex flex-col gap-4 bg-white border border-[#d5dadc] rounded-[4px] p-6">
+                <h2 id="related-heading" className="type-eyebrow text-[#7f8a91]">
+                  Related
+                </h2>
+                <ul className="flex flex-col gap-3">
+                  {story.article.related.map((r) => (
+                    <li key={r.href}>
+                      <Link href={r.href} prefetch={false} className="type-body font-medium text-[#080f12] hover:text-[#e22328]">
+                        {r.label} <span aria-hidden="true" className="text-[#e22328]">→</span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </aside>
+            )}
+          </article>
+        </CompanySection>
+      </div>
+    </>
   );
 }
