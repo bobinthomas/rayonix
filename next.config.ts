@@ -23,11 +23,6 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/domains/subsurface",
-        destination: "/subsurface/detect/gpr",
-        permanent: true,
-      },
-      {
         source: "/sub-surface/detect/gpr",
         destination: "/subsurface/detect/gpr",
         permanent: true,

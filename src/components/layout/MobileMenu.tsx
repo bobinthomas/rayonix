@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { X, ChevronDown } from "lucide-react";
-import { megaMenuData, MegaMenuTab } from "./MegaMenu";
+import { megaMenuData, type MegaMenuTab } from "@/content/mega-menu";
 
 interface MobileMenuProps {
   isOpen: boolean;
