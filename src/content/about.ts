@@ -76,7 +76,7 @@ export const LEADERS: Leader[] = [
 ];
 
 export const ABOUT_SEO = {
-  title: "About Us | Building Capability Around the Mission",
+  title: "About Us",
   description:
     "We bring together global technologies, indigenous capabilities and integrated systems to address evolving defence challenges. Mission-led and integration-driven.",
 };

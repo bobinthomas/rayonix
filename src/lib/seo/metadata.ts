@@ -76,3 +76,46 @@ export function buildMetadata(page: PageSEO): Metadata {
         },
   };
 }
+
+/**
+ * Metadata for a static page: title (the layout template adds the site suffix),
+ * description, canonical and the default OG image.
+ */
+export function pageMetadata({
+  title,
+  description,
+  path,
+  noindex = false,
+  type = "website",
+}: {
+  title: string;
+  description: string;
+  path: string;
+  noindex?: boolean;
+  type?: "website" | "article";
+}): Metadata {
+  const fullTitle = `${title} | Rayonix Defence Technologies`;
+  return {
+    title,
+    description: clampDescription(description),
+    alternates: { canonical: path },
+    openGraph: {
+      type,
+      locale: "en_US",
+      url: `${SITE_URL}${path}`,
+      siteName: SITE_NAME,
+      title: fullTitle,
+      description: clampDescription(description),
+      images: [{ url: DEFAULT_OG_IMAGE, width: 1200, height: 630, alt: "Rayonix" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: fullTitle,
+      description: clampDescription(description),
+      images: [DEFAULT_OG_IMAGE],
+    },
+    ...(noindex ? { robots: { index: false, follow: true } } : {}),
+  };
+}
+
+export { DEFAULT_OG_IMAGE };

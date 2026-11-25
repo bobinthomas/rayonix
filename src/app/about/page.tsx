@@ -1,75 +1,32 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { BreadcrumbSchema } from "@/lib/seo/json-ld";
+import { pageMetadata } from "@/lib/seo/metadata";
+import { CompanyHero, CompanySection } from "@/components/company/ui";
+import ContactTeaser from "@/components/company/ContactTeaser";
 import {
-  ArrowLink,
-  CompanyHero,
-  CompanySection,
-  CornerTicks,
-  HudBadge,
-} from "@/components/company/ui";
+  ABOUT_HERO,
+  ABOUT_PILLARS,
+  ABOUT_SEO,
+  LEADERS,
+  LEADERSHIP_HEADING,
+  MISSION,
+  VISION,
+  type Leader,
+} from "@/content/about";
 
-export const metadata: Metadata = {
-  title: "About Rayonix | Global Technology, Indian Defence Capability",
-  description:
-    "Rayonix builds integrated sensing, intelligence, and response systems engineered for modern multi-domain defence and critical enterprise security.",
-  alternates: { canonical: "/about" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: ABOUT_SEO.title,
+  description: ABOUT_SEO.description,
+  path: "/about",
+});
 
-/** Figma 556:6457 "About Us". Copy as supplied in the design. */
-
-const SUBNAV = [
-  { label: "Overview", href: "#mission" },
-  { label: "Certifications", href: "#certifications" },
-  { label: "Global presence", href: "#presence" },
-  { label: "Partners", href: "#partners" },
-];
-
-const PILLARS = [
-  {
-    title: "Our Mission",
-    body: "To eliminate operational blind spots across subsurface, surface, and aerial domains through indigenous deep-tech engineering.",
-    points: [
-      "Autonomous subsurface threat detection",
-      "Real-time multi-spectral sensor fusion",
-      "Zero-latency edge computing & tactical interdiction",
-    ],
-  },
-  {
-    title: "Our Vision",
-    body: "To establish global leadership in unified autonomous defence ecosystems built in India for the world.",
-    points: [
-      "Sovereign supply chain security & 100% indigenous IP",
-      "Interoperable allied defence partnerships",
-      "Continuous multi-domain deterrent dominance",
-    ],
-  },
-];
-
-const KPIS = [
-  { value: "15+", title: "Deployed Systems", body: "Across contested border frontiers & naval corridors." },
-  { value: "18,000 ft", title: "Extreme Altitude Proven", body: "Sub-zero trials in rugged Himalayan passes (-40°C)." },
-  { value: "12+", title: "Global Partner Nations", body: "Joint defence evaluation & sovereign bilateral tech programs." },
-];
-
+/** Certifications and partners are kept from the previous About page (Figma 556:6457). */
 const CREDENTIALS = [
   { icon: "icon-cert-iso.svg", title: "ISO 9001", body: "Quality Management Systems for high-reliability manufacturing." },
   { icon: "icon-cert-as9100.svg", title: "AS9100D", body: "Aviation, Space and Defence Engineering manufacturing standards." },
   { icon: "icon-cert-milstd.svg", title: "MIL-STD-810H", body: "Environmental Engineering & extreme laboratory durability testing." },
   { icon: "icon-cert-india.svg", title: "Make in India Defence", body: "100% Indigenous Design, Development & sovereign manufacturing." },
-];
-
-const HUBS = [
-  {
-    kind: "Primary Facility",
-    name: "Bengaluru Tech Hub (India)",
-    body: "Headquarters, cleanrooms, and multi-domain engineering center.",
-  },
-  {
-    kind: "Bilateral Hub",
-    name: "Canberra Joint Evaluation Facility (Australia)",
-    body: "Field validation, maritime corridor telemetry, and defence tech interoperability.",
-  },
 ];
 
 const PARTNERS = [
@@ -89,6 +46,69 @@ const PARTNERS = [
   { name: "Tyndall FX", file: "tyndall-fx" },
 ];
 
+const pad = (n: number) => String(n).padStart(2, "0");
+
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+function LeaderCard({ leader }: { leader: Leader }) {
+  return (
+    <li className="flex flex-col gap-6 bg-white border border-[rgba(189,196,200,0.4)] rounded-[4px] p-6 sm:p-10">
+      <div className="flex items-center gap-5">
+        {leader.photo ? (
+          <Image
+            src={leader.photo.src}
+            alt={leader.photo.alt}
+            width={80}
+            height={80}
+            className="size-20 rounded-full object-cover"
+          />
+        ) : (
+          <span
+            className="size-20 shrink-0 rounded-full bg-[#080f12] text-[#f5f6f6] flex items-center justify-center type-h3 tracking-[0.04em]"
+            aria-hidden="true"
+          >
+            {initials(leader.name)}
+          </span>
+        )}
+        <div className="flex flex-col gap-1">
+          <h3 className="type-h3 text-[#080f12]">{leader.name}</h3>
+          <p className="type-small text-[#e22328] font-medium">{leader.title}</p>
+        </div>
+        {leader.linkedin && (
+          <a
+            href={leader.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${leader.name} on LinkedIn`}
+            className="ml-auto text-[#080f12] hover:text-[#e22328]"
+          >
+            in
+          </a>
+        )}
+      </div>
+      <blockquote className="border-l-2 border-[#e22328] pl-5">
+        <p className="type-body-lg text-[#2f3639]">&ldquo;{leader.quote.replace(/^"|"$/g, "")}&rdquo;</p>
+      </blockquote>
+      <div className="flex flex-col gap-3 border-t border-[rgba(189,196,200,0.4)] pt-5">
+        <p className="type-eyebrow text-[#7f8a91]">Professional Focus</p>
+        <ul className="flex flex-wrap gap-2">
+          {leader.focus.map((f) => (
+            <li key={f} className="rounded-[2px] border border-[#d5dadc] bg-[#f4f5f7] px-3 py-1 type-caption text-[#080f12]">
+              {f}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </li>
+  );
+}
+
 export default function AboutPage() {
   return (
     <>
@@ -99,235 +119,136 @@ export default function AboutPage() {
           { name: "About Us", href: "/about" },
         ]}
       />
-      <main className="relative w-full min-h-screen bg-[#080f12]">
-      <CompanyHero
-        ariaLabel="About Rayonix"
-        crumbs={[{ label: "Home", href: "/" }, { label: "Company" }, { label: "About us" }]}
-        title={"Global technology.\nIndian defence capability."}
-        intro="Rayonix builds integrated sensing, intelligence, and response systems engineered for modern multi-domain defence and critical enterprise security."
-        introBeside
-        subnav={
-          <nav
-            aria-label="About sections"
-            className="-mx-6 px-6 sm:mx-0 sm:px-0 overflow-x-auto border-b border-[#253035]"
-          >
-            <ul className="flex gap-8 whitespace-nowrap">
-              {SUBNAV.map((item, i) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    aria-current={i === 0 ? "true" : undefined}
-                    className={`block pb-3 type-body border-b-2 transition-colors ${
-                      i === 0
-                        ? "border-[#e22328] text-[#e22328] font-bold"
-                        : "border-transparent text-[#bdc4c8] hover:text-white"
-                    }`}
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        }
-      >
-        {/* Hero laboratory telemetry frame (556:7184) */}
-        <div className="relative mt-4 bg-[#10181c] border border-[#253035] rounded-[4px] p-2 sm:p-[9px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.25)]">
-          <div className="relative h-[240px] sm:h-[420px] lg:h-[555px] rounded-[2px] overflow-hidden bg-[#080f12]">
-            <Image
-              src="/assets/company/about-hero-lab.jpg"
-              alt="Engineers at work in a defence engineering laboratory and cleanroom integration facility"
-              fill
-              priority
-              sizes="(max-width: 1280px) 100vw, 1270px"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#080f12] via-transparent to-[rgba(8,15,18,0.2)]" aria-hidden="true" />
-            <div className="absolute left-4 top-4 right-4 hidden sm:flex flex-wrap gap-2">
-              <HudBadge dot>Facility Telemetry: Cleanroom Tier 1</HudBadge>
-              <HudBadge tone="muted">Sensor Matrix: Multi-Domain Fusion</HudBadge>
-            </div>
-            <div className="absolute right-3 bottom-3 sm:right-4 sm:bottom-4 max-w-[calc(100%-1.5rem)]">
-              <HudBadge tone="alert" icon="/assets/company/icon-live-loop.svg" className="py-[7px] gap-[10px]">
-                Autonomous Integration Test Stand: Active Live Loop
-              </HudBadge>
-            </div>
-          </div>
-          <CornerTicks />
-        </div>
-      </CompanyHero>
-
-      {/* Mission & Vision (556:7208) */}
-      <CompanySection tone="light" id="mission" ariaLabel="Mission and vision">
-        <div className="flex flex-col gap-10 lg:gap-14">
-          <h2 className="type-h2 text-[#080f12]">
-            Architecting Autonomy for Sovereign Supremacy
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-14">
-            {PILLARS.map((p) => (
-              <div
-                key={p.title}
-                className="relative bg-white border border-[rgba(189,196,200,0.2)] rounded-[4px] drop-shadow-[0px_1px_1px_rgba(0,0,0,0.05)] p-8 lg:p-[49px]"
-              >
-                <span className="absolute left-0 top-8 bottom-8 w-1 bg-[#e22328] rounded-r-[2px]" aria-hidden="true" />
-                <div className="pl-4 flex flex-col gap-6">
-                  <div className="flex flex-col gap-3">
-                    <h3 className="type-statement text-[#080f12]">{p.title}</h3>
-                    <p className="type-body-lg text-[#47494a]">{p.body}</p>
-                  </div>
-                  <ul className="flex flex-col gap-[14px] border-t border-[rgba(189,196,200,0.15)] pt-[17px]">
-                    {p.points.map((pt) => (
-                      <li key={pt} className="flex items-start gap-3">
-                        <span className="mt-1 size-4 shrink-0 rounded-full bg-[rgba(226,35,40,0.1)] flex items-center justify-center">
-                          <Image src="/assets/company/icon-check.svg" alt="" width={12} height={12} aria-hidden="true" />
-                        </span>
-                        <span className="type-body text-[#080f12]">{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </CompanySection>
-
-      {/* Field proof metrics (556:7272) */}
-      <section aria-label="Field proof" className="relative w-full bg-[#080f12] text-[#f5f6f6] border-b border-[#253035] py-16 lg:py-20 overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          aria-hidden="true"
-          style={{
-            backgroundImage:
-              "linear-gradient(90deg, #253035 1px, transparent 1px), linear-gradient(180deg, #253035 1px, transparent 1px)",
-            backgroundSize: "32px 32px",
-          }}
-        />
-        <ul className="relative max-w-[1280px] mx-auto w-full px-6 sm:px-8 grid grid-cols-1 md:grid-cols-3">
-          {KPIS.map((k, i) => (
-            <li
-              key={k.title}
-              className={`flex flex-col gap-4 py-6 md:py-0 md:pr-8 ${
-                i > 0 ? "border-t md:border-t-0 md:border-l border-[#253035] md:pl-[33px]" : ""
-              }`}
-            >
-              <p className="flex items-end gap-2 type-stat">
-                {k.value}
-                <span className="mb-[15px] size-[10px] shrink-0 rounded-full bg-[#e22328] shadow-[0px_0px_12px_0px_#e22328]" aria-hidden="true" />
-              </p>
-              <div className="flex flex-col gap-1">
-                <h3 className="type-h3 ">{k.title}</h3>
-                <p className="type-small text-[#bdc4c8]">{k.body}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Certifications & global footprint (556:7308) */}
-      <CompanySection tone="light" id="certifications" ariaLabel="Certifications and international reach">
-        <div className="flex flex-col gap-10 lg:gap-16">
-          <h2 className="type-h2 text-[#080f12]">
-            Defence Certifications &amp; International Reach
-          </h2>
+      <div className="relative w-full min-h-screen bg-[#080f12]">
+        {/* Hero: our approach + four pillars */}
+        <CompanyHero
+          id="approach"
+          ariaLabel="Our approach"
+          eyebrow={ABOUT_HERO.eyebrow}
+          crumbs={[{ label: "Home", href: "/" }, { label: "Company", href: "/about" }, { label: "About Us" }]}
+          title={ABOUT_HERO.title}
+          intro={ABOUT_HERO.intro}
+        >
           <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-            {CREDENTIALS.map((c) => (
+            {ABOUT_PILLARS.map((p, i) => (
               <li
-                key={c.title}
-                className="flex flex-col justify-between gap-10 lg:min-h-[242px] bg-white border border-[rgba(189,196,200,0.2)] rounded-[4px] drop-shadow-[0px_1px_1px_rgba(0,0,0,0.05)] p-[25px]"
+                key={p.title}
+                className="flex flex-col gap-5 bg-[#10181c] border border-[#253035] rounded-[4px] p-6 lg:p-[29px]"
               >
-                <span className="size-10 rounded-[2px] bg-[#f4f5f7] flex items-center justify-center">
-                  <Image src={`/assets/company/${c.icon}`} alt="" width={24} height={24} aria-hidden="true" />
-                </span>
-                <div className="flex flex-col gap-1">
-                  <h3 className="type-h3 text-[#080f12]">{c.title}</h3>
-                  <p className="type-small text-[#47494a]">{c.body}</p>
+                <span className="type-h3 text-[#e22328]">{pad(i + 1)}</span>
+                <div className="flex flex-col gap-2">
+                  <h2 className="type-body font-bold tracking-[0.04em] text-[#f5f6f6]">{p.title}</h2>
+                  <p className="type-small text-[#bdc4c8]">{p.body}</p>
                 </div>
               </li>
             ))}
           </ul>
+        </CompanyHero>
 
-          {/* World map module + operational hubs */}
-          <div
-            id="presence"
-            className="scroll-mt-24 grid grid-cols-1 lg:grid-cols-12 bg-[#10181c] border border-[#253035] rounded-[4px] overflow-hidden shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1),0px_8px_10px_-6px_rgba(0,0,0,0.1)]"
-          >
-            <div className="relative lg:col-span-8 h-[260px] sm:h-[380px] lg:h-[528px] bg-[#080f12]">
-              <Image
-                src="/assets/company/about-world-map.jpg"
-                alt="Tactical world map showing Rayonix defence hubs connected by data links"
-                fill
-                sizes="(max-width: 1024px) 100vw, 852px"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[rgba(16,24,28,0.8)]" aria-hidden="true" />
-              <div className="absolute left-4 top-4 max-w-[calc(100%-2rem)]">
-                <HudBadge dot tone="muted" className="py-[7px]">
-                  Real-Time Allied Link Status: Active
-                </HudBadge>
-              </div>
-            </div>
-            <div className="lg:col-span-4 flex flex-col gap-8 p-6 sm:p-10">
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-[6px]">
-                  <p className="type-eyebrow text-[#e22328]">Strategic Nodes</p>
-                  <h3 className="type-h3 text-[#f5f6f6]">Operational Hubs</h3>
-                </div>
-                <ul className="flex flex-col gap-4">
-                  {HUBS.map((h) => (
-                    <li key={h.name} className="flex flex-col gap-1 bg-[#080f12] border border-[#253035] rounded-[2px] p-[17px]">
-                      <span className="type-caption text-[#7f8a91]">{h.kind}</span>
-                      <span className="type-body font-medium text-[#f5f6f6]">{h.name}</span>
-                      <span className="type-small text-[#bdc4c8]">{h.body}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <ArrowLink href="#global-presence" bold className="type-cta">
-                Explore global presence
-              </ArrowLink>
-            </div>
+        {/* Mission */}
+        <CompanySection tone="light" id="mission" ariaLabel="Mission">
+          <div className="flex flex-col gap-6 lg:gap-8">
+            <p className="type-eyebrow text-[#e22328]">{MISSION.heading}</p>
+            <h2 className="max-w-[1100px] type-hero text-[#080f12]">{MISSION.statement}</h2>
           </div>
-        </div>
-      </CompanySection>
+        </CompanySection>
 
-      {/* Global Strategic Partners (id="partners") */}
-      <CompanySection tone="dark" id="partners" ariaLabel="Global strategic partners" className="scroll-mt-28">
-        <div className="flex flex-col gap-8 lg:gap-12">
-          <div className="flex flex-col gap-3">
-            <p className="type-eyebrow text-[#e22328]">Global Alliances</p>
-            <h2 className="type-h2 text-[#f5f6f6]">Strategic Partners &amp; Collaborators</h2>
-            <p className="type-body-lg text-[#bdc4c8] max-w-[800px]">
-              We collaborate with premier international defence innovators, integrating battle-proven capabilities with sovereign Make-in-India systems.
-            </p>
-          </div>
-
-          <div className="w-full bg-white/[0.04] backdrop-blur-md p-3 sm:p-4 rounded-[4px] border border-white/10 shadow-2xl">
-            <ul
-              className="rounded-[2px] bg-[#f6f7f9] p-4 sm:p-6 lg:p-8 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3 sm:gap-4 lg:gap-[14px]"
-              aria-label="Global defence and technology partners"
-            >
-              {PARTNERS.map((partner) => (
+        {/* Vision: today, tomorrow, future */}
+        <CompanySection tone="dark" id="vision" ariaLabel="Vision">
+          <div className="flex flex-col gap-10 lg:gap-14">
+            <h2 className="type-h2 text-[#f5f6f6]">{VISION.heading}</h2>
+            <ol className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+              {VISION.steps.map((step, i) => (
                 <li
-                  key={partner.file}
-                  className="relative aspect-[263/243] rounded-[8px] border border-[#e4e7ec] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)]"
+                  key={step.stage}
+                  className="relative flex flex-col gap-6 bg-[#10181c] border border-[#253035] rounded-[4px] p-6 lg:p-10"
                 >
-                  <Image
-                    src={`/assets/partners/${partner.file}.webp`}
-                    alt={partner.name}
-                    width={526}
-                    height={486}
-                    sizes="(max-width: 767px) 45vw, (max-width: 1279px) 14vw, 175px"
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full object-contain p-2"
-                  />
+                  <div className="flex items-center gap-3">
+                    <span className="type-eyebrow text-[#e22328]">
+                      {pad(i + 1)} · {step.stage}
+                    </span>
+                    <span className="flex-1 h-px bg-[#253035]" aria-hidden="true" />
+                  </div>
+                  <p className="type-statement text-[#f5f6f6]">{step.line}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </CompanySection>
+
+        {/* Leadership */}
+        <CompanySection tone="light" id="leadership" ariaLabel="Leadership">
+          <div className="flex flex-col gap-10 lg:gap-14">
+            <h2 className="type-h2 text-[#080f12]">{LEADERSHIP_HEADING}</h2>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+              {LEADERS.map((l) => (
+                <LeaderCard key={l.name} leader={l} />
+              ))}
+            </ul>
+          </div>
+        </CompanySection>
+
+        {/* Certifications (kept from the previous page) */}
+        <CompanySection tone="dark" id="certifications" ariaLabel="Defence certifications">
+          <div className="flex flex-col gap-10 lg:gap-16">
+            <h2 className="type-h2 text-[#f5f6f6]">Defence Certifications</h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+              {CREDENTIALS.map((c) => (
+                <li
+                  key={c.title}
+                  className="flex flex-col justify-between gap-10 lg:min-h-[242px] bg-white border border-[rgba(189,196,200,0.2)] rounded-[4px] p-[25px]"
+                >
+                  <span className="size-10 rounded-[2px] bg-[#f4f5f7] flex items-center justify-center">
+                    <Image src={`/assets/company/${c.icon}`} alt="" width={24} height={24} aria-hidden="true" />
+                  </span>
+                  <div className="flex flex-col gap-1">
+                    <h3 className="type-h3 text-[#080f12]">{c.title}</h3>
+                    <p className="type-small text-[#47494a]">{c.body}</p>
+                  </div>
                 </li>
               ))}
             </ul>
           </div>
-        </div>
-      </CompanySection>
-    </main>
+        </CompanySection>
+
+        {/* Partners (kept from the previous page) */}
+        <CompanySection tone="dark" id="partners" ariaLabel="Global strategic partners" className="scroll-mt-28">
+          <div className="flex flex-col gap-8 lg:gap-12">
+            <div className="flex flex-col gap-3">
+              <p className="type-eyebrow text-[#e22328]">Global Alliances</p>
+              <h2 className="type-h2 text-[#f5f6f6]">Strategic Partners &amp; Collaborators</h2>
+              <p className="type-body-lg text-[#bdc4c8] max-w-[800px]">
+                We collaborate with premier international defence innovators, integrating battle-proven capabilities with sovereign Make-in-India systems.
+              </p>
+            </div>
+            <div className="w-full bg-white/[0.04] backdrop-blur-md p-3 sm:p-4 rounded-[4px] border border-white/10 shadow-2xl">
+              <ul
+                className="rounded-[2px] bg-[#f6f7f9] p-4 sm:p-6 lg:p-8 grid grid-cols-2 sm:grid-cols-4 md:grid-cols-7 gap-3 sm:gap-4 lg:gap-[14px]"
+                aria-label="Global defence and technology partners"
+              >
+                {PARTNERS.map((partner) => (
+                  <li
+                    key={partner.file}
+                    className="relative aspect-[263/243] rounded-[8px] border border-[#e4e7ec] bg-white shadow-[0_1px_2px_rgba(16,24,40,0.04)]"
+                  >
+                    <Image
+                      src={`/assets/partners/${partner.file}.webp`}
+                      alt={`${partner.name} logo`}
+                      width={526}
+                      height={486}
+                      sizes="(max-width: 767px) 45vw, (max-width: 1279px) 14vw, 175px"
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-contain p-2"
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </CompanySection>
+
+        <ContactTeaser />
+      </div>
     </>
   );
 }

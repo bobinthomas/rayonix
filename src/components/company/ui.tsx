@@ -54,7 +54,11 @@ export function CompanyHero({
   subnav,
   children,
   ariaLabel,
+  eyebrow,
+  id,
 }: {
+  eyebrow?: string;
+  id?: string;
   crumbs: Crumb[];
   title: string;
   intro: string;
@@ -76,13 +80,15 @@ export function CompanyHero({
 
   return (
     <section
-      className="relative w-full bg-[#080f12] text-[#f5f6f6] pt-28 sm:pt-32 pb-12 lg:pb-16"
+      id={id}
+      className="relative w-full scroll-mt-24 bg-[#080f12] text-[#f5f6f6] pt-28 sm:pt-32 pb-12 lg:pb-16"
       aria-label={ariaLabel}
     >
       <div className="max-w-[1280px] mx-auto w-full px-6 sm:px-8 flex flex-col gap-8 lg:gap-[34px]">
         <div className="flex flex-col gap-5">
           <Breadcrumb items={crumbs} />
           {subnav}
+          {eyebrow && <p className="type-eyebrow text-[#e22328]">{eyebrow}</p>}
           {introBeside ? (
             <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-10">
               <div className="lg:flex-1 lg:min-w-0">{heading}</div>

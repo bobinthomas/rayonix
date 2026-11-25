@@ -4,7 +4,7 @@ import type { CapabilityLink } from "./capabilities";
 export const ECOSYSTEM_HUB = {
   heading: "Beyond Integration. Built for Defence.",
   seo: {
-    title: "Ecosystem | Beyond Integration. Built for Defence.",
+    title: "Ecosystem",
     description:
       "X Labs, neXr Optronics and Mcray Xtend: research, electro-optical sensing and UAV manufacturing within the Rayonix defence ecosystem.",
   },

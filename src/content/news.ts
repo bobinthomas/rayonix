@@ -50,7 +50,7 @@ export const NEWSROOM_INTRO = {
 };
 
 export const NEWS_SEO = {
-  title: "Newsroom | The Latest from Rayonix",
+  title: "Newsroom",
   description:
     "Stay connected with our latest announcements, strategic partnerships, media coverage and developments shaping the future of defence technology.",
 };

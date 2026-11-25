@@ -26,7 +26,7 @@ export const CAPABILITIES_INTRO = {
 };
 
 export const CAPABILITIES_SEO = {
-  title: "Capabilities | One Connected Defence Ecosystem",
+  title: "Capabilities",
   description:
     "We bring sensing, intelligence, autonomy, command and response together to deliver integrated, mission-ready defence capabilities across operational domains.",
 };
