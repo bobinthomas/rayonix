@@ -23,3 +23,6 @@
 .vscode/
 .idea/
 website-hero-final.mp4
+
+# Wrangler local secrets
+.dev.vars

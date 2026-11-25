@@ -9,7 +9,7 @@ import FieldDroneBanner from "@/components/home/FieldDroneBanner";
 import BeyondIntegrationSection from "@/components/home/BeyondIntegrationSection";
 import GlobalPartnershipSection from "@/components/home/GlobalPartnershipSection";
 import ExploreSection from "@/components/home/ExploreSection";
-import LetsTalkSection from "@/components/home/LetsTalkSection";
+import ContactTeaser from "@/components/company/ContactTeaser";
 import Reveal from "@/components/ui/Reveal";
 
 export const revalidate = 86400; // Static edge caching with on-demand revalidation
@@ -56,8 +56,8 @@ export default function HomePage() {
         {/* 09 · Explore Rayonix (Light Section - Stories, Ecosystem, Careers, News) */}
         <Reveal><ExploreSection /></Reveal>
 
-        {/* 10 · Lets Talk (3 Consultation Pillars) */}
-        <Reveal><LetsTalkSection /></Reveal>
+        {/* 10 · Closing band: Let's Start a Conversation */}
+        <Reveal><ContactTeaser /></Reveal>
       </main>
     </>
   );
