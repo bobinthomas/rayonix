@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import Image from "next/image";
 import CTAButton from "@/components/ui/CTAButton";
 
 export default function HeroSection() {
@@ -106,14 +105,18 @@ export default function HeroSection() {
     >
       {/* Background Hero Video with Poster Fallback */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <Image
-          src="/assets/hero-poster.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
+        <picture>
+          <source media="(max-width: 767px)" srcSet="/assets/hero-poster-mobile.webp" />
+          <img
+            src="/assets/hero-poster.webp"
+            alt=""
+            width={1920}
+            height={1000}
+            fetchPriority="high"
+            decoding="sync"
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+        </picture>
         <video
           ref={videoRef}
           width={1920}
