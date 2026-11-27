@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { OrganizationSchema, WebSiteSchema } from "@/lib/seo/json-ld";
 import HeroSection from "@/components/home/HeroSection";
 import BattlespaceSection from "@/components/home/BattlespaceSection";
-import EcosystemSection from "@/components/home/EcosystemSection";
-import MissionArchitectureSection from "@/components/home/MissionArchitectureSection";
-import CapabilitiesSection from "@/components/home/CapabilitiesSection";
 import FieldDroneBanner from "@/components/home/FieldDroneBanner";
-import BeyondIntegrationSection from "@/components/home/BeyondIntegrationSection";
-import GlobalPartnershipSection from "@/components/home/GlobalPartnershipSection";
-import ExploreSection from "@/components/home/ExploreSection";
 import ContactTeaser from "@/components/company/ContactTeaser";
 import Reveal from "@/components/ui/Reveal";
 import { getHomepageNews } from "@/lib/cms";
+
+const EcosystemSection = dynamic(() => import("@/components/home/EcosystemSection"));
+const MissionArchitectureSection = dynamic(() => import("@/components/home/MissionArchitectureSection"));
+const CapabilitiesSection = dynamic(() => import("@/components/home/CapabilitiesSection"));
+const BeyondIntegrationSection = dynamic(() => import("@/components/home/BeyondIntegrationSection"));
+const GlobalPartnershipSection = dynamic(() => import("@/components/home/GlobalPartnershipSection"));
+const ExploreSection = dynamic(() => import("@/components/home/ExploreSection"));
 
 export const revalidate = 86400; // Static edge caching with on-demand revalidation
 
