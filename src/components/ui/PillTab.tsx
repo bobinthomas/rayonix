@@ -32,7 +32,7 @@ export default function PillTab({
       type="button"
       role="tab"
       aria-selected={active}
-      className={`group relative px-[9px] sm:px-[10px] xl:px-[11px] py-[9px] sm:py-[10px] xl:py-[12px] rounded-[4px] type-caption font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] ${
+      className={`group relative shrink-0 px-[9px] sm:px-[10px] xl:px-[11px] py-[9px] sm:py-[10px] xl:py-[12px] rounded-[4px] type-caption font-medium transition-colors duration-200 cursor-pointer whitespace-nowrap overflow-hidden select-none border-0 outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] ${
         active ? "bg-[#10181c] text-[#f1f2f2]" : "bg-[#6b7479] text-white hover:bg-[#5b6469]"
       } ${className}`}
       {...rest}

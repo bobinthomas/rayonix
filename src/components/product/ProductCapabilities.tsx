@@ -181,7 +181,7 @@ export default function ProductCapabilities({
         >
           {/* Horizontal Tab Bar — same pill tabs as Home "One Connected Defense Ecosystem" */}
           <div
-            className="flex items-center gap-[6px] sm:gap-[8px] overflow-x-auto no-scrollbar pb-1"
+            className="flex flex-wrap items-center gap-[6px] sm:gap-[8px] pb-1"
             role="tablist"
             aria-label="Capabilities Navigation"
           >
