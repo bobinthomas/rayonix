@@ -27,6 +27,20 @@ export default async function HomePage() {
   const homepageStories = await getHomepageNews();
   return (
     <>
+      <link
+        rel="preload"
+        as="image"
+        href="/assets/hero-poster-mobile.webp"
+        media="(max-width: 767px)"
+        fetchPriority="high"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href="/assets/hero-poster.webp"
+        media="(min-width: 768px)"
+        fetchPriority="high"
+      />
       {/* Schema.org Structured Data */}
       <OrganizationSchema />
       <WebSiteSchema />
