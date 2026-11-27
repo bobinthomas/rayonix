@@ -23,8 +23,11 @@ export default function HeroSection() {
     let observer: IntersectionObserver | undefined;
     let idleId: number | undefined;
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    let attached = false;
 
     const attachVideo = () => {
+      if (attached) return;
+      attached = true;
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
       videoEl.src = isMobile
         ? "/assets/videos/website-hero-mobile.mp4"
@@ -52,8 +55,19 @@ export default function HeroSection() {
       observer.observe(sectionEl);
     };
 
+    const onFirstInteraction = () => {
+      if (timeoutId !== undefined) clearTimeout(timeoutId);
+      attachVideo();
+    };
+
     const schedule = () => {
-      if ("requestIdleCallback" in window) {
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      if (isMobile) {
+        // Keep hero-poster.webp as the Mobile LCP element; attach video on first interaction or 4s fallback.
+        window.addEventListener("pointerdown", onFirstInteraction, { once: true, passive: true });
+        window.addEventListener("scroll", onFirstInteraction, { once: true, passive: true });
+        timeoutId = setTimeout(attachVideo, 4000);
+      } else if ("requestIdleCallback" in window) {
         idleId = window.requestIdleCallback(attachVideo, { timeout: 2000 });
       } else {
         timeoutId = setTimeout(attachVideo, 200);
@@ -68,6 +82,8 @@ export default function HeroSection() {
 
     return () => {
       window.removeEventListener("load", schedule);
+      window.removeEventListener("pointerdown", onFirstInteraction);
+      window.removeEventListener("scroll", onFirstInteraction);
       if (idleId !== undefined) window.cancelIdleCallback(idleId);
       if (timeoutId !== undefined) clearTimeout(timeoutId);
       observer?.disconnect();
