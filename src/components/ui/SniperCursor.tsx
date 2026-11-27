@@ -3,9 +3,12 @@
 import React, { useEffect, useRef, useState } from "react";
 
 const PADDING = 16; // 16px inset from viewport edges
+const INTERACTIVE_SELECTOR =
+  'a, button, [role="button"], [role="tab"], input, select, textarea, summary, label[for], [data-cursor="pointer"]';
 
 export default function SniperCursor() {
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [isHovering, setIsHovering] = useState<boolean>(false);
   const [isTouchDevice, setIsTouchDevice] = useState<boolean>(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -16,6 +19,8 @@ export default function SniperCursor() {
   const yCoordRef = useRef<HTMLSpanElement>(null);
 
   const mousePos = useRef<{ x: number; y: number }>({ x: -100, y: -100 });
+  const visibleRef = useRef<boolean>(false);
+  const hoveringRef = useRef<boolean>(false);
   const rafId = useRef<number | null>(null);
 
   useEffect(() => {
@@ -34,11 +39,29 @@ export default function SniperCursor() {
 
     const onMouseMove = (e: MouseEvent) => {
       mousePos.current = { x: e.clientX, y: e.clientY };
-      if (!isVisible) setIsVisible(true);
+      if (!visibleRef.current) {
+        visibleRef.current = true;
+        setIsVisible(true);
+      }
+
+      const target = e.target instanceof Element ? e.target.closest(INTERACTIVE_SELECTOR) : null;
+      const nextHover = target !== null;
+      if (hoveringRef.current !== nextHover) {
+        hoveringRef.current = nextHover;
+        setIsHovering(nextHover);
+      }
     };
 
-    const onMouseLeave = () => setIsVisible(false);
-    const onMouseEnter = () => setIsVisible(true);
+    const onMouseLeave = () => {
+      visibleRef.current = false;
+      hoveringRef.current = false;
+      setIsVisible(false);
+      setIsHovering(false);
+    };
+    const onMouseEnter = () => {
+      visibleRef.current = true;
+      setIsVisible(true);
+    };
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
     document.addEventListener("mouseleave", onMouseLeave);
@@ -95,7 +118,7 @@ export default function SniperCursor() {
       document.removeEventListener("mouseenter", onMouseEnter);
       if (rafId.current) cancelAnimationFrame(rafId.current);
     };
-  }, [isVisible]);
+  }, []);
 
   if (isTouchDevice) return null;
 
@@ -116,14 +139,18 @@ export default function SniperCursor() {
       {/* 1. Subtle Full-Length Vertical Line (zero glow, crisp subtle hairline) */}
       <div
         ref={verticalLineRef}
-        className="absolute top-0 bottom-0 left-0 w-px bg-white/[0.12] will-change-transform"
+        className={`absolute top-0 bottom-0 left-0 w-px will-change-transform transition-colors duration-200 ${
+          isHovering ? "bg-[#e22328]/25" : "bg-white/[0.12]"
+        }`}
         style={{ transform: "translate3d(-100px, 0, 0)" }}
       />
 
       {/* 2. Subtle Full-Length Horizontal Line (zero glow, crisp subtle hairline) */}
       <div
         ref={horizontalLineRef}
-        className="absolute top-0 left-0 right-0 h-px bg-white/[0.12] will-change-transform"
+        className={`absolute top-0 left-0 right-0 h-px will-change-transform transition-colors duration-200 ${
+          isHovering ? "bg-[#e22328]/25" : "bg-white/[0.12]"
+        }`}
         style={{ transform: "translate3d(0, -100px, 0)" }}
       />
 
@@ -133,16 +160,30 @@ export default function SniperCursor() {
         className="absolute top-0 left-0 will-change-transform"
         style={{ transform: "translate3d(-100px, -100px, 0)" }}
       >
-        {/* Subtle Intersection Reticle Box (no glow) */}
+        {/* Subtle Intersection Reticle Box (morphs to diamond lock-on on interactive targets) */}
         <div className="relative -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
           {/* Outer hairline square box */}
-          <div className="w-[14px] h-[14px] border border-white/20 bg-transparent" />
+          <div
+            className={`w-[14px] h-[14px] border transition-[transform,border-color,background-color] duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isHovering
+                ? "sniper-reticle-lock border-[#e22328] bg-[#e22328]/10"
+                : "scale-100 rotate-0 border-white/20 bg-transparent"
+            }`}
+          />
           {/* Inner precision center dot in Rayonix Brand Red */}
-          <div className="absolute w-[2.5px] h-[2.5px] bg-[#e22328] rounded-full" />
+          <div
+            className={`absolute w-[2.5px] h-[2.5px] bg-[#e22328] rounded-full transition-transform duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isHovering ? "sniper-dot-pulse" : "scale-100"
+            }`}
+          />
         </div>
 
         {/* Clean, Subtle X Y Coordinates Display directly adjacent to the intersection */}
-        <div className="absolute top-[8px] left-[10px] flex items-center gap-2 font-mono text-[10px] tracking-wider bg-[#080f12]/90 px-1.5 py-0.5 rounded-[2px] border border-white/[0.08] select-none whitespace-nowrap">
+        <div
+          className={`absolute top-[8px] left-[10px] flex items-center gap-2 font-mono text-[10px] tracking-wider bg-[#080f12]/90 px-1.5 py-0.5 rounded-[2px] border select-none whitespace-nowrap transition-colors duration-200 ${
+            isHovering ? "border-[#e22328]/45" : "border-white/[0.08]"
+          }`}
+        >
           <div className="flex items-center gap-1">
             <span className="text-[#7f8a91] text-[9px]">X</span>
             <span ref={xCoordRef} className="text-[#f5f6f6] font-medium">0000</span>
