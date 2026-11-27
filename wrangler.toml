@@ -3,12 +3,12 @@ compatibility_date = "2024-11-01"
 compatibility_flags = ["nodejs_compat"]
 pages_build_output_dir = ".vercel/output/static"
 
-# Cloudflare D1 Database binding for CMS (enable once D1 database is provisioned)
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "rayonix-db"
-# database_id = "local-d1-db"
-# preview_database_id = "local-d1-db"
+# Cloudflare D1 Database binding for CMS (Free Tier)
+[[d1_databases]]
+binding = "DB"
+database_name = "rayonix-db"
+database_id = "0453855e-ae3d-4f5a-8a85-6d48a4fc36c2"
+preview_database_id = "0453855e-ae3d-4f5a-8a85-6d48a4fc36c2"
 
 # Cloudflare R2 Bucket binding for Media Storage
 # [[r2_buckets]]
