@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { detectRequestKind, useRequestModal } from "@/components/ui/RequestModal";
 
 export interface CTAButtonProps {
   variant?: "primary" | "secondary" | "outline" | "outline-dark";
@@ -24,6 +25,18 @@ export default function CTAButton({
   disabled = false,
   "aria-label": ariaLabel,
 }: CTAButtonProps) {
+  const modal = useRequestModal();
+  const detected = modal ? detectRequestKind(children, href) : null;
+
+  const handleAction = (e: React.MouseEvent<HTMLElement>) => {
+    if (detected && modal) {
+      e.preventDefault();
+      modal.openRequest(detected);
+      return;
+    }
+    onClick?.(e);
+  };
+
   const isPrimary = variant === "primary";
   const isOutline = variant === "outline" || variant === "outline-dark";
   // Outline variants: 1px border, no fill; border turns red on hover.
@@ -114,7 +127,7 @@ export default function CTAButton({
         prefetch={false}
         className={combinedClasses}
         aria-label={ariaLabel}
-        onClick={onClick}
+        onClick={handleAction}
       >
         {renderFill()}
         <span className="relative z-10 transition-colors duration-300">{children}</span>
@@ -127,7 +140,7 @@ export default function CTAButton({
     <button
       type={type}
       className={combinedClasses}
-      onClick={onClick}
+      onClick={handleAction}
       disabled={disabled}
       aria-label={ariaLabel}
     >

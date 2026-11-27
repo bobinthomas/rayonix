@@ -137,6 +137,22 @@ export interface CmsCareerRole {
   updatedAt?: string;
 }
 
+export interface SiteSettings {
+  careersEmail: string;
+  newsletterEmail: string;
+  demoEmail: string;
+  brochureEmail: string;
+  contactEmail: string;
+  ga4Id: string;
+  gtmId: string;
+  metaPixelId: string;
+  clarityId: string;
+  linkedinUrl: string;
+  xUrl: string;
+  youtubeUrl: string;
+  instagramUrl: string;
+}
+
 /**
  * Full CMS content response for a page
  */

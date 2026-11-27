@@ -11,7 +11,11 @@ const FLAG_SRC: Record<string, string> = {
   australia: "/assets/flag-australia.svg",
 };
 
-export default function Footer() {
+export default function Footer({
+  social,
+}: {
+  social?: { linkedinUrl?: string; xUrl?: string; youtubeUrl?: string; instagramUrl?: string };
+} = {}) {
   return (
     <footer
       className="relative w-full bg-[#253035] text-[#f5f6f6]"
@@ -66,23 +70,58 @@ export default function Footer() {
               {/* Connect Column */}
               <div className="flex flex-col gap-3.5">
                 <p className="type-body-lg text-[#f5f6f6]">Connect</p>
-                <a
-                  href={CONTACT.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#f5f6f6] hover:text-[#e22328] transition-colors inline-flex items-center"
-                  aria-label="LinkedIn"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-5 h-5"
-                    aria-hidden="true"
+                <div className="flex items-center gap-4">
+                  <a
+                    href={social?.linkedinUrl || CONTACT.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#f5f6f6] hover:text-[#e22328] transition-colors inline-flex items-center"
+                    aria-label="LinkedIn"
                   >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.979 0 1.778-.773 1.778-1.729V1.73C24 .774 23.205 0 22.222 0h.003z" />
-                  </svg>
-                </a>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className="w-5 h-5"
+                      aria-hidden="true"
+                    >
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.979 0 1.778-.773 1.778-1.729V1.73C24 .774 23.205 0 22.222 0h.003z" />
+                    </svg>
+                  </a>
+                  {social?.xUrl && (
+                    <a
+                      href={social.xUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="type-small text-[#f5f6f6] hover:text-[#e22328] transition-colors"
+                      aria-label="X"
+                    >
+                      X
+                    </a>
+                  )}
+                  {social?.youtubeUrl && (
+                    <a
+                      href={social.youtubeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="type-small text-[#f5f6f6] hover:text-[#e22328] transition-colors"
+                      aria-label="YouTube"
+                    >
+                      YouTube
+                    </a>
+                  )}
+                  {social?.instagramUrl && (
+                    <a
+                      href={social.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="type-small text-[#f5f6f6] hover:text-[#e22328] transition-colors"
+                      aria-label="Instagram"
+                    >
+                      Instagram
+                    </a>
+                  )}
+                </div>
               </div>
             </div>
           </div>

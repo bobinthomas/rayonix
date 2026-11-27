@@ -1,9 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import type { CmsBlogPost, CmsCareerRole, CmsNewsStory } from "@/lib/cms/types";
+import type { CmsBlogPost, CmsCareerRole, CmsNewsStory, SiteSettings } from "@/lib/cms/types";
 
-type Tab = "news" | "blog" | "careers";
+type Tab = "news" | "blog" | "careers" | "settings";
 
 interface SessionInfo {
   authenticated: boolean;
@@ -31,6 +31,7 @@ export default function AdminDashboard() {
   const [news, setNews] = useState<CmsNewsStory[]>([]);
   const [blog, setBlog] = useState<CmsBlogPost[]>([]);
   const [roles, setRoles] = useState<CmsCareerRole[]>([]);
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
 
   const loadSession = useCallback(async () => {
     const res = await fetch("/api/admin/auth/session", { cache: "no-store" });
@@ -39,14 +40,16 @@ export default function AdminDashboard() {
   }, []);
 
   const loadAllContent = useCallback(async () => {
-    const [nRes, bRes, cRes] = await Promise.all([
+    const [nRes, bRes, cRes, sRes] = await Promise.all([
       fetch("/api/admin/news", { cache: "no-store" }),
       fetch("/api/admin/blog", { cache: "no-store" }),
       fetch("/api/admin/careers", { cache: "no-store" }),
+      fetch("/api/admin/settings", { cache: "no-store" }),
     ]);
     if (nRes.ok) setNews(((await nRes.json()) as { items: CmsNewsStory[] }).items);
     if (bRes.ok) setBlog(((await bRes.json()) as { items: CmsBlogPost[] }).items);
     if (cRes.ok) setRoles(((await cRes.json()) as { items: CmsCareerRole[] }).items);
+    if (sRes.ok) setSettings(((await sRes.json()) as { settings: SiteSettings }).settings);
   }, []);
 
   useEffect(() => {
@@ -152,7 +155,7 @@ export default function AdminDashboard() {
               DB: {session.storage === "d1" ? "Cloudflare D1" : "Local Dev Memory"}
             </span>
             <span className="font-mono text-[11px] px-2.5 py-1 rounded-[4px] bg-[#10181c] border border-[#253035] text-[#bdc4c8]">
-              R2: {session.mediaBucket ? "Connected" : "URL Mode"}
+              Media: {session.mediaBucket ? "Cloudflare R2" : "D1 Free-Plan (<=500KB)"}
             </span>
             <button type="button" onClick={handleLogout} className={btnGhost}>
               Sign Out
@@ -166,6 +169,7 @@ export default function AdminDashboard() {
               { id: "news", label: `Newsroom (${news.length})` },
               { id: "blog", label: `Blog (${blog.length})` },
               { id: "careers", label: `Careers (${roles.length})` },
+              { id: "settings", label: "Settings" },
             ] as const
           ).map((t) => (
             <button
@@ -219,6 +223,16 @@ export default function AdminDashboard() {
         {tab === "careers" && (
           <CareersManager
             items={roles}
+            onSaved={async (msg) => {
+              setStatusMsg(msg);
+              await loadAllContent();
+            }}
+          />
+        )}
+
+        {tab === "settings" && settings && (
+          <SettingsManager
+            initial={settings}
             onSaved={async (msg) => {
               setStatusMsg(msg);
               await loadAllContent();
@@ -414,20 +428,18 @@ function NewsManager({
           <label className={labelCls}>Cover Image URL</label>
           <div className="flex gap-2">
             <input value={imageSrc} onChange={(e) => setImageSrc(e.target.value)} placeholder="/images/..." className={inputCls} />
-            {hasR2 && (
-              <label className={`${btnGhost} cursor-pointer shrink-0`}>
-                Upload
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => {
-                    const f = e.target.files?.[0];
-                    if (f) void handleImageUpload(f);
-                  }}
-                />
-              </label>
-            )}
+            <label className={`${btnGhost} cursor-pointer shrink-0`}>
+              {hasR2 ? "Upload (R2)" : "Upload"}
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => {
+                  const f = e.target.files?.[0];
+                  if (f) void handleImageUpload(f);
+                }}
+              />
+            </label>
           </div>
         </div>
         <div>
@@ -781,5 +793,125 @@ function CareersManager({
         )}
       </div>
     </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Settings Manager                                                           */
+/* -------------------------------------------------------------------------- */
+
+function SettingsManager({
+  initial,
+  onSaved,
+}: {
+  initial: SiteSettings;
+  onSaved: (msg: string) => Promise<void>;
+}) {
+  const [form, setForm] = useState<SiteSettings>(initial);
+  const [saving, setSaving] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  useEffect(() => {
+    setForm(initial);
+  }, [initial]);
+
+  const set = (k: keyof SiteSettings) => (e: React.ChangeEvent<HTMLInputElement>) =>
+    setForm((prev) => ({ ...prev, [k]: e.target.value }));
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSaving(true);
+    setErr(null);
+    try {
+      const res = await fetch("/api/admin/settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = (await res.json()) as { error?: string };
+      if (!res.ok) {
+        setErr(data.error ?? "Failed to save settings.");
+      } else {
+        await onSaved("Site configuration saved and revalidated.");
+      }
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="bg-[#10181c] border border-[#253035] rounded-[4px] p-6 flex flex-col gap-4">
+        <h2 className="type-h4 text-[#f5f6f6]">Notification Emails</h2>
+        <div>
+          <label className={labelCls}>Careers Email</label>
+          <input type="email" value={form.careersEmail} onChange={set("careersEmail")} placeholder="hr@rayonix.com" className={inputCls} />
+        </div>
+        <div>
+          <label className={labelCls}>Newsletter Email</label>
+          <input type="email" value={form.newsletterEmail} onChange={set("newsletterEmail")} placeholder="info@rayonix.in" className={inputCls} />
+        </div>
+        <div>
+          <label className={labelCls}>Demo Request Email</label>
+          <input type="email" value={form.demoEmail} onChange={set("demoEmail")} placeholder="info@rayonix.in" className={inputCls} />
+        </div>
+        <div>
+          <label className={labelCls}>Brochure Request Email</label>
+          <input type="email" value={form.brochureEmail} onChange={set("brochureEmail")} placeholder="info@rayonix.in" className={inputCls} />
+        </div>
+        <div>
+          <label className={labelCls}>General Contact Email</label>
+          <input type="email" value={form.contactEmail} onChange={set("contactEmail")} placeholder="info@rayonix.in" className={inputCls} />
+        </div>
+      </div>
+
+      <div className="bg-[#10181c] border border-[#253035] rounded-[4px] p-6 flex flex-col gap-4">
+        <h2 className="type-h4 text-[#f5f6f6]">Analytics &amp; Tracking IDs</h2>
+        <div>
+          <label className={labelCls}>Google Analytics (GA4 Measurement ID)</label>
+          <input value={form.ga4Id} onChange={set("ga4Id")} placeholder="G-XXXXXXXXXX" className={inputCls} />
+        </div>
+        <div>
+          <label className={labelCls}>Google Tag Manager (GTM ID)</label>
+          <input value={form.gtmId} onChange={set("gtmId")} placeholder="GTM-XXXXXXX" className={inputCls} />
+        </div>
+        <div>
+          <label className={labelCls}>Meta Pixel ID</label>
+          <input value={form.metaPixelId} onChange={set("metaPixelId")} placeholder="123456789012345" className={inputCls} />
+        </div>
+        <div>
+          <label className={labelCls}>Microsoft Clarity ID</label>
+          <input value={form.clarityId} onChange={set("clarityId")} placeholder="abcdefghij" className={inputCls} />
+        </div>
+      </div>
+
+      <div className="bg-[#10181c] border border-[#253035] rounded-[4px] p-6 flex flex-col gap-4 justify-between">
+        <div className="flex flex-col gap-4">
+          <h2 className="type-h4 text-[#f5f6f6]">Social Media Handles</h2>
+          <div>
+            <label className={labelCls}>LinkedIn URL</label>
+            <input type="url" value={form.linkedinUrl} onChange={set("linkedinUrl")} placeholder="https://linkedin.com/company/rayonix" className={inputCls} />
+          </div>
+          <div>
+            <label className={labelCls}>X (Twitter) URL</label>
+            <input type="url" value={form.xUrl} onChange={set("xUrl")} placeholder="https://x.com/rayonix" className={inputCls} />
+          </div>
+          <div>
+            <label className={labelCls}>YouTube URL</label>
+            <input type="url" value={form.youtubeUrl} onChange={set("youtubeUrl")} placeholder="https://youtube.com/@rayonix" className={inputCls} />
+          </div>
+          <div>
+            <label className={labelCls}>Instagram URL</label>
+            <input type="url" value={form.instagramUrl} onChange={set("instagramUrl")} placeholder="https://instagram.com/rayonix" className={inputCls} />
+          </div>
+        </div>
+        <div className="flex flex-col gap-3 pt-4">
+          {err && <p className="text-[13px] text-[#f0494d]">{err}</p>}
+          <button type="submit" disabled={saving} className={btnPrimary}>
+            {saving ? "Saving…" : "Save Configuration"}
+          </button>
+        </div>
+      </div>
+    </form>
   );
 }

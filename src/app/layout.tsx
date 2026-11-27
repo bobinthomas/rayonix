@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import SniperCursor from "@/components/ui/SniperCursor";
+import { RequestModalProvider } from "@/components/ui/RequestModal";
+import { getSiteSettings } from "@/lib/cms/store";
 import "./globals.css";
 
 const gordita = localFont({
@@ -139,26 +142,47 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSiteSettings();
   return (
     <html lang="en" className={`dark ${gordita.variable} ${gordita.className}`}>
       <body className={`${gordita.className} font-sans min-h-screen flex flex-col gap-0 min-[700px]:gap-4 bg-rayonix-canvas text-rayonix-text-primary antialiased selection:bg-rayonix-accent selection:text-white p-0 min-[700px]:p-4`}>
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#e22328] focus:text-white focus:rounded-[4px] focus:outline-none focus:ring-2 focus:ring-white focus:shadow-lg type-body font-medium"
-        >
-          Skip to main content
-        </a>
-        <SniperCursor />
-        <Header />
-        <main id="main-content" tabIndex={-1} className="flex-1 w-full outline-none">
-          {children}
-        </main>
-        <Footer />
+        <RequestModalProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-[#e22328] focus:text-white focus:rounded-[4px] focus:outline-none focus:ring-2 focus:ring-white focus:shadow-lg type-body font-medium"
+          >
+            Skip to main content
+          </a>
+          <SniperCursor />
+          <Header />
+          <main id="main-content" tabIndex={-1} className="flex-1 w-full outline-none">
+            {children}
+          </main>
+          <Footer social={settings} />
+        </RequestModalProvider>
+        {settings.ga4Id && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${settings.ga4Id}`} strategy="afterInteractive" />
+            <Script id="ga4-init" strategy="afterInteractive">
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${settings.ga4Id}');`}
+            </Script>
+          </>
+        )}
+        {settings.gtmId && (
+          <Script id="gtm-init" strategy="afterInteractive">
+            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${settings.gtmId}');`}
+          </Script>
+        )}
+        {settings.clarityId && (
+          <Script id="clarity-init" strategy="afterInteractive">
+            {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${settings.clarityId}");`}
+          </Script>
+        )}
       </body>
     </html>
   );

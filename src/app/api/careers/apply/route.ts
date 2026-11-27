@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getSiteSettings } from "@/lib/cms/store";
 
 export const runtime = "edge";
 
@@ -71,7 +72,8 @@ export async function POST(request: NextRequest) {
   }
 
   const file = resume as File;
-  const recipient = process.env.CAREERS_TO || CAREERS_RECIPIENT;
+  const settings = await getSiteSettings();
+  const recipient = process.env.CAREERS_TO || settings.careersEmail || CAREERS_RECIPIENT;
   const text = [
     `Role: ${roleTitle}`,
     team ? `Team: ${team}` : null,

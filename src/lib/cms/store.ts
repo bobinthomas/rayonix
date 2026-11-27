@@ -9,17 +9,44 @@
 import { NEWS, type NewsStory } from "@/content/news";
 import { blogPosts, type BlogPost } from "@/content/company/blog";
 import { ROLES, type Role } from "@/content/careers";
+import { CONTACT } from "@/content/site";
 import { getD1 } from "./env";
-import type { CmsBlogPost, CmsCareerRole, CmsNewsStory } from "./types";
+import type { CmsBlogPost, CmsCareerRole, CmsNewsStory, SiteSettings } from "./types";
 
 /* -------------------------------------------------------------------------- */
 /* Local Dev In-Memory Fallback                                               */
 /* -------------------------------------------------------------------------- */
 
+export const DEFAULT_SITE_SETTINGS: SiteSettings = {
+  careersEmail: "hr@rayonix.com",
+  newsletterEmail: CONTACT.email,
+  demoEmail: CONTACT.email,
+  brochureEmail: CONTACT.email,
+  contactEmail: CONTACT.email,
+  ga4Id: "",
+  gtmId: "",
+  metaPixelId: "",
+  clarityId: "",
+  linkedinUrl: CONTACT.linkedin,
+  xUrl: "",
+  youtubeUrl: "",
+  instagramUrl: "",
+};
+
+interface DevMediaItem {
+  id: number;
+  filename: string;
+  contentType: string;
+  sizeBytes: number;
+  dataBase64: string;
+}
+
 interface DevCmsState {
   news: CmsNewsStory[];
   blog: CmsBlogPost[];
   roles: CmsCareerRole[];
+  settings: SiteSettings;
+  media: DevMediaItem[];
   nextId: number;
 }
 
@@ -71,6 +98,8 @@ function getDevState(): DevCmsState {
         published: true,
         sortOrder: idx,
       })),
+      settings: { ...DEFAULT_SITE_SETTINGS },
+      media: [],
       nextId: id,
     };
   }
@@ -621,4 +650,100 @@ export async function deleteCareerRole(id: number): Promise<boolean> {
   }
   const res = await db.prepare("DELETE FROM career_roles WHERE id = ?").bind(id).run();
   return (res.meta?.changes ?? 0) > 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Site Settings                                                              */
+/* -------------------------------------------------------------------------- */
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  const db = getD1();
+  if (!db) {
+    return { ...getDevState().settings };
+  }
+
+  try {
+    const res = await db.prepare("SELECT key, value FROM site_settings").all<{ key: string; value: string }>();
+    const merged: SiteSettings = { ...DEFAULT_SITE_SETTINGS };
+    for (const row of res.results ?? []) {
+      if (row.key in merged) {
+        (merged as unknown as Record<string, string>)[row.key] = row.value;
+      }
+    }
+    return merged;
+  } catch {
+    return { ...DEFAULT_SITE_SETTINGS };
+  }
+}
+
+export async function updateSiteSettings(patch: Partial<SiteSettings>): Promise<SiteSettings> {
+  const current = await getSiteSettings();
+  const next: SiteSettings = { ...current };
+  for (const key of Object.keys(DEFAULT_SITE_SETTINGS) as (keyof SiteSettings)[]) {
+    if (typeof patch[key] === "string") {
+      next[key] = patch[key]!.trim();
+    }
+  }
+
+  const db = getD1();
+  if (!db) {
+    getDevState().settings = next;
+    return next;
+  }
+
+  const stmts = (Object.keys(DEFAULT_SITE_SETTINGS) as (keyof SiteSettings)[]).map((key) =>
+    db
+      .prepare(
+        `INSERT INTO site_settings (key, value, updated_at) VALUES (?, ?, datetime('now'))
+         ON CONFLICT(key) DO UPDATE SET value = excluded.value, updated_at = datetime('now')`
+      )
+      .bind(key, next[key])
+  );
+  await db.batch(stmts);
+  return next;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Free-Plan D1 Media Assets                                                  */
+/* -------------------------------------------------------------------------- */
+
+export async function saveMediaAsset(input: {
+  filename: string;
+  contentType: string;
+  sizeBytes: number;
+  dataBase64: string;
+}): Promise<{ id: number; url: string }> {
+  const db = getD1();
+  if (!db) {
+    const state = getDevState();
+    const id = state.nextId++;
+    state.media.push({ id, ...input });
+    return { id, url: `/api/media/d1/${id}` };
+  }
+
+  const res = await db
+    .prepare("INSERT INTO media_assets (filename, content_type, size_bytes, data_base64) VALUES (?, ?, ?, ?)")
+    .bind(input.filename, input.contentType, input.sizeBytes, input.dataBase64)
+    .run();
+  const id = Number(res.meta?.last_row_id ?? 0);
+  return { id, url: `/api/media/d1/${id}` };
+}
+
+export async function getMediaAsset(id: number): Promise<DevMediaItem | null> {
+  const db = getD1();
+  if (!db) {
+    return getDevState().media.find((m) => m.id === id) ?? null;
+  }
+  const row = await db
+    .prepare("SELECT id, filename, content_type, size_bytes, data_base64 FROM media_assets WHERE id = ? LIMIT 1")
+    .bind(id)
+    .first<{ id: number; filename: string; content_type: string; size_bytes: number; data_base64: string }>();
+  if (!row) return null;
+  return {
+    id: row.id,
+    filename: row.filename,
+    contentType: row.content_type,
+    sizeBytes: row.size_bytes,
+    dataBase64: row.data_base64,
+  };
 }
