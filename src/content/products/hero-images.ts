@@ -19,8 +19,10 @@ export const heroImages: Record<string, ProductImage> = {
   "/surface/detect/vibration": { src: "/assets/banners/surface-detect-vibration.webp", alt: "Vibration Sensors banner" },
   "/surface/detect/efence": { src: "/assets/banners/surface-detect-efence.webp", alt: "E-Fence banner" },
   "/surface/detect/optical-radar": { src: "/assets/banners/surface-detect-optical-radar.webp", alt: "Optical Radar banner" },
+  "/surface/detect/polarimetric": { src: "/assets/banners/surface-detect-polarimetric.webp", alt: "Polarimetric Thermal Imaging banner" },
   "/surface/respond/weapons-tactical": { src: "/assets/banners/surface-respond-weapons-tactical.webp", alt: "Weapons & Tactical Systems banner" },
   "/surface/respond/drone-response": { src: "/assets/banners/surface-respond-drone-response.webp", alt: "Autonomous Drone Response banner" },
+  "/surface/respond/non-lethal": { src: "/assets/banners/surface-respond-non-lethal.webp", alt: "Non-Lethal Response Systems banner" },
   "/surface/respond/ugv": { src: "/assets/banners/surface-respond-ugv.webp", alt: "Unmanned Ground Systems banner" },
 
   // Aerial
@@ -30,4 +32,8 @@ export const heroImages: Record<string, ProductImage> = {
   "/aerial/detect/lidar": { src: "/assets/banners/aerial-detect-lidar.webp", alt: "LiDAR banner" },
   "/aerial/detect/rf-gnss": { src: "/assets/banners/aerial-detect-rf-gnss.webp", alt: "RF & GNSS banner" },
   "/aerial/detect/acoustic": { src: "/assets/banners/aerial-detect-acoustic.webp", alt: "Acoustic Sensing banner" },
+  "/aerial/respond/rf-jamming": { src: "/assets/banners/aerial-respond-rf-jamming.webp", alt: "RF Jamming Counter-UAS banner" },
+  "/aerial/respond/laser-interception": { src: "/assets/banners/aerial-respond-laser-interception.webp", alt: "Laser-Based Interception banner" },
+  "/aerial/respond/kinetic-interception": { src: "/assets/banners/aerial-respond-kinetic-interception.webp", alt: "Kinetic Interception banner" },
+  "/aerial/respond/net-interception": { src: "/assets/banners/aerial-respond-net-interception.webp", alt: "Net-Based Interception banner" },
 };

@@ -1,5 +1,6 @@
 import type { SolutionPageContent } from "./types";
 import { generatedSolutions } from "./generated";
+import { solutionHeroImages } from "./hero-images";
 import { contactHref } from "../site";
 
 /**
@@ -13,7 +14,11 @@ const toContact = (slug: string, href: string) =>
 
 export const solutions: SolutionPageContent[] = generatedSolutions.map((s) => ({
   ...s,
-  hero: { ...s.hero, cta: { ...s.hero.cta, href: toContact(s.slug, s.hero.cta.href) } },
+  hero: {
+    ...s.hero,
+    image: s.hero.image ?? solutionHeroImages[s.slug],
+    cta: { ...s.hero.cta, href: toContact(s.slug, s.hero.cta.href) },
+  },
   cta: {
     ...s.cta,
     primary: { ...s.cta.primary, href: toContact(s.slug, s.cta.primary.href) },
