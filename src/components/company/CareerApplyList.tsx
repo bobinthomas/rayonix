@@ -52,6 +52,12 @@ function ApplyModal({ role, onClose }: { role: Role; onClose: () => void }) {
   const [error, setError] = useState<string | null>(null);
   const [fields, setFields] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -109,7 +115,9 @@ function ApplyModal({ role, onClose }: { role: Role; onClose: () => void }) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-black/75 backdrop-blur-sm p-4"
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 transition-opacity duration-[180ms] ease-[cubic-bezier(0.23,1,0.32,1)] ${
+        mounted ? "opacity-100" : "opacity-0"
+      }`}
       role="dialog"
       aria-modal="true"
       aria-labelledby="apply-modal-title"
@@ -117,7 +125,11 @@ function ApplyModal({ role, onClose }: { role: Role; onClose: () => void }) {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="relative w-full max-w-[560px] max-h-[90vh] overflow-y-auto bg-white text-[#080f12] border border-[#d5dadc] rounded-[4px] p-6 sm:p-8 shadow-2xl">
+      <div
+        className={`relative w-full max-w-[560px] max-h-[90vh] overflow-y-auto bg-white text-[#080f12] border border-[#d5dadc] rounded-[4px] p-6 sm:p-8 shadow-2xl transition-[transform,opacity] duration-[220ms] ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none ${
+          mounted ? "opacity-100 scale-100" : "opacity-0 scale-[0.96]"
+        }`}
+      >
         <button
           type="button"
           onClick={onClose}

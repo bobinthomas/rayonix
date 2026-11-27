@@ -218,7 +218,7 @@ export default function GlobalPartnershipSection() {
                   stroke="#e22328"
                   strokeWidth={1}
                   strokeOpacity={marker.isHQ ? 0.9 : 0.6}
-                  className="transition-all duration-300 group-hover:scale-125"
+                  className="transition-transform duration-200 [@media(hover:hover)]:group-hover:scale-125 motion-reduce:transform-none"
                   style={{ pointerEvents: "none" }}
                 />
 
@@ -227,7 +227,7 @@ export default function GlobalPartnershipSection() {
                   r={isHovered ? (marker.isHQ ? 6 : 5) : (marker.isHQ ? 4.5 : 3.5)}
                   fill="#e22328"
                   filter="url(#hud-glow-red)"
-                  className="transition-all duration-200 group-hover:scale-125"
+                  className="transition-transform duration-200 [@media(hover:hover)]:group-hover:scale-125 motion-reduce:transform-none"
                   style={{ pointerEvents: "none" }}
                 />
 

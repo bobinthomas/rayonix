@@ -88,7 +88,7 @@ export default function SolutionPage({ content }: { content: SolutionPageContent
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildSolutionJsonLd(content)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildSolutionJsonLd(content)).replace(/</g, "\\u003c") }}
       />
       <div className="relative w-full min-h-screen bg-[#080f12]">
         {/* 01 · Hero */}

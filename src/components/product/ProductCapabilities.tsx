@@ -205,9 +205,9 @@ export default function ProductCapabilities({
             id={`capability-panel-${active.id}`}
             role="tabpanel"
             aria-labelledby={`capability-tab-${active.id}`}
-            className="bg-white rounded-[4px] p-6 sm:p-10 lg:p-[48px] border border-[#e2e8f0] shadow-sm flex flex-col md:flex-row items-center justify-between gap-8 min-h-[260px] transition-all duration-300"
+            className="bg-white rounded-[4px] p-6 sm:p-10 lg:p-[48px] border border-[#e2e8f0] shadow-sm flex flex-col md:flex-row items-center justify-between gap-8 min-h-[260px] transition-colors duration-200"
           >
-            <div className="flex flex-col gap-2 max-w-[850px]">
+            <div key={active.id} className="flex flex-col gap-2 max-w-[850px] anim-fade-up">
               <h3 className="type-h3 text-[#080f12] ">
                 {active.title}
               </h3>

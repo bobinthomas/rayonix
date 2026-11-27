@@ -92,7 +92,7 @@ export default function ProductUseCases({ useCases }: ProductUseCasesProps) {
             <button
               onClick={handlePrev}
               aria-label="Previous use cases"
-              className="w-12 h-12 rounded-[4px] bg-[#10181c] border border-[#253035] flex items-center justify-center transition-all duration-300 hover:border-[#e22328] hover:bg-[#162025] cursor-pointer group outline-none"
+              className="w-12 h-12 rounded-[4px] bg-[#10181c] border border-[#253035] flex items-center justify-center transition-colors duration-200 hover:border-[#e22328] hover:bg-[#162025] cursor-pointer group outline-none"
             >
               <svg
                 width="8"
@@ -116,7 +116,7 @@ export default function ProductUseCases({ useCases }: ProductUseCasesProps) {
             <button
               onClick={handleNext}
               aria-label="Next use cases"
-              className="w-12 h-12 rounded-[4px] bg-[#10181c] border border-[#253035] flex items-center justify-center transition-all duration-300 hover:border-[#e22328] hover:bg-[#162025] cursor-pointer group outline-none"
+              className="w-12 h-12 rounded-[4px] bg-[#10181c] border border-[#253035] flex items-center justify-center transition-colors duration-200 hover:border-[#e22328] hover:bg-[#162025] cursor-pointer group outline-none"
             >
               <svg
                 width="8"
@@ -187,7 +187,7 @@ export default function ProductUseCases({ useCases }: ProductUseCasesProps) {
                 className="h-6 flex items-center cursor-pointer"
               >
                 <span
-                  className={`block h-1.5 rounded-full transition-all duration-300 ${
+                  className={`block h-1.5 rounded-full transition-[width,background-color] duration-200 ${
                     mobileIndex === idx ? "w-8 bg-[#e22328]" : "w-2 bg-[#253035]"
                   }`}
                 />
@@ -246,7 +246,7 @@ export default function ProductUseCases({ useCases }: ProductUseCasesProps) {
               key={idx}
               onClick={() => setCurrentPage(idx)}
               aria-label={`Go to slide ${idx + 1}`}
-              className={`h-1.5 transition-all duration-300 rounded-full cursor-pointer ${
+              className={`h-1.5 transition-[width,background-color] duration-200 rounded-full cursor-pointer ${
                 currentPage === idx
                   ? "w-8 bg-[#e22328]"
                   : "w-2 bg-[#253035] hover:bg-[#7f8a91]"

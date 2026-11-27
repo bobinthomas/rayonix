@@ -15,7 +15,7 @@ export default function ProductPage({ content }: { content: ProductPageContent }
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildProductJsonLd(content)) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(buildProductJsonLd(content)).replace(/</g, "\\u003c") }}
       />
       <div className="relative w-full min-h-screen bg-[#080f12]">
         <ProductHero hero={content.hero} breadcrumbs={content.breadcrumbs} />

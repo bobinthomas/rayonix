@@ -23,17 +23,18 @@ export default function Reveal({ children, as: Tag = "div", className = "", dela
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (el.getBoundingClientRect().top < window.innerHeight * 0.9) return;
 
-    el.dataset.reveal = "hidden";
+    if (el.getBoundingClientRect().top >= window.innerHeight * 0.92) {
+      el.dataset.reveal = "hidden";
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          el.dataset.reveal = "shown";
-          io.disconnect();
+        for (const entry of entries) {
+          el.dataset.reveal = entry.isIntersecting ? "shown" : "hidden";
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.02, rootMargin: "-20px 0px -20px 0px" }
     );
     io.observe(el);
     return () => io.disconnect();

@@ -12,7 +12,7 @@ export type { MegaMenuTab };
 function StraightArrow({ className = "" }: { className?: string }) {
   return (
     <span
-      className={`inline-flex items-center justify-center flex-shrink-0 w-6 h-6 transition-all duration-300 ${className}`}
+      className={`inline-flex items-center justify-center flex-shrink-0 w-6 h-6 transition-colors duration-200 ${className}`}
     >
       <svg
         width="20"
@@ -87,7 +87,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
                     onFocus={() => handleModeChange(mode.id)}
                     onMouseEnter={() => handleModeChange(mode.id)}
                     onClick={() => handleModeChange(mode.id)}
-                    className={`relative px-3.5 py-1.5 type-small font-medium transition-colors duration-200 rounded-[2px] flex items-center gap-2 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] ${
+                    className={`relative px-3.5 py-1.5 type-small font-medium transition-[transform,background-color,color] duration-[150ms] ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] motion-reduce:active:scale-100 rounded-[2px] flex items-center gap-2 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] ${
                       isActive
                         ? "bg-[#e22328] text-white shadow-sm"
                         : "text-[#9ca8ae] hover:text-white hover:bg-white/[0.06]"
@@ -108,11 +108,10 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
               })}
             </div>
 
-            {/* 2-Column Grid of Interactive Mega Links with smooth cross-dissolve & fixed envelope */}
+            {/* 2-Column Grid of Interactive Mega Links */}
             <div className="min-h-[230px] flex items-start">
               <div
-                key={`${activeTab}-${currentMode.id}`}
-                className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-1.5 w-full transition-all duration-300 ease-out anim-fade-up"
+                className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-1.5 w-full transition-[transform,opacity] duration-[180ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
               >
                 {currentMode.items.map((item) => (
                   <Link
@@ -120,7 +119,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
                     href={item.href}
                     prefetch={false}
                     onClick={onClose}
-                    className="group flex items-center justify-between p-3 rounded-[4px] transition-all duration-200 hover:bg-white/[0.04] border border-transparent hover:border-[#253035]/60 outline-none focus-visible:ring-1 focus-visible:ring-[#e22328]"
+                    className="group flex items-center justify-between p-3 rounded-[4px] transition-colors duration-200 hover:bg-white/[0.04] border border-transparent hover:border-[#253035]/60 outline-none focus-visible:ring-1 focus-visible:ring-[#e22328]"
                   >
                     <div className="pr-3">
                       <h4 className="type-small font-medium text-[#f5f6f6] group-hover:text-[#e22328] transition-colors ">
@@ -131,7 +130,7 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
                       </p>
                     </div>
                     {/* Straight Red Arrow sliding in smoothly on hover */}
-                    <div className="opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                    <div className="opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-[transform,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)]">
                       <StraightArrow />
                     </div>
                   </Link>
@@ -141,21 +140,19 @@ export default function MegaMenu({ activeTab, onClose }: MegaMenuProps) {
 
             {/* Bottom Quick Bar */}
             <div
-              key={activeTab}
-              className="pt-4 mt-3 border-t border-[#253035] flex items-center justify-between type-caption text-[#7f8e95] anim-fade-in"
+              className="pt-4 mt-3 border-t border-[#253035] flex items-center justify-between type-caption text-[#7f8e95]"
             >
               <span className="truncate pr-4">{content.subtitle}</span>
             </div>
           </div>
 
-          {/* Right Column (4 cols): Spotlight Card with smooth cross-fade */}
+          {/* Right Column (4 cols): Spotlight Card */}
           <div className="lg:col-span-4 flex flex-col">
             <Link
-              key={activeTab}
               href={content.spotlight.href}
               onClick={onClose}
               prefetch={false}
-              className="h-full bg-[#162025] border border-[#253035] rounded-[4px] p-5 sm:p-6 flex flex-col justify-between group hover:border-[#e22328]/40 transition-all duration-300 shadow-md anim-fade-in cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328]"
+              className="h-full bg-[#162025] border border-[#253035] rounded-[4px] p-5 sm:p-6 flex flex-col justify-between group hover:border-[#e22328]/40 transition-[border-color,box-shadow] duration-200 shadow-md cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328]"
             >
               <div>
                 {/* Header Tag */}

@@ -43,15 +43,28 @@ export default function Header() {
   const pathname = usePathname();
   const activeRouteTab = getActiveRouteTab(pathname);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMegaTab, setActiveMegaTab] = useState<MegaMenuTab | null>(null);
   const [displayTab, setDisplayTab] = useState<MegaMenuTab>("subsurface");
   const headerRef = useRef<HTMLDivElement>(null);
   const leaveTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const lastScrollYRef = useRef(0);
 
   useEffect(() => {
+    lastScrollYRef.current = window.scrollY;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 12);
+      const y = window.scrollY;
+      setIsScrolled(y > 12);
+
+      if (y <= 80) {
+        setIsHeaderVisible(true);
+      } else if (y - lastScrollYRef.current > 6) {
+        setIsHeaderVisible(false);
+      } else if (lastScrollYRef.current - y > 6) {
+        setIsHeaderVisible(true);
+      }
+      lastScrollYRef.current = y;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -82,6 +95,7 @@ export default function Header() {
   };
 
   const isMenuOpen = activeMegaTab !== null;
+  const showHeader = isHeaderVisible || isMenuOpen || mobileMenuOpen;
   const isTabHighlighted = (tab: MegaMenuTab) =>
     activeMegaTab !== null ? activeMegaTab === tab : activeRouteTab === tab;
 
@@ -120,8 +134,12 @@ export default function Header() {
         onMouseLeave={handleCloseMegaMenu}
         onKeyDown={handleKeyDown}
         onBlur={handleBlur}
-        className={`fixed top-0 left-0 right-0 min-[700px]:top-4 min-[700px]:left-4 min-[700px]:right-4 z-50 transform transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
-          isScrolled ? "translate-y-0 min-[700px]:-translate-y-4" : "translate-y-0"
+        className={`fixed top-0 left-0 right-0 min-[700px]:top-4 min-[700px]:left-4 min-[700px]:right-4 z-50 transform transition-transform duration-[240ms] ease-[cubic-bezier(0.23,1,0.32,1)] will-change-transform ${
+          !showHeader
+            ? "-translate-y-[calc(100%+20px)]"
+            : isScrolled
+            ? "translate-y-0 min-[700px]:-translate-y-4"
+            : "translate-y-0"
         }`}
       >
         {/* Persistent invariant-height Header (80px at all times: zero layout jump) */}
@@ -165,7 +183,7 @@ export default function Header() {
               <div
                 onMouseEnter={() => handleTabEnter("subsurface")}
                 onMouseLeave={handleCloseMegaMenu}
-                className={`relative flex items-center h-full transition-all ${
+                className={`relative flex items-center h-full transition-colors duration-200 ${
                   isTabHighlighted("subsurface")
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
@@ -220,7 +238,7 @@ export default function Header() {
               <div
                 onMouseEnter={() => handleTabEnter("surface")}
                 onMouseLeave={handleCloseMegaMenu}
-                className={`relative flex items-center h-full transition-all ${
+                className={`relative flex items-center h-full transition-colors duration-200 ${
                   isTabHighlighted("surface")
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
@@ -275,7 +293,7 @@ export default function Header() {
               <div
                 onMouseEnter={() => handleTabEnter("aerial")}
                 onMouseLeave={handleCloseMegaMenu}
-                className={`relative flex items-center h-full transition-all ${
+                className={`relative flex items-center h-full transition-colors duration-200 ${
                   isTabHighlighted("aerial")
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
@@ -333,7 +351,7 @@ export default function Header() {
               <div
                 onMouseEnter={() => handleTabEnter("solutions")}
                 onMouseLeave={handleCloseMegaMenu}
-                className={`relative flex items-center h-full transition-all ${
+                className={`relative flex items-center h-full transition-colors duration-200 ${
                   isTabHighlighted("solutions")
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
@@ -388,7 +406,7 @@ export default function Header() {
               <div
                 onMouseEnter={() => handleTabEnter("company")}
                 onMouseLeave={handleCloseMegaMenu}
-                className={`relative flex items-center h-full transition-all ${
+                className={`relative flex items-center h-full transition-colors duration-200 ${
                   isTabHighlighted("company")
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
@@ -457,16 +475,16 @@ export default function Header() {
         {/* Sigmoid Curtain Dropdown: Outer clipped container (overflow-hidden) */}
         <div
           onMouseEnter={handleCancelClose}
-          className={`absolute top-full left-0 right-0 overflow-hidden transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          className={`absolute top-full left-0 right-0 overflow-hidden transition-[opacity,visibility] duration-[220ms] ease-[cubic-bezier(0.23,1,0.32,1)] ${
             isMenuOpen
               ? "opacity-100 visible pointer-events-auto"
               : "opacity-0 invisible pointer-events-none"
           }`}
           style={{ zIndex: 2100 }}
         >
-          {/* Inner sliding container (translates from -100% to 0% like Sigmoid .dropdown-container) */}
+          {/* Inner sliding container */}
           <div
-            className={`w-full transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] will-change-transform ${
+            className={`w-full transform transition-transform duration-[220ms] ease-[cubic-bezier(0.23,1,0.32,1)] will-change-transform ${
               isMenuOpen ? "translate-y-0" : "-translate-y-full"
             }`}
           >

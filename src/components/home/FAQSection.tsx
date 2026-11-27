@@ -67,11 +67,16 @@ export default function FAQSection({ faqs }: FAQSectionProps) {
                   </div>
                 </button>
 
-                {isOpen && (
-                  <div className="mt-4 pr-12 type-body-lg text-[#bdc4c8] anim-fade-in">
+                <div
+                  aria-hidden={!isOpen}
+                  className={`grid transition-[grid-template-rows,opacity,margin-top] duration-[240ms] ease-[cubic-bezier(0.23,1,0.32,1)] ${
+                    isOpen ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0 mt-0 pointer-events-none"
+                  }`}
+                >
+                  <div className="overflow-hidden pr-12 type-body-lg text-[#bdc4c8]">
                     <p>{faq.answer}</p>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}

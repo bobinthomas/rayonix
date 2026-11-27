@@ -55,7 +55,7 @@ export default function NewsCard({
       {/* 2. Middle: Fixed 322px Container (Image slides up on hover, revealing description and buttons) */}
       <div className="relative w-full h-[322px] rounded-[4px] overflow-hidden shrink-0 my-auto">
         {/* Story Image: In resting state fills full 322px; on hover slides UP by 160px (extra 40px clearance) */}
-        <div className="absolute inset-x-0 top-0 h-[322px] w-full rounded-[4px] overflow-hidden transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[160px] group-focus-within:-translate-y-[160px]">
+        <div className="absolute inset-x-0 top-0 h-[322px] w-full rounded-[4px] overflow-hidden transition-transform duration-[260ms] ease-[cubic-bezier(0.23,1,0.32,1)] [@media(hover:hover)]:group-hover:-translate-y-[160px] group-focus-within:-translate-y-[160px] motion-reduce:transform-none">
           {imageSrc ? (
             <Image
               src={imageSrc}
@@ -70,7 +70,7 @@ export default function NewsCard({
         </div>
 
         {/* Revealed Content: Starts translated down, on hover slides up into view */}
-        <div className="absolute inset-x-0 bottom-0 flex flex-col justify-end gap-[12px] pb-1 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-[140px] opacity-0 pointer-events-none group-hover:translate-y-0 group-hover:opacity-100 group-hover:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100 group-focus-within:pointer-events-auto">
+        <div className="absolute inset-x-0 bottom-0 flex flex-col justify-end gap-[12px] pb-1 transition-[transform,opacity] duration-[260ms] ease-[cubic-bezier(0.23,1,0.32,1)] translate-y-[140px] opacity-0 pointer-events-none [@media(hover:hover)]:group-hover:translate-y-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100 group-focus-within:pointer-events-auto motion-reduce:transform-none">
           <p className="type-body text-[#f5f6f6] line-clamp-3">
             {description}
           </p>
@@ -83,7 +83,7 @@ export default function NewsCard({
                 key={idx}
                 href={btn.href}
                 {...(btn.external ? { target: "_blank", rel: "noopener noreferrer" } : { prefetch: false })}
-                className="group/btn relative inline-flex items-center justify-center gap-3 sm:gap-4 px-4 sm:px-5 py-2.5 sm:py-3 h-[46px] sm:h-[52px] rounded-[4px] border border-[#e22328] overflow-hidden transition-all duration-300 select-none cursor-pointer type-cta whitespace-nowrap"
+                className="group/btn relative inline-flex items-center justify-center gap-3 sm:gap-4 px-4 sm:px-5 py-2.5 sm:py-3 h-[46px] sm:h-[52px] rounded-[4px] border border-[#e22328] overflow-hidden transition-[transform,background-color,border-color,color] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] select-none cursor-pointer type-cta whitespace-nowrap"
               >
                 {/* Black background grows from bottom to top on hover */}
                 <span

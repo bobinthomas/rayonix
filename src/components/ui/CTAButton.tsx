@@ -58,7 +58,7 @@ export default function CTAButton({
         />
 
         {/* Forward Chevron Tip (slides forward and turns red on hover) */}
-        <g className="transition-transform duration-300 ease-out group-hover:translate-x-[26px]">
+        <g className="transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:translate-x-[26px]">
           <path
             d="M25.4336 58.8475L22 58.7051L30.6429 49.7475C35.4009 44.8162 39.2858 40.6678 39.2858 40.5254C39.2858 40.3831 35.4009 36.2347 30.6429 31.3034L22 22.3457L23.0988 22.183C23.707 22.0915 29.8777 22.0102 36.8038 22.0102L49.4101 22L58.2099 31.0899C63.0464 36.0923 67 40.3424 67 40.5254C67 40.7084 63.0562 44.9483 58.2296 49.9305L49.4591 59H39.1583C33.4977 58.9898 27.3172 58.9288 25.4336 58.8475Z"
             fillRule="evenodd"
@@ -78,7 +78,7 @@ export default function CTAButton({
   );
 
   const baseClasses =
-    "group relative overflow-hidden inline-flex items-center justify-center gap-[16px] px-[20px] py-[13px] rounded-[4px] type-cta whitespace-nowrap transition-all duration-300 select-none cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] focus-visible:ring-offset-2";
+    "group relative overflow-hidden inline-flex items-center justify-center gap-[16px] px-[20px] py-[13px] rounded-[4px] type-cta whitespace-nowrap transition-[transform,background-color,border-color,color] duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] select-none cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e22328] focus-visible:ring-offset-2";
 
   const variantClasses = isOutline
     ? variant === "outline-dark"
@@ -98,7 +98,7 @@ export default function CTAButton({
   const renderFill = () =>
     isOutline ? null : (
     <span
-      className={`absolute inset-0 transition-transform duration-300 ease-out z-0 pointer-events-none ${
+      className={`absolute inset-0 transition-transform duration-[160ms] ease-[cubic-bezier(0.23,1,0.32,1)] z-0 pointer-events-none ${
         isPrimary
           ? "bg-[#080f12] translate-y-full group-hover:translate-y-0"
           : "bg-[#080f12] translate-y-full group-hover:translate-y-0"
