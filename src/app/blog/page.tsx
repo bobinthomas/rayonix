@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CompanyHero, CompanySection } from "@/components/company/ui";
-import { blogPosts, formatBlogMonth } from "@/content/company/blog";
+import { formatBlogMonth } from "@/content/company/blog";
+import { getPublishedBlogPosts } from "@/lib/cms";
+
+export const runtime = "edge";
 
 // Kept noindex until the client approves the go-live.
 export const metadata: Metadata = {
@@ -11,7 +14,8 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await getPublishedBlogPosts();
   return (
     <main className="relative w-full min-h-screen bg-[#080f12]">
       <CompanyHero
@@ -25,7 +29,7 @@ export default function BlogPage() {
 
       <CompanySection tone="dark" ariaLabel="Articles">
         <ul className="flex flex-col gap-6 list-none p-0 m-0">
-          {blogPosts.map((post) => (
+          {posts.map((post) => (
             <li key={post.slug}>
               <article className="flex flex-col gap-3 bg-[#10181c] border border-[#253035] rounded-[4px] p-6 sm:p-8">
                 <p className="type-caption text-[#7f8a91]">

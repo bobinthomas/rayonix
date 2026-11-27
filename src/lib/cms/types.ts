@@ -83,6 +83,60 @@ export interface LLMsContent {
   sortOrder: number;
 }
 
+export interface CmsNewsButton {
+  label: string;
+  href: string;
+  external?: boolean;
+}
+
+export interface CmsNewsStory {
+  id: number;
+  slug: string;
+  kind: "announcement" | "coverage";
+  published: boolean;
+  homepage: boolean;
+  category: string;
+  date: string | null;
+  title: string;
+  summary: string[];
+  coverageUrl?: string | null;
+  source?: string;
+  buttons: CmsNewsButton[];
+  image?: { src: string; alt: string };
+  article?: {
+    body: string[] | null;
+    sourceLink?: { label: string; href: string };
+    related: { label: string; href: string }[];
+  };
+  sortOrder: number;
+  updatedAt?: string;
+}
+
+export interface CmsBlogPost {
+  id: number;
+  slug: string;
+  title: string;
+  date: string;
+  summary: string;
+  body: string[];
+  coverImage?: string;
+  published: boolean;
+  updatedAt?: string;
+}
+
+export interface CmsCareerRole {
+  id: number;
+  title: string;
+  team: string;
+  location: string;
+  type: string;
+  description?: string;
+  applyUrl: string;
+  published: boolean;
+  sortOrder: number;
+  updatedAt?: string;
+}
+
 /**
  * Full CMS content response for a page
  */

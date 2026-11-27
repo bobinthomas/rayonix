@@ -23,7 +23,7 @@ export default function NewsletterForm() {
         body: JSON.stringify({ email, honeypot }),
       });
 
-      const data = await res.json().catch(() => ({}));
+      const data = (await res.json().catch(() => ({}))) as { error?: string };
 
       if (res.ok) {
         setStatus("success");

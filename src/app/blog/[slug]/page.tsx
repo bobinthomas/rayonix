@@ -1,19 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CompanyHero, CompanySection } from "@/components/company/ui";
-import { blogPosts, getBlogPost, formatBlogMonth } from "@/content/company/blog";
+import { formatBlogMonth } from "@/content/company/blog";
+import { getPublishedBlogPostBySlug } from "@/lib/cms";
 
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return blogPosts.map((p) => ({ slug: p.slug }));
-}
+export const runtime = "edge";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getPublishedBlogPostBySlug(slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -26,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = await getPublishedBlogPostBySlug(slug);
   if (!post) notFound();
 
   return (

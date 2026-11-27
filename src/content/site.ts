@@ -102,7 +102,7 @@ export const FLAGS = {
 } as const;
 
 /** Careers label used in the menu, footer and homepage. URL stays /careers. */
-export const CAREERS_LABEL = "Build With Us";
+export const CAREERS_LABEL = "Careers";
 
 export const COPYRIGHT = "© 2026 Rayonix. All Rights Reserved.";
 export const CLOSING_BRAND_LINE = "Invisible Warfare. Visible Impact.";

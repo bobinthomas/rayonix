@@ -3,11 +3,45 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu } from "lucide-react";
 import MobileMenu from "./MobileMenu";
 import MegaMenu, { MegaMenuTab } from "./MegaMenu";
 
+const COMPANY_PREFIXES = [
+  "/about",
+  "/ecosystem",
+  "/capabilities",
+  "/platforms",
+  "/news",
+  "/blog",
+  "/careers",
+  "/contact",
+];
+
+function getActiveRouteTab(pathname: string | null): MegaMenuTab | null {
+  if (!pathname) return null;
+  if (pathname.startsWith("/subsurface") || pathname.startsWith("/domains/subsurface")) {
+    return "subsurface";
+  }
+  if (pathname.startsWith("/surface") || pathname.startsWith("/domains/surface")) {
+    return "surface";
+  }
+  if (pathname.startsWith("/aerial") || pathname.startsWith("/domains/aerial")) {
+    return "aerial";
+  }
+  if (pathname.startsWith("/solutions")) {
+    return "solutions";
+  }
+  if (COMPANY_PREFIXES.some((p) => pathname === p || pathname.startsWith(`${p}/`))) {
+    return "company";
+  }
+  return null;
+}
+
 export default function Header() {
+  const pathname = usePathname();
+  const activeRouteTab = getActiveRouteTab(pathname);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeMegaTab, setActiveMegaTab] = useState<MegaMenuTab | null>(null);
@@ -48,6 +82,8 @@ export default function Header() {
   };
 
   const isMenuOpen = activeMegaTab !== null;
+  const isTabHighlighted = (tab: MegaMenuTab) =>
+    activeMegaTab !== null ? activeMegaTab === tab : activeRouteTab === tab;
 
   useEffect(() => {
     if (typeof document !== "undefined") {
@@ -130,7 +166,7 @@ export default function Header() {
                 onMouseEnter={() => handleTabEnter("subsurface")}
                 onMouseLeave={handleCloseMegaMenu}
                 className={`relative flex items-center h-full transition-all ${
-                  activeMegaTab === "subsurface"
+                  isTabHighlighted("subsurface")
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
                 }`}
@@ -138,13 +174,16 @@ export default function Header() {
                 <Link
                   href="/domains/subsurface"
                   prefetch={false}
+                  aria-current={activeRouteTab === "subsurface" ? "true" : undefined}
                   onKeyDown={(e) => {
                     if (e.key === "ArrowDown") {
                       e.preventDefault();
                       handleTabEnter("subsurface");
                     }
                   }}
-                  className="inline-flex items-center type-small font-medium text-[#f5f6f6] hover:text-white transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2"
+                  className={`inline-flex items-center type-small font-medium transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2 ${
+                    isTabHighlighted("subsurface") ? "text-white" : "text-[#f5f6f6] hover:text-white"
+                  }`}
                 >
                   <span>Subsurface</span>
                 </Link>
@@ -182,7 +221,7 @@ export default function Header() {
                 onMouseEnter={() => handleTabEnter("surface")}
                 onMouseLeave={handleCloseMegaMenu}
                 className={`relative flex items-center h-full transition-all ${
-                  activeMegaTab === "surface"
+                  isTabHighlighted("surface")
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
                 }`}
@@ -190,13 +229,16 @@ export default function Header() {
                 <Link
                   href="/domains/surface"
                   prefetch={false}
+                  aria-current={activeRouteTab === "surface" ? "true" : undefined}
                   onKeyDown={(e) => {
                     if (e.key === "ArrowDown") {
                       e.preventDefault();
                       handleTabEnter("surface");
                     }
                   }}
-                  className="inline-flex items-center type-small font-medium text-[#f5f6f6] hover:text-white transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2"
+                  className={`inline-flex items-center type-small font-medium transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2 ${
+                    isTabHighlighted("surface") ? "text-white" : "text-[#f5f6f6] hover:text-white"
+                  }`}
                 >
                   <span>Surface</span>
                 </Link>
@@ -234,7 +276,7 @@ export default function Header() {
                 onMouseEnter={() => handleTabEnter("aerial")}
                 onMouseLeave={handleCloseMegaMenu}
                 className={`relative flex items-center h-full transition-all ${
-                  activeMegaTab === "aerial"
+                  isTabHighlighted("aerial")
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
                 }`}
@@ -242,13 +284,16 @@ export default function Header() {
                 <Link
                   href="/domains/aerial"
                   prefetch={false}
+                  aria-current={activeRouteTab === "aerial" ? "true" : undefined}
                   onKeyDown={(e) => {
                     if (e.key === "ArrowDown") {
                       e.preventDefault();
                       handleTabEnter("aerial");
                     }
                   }}
-                  className="inline-flex items-center type-small font-medium text-[#f5f6f6] hover:text-white transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2"
+                  className={`inline-flex items-center type-small font-medium transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2 ${
+                    isTabHighlighted("aerial") ? "text-white" : "text-[#f5f6f6] hover:text-white"
+                  }`}
                 >
                   <span>Aerial</span>
                 </Link>
@@ -289,7 +334,7 @@ export default function Header() {
                 onMouseEnter={() => handleTabEnter("solutions")}
                 onMouseLeave={handleCloseMegaMenu}
                 className={`relative flex items-center h-full transition-all ${
-                  activeMegaTab === "solutions"
+                  isTabHighlighted("solutions")
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
                 }`}
@@ -297,13 +342,16 @@ export default function Header() {
                 <Link
                   href="/solutions"
                   prefetch={false}
+                  aria-current={activeRouteTab === "solutions" ? "true" : undefined}
                   onKeyDown={(e) => {
                     if (e.key === "ArrowDown") {
                       e.preventDefault();
                       handleTabEnter("solutions");
                     }
                   }}
-                  className="inline-flex items-center type-small font-medium text-[#f5f6f6] hover:text-white transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2"
+                  className={`inline-flex items-center type-small font-medium transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2 ${
+                    isTabHighlighted("solutions") ? "text-white" : "text-[#f5f6f6] hover:text-white"
+                  }`}
                 >
                   <span>Solutions</span>
                 </Link>
@@ -341,7 +389,7 @@ export default function Header() {
                 onMouseEnter={() => handleTabEnter("company")}
                 onMouseLeave={handleCloseMegaMenu}
                 className={`relative flex items-center h-full transition-all ${
-                  activeMegaTab === "company"
+                  isTabHighlighted("company")
                     ? "border-b-[3px] border-[#e22328]"
                     : "border-b-[3px] border-transparent"
                 }`}
@@ -349,13 +397,16 @@ export default function Header() {
                 <Link
                   href="/about"
                   prefetch={false}
+                  aria-current={activeRouteTab === "company" ? "true" : undefined}
                   onKeyDown={(e) => {
                     if (e.key === "ArrowDown") {
                       e.preventDefault();
                       handleTabEnter("company");
                     }
                   }}
-                  className="inline-flex items-center type-small font-medium text-[#f5f6f6] hover:text-white transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2"
+                  className={`inline-flex items-center type-small font-medium transition-colors outline-none focus-visible:ring-1 focus-visible:ring-[#e22328] py-2 ${
+                    isTabHighlighted("company") ? "text-white" : "text-[#f5f6f6] hover:text-white"
+                  }`}
                 >
                   <span>Company</span>
                 </Link>

@@ -4,20 +4,16 @@ import { notFound } from "next/navigation";
 import { BreadcrumbSchema, ArticleSchema } from "@/lib/seo/json-ld";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { CompanyHero, CompanySection } from "@/components/company/ui";
-import { formatNewsDate, getStory, publishedArticles } from "@/content/news";
+import { formatNewsDate } from "@/content/news";
+import { getNewsStoryBySlug } from "@/lib/cms";
 
-/** Article pages exist only for published announcements. Coverage links out; retired slugs redirect to /news. */
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return publishedArticles.map((s) => ({ slug: s.slug }));
-}
+export const runtime = "edge";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const story = getStory(slug);
+  const story = await getNewsStoryBySlug(slug);
   if (!story) return {};
   return pageMetadata({
     title: story.title,
@@ -29,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function NewsArticlePage({ params }: Props) {
   const { slug } = await params;
-  const story = getStory(slug);
+  const story = await getNewsStoryBySlug(slug);
   if (!story || !story.published || !story.article) notFound();
 
   const date = formatNewsDate(story.date);

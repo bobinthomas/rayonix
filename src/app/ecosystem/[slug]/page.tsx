@@ -7,7 +7,8 @@ import ContactTeaser from "@/components/company/ContactTeaser";
 import StoryCard from "@/components/company/StoryCard";
 import CapabilityChips from "@/components/common/CapabilityChips";
 import { getEcosystemCompany } from "@/content/ecosystem";
-import { getStory, type NewsStory } from "@/content/news";
+import { type NewsStory } from "@/content/news";
+import { getNewsStoryBySlug } from "@/lib/cms";
 import { contactHref } from "@/content/site";
 
 // x-labs has its own page: src/app/ecosystem/x-labs/page.tsx
@@ -37,8 +38,7 @@ export default async function EcosystemCompanyPage({ params }: Props) {
   const c = getEcosystemCompany(slug);
   if (!c) notFound();
 
-  const related = c.relatedNews
-    .map(getStory)
+  const related = (await Promise.all(c.relatedNews.map(getNewsStoryBySlug)))
     .filter((s): s is NewsStory => !!s && s.published);
 
   return (

@@ -4,8 +4,11 @@ import { BreadcrumbSchema } from "@/lib/seo/json-ld";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { CompanyHero, CompanySection } from "@/components/company/ui";
 import NewsList from "@/components/company/NewsList";
-import { NEWSROOM_INTRO, NEWS_SEO, publishedNews } from "@/content/news";
+import { NEWSROOM_INTRO, NEWS_SEO } from "@/content/news";
+import { getPublishedNews } from "@/lib/cms";
 import { contactHref } from "@/content/site";
+
+export const runtime = "edge";
 
 export const metadata: Metadata = pageMetadata({
   title: NEWS_SEO.title,
@@ -13,7 +16,8 @@ export const metadata: Metadata = pageMetadata({
   path: "/news",
 });
 
-export default function NewsPage() {
+export default async function NewsPage() {
+  const stories = await getPublishedNews();
   return (
     <>
       <BreadcrumbSchema
@@ -43,7 +47,7 @@ export default function NewsPage() {
         </CompanyHero>
 
         <CompanySection tone="light" ariaLabel="Announcements and media coverage">
-          <NewsList stories={publishedNews} />
+          <NewsList stories={stories} />
         </CompanySection>
       </div>
     </>

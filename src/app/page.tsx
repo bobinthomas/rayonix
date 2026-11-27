@@ -11,6 +11,7 @@ import GlobalPartnershipSection from "@/components/home/GlobalPartnershipSection
 import ExploreSection from "@/components/home/ExploreSection";
 import ContactTeaser from "@/components/company/ContactTeaser";
 import Reveal from "@/components/ui/Reveal";
+import { getHomepageNews } from "@/lib/cms";
 
 export const revalidate = 86400; // Static edge caching with on-demand revalidation
 
@@ -20,7 +21,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const homepageStories = await getHomepageNews();
   return (
     <>
       {/* Schema.org Structured Data */}
@@ -54,7 +56,7 @@ export default function HomePage() {
         <Reveal><GlobalPartnershipSection /></Reveal>
 
         {/* 09 · Explore Rayonix (Light Section - Stories, Ecosystem, Careers, News) */}
-        <Reveal><ExploreSection /></Reveal>
+        <Reveal><ExploreSection stories={homepageStories} /></Reveal>
 
         {/* 10 · Closing band: Let's Start a Conversation */}
         <Reveal><ContactTeaser /></Reveal>

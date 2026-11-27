@@ -121,3 +121,57 @@ export async function getFooterNav(): Promise<NavItem[]> {
 export async function getLLMsContent(): Promise<LLMsContent[]> {
   return [...llmsContent].sort((a, b) => a.sortOrder - b.sortOrder);
 }
+
+// ---------------------------------------------------------------------------
+// Newsroom, Blog & Careers (D1-backed in prod, in-memory fallback in dev)
+// ---------------------------------------------------------------------------
+
+import {
+  listNews,
+  getNewsBySlug,
+  listBlogPosts,
+  getBlogBySlug,
+  listCareerRoles,
+  toPublicNewsStory,
+  toPublicBlogPost,
+  toPublicRole,
+} from "./store";
+import type { NewsStory } from "@/content/news";
+import type { BlogPost } from "@/content/company/blog";
+import type { Role } from "@/content/careers";
+
+export async function getPublishedNews(): Promise<NewsStory[]> {
+  const rows = await listNews({ onlyPublished: true });
+  return rows.map(toPublicNewsStory);
+}
+
+export async function getHomepageNews(): Promise<NewsStory[]> {
+  const rows = await listNews({ onlyPublished: true, onlyHomepage: true });
+  return rows.map(toPublicNewsStory);
+}
+
+export async function getPublishedNewsArticles(): Promise<NewsStory[]> {
+  const rows = await listNews({ onlyPublished: true });
+  return rows.filter((r) => r.kind === "announcement" && r.article).map(toPublicNewsStory);
+}
+
+export async function getNewsStoryBySlug(slug: string): Promise<NewsStory | undefined> {
+  const row = await getNewsBySlug(slug);
+  return row ? toPublicNewsStory(row) : undefined;
+}
+
+export async function getPublishedBlogPosts(): Promise<BlogPost[]> {
+  const rows = await listBlogPosts({ onlyPublished: true });
+  return rows.map(toPublicBlogPost);
+}
+
+export async function getPublishedBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
+  const row = await getBlogBySlug(slug);
+  if (!row || !row.published) return undefined;
+  return toPublicBlogPost(row);
+}
+
+export async function getPublishedCareerRoles(): Promise<Role[]> {
+  const rows = await listCareerRoles({ onlyPublished: true });
+  return rows.map(toPublicRole);
+}

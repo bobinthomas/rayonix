@@ -5,9 +5,9 @@ import CTAButton from "@/components/ui/CTAButton";
 import TransformingHeading from "@/components/ui/TransformingHeading";
 import NewsCard from "@/components/home/NewsCard";
 import { CAREERS_LABEL } from "@/content/site";
-import { NEWSROOM_INTRO, formatNewsDate, homepageNews } from "@/content/news";
+import { NEWSROOM_INTRO, formatNewsDate, homepageNews, type NewsStory } from "@/content/news";
 
-export default function ExploreSection() {
+export default function ExploreSection({ stories = homepageNews }: { stories?: NewsStory[] }) {
   return (
     <section
       className="relative w-full bg-[#f5f6f6] text-[#080f12] py-16 lg:py-[80px] rounded-none"
@@ -215,9 +215,9 @@ export default function ExploreSection() {
             </div>
           </div>
 
-          {/* Newest stories from src/content/news.ts */}
+          {/* Newest stories from CMS */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {homepageNews.slice(0, 2).map((story, i) => (
+            {stories.slice(0, 2).map((story, i) => (
               <NewsCard
                 key={story.slug}
                 variant={i === 0 ? "slate" : "deep"}

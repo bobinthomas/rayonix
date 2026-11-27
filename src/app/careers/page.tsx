@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/lib/seo/json-ld";
 import { pageMetadata } from "@/lib/seo/metadata";
 import { CompanyHero, CompanySection } from "@/components/company/ui";
+import CareerApplyList from "@/components/company/CareerApplyList";
 import CTAButton from "@/components/ui/CTAButton";
-import { BUILD_WITH_US, CAREERS_EMPTY, CAREERS_SEO, ROLES } from "@/content/careers";
+import { BUILD_WITH_US, CAREERS_EMPTY, CAREERS_SEO } from "@/content/careers";
+import { getPublishedCareerRoles } from "@/lib/cms";
 import { CAREERS_LABEL, contactHref } from "@/content/site";
+
+export const runtime = "edge";
 
 export const metadata: Metadata = pageMetadata({
   title: CAREERS_SEO.title,
@@ -12,7 +16,8 @@ export const metadata: Metadata = pageMetadata({
   path: "/careers",
 });
 
-export default function CareersPage() {
+export default async function CareersPage() {
+  const roles = await getPublishedCareerRoles();
   return (
     <>
       <BreadcrumbSchema
@@ -47,32 +52,8 @@ export default function CareersPage() {
         <CompanySection tone="light" id="open-positions" ariaLabel={CAREERS_EMPTY.heading}>
           <div className="flex flex-col gap-8">
             <h2 className="type-h2 text-[#080f12]">{CAREERS_EMPTY.heading}</h2>
-            {ROLES.length ? (
-              <ul className="flex flex-col border-t border-[#d5dadc]">
-                {ROLES.map((role) => {
-                  const external = /^https?:\/\//.test(role.applyUrl);
-                  return (
-                    <li
-                      key={`${role.title}-${role.location}`}
-                      className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#d5dadc] py-6"
-                    >
-                      <div className="flex flex-col gap-1">
-                        <h3 className="type-h3 text-[#080f12]">{role.title}</h3>
-                        <p className="type-small text-[#47494a]">
-                          {[role.team, role.location, role.type].filter(Boolean).join(" · ")}
-                        </p>
-                      </div>
-                      <a
-                        href={role.applyUrl}
-                        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                        className="type-cta text-[#e22328] underline-offset-4 hover:underline"
-                      >
-                        Apply<span className="sr-only"> for {role.title}</span>
-                      </a>
-                    </li>
-                  );
-                })}
-              </ul>
+            {roles.length ? (
+              <CareerApplyList roles={roles} />
             ) : (
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 bg-white border border-[#d5dadc] rounded-[4px] p-6 sm:p-10">
                 <p className="type-body-lg text-[#080f12]">{CAREERS_EMPTY.message}</p>

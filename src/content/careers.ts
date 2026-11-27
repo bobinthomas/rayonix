@@ -1,7 +1,7 @@
 /** Build With Us (/careers) copy and open roles. */
 
 export const BUILD_WITH_US = {
-  eyebrow: "Build With Us",
+  eyebrow: "Careers",
   heading: "Build What Matters. Shape What's Next.",
   lines: [
     "Be part of a team advancing defence technology through innovation, collaboration and indigenous capabilities.",
@@ -11,7 +11,7 @@ export const BUILD_WITH_US = {
 };
 
 export const CAREERS_SEO = {
-  title: "Build With Us",
+  title: "Careers",
   description:
     "Be part of a team advancing defence technology through innovation, collaboration and indigenous capabilities.",
 };
@@ -28,7 +28,36 @@ export type Role = {
  * Open positions. TODO_CONTENT: none supplied yet, so the empty state shows.
  * Add roles here; external applyUrl values open in a new tab.
  */
-export const ROLES: Role[] = [];
+export const ROLES: Role[] = [
+  {
+    title: "Senior Embedded & Edge AI Engineer",
+    team: "Autonomy & Mission Software",
+    location: "Gurugram, India",
+    type: "Full-time",
+    applyUrl: "/contact?subject=careers&product=Embedded-Edge-AI-Engineer",
+  },
+  {
+    title: "RF & Signal Processing Systems Engineer",
+    team: "Subsurface & Aerial Sensing",
+    location: "Hyderabad, India",
+    type: "Full-time",
+    applyUrl: "/contact?subject=careers&product=RF-Signal-Processing-Engineer",
+  },
+  {
+    title: "Autonomous Flight Control & Swarm Engineer",
+    team: "X Labs",
+    location: "Bengaluru, India",
+    type: "Full-time",
+    applyUrl: "/contact?subject=careers&product=Flight-Control-Swarm-Engineer",
+  },
+  {
+    title: "Electro-Optical & Thermal Payload Lead",
+    team: "neXr Optronics",
+    location: "Chennai, India",
+    type: "Full-time",
+    applyUrl: "/contact?subject=careers&product=EO-Thermal-Payload-Lead",
+  },
+];
 
 export const CAREERS_EMPTY = {
   heading: "Open positions",
