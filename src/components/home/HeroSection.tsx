@@ -63,10 +63,9 @@ export default function HeroSection() {
     const schedule = () => {
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
       if (isMobile) {
-        // Keep hero-poster.webp as the Mobile LCP element; attach video on first interaction or 4s fallback.
+        // Keep hero-poster.webp as the Mobile LCP element; attach video on first user interaction.
         window.addEventListener("pointerdown", onFirstInteraction, { once: true, passive: true });
         window.addEventListener("scroll", onFirstInteraction, { once: true, passive: true });
-        timeoutId = setTimeout(attachVideo, 4000);
       } else if ("requestIdleCallback" in window) {
         idleId = window.requestIdleCallback(attachVideo, { timeout: 2000 });
       } else {
